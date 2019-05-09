@@ -57,8 +57,5 @@ npm run pre-release // v0.2.1 to v0.2.2-rc.0
 
 ## TODO
 
-- add redux
 - add generic build script
-- configure for typescript optionally
-  - modify linters for typescript
 - add SonarCloud local executable
