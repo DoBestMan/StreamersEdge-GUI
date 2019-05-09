@@ -1,5 +1,5 @@
 import {applyMiddleware, createStore} from 'redux';
-import {createHashHistory} from 'history';
+import {createBrowserHistory} from 'history';
 import {routerMiddleware} from 'connected-react-router';
 import Immutable from 'immutable';
 import {composeWithDevTools} from 'redux-devtools-extension';
@@ -7,7 +7,7 @@ import createRootReducer from '../reducers/index';
 import thunk from 'redux-thunk';
 
 // Session history
-export const history = createHashHistory();
+export const history = createBrowserHistory();
 
 export default function configureStore() {
   // For typescript, this may need tweaking...

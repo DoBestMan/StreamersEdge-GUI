@@ -17,6 +17,7 @@ var fs = require('fs');
 var useYarn = fs.existsSync(paths.yarnLockFile);
 var cli = useYarn ? 'yarn' : 'npm';
 var openBrowser = require('react-dev-utils/openBrowser');
+var os = require('os');
 
 
 // Warn and crash if required files are missing
@@ -56,7 +57,7 @@ function setupCompiler(host, port, protocol) {
     var isSuccessful = !messages.errors.length && !messages.warnings.length;
     var showInstructions = isSuccessful && (isInteractive || isFirstCompile);
 
-    if (isSuccessful) {
+    if (isSuccessful && os.platform() !== 'win32') {
       console.log(chalk.green('Compiled successfully!'));
       openBrowser(protocol + '://' + host + ':' + port + '/');
     }
