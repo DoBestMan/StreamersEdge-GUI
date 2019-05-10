@@ -16,7 +16,6 @@ var compiler = webpack(config);
 var fs = require('fs');
 var useYarn = fs.existsSync(paths.yarnLockFile);
 var cli = useYarn ? 'yarn' : 'npm';
-var openBrowser = require('react-dev-utils/openBrowser');
 var os = require('os');
 
 
@@ -59,7 +58,6 @@ function setupCompiler(host, port, protocol) {
 
     if (isSuccessful && os.platform() !== 'win32') {
       console.log(chalk.green('Compiled successfully!'));
-      openBrowser(protocol + '://' + host + ':' + port + '/');
     }
 
     if (showInstructions) {

@@ -5,6 +5,19 @@ html {
 }
 
 .code-me {
+  display: flex;
+  flex-direction: column;
   padding: 10%;
   color: orange;
+  text-align: center;
+}
+
+.btn {
+  &--red {
+    background-color: rgb(103, 131, 255);
+  }
+
+  &:hover {
+    background-color: rgb(127, 131, 255);
+  }
 }

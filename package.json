@@ -39,7 +39,6 @@
     "husky": "^2.1.0",
     "lint-staged": "^8.1.6",
     "node-sass": "^4.12.0",
-    "opn": "^6.0.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.17.0",
@@ -57,12 +56,14 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "connected-react-router": "^6.4.0",
     "history": "^4.9.0",
     "immutable": "^4.0.0-rc.12",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.4",
+    "react-jss": "^8.6.1",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
