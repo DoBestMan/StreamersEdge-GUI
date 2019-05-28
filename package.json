@@ -43,6 +43,7 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.17.0",
     "react-dev-utils": "^9.0.0",
+    "react-redux-i18n": "^1.9.3",
     "react-router": "^5.0.0",
     "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^7.1.0",
@@ -56,6 +57,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.8.6",
     "@material-ui/core": "^3.9.3",
     "connected-react-router": "^6.4.0",
     "history": "^4.9.0",
@@ -74,6 +76,9 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      "react-hot-loader/babel"
     ]
   },
   "config": {

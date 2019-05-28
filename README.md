@@ -7,6 +7,9 @@
 ## STACK
 
 - React
+- [react-hot-loader](https://www.npmjs.com/package/react-hot-loader)
+  - React-🔥-Dom
+  - Updating translation file contents will not work with hot reloading.
 - [Redux](https://redux.js.org/) (single source of truth state management)
 - Redux dev tools (allow user to debug )
 - React-Router (we use this to control navigation)
