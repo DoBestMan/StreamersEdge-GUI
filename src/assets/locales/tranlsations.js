@@ -16,11 +16,11 @@ export const translationObject = {
         invalid: 'invalid email address'
       },
       password: {
-        ThreeAnd63: 'password must be between 3 and 63 characters in length',
+        lengthRequirement: 'password must be between 3 and 63 characters in length',
         requires: 'password must contain at least one number, one special character (.@$!%^*#), and no spaces'
       },
       search: {
-        threeAnd100: 'search text must be greater than 3 and less than 100 characters',
+        lengthRequirement: 'search text must be greater than 3 and less than 100 characters',
         noBlank: 'search text cannot be blank'
       },
       date: {
@@ -28,8 +28,10 @@ export const translationObject = {
         beToday: 'starting date must be current date',
         startLessThanEnd: 'start date must be less than end date'
       },
-      beNumber: 'must be a number',
-      beDecimalOrInt: 'must be either a decimal or integer'
+      general: {
+        beNumber: 'must be a number',
+        beDecimalOrInt: 'must be either a decimal or integer'
+      }
     },
     codeMe: 'Code Me!!!!!'
   }
