@@ -1,14 +1,15 @@
 /* stylelint-disable */
+@import '../../assets/styles/common.scss';
 
 html {
-  background-color: rgb(25, 40, 55);
+  background-color: rgb(12, 36, 61);
 }
 
 .code-me {
-  display: flex;
+  @extend .flex;
   flex-direction: column;
   padding: 10%;
-  color: orange;
+  color: rgb(0, 255, 98);
   text-align: center;
 }
 
