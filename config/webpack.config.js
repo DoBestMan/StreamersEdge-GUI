@@ -6,6 +6,7 @@ const Clean = require('clean-webpack-plugin');
 const chalk = require('chalk');
 const path = require('path');
 const getClientEnvironment = require('./env');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -41,12 +42,20 @@ var plugins = [
     process.stdout.write(chalk.green(
       (percentage * 100).toFixed(2) + '% ' + msg + '                 \033[0G'
     ));
+  }),
+  new StyleLintPlugin({
+    "extends": "./src/assets/styling/index.js",
+      "ignoreFiles": [
+        "**/*.js",
+        "**/*.jsx"
+      ]
   })
 ];
 
 module.exports = {
   entry: paths.appIndexJs,
   mode: 'development',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -72,12 +81,11 @@ module.exports = {
                     'last 4 versions',
                     'Firefox ESR',
                     'not ie < 9' // React doesn't support IE8 anyway
-                  ]}),
-                require('stylelint')()
+                  ]
+                }),
               ]
             }
-          },
-          'sass-loader',
+          }, 'sass-loader'
         ]
       },
       {
