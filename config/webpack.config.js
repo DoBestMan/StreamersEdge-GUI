@@ -89,6 +89,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.css$/,
+        use: [ 'css-to-mui-loader' ]
+      },
+      {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         exclude: /(node_modules|bower_components)/,

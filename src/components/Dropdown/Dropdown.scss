@@ -1,0 +1,43 @@
+.dropdown {
+  width: fit-content;
+  height: 100px;
+
+  &__row {
+    width: 488px;
+    height: 147px;
+  }
+
+  &__input {
+    bottom: 120px;
+    left: 60px;
+    width:  360px;
+    height: 90px;
+    padding: 0;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 0;
+    }
+  }
+
+  &__menuItem {
+    justify-content: center;
+    border: solid 1px transparent;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    background: radial-gradient(rgb(41, 41, 41) 5%, rgb(41, 41, 41) 25%, rgb(0, 0, 0) 50%, rgb(0, 0, 0) 70%) left bottom no-repeat;
+    background-size:100% 5px;
+
+    &:hover {
+      border: solid 1px rgb(221, 222, 223);
+      border-radius: 5px;
+    }
+  }
+}
