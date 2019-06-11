@@ -10,7 +10,10 @@ import {createGenerateClassName, jssPreset} from '@material-ui/core/styles';
 const styleNode = document.createComment('insertion-point-jss');
 document.head.insertBefore(styleNode, document.head.firstChild);
 
-const generateClassName = createGenerateClassName();
+const generateClassName = createGenerateClassName({
+  disableglobal: true
+});
+;
 const jss = create({
   ...jssPreset(),
   insertionPoint: 'insertion-point-jss'

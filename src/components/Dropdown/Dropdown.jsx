@@ -30,10 +30,6 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleChange = (event) => {
-    this.props.handleChange(event.target.value);
-  }
-
   onOpen = () => {
     this.setState({dropdownOpen: true});
   }
@@ -50,7 +46,7 @@ class Dropdown extends React.Component {
   render() {
     const {classes, dropdownList, selectedValue} = this.props;
     return (
-      <form className='dropdown' autoComplete='off'>
+      <div className='dropdown'>
         <FormControl>
           <img className='dropdown__row' src={ this.state.image } alt=''/>
           <Select
@@ -59,7 +55,7 @@ class Dropdown extends React.Component {
             open={ this.state.dropdownOpen } 
             onOpen={ this.onOpen }
             onClose={ this.onClose }
-            onChange={ this.handleChange }
+            onChange={ this.props.handleChange }
             onMouseOver={ this.mouseOver } 
             onMouseOut={ this.mouseOut }
             IconComponent={ () => <> </> }//remove the default material ui dropdown icon
@@ -75,7 +71,7 @@ class Dropdown extends React.Component {
             ))}
           </Select>
         </FormControl>
-      </form>
+      </div>
     );
   }
 }
@@ -84,7 +80,6 @@ Dropdown.propTypes = {
   classes: PropTypes.object.isRequired,
   dropdownList: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired
-
 };
 
 export default withStyles(styles)(Dropdown);

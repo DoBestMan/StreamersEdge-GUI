@@ -1,0 +1,108 @@
+
+import axios from 'axios';
+import Config from '../constants/Config';
+import querystring from 'query-string';
+import StorageUtil from './../utility/StorageUtil';
+
+const ApiHandler = axios.create({
+  withCredentials: true
+});
+
+
+const apiRoot = Config.isDev ? Config.devApiRoute : Config.prodApiRoute;
+
+class AuthService {
+
+  // Basic Sign-Up via email
+  static register(account) {
+    const query = `${apiRoot}api/v1/auth/sign-up`;
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+      
+      const body = {
+        email: account.email,
+        username: account.username,
+        password: account.password,
+        repeatPassword: account.repeatPassword
+      };
+
+      const response = await ApiHandler.post(query, querystring.stringify(body), headers);
+
+  
+      if (response.data.status !== 200) {
+        return reject(response);
+      }
+        
+      return resolve(response.data.result);
+    });
+  }
+
+  static getRedirect(platform) {
+    const query = `${apiRoot}api/v1/auth/${platform}/redirect-url`;
+
+    return new Promise(async (resolve, reject) => {
+      const response = await ApiHandler.get(query);
+  
+      if (response.data.status !== 200) {
+        return reject(response);
+      }
+        
+      return resolve(response.data.result);
+    });
+  }
+
+  static googleAuth(code) {
+    const query = `${apiRoot}api/v1/auth/google/code`;
+    const headers = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    };
+    
+    const body = {
+      code
+    };
+
+    return new Promise(async (resolve, reject) => {
+      const response = await ApiHandler.post(query, querystring.stringify(body), headers);
+  
+      if (response.data.status !== 200) {
+        return reject(response);
+      }
+        
+      return resolve(response.data.result);
+    });
+  }
+
+  // Generic auth for profile creation
+  static authorize(code) {
+    const platform = StorageUtil.get('se-platform');
+    const query = `${apiRoot}api/v1/auth/${platform}/code`;
+    const headers = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    };
+    
+    const body = {
+      code
+    };
+
+    return new Promise(async (resolve, reject) => {
+      const response = await ApiHandler.post(query, querystring.stringify(body), headers);
+  
+      if (response.data.status !== 200) {
+        return reject(response);
+      }
+        
+      return resolve(response.data.result);
+    });
+
+  }
+}
+
+export default AuthService;

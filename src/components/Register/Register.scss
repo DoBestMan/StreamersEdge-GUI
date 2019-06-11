@@ -1,4 +1,36 @@
-/* stylelint-disable */
 .register {
   color: red;
+}
+
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:-webkit-fill-available;
+  margin: auto;
+  background-image: url('../../assets/images/background.png');
+}
+
+.register-title {
+  margin-top:50px;
+  font-weight: 50;
+  font-size: 30px;
+  color: white;
+}
+
+.register-divider {
+  height:7px;
+  margin: auto;
+
+  &__top {
+    @extend .register-divider;
+
+    background-image: linear-gradient(#ffffff, #5e5f61);
+  }
+
+  &__bottom {
+    @extend .register-divider;
+
+    background-image: linear-gradient(#5e5f61, #ffffff);
+  }
 }

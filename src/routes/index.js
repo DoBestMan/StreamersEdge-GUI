@@ -4,6 +4,7 @@ import Home from '../components/Home';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import Dashboard from '../components/Dashboard';
+import CreateProfile from '../components/CreateProfile';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 
 // https://github.com/supasate/connected-react-router/blob/master/examples/immutable/src/routes/index.js
@@ -14,6 +15,7 @@ const routes = (
       <Route exact path='/' component={ Home }/>
       <Route path='/login' component={ Login }/>
       <Route path='/sign-up' component={ Register }/>
+      <Route path='/profile' component={ CreateProfile }/>
       <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
     </Switch>
   </React.Fragment>

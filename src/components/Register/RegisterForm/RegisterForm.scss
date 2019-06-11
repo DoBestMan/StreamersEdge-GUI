@@ -1,0 +1,25 @@
+/* stylelint-disable */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  color: white;
+
+  &__input {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    color:white;
+  }
+}
+
+.MuiInputBase-root-18 {
+  color: white;
+}
+
+.MuiInput-underline-9 {
+  border-bottom: 1px solid white;
+}
+
+.labelStyle {
+  color: white !important;
+}
