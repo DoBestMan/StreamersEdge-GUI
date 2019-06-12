@@ -2,6 +2,10 @@
   width: fit-content;
   height: 100px;
 
+  &__form {
+    //TODO find a way to set height here in order to fix invisible overlay bug
+  }
+
   &__row {
     width: 488px;
     height: 147px;

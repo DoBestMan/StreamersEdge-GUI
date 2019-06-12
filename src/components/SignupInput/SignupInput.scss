@@ -1,0 +1,19 @@
+.input {
+  flex-direction: initial;
+  width: fit-content;
+  height: 90px;
+
+  &__form {
+    height: 54px;
+  }
+
+  &__text {
+    bottom: 57px;
+    left: 6px;
+    width:  370px;
+    height: 54px;
+    padding: 0;
+    color: white;
+    text-align: center;
+  }
+}

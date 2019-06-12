@@ -61,6 +61,8 @@ const ValidationUtil = {
     
     if(!regex.test(email)) {
       return translate('errors.email.invalid');
+    } else {
+      return null;
     }
   },
 

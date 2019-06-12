@@ -4,20 +4,18 @@
  */
 import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import AuthService from '../../../services/AuthService';
-
-/*<TextField
-    style={{
-        backgroundColor: "blue"
-    }}
-    InputProps={{
-        style: {
-            color: "red"
-        }
-    }}
-/>*/
+import SignupInput from '../../SignupInput';
+import IconEmail from '../../../assets/images/signup_email_input.png';
+import IconEmailActive from '../../../assets/images/signup_email_active_input.png';
+import IconPassword from '../../../assets/images/signup_password_input.png';
+import IconPasswordActive from '../../../assets/images/signup_password_active_input.png';
+import IconUsername from '../../../assets/images/signup_username_input.png';
+import IconUsernameActive from '../../../assets/images/signup_username_active_input.png';
+import {Link} from 'react-router-dom';
+import ValidationUtil from '../../../utility/ValidationUtil';
 
 class RegisterForm extends Component{
 
@@ -26,12 +24,23 @@ class RegisterForm extends Component{
     this.state = {
       email: '',
       username: '',
-      password: ''
+      password: '',
+      resultText: '',
+      errors : {
+        email: '',
+        username: '',
+        password: ''
+      }
     };
   } 
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    if (this.state.errors.email !== null || this.state.errors.username !== null || this.state.errors.password !== null) {
+      console.warn('Registration failed');
+      return;
+    }
 
     const account = {
       email: this.state.email,
@@ -41,7 +50,11 @@ class RegisterForm extends Component{
     };
 
     AuthService.register(account).then((r) => {
+      this.setState({resultText: 'Confirmation email sent'});
       console.log(r);
+    }).catch((e) => {
+      console.error(e);
+      this.setState({resultText: e});
     });
   }
 
@@ -51,24 +64,60 @@ class RegisterForm extends Component{
       [name]: value
     });    
   }
+
+  validate = (type) => {
+    switch(type) {
+      case 'email':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            email: ValidationUtil.validateEmail(this.state.email)
+          }
+        });
+        break;
+      case 'password':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            password: ValidationUtil.validatePassword(this.state.password)
+          }
+        });
+        break;
+      case 'username':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            username: ValidationUtil.validateUserName(this.state.username)
+          }
+        });
+        break;
+      default:
+    }
+  }
   
   render(){
     return(
       <>
        <form className='register-form' onSubmit={ this.handleSubmit }>
-         <FormControl className='inputStyle' margin='normal' required fullWidth>
-           <TextField OutlinedInputProps={ {style: {color: 'white'}} } 
-             InputLabelProps={ {style: {color: 'white'}} } InputProps={ {style: {color: 'white'}} }
-             label='Email' className='inputStyle register-form__input' name='email' onChange={ this.handleChange }/>
-         </FormControl>
          <FormControl margin='normal' required fullWidth>
-           <TextField InputLabelProps={ {style: {color: 'white'}} } 
-             InputProps={ {style: {color: 'white'}} } label='Password' className='register-form__input' name='password' onChange={ this.handleChange }/>
+           <SignupInput onBlur={ () => this.validate('email') } name='email' handleChange={ this.handleChange } 
+             inputValue={ this.state.email } inputImage={ IconEmail } activeInputImage={ IconEmailActive }/>
          </FormControl>
+         <InputLabel shrink error={ true }>{this.state.errors.email}</InputLabel>
          <FormControl margin='normal' required fullWidth>
-           <TextField InputLabelProps={ {style: {color: 'white'}} } 
-             InputProps={ {style: {color: 'white'}} } label='Username' className='register-form__input' name='username' onChange={ this.handleChange }/>
+           <SignupInput onBlur={ () => this.validate('password') } name='password' handleChange={ this.handleChange }
+             inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
          </FormControl>
+         <InputLabel className='register-error' shrink error={ true }>{this.state.errors.password}</InputLabel>
+         <FormControl margin='normal' required fullWidth>
+           <SignupInput onBlur={ () => this.validate('username') } name='username' handleChange={ this.handleChange }
+             inputValue={ this.state.username } inputImage={ IconUsername } activeInputImage={ IconUsernameActive }/>
+         </FormControl>
+         <InputLabel shrink error={ true }>{this.state.errors.username}</InputLabel>
+         <span className='register-success'>{this.state.resultText}</span>
+         <span className='login-textlink'>Already have an account? 
+           <Link to={ '/login' } activeclassname='active'>{'Login'}</Link>
+         </span>
          <Button type='submit' style={ {color: 'white'} } variant='outlined'>
         Register
          </Button>

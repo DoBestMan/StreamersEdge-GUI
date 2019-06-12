@@ -2,7 +2,7 @@
 .register-form {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  align-items: center;
   color: white;
 
   &__input {
@@ -10,6 +10,14 @@
     margin-bottom: 6px;
     color:white;
   }
+}
+
+.register-error {
+  width: 400px;
+}
+
+.register-success {
+  color: green;
 }
 
 .MuiInputBase-root-18 {
@@ -20,6 +28,10 @@
   border-bottom: 1px solid white;
 }
 
-.labelStyle {
-  color: white !important;
+.login-textlink {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
+

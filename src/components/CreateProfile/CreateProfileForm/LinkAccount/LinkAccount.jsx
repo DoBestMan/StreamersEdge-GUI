@@ -6,10 +6,9 @@ import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import AuthService from '../../../../services/AuthService';
 import LinkAccountConfirmation from './LinkAccountConfirmation';
-import Config from '../../../../constants/Config';
 import Dropdown from './../../../Dropdown/index';
+import AuthUtil from '../../../../utility/AuthUtil';
 
 
 class LinkAccount extends Component {
@@ -50,32 +49,7 @@ class LinkAccount extends Component {
 
     this.handleClose();
     const platform = this.state.platform;
-    const supportedPlatforms = Config.supportedPlatforms;
-
-    if (supportedPlatforms.includes(platform.toLowerCase())) {
-      switch (platform) {
-        case 'twitch':
-          AuthService.getRedirect('twitch').then((response) => {
-            window.location.assign(response);
-          }).catch((error) => {
-            console.warn(error);
-          });
-          break;
-        case 'google':
-          AuthService.getRedirect('google').then((response) => {
-            window.location.assign(response);
-          }).catch((error) => {
-            console.warn(error);
-          });
-          break;
-
-        case 'facebook':
-          break;
-        default:
-          console.warn('Error');
-          break;
-      }
-    }
+    AuthUtil.authVia(platform);
     
 
   }

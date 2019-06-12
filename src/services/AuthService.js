@@ -15,6 +15,7 @@ class AuthService {
 
   // Basic Sign-Up via email
   static register(account) {
+    let response;
     const query = `${apiRoot}api/v1/auth/sign-up`;
     return new Promise(async (resolve, reject) => {
       const headers = {
@@ -30,14 +31,16 @@ class AuthService {
         repeatPassword: account.repeatPassword
       };
 
-      const response = await ApiHandler.post(query, querystring.stringify(body), headers);
 
-  
-      if (response.data.status !== 200) {
-        return reject(response);
+      try {
+        response = await ApiHandler.post(query, querystring.stringify(body), headers);
+        return resolve(response.data.result);
+
+      } catch(err) {
+        return reject(err.toString());
       }
+    
         
-      return resolve(response.data.result);
     });
   }
 

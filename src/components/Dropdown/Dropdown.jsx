@@ -47,7 +47,7 @@ class Dropdown extends React.Component {
     const {classes, dropdownList, selectedValue} = this.props;
     return (
       <div className='dropdown'>
-        <FormControl>
+        <FormControl className='dropdown__form'>
           <img className='dropdown__row' src={ this.state.image } alt=''/>
           <Select
             className='dropdown__input'
