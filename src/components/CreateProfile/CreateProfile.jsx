@@ -6,10 +6,37 @@
 import React, {Component} from 'react';
 import CreateProfileForm from './CreateProfileForm';
 import HeaderLogo from '../../assets/images/profile/streamers_edge_logo.png';
+import step_1 from '../../assets/images/profile/step_1.svg';
+import step_2 from '../../assets/images/profile/step_2.svg';
+import step_3 from '../../assets/images/profile/step_3.svg';
 
 class CreateProfile extends Component{
-  
+  constructor() {
+    super();
+    this.state = {currentStep: 1};
+  }
+
+  changeStep = (step) => {
+    this.setState({currentStep: step});
+  }
+
+  renderStep() {
+    const step = this.state.currentStep;
+
+    switch(step) {
+      case 1 :
+        return (<img src={ step_1 } alt='' />);
+      case 2 :
+        return (<img src={ step_2 } alt='' />);
+      case 3 :
+        return (<img src={ step_3 } alt='' />);
+      default:
+        return;
+    }
+  }
+
   render(){
+    console.log('location: ', this.props.location);
     return(
       <>
       <div className='profile-header'>
@@ -18,11 +45,12 @@ class CreateProfile extends Component{
       <div className='profile-divider__top'/>
       <div className='profile-page'>
         <div className='profile-form'>
-          <CreateProfileForm location={ this.props.location } />
+          <CreateProfileForm changeStep={ this.changeStep } currentStep={ this.state.currentStep } location={ this.props.location } />
         </div>
       </div>
       <div className='profile-divider__bottom'/>
       <div className='profile-footer'>
+        {this.renderStep()}
       </div>
       </>
     );

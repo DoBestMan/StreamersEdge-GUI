@@ -24,7 +24,6 @@ class CreateProfileForm extends Component{
 
     // Set the initial input values
     this.state = {
-      currentStep: 1, // Default is Step 1
       email: '',
       accountType: 'Viewer'
     };
@@ -53,7 +52,7 @@ class CreateProfileForm extends Component{
 
   // Handles form validation based on the step. We may not need validation for some steps.
   validate = () => {
-    let currentStep = this.state.currentStep;
+    let currentStep = this.props.currentStep;
     let result = false;
 
     switch (currentStep) {
@@ -80,7 +79,7 @@ class CreateProfileForm extends Component{
   }
 
   next = () => {
-    let currentStep = this.state.currentStep;
+    let currentStep = this.props.currentStep;
 
     const validateCheck = this.validate();
 
@@ -92,24 +91,20 @@ class CreateProfileForm extends Component{
 
     // If the current step is 1 or 2, then add one on "next" button click
     currentStep = currentStep >= 2? 3: currentStep + 1;
-    this.setState({
-      currentStep: currentStep
-    });
+    this.props.changeStep(currentStep);
   }
     
   prev = () => {
-    let currentStep = this.state.currentStep;
+    let currentStep = this.props.currentStep;
     // If the current step is 2 or 3, then subtract one on "previous" button click
     currentStep = currentStep <= 1? 1: currentStep - 1;
-    this.setState({
-      currentStep: currentStep
-    });
+    this.props.changeStep(currentStep);
   }
 
 
   // The "next" and "previous" button functions
   get previousButton(){
-    let currentStep = this.state.currentStep;
+    let currentStep = this.props.currentStep;
 
     // If the current step is not 1, then render the "previous" button
     if(currentStep !==1){
@@ -123,7 +118,7 @@ class CreateProfileForm extends Component{
   }
   
   get nextButton(){
-    let currentStep = this.state.currentStep;
+    let currentStep = this.props.currentStep;
 
     // If the current step is not 3, then render the "next" button
     if(currentStep < 3){
@@ -139,9 +134,9 @@ class CreateProfileForm extends Component{
   render(){
     let form;
     let active = <ActiveAccount search ={ this.props.location.search }></ActiveAccount>;
-    const navigationClass = `profileform-navigation__${this.state.currentStep}`;
+    const navigationClass = `profileform-navigation__${this.props.currentStep}`;
 
-    switch (this.state.currentStep) {
+    switch (this.props.currentStep) {
       case 1:
         form =  <form className='profileform-one' onSubmit={ this.handleSubmit }>
           <span className='profileform-title'>CREATE YOUR PROFILE</span>
