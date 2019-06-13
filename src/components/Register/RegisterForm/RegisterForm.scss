@@ -13,19 +13,11 @@
 }
 
 .register-error {
-  width: 400px;
+  width: 350px;
 }
 
 .register-success {
   color: green;
-}
-
-.MuiInputBase-root-18 {
-  color: white;
-}
-
-.MuiInput-underline-9 {
-  border-bottom: 1px solid white;
 }
 
 .login-textlink {
@@ -33,5 +25,18 @@
   justify-content: center;
   margin-top: 25px;
   margin-bottom: 25px;
+}
+
+.register-button-container {
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.register-button-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 

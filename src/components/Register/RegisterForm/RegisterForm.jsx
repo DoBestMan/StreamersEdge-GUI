@@ -15,6 +15,7 @@ import IconPasswordActive from '../../../assets/images/signup_password_active_in
 import IconUsername from '../../../assets/images/signup_username_input.png';
 import IconUsernameActive from '../../../assets/images/signup_username_active_input.png';
 import {Link} from 'react-router-dom';
+import RegisterButton from '../../../assets/images/signup/register_button.png';
 import ValidationUtil from '../../../utility/ValidationUtil';
 
 class RegisterForm extends Component{
@@ -26,6 +27,8 @@ class RegisterForm extends Component{
       username: '',
       password: '',
       resultText: '',
+      registerDisabled: false,
+      registerBtnText: 'REGISTER',
       errors : {
         email: '',
         username: '',
@@ -49,12 +52,26 @@ class RegisterForm extends Component{
       repeatPassword: this.state.password
     };
 
+    this.setState({
+      registerDisabled: true,
+      registerBtnText: 'LOADING...'
+    });
+
     AuthService.register(account).then((r) => {
-      this.setState({resultText: 'Confirmation email sent'});
+      this.setState({
+        resultText: 'Confirmation email sent',
+        registerDisabled: false,
+        registerBtnText: 'REGISTER'
+
+      });
       console.log(r);
     }).catch((e) => {
       console.error(e);
-      this.setState({resultText: e});
+      this.setState({
+        resultText: e,
+        registerDisabled: false,
+        registerBtnText: 'REGISTER'
+      });
     });
   }
 
@@ -118,9 +135,12 @@ class RegisterForm extends Component{
          <span className='login-textlink'>Already have an account? 
            <Link to={ '/login' } activeclassname='active'>{'Login'}</Link>
          </span>
-         <Button type='submit' style={ {color: 'white'} } variant='outlined'>
-        Register
-         </Button>
+         <div className='register-button-container'>
+           <Button disabled={ this.state.registerDisabled } className='register-button' type='submit' style={ {color: 'white'} }>
+             <img className='register-buttton-img' src={ RegisterButton } alt='Register' type='submit' />
+             <div className='register-button-text'>{this.state.registerBtnText}</div>
+           </Button>
+         </div>
        </form>
       </>
     );
