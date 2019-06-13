@@ -3,6 +3,7 @@
   height: 100px;
 
   &__form {
+    z-index: 1;
     //TODO find a way to set height here in order to fix invisible overlay bug
   }
 
