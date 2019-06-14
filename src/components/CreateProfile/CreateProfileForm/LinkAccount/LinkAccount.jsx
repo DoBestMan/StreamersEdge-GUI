@@ -9,7 +9,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import LinkAccountConfirmation from './LinkAccountConfirmation';
 import Dropdown from './../../../Dropdown/index';
 import AuthUtil from '../../../../utility/AuthUtil';
-
+import {withRouter} from 'react-router-dom';
 
 class LinkAccount extends Component {
 
@@ -49,7 +49,7 @@ class LinkAccount extends Component {
 
     this.handleClose();
     const platform = this.state.platform;
-    AuthUtil.authVia(platform);
+    AuthUtil.authVia(platform, this.props.location.pathname);
     
 
   }
@@ -71,4 +71,4 @@ class LinkAccount extends Component {
   }
 }
 
-export default LinkAccount;
+export default withRouter(LinkAccount);

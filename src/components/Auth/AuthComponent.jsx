@@ -13,7 +13,7 @@ export function  requireAuthentication(Component) {
     }
 
     checkAuth() {
-      if (!this.props.isLogin) {
+      if (!this.props.isLoggedIn) {
         let redirectAfterLogin = this.props.location.pathname;
         this.props.dispatch(NavigateActions.navigateToSignIn(redirectAfterLogin));
       }
@@ -21,14 +21,14 @@ export function  requireAuthentication(Component) {
 
     render() {
       return (
-        this.props.isLogin === true
+        this.props.isLoggedIn === true
           ? <Component { ...this.props }/>
           : null
       );
     }
   }
 
-  const mapStateToProps = (state) => ({isLogin: state.getIn(['app', 'isLogin'])});
+  const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['account', 'isLoggedIn'])});
 
   return connect(mapStateToProps)(AuthenticatedComponent);
 }

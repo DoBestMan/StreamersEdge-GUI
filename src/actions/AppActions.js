@@ -1,5 +1,8 @@
+/* eslint-disable */
 import ActionTypes from '../constants/ActionTypes';
 import NavigateActions from '../actions/NavigateActions';
+import AuthService from '../services/AuthService';
+import AccountActions from '../actions/AccountActions';
 
 class AppPrivateActions {
   /**
@@ -12,32 +15,35 @@ class AppPrivateActions {
     return {
       type: ActionTypes.APP_LOGOUT,
       payload: {
-        isLogin: false,
+        isLoggedin: false,
         account: null,
-        accountId: null
+        password: null
       }
     };
   }
 
   /**
-   * Private Redux Action Creator (APP_LOGIN)
-   * Account Login in app
-   *
-   * @param {String} account
-   * @param {String} accountId
-   * @returns {{type, payload: {isLogin: boolean, account: String, accountId: String}}}
+   * Log the user in given account name and password
+   * This is internal action that is used for the exposed login and signup function
+   * @param {object} account
    */
-  static loginAction(account, accountId) {
-    return {
-      type: ActionTypes.APP_LOGIN,
-      payload: {
-        isLogin: true,
-        account: account,
-        accountId: accountId
-      }
-    };
+
+  static processLogin(account) {
+    return (dispatch) => AuthService.login(account).then((fullAccount) => {
+      console.log(fullAccount);
+      // Save account information
+      dispatch(AccountActions.setAccountAction(fullAccount));
+      // Save password
+      dispatch(AccountActions.setPasswordAction(account.password));
+      // Set is logged in
+      dispatch(AccountActions.setIsLoggedInAction(true));
+    }).catch((e) => {
+      throw e;
+    });
   }
+
 }
+
 class AppActions {
   /**
  * login in app-Reducer
@@ -47,13 +53,18 @@ class AppActions {
  */
   static login(account, next = null) {
     return (dispatch) => {
-      dispatch(AppPrivateActions.loginAction(account.name, account.id));
+      dispatch(AppPrivateActions.processLogin(account)).then(() => {
+        console.log('Login succeeded'); //TODO: need to error handle this
+          dispatch(NavigateActions.navigateTo('/dashboard'));
+      }).catch((err) => {
+        console.error(err);
+      });
 
-      if (next) {
-        dispatch(NavigateActions.navigateTo(next)); 
-      } else {
-        dispatch(NavigateActions.navigateToDashboard());
-      }
+      // if (next) {
+      //   dispatch(NavigateActions.navigateTo(next)); 
+      // } else {
+      //   dispatch(NavigateActions.navigateToDashboard());
+      // }
     };
   }
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import HeaderLogo from '../../assets/images/profile/streamers_edge_logo.png';
 import RegisterForm from './RegisterForm';
-import RegisterFooter from './RegisterFooter';
+import AuthFooter from '../Auth/AuthFooter';
 
 class Register extends Component {
   render() {
@@ -16,7 +16,7 @@ class Register extends Component {
           <div className='register-page'>
             <span className='register-title'>CREATE YOUR ACCOUNT</span>
             <RegisterForm></RegisterForm>
-            <RegisterFooter></RegisterFooter>
+            <AuthFooter></AuthFooter>
           </div>
       </>
     );
