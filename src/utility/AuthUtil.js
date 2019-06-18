@@ -33,6 +33,8 @@ const AuthUtil = {
           window.location.assign(authUrl);
           break;
         case 'facebook':
+          authUrl = `${apiRoot}api/v1/auth/facebook`;
+          window.location.assign(authUrl);
           break;
         default:
           console.warn('Error');
