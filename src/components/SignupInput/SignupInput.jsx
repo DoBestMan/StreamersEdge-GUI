@@ -45,6 +45,7 @@ class InputField extends Component{
             onMouseOut={ this.mouseOut }
             onBlur = { this.props.onBlur }
             InputProps={ {className: classes.input, disableUnderline: true} }
+            type={ this.props.type }
           />
         </FormControl>
       </div>

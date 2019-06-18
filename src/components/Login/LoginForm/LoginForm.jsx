@@ -56,7 +56,7 @@ class LoginForm extends Component{
              inputValue={ this.state.username } inputImage={ IconUsername } activeInputImage={ IconUsernameActive }/>
          </FormControl>
          <FormControl margin='normal' required fullWidth>
-           <SignupInput name='password' handleChange={ this.handleChange }
+           <SignupInput name='password' type='password' handleChange={ this.handleChange }
              inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
          </FormControl>
          <span className='register-textlink'>Don't have a Streamers Edge Account?

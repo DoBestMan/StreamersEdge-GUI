@@ -122,7 +122,7 @@ class RegisterForm extends Component{
          </FormControl>
          <InputLabel shrink error={ true }>{this.state.errors.email}</InputLabel>
          <FormControl margin='normal' required fullWidth>
-           <SignupInput onBlur={ () => this.validate('password') } name='password' handleChange={ this.handleChange }
+           <SignupInput onBlur={ () => this.validate('password') } name='password' type='password' handleChange={ this.handleChange }
              inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
          </FormControl>
          <InputLabel className='register-error' shrink error={ true }>{this.state.errors.password}</InputLabel>
