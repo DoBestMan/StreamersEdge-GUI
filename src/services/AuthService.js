@@ -72,26 +72,6 @@ class AuthService {
     });
   }
 
-  /* Get the appropriate web portal URL 
-  ** For third party authentication
-  ** There should not be any reason to call this function directly.
-  ** Use AuthUtil.js to handle 3rd party auth flow + redirection.
-  *
-  */
-  static getRedirect(platform) {
-    const query = `${apiRoot}api/v1/auth/${platform}/redirect-url`;
-
-    return new Promise(async (resolve, reject) => {
-      const response = await ApiHandler.get(query);
-  
-      if (response.data.status !== 200) {
-        return reject(response);
-      }
-        
-      return resolve(response.data.result);
-    });
-  }
-
   // Generic auth for profile creation
   // TODO: Move platform to Redux
   static authorize(code) {
