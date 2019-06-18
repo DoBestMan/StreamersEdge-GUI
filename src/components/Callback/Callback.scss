@@ -1,0 +1,11 @@
+.callback-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: -webkit-fill-available;
+  color: white;
+
+  &__content {
+    max-width: 50%;
+  }
+}

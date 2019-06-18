@@ -5,6 +5,7 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 import Dashboard from '../components/Dashboard';
 import CreateProfile from '../components/CreateProfile';
+import Callback from '../components/Callback';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 
 // https://github.com/supasate/connected-react-router/blob/master/examples/immutable/src/routes/index.js
@@ -17,6 +18,7 @@ const routes = (
       <Route path='/sign-up' component={ Register }/>
       <Route path='/profile' component={ CreateProfile }/>
       <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
+      <Route path='/callback' component={ Callback }/>
     </Switch>
   </React.Fragment>
 );

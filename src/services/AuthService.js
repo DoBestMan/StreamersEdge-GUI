@@ -59,7 +59,6 @@ class AuthService {
         repeatPassword: account.repeatPassword
       };
 
-
       try {
         response = await ApiHandler.post(query, querystring.stringify(body), headers);
         return resolve(response.data.result);
@@ -68,8 +67,30 @@ class AuthService {
         return reject(err.toString());
       }
     
-        
     });
+  }
+
+  // Confirm user email
+  static confirmEmail(token) {
+    let response;
+    const query = `${apiRoot}api/v1/auth/confirm-email/${token}`;
+
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      try {
+        response = await ApiHandler.get(query, headers);
+        return resolve(response.data.result);
+
+      } catch(err) {
+        return reject(err.toString());
+      }
+    });
+
   }
 
   // Generic auth for profile creation
