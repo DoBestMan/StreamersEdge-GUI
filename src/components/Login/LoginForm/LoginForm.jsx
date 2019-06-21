@@ -12,7 +12,6 @@ import IconUsernameActive from '../../../assets/images/signup_username_active_in
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import LoginButton from '../../../assets/images/login/login_button.png';
-// import ValidationUtil from './../../../utility/ValidationUtil';
 
 class LoginForm extends Component{
 
@@ -61,6 +60,9 @@ class LoginForm extends Component{
          </FormControl>
          <span className='register-textlink'>Don't have a Streamers Edge Account?
            <Link to={ '/sign-up' } activeclassname='active'> {'Register'} </Link>
+         </span>
+         <span className='register-textlink'>
+           <Link to={ '/forgot-password' } activeclassname='active'>{'Forgot your password?'}</Link>
          </span>
          <div className='login-button-container'>
            <Button disabled={ false } className='login-button' type='submit' style={ {color: 'white'} }>

@@ -93,6 +93,61 @@ class AuthService {
 
   }
 
+  // Send an email for pw reset
+  static forgotPassword(email) {
+    let response;
+    const query = `${apiRoot}api/v1/auth/forgot-password`;
+  
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const body = {
+        email: email
+      };    
+  
+      try {
+        response = await ApiHandler.post(query, querystring.stringify(body), headers);
+        return resolve(response.data.result);
+  
+      } catch(err) {
+        return reject(err.toString());
+      }
+    });
+  
+  }
+
+  // Actually reset the user's pw
+  static resetPassword(token, newPassword) {
+    let response;
+    const query = `${apiRoot}api/v1/auth/reset-password`;
+
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const body = {
+        token,
+        password: newPassword,
+        repeatPassword: newPassword
+      };    
+
+      try {
+        response = await ApiHandler.post(query, querystring.stringify(body), headers);
+        return resolve(response.data.result);
+
+      } catch(err) {
+        return reject(err.toString());
+      }
+    });
+  }
+
   // Generic auth for profile creation
   // TODO: Move platform to Redux
   static authorize(code) {

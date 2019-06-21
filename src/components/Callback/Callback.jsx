@@ -40,6 +40,9 @@ class Callback extends Component {
           console.error(err);
         });
         break;
+      case 'reset-password':
+        this.props.history.push(`/forgot-password?token=${pathAry[3]}`);
+        break;
       default:
         // an error occurred.
         console.warn('Error - unidentified callback');
@@ -53,7 +56,6 @@ class Callback extends Component {
       <div className='callback-page'>
         <div className='callback-page__content'>
           {this.state.error}
-
         </div>
       </div>
       </>
