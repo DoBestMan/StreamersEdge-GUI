@@ -1,0 +1,17 @@
+.input--background {
+  position: center;
+  width: 455px;
+  height: 129px;
+}
+
+.input--text {
+  bottom: 92px;
+  left: 40px;
+  width: 386px;
+  height: 52px;
+  text-indent: 20px;
+}
+
+.input--test:-internal-autofill-selected {
+  background-color: black;
+}
