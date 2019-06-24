@@ -4,6 +4,11 @@
       "@babel/preset-env",
       {
         "targets": {
+          "browsers": [
+            ">0.25%",
+            "not ie 11",
+            "not op_mini all"
+          ],
           "node": "10"
         }
       }
@@ -12,6 +17,7 @@
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime"
   ]
 }

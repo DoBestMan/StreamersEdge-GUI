@@ -49,7 +49,7 @@ class AppActions {
  * login in app-Reducer
  *
  * @param {Object} account {name: String, id: String}
- * @returns {function(*)}
+ * @returns Navigate action
  */
   static login(account, next = null) {
     return (dispatch) => {

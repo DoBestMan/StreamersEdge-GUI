@@ -174,6 +174,34 @@ class AuthService {
     });
 
   }
+
+  static linkPeerplaysAccount(account) {
+    let response;
+    const query = `${apiRoot}api/v1/profile`;
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+      
+      const body = {
+        peerplaysAccountName: account.peerplaysAccountName
+      };
+
+
+      try {
+        response = await ApiHandler.patch(query, querystring.stringify(body), headers);
+        console.log(response.data.result);
+        return resolve(response.data.result);
+
+      } catch(err) {
+        return reject(err.toString());
+      }
+    
+        
+    });
+  };
 }
 
 export default AuthService;

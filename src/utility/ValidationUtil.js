@@ -1,7 +1,7 @@
 import {translate} from './GeneralUtils';
 
 const ValidationUtil = {
-  validateUserName(value) {
+  validateUsername(value) {
     var label = void 0;
     var ref = void 0;
     var prefix = void 0;
@@ -141,7 +141,7 @@ const ValidationUtil = {
   },
 
   validateInviteGamer(string) {
-    return this.validateUserName(string);
+    return this.validateUsername(string);
   },
 
   validateBounty(number) {

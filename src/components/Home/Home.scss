@@ -14,7 +14,11 @@ html {
 }
 
 .btn {
+  color: white;
+
   &--red {
+    @extend .btn;
+
     background-color: rgb(103, 131, 255);
   }
 

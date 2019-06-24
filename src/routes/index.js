@@ -8,6 +8,7 @@ import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
 import ForgotPassword from '../components/ForgotPassword';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
+import PeerplaysLogin from '../components/PeerplaysLogin/';
 
 // https://github.com/supasate/connected-react-router/blob/master/examples/immutable/src/routes/index.js
 
@@ -20,6 +21,7 @@ const routes = (
       <Route path='/forgot-password' component={ ForgotPassword }/>
       <Route path='/profile' component={ CreateProfile }/>
       <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
+      <Route path='/peerplays' component={ PeerplaysLogin }/>
       <Route path='/callback' component={ Callback }/>
     </Switch>
   </React.Fragment>

@@ -104,7 +104,7 @@ class RegisterForm extends Component{
         this.setState({
           errors: {
             ...this.state.errors,
-            username: ValidationUtil.validateUserName(this.state.username)
+            username: ValidationUtil.validateUsername(this.state.username)
           }
         });
         break;
