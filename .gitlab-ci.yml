@@ -1,0 +1,25 @@
+image: node:10.16.0
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - npm install
+  tags:
+    - docker
+
+deployToDev:
+  stage: deploy
+  script:
+    - bash deploy/deployToDev.sh
+  only:
+    - develop
+
+deployToStaging:
+  stage: deploy
+  script:
+    - bash deploy/deployToStaging.sh
+  when: manual
