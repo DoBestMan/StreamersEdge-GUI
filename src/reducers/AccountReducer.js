@@ -1,10 +1,10 @@
 import ActionTypes from '../constants/ActionTypes';
 import Immutable from 'immutable';
+import StorageUtil from '../utility/StorageUtil';
 
 let initialState = Immutable.fromJS({
-  isLoggedIn: false,
-  account: {},
-  password: null
+  isLoggedIn: StorageUtil.get('se-user') ? true : false,
+  account: JSON.parse(StorageUtil.get('se-user'))
 });
 
 export default function(state = initialState, action) {
@@ -17,13 +17,13 @@ export default function(state = initialState, action) {
 
     case ActionTypes.ACCOUNT_SET_ACCOUNT: {
       return state.merge({
-        account: action.account
+        account: action.payload.account
       });
     }
 
     case ActionTypes.ACCOUNT_SET_PASSWORD: {
       return state.merge({
-        password: action.password
+        password: action.payload.password
       });
     }
 
@@ -37,8 +37,11 @@ export default function(state = initialState, action) {
       return initialState;
     }
 
-    case ActionTypes.AUTH_LOGOUT: {
-      return initialState;
+    case ActionTypes.ACCOUNT_LOGOUT: {
+      return state.merge({
+        isLoggedIn: action.payload.isLoggedIn,
+        account: action.payload.account
+      });
     }
 
     default:

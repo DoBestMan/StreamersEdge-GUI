@@ -5,6 +5,13 @@ import RegisterForm from './RegisterForm';
 import AuthFooter from '../Auth/AuthFooter';
 
 class Register extends Component {
+
+  componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
   render() {
     return(
       <>
@@ -22,5 +29,7 @@ class Register extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['account', 'isLoggedIn'])});
 
-export default connect()(Register);
+
+export default connect(mapStateToProps)(Register);

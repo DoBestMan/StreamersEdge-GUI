@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import Config from '../constants/Config';
+import StorageUtil from '../utility/StorageUtil';
 
 const ApiHandler = axios.create({
   withCredentials: true
@@ -16,11 +17,16 @@ class ProfileService {
 
     return new Promise(async (resolve, reject) => {
       const response = await ApiHandler.get(query);
+
+      if (response.data.status === 401) {
+        StorageUtil.remove('se-user');
+      }
   
       if (response.data.status !== 200) {
         return reject(response);
       }
-        
+      
+      StorageUtil.set('se-user', JSON.stringify(response.data.result));
       return resolve(response.data.result);
     });
   }

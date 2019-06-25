@@ -12,18 +12,12 @@ class AccountActions {
     };
   }
 
-
   static setAccountAction(account) {
     return {
       type: ActionTypes.ACCOUNT_SET_ACCOUNT,
-      account
-    };
-  }
-
-  static setPasswordAction(password) {
-    return {
-      type: ActionTypes.ACCOUNT_SET_PASSWORD,
-      password
+      payload: {
+        account: account
+      }
     };
   }
 }

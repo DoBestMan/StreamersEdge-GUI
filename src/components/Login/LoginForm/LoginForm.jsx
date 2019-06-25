@@ -12,6 +12,8 @@ import IconUsernameActive from '../../../assets/images/signup_username_active_in
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import LoginButton from '../../../assets/images/login/login_button.png';
+import AuthService from '../../../services/AuthService';
+import ProfileService from '../../../services/ProfileService';
 
 class LoginForm extends Component{
 
@@ -44,6 +46,18 @@ class LoginForm extends Component{
     this.setState({
       [name]: value
     });    
+  }
+
+  logout = () => {
+    AuthService.logout().then((r) => {
+      console.log(r);
+    });
+  }
+
+  getProfile = () => {
+    ProfileService.getProfile().then((r) => {
+      console.log(r);
+    });
   }
   
   render(){

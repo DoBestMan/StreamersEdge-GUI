@@ -1,31 +1,42 @@
 import React, {Component} from 'react';
-import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom';
-import {Translate} from 'react-redux-i18n';
+import {connect} from 'react-redux';
+import ProfileService from '../../services/ProfileService';
+import AccountActions from '../../actions/AccountActions';
+import {bindActionCreators} from 'redux';
 
 class Home extends Component{
-  state = {
-    inputValue: ''
-  };
+
+  // Redirect to dashboard, if the user is not logged in then they will go to the login page instead.
+  componentDidMount() {
+    ProfileService.getProfile().then((profile) => {
+      this.props.setAccount(profile);
+      this.props.setLoggedIn(true);
+      this.props.history.push('/dashboard');
+    });
+
+  }
 
   handleChange = (val) => {
     this.setState({inputValue: val});
   }
-
+  
   render(){
-
+    
     return(
-      <>
-        <p className='code-me'>
-          <Link to='/login'>Login</Link>
-          <Link to='/dashboard'>
-            <Button className='btn btn--red'>Dashboard</Button>
-          </Link>
-          <Translate value='codeMe' />
-        </p>
-      </>
+      <div className='code-me'>
+        Placeholder text
+      </div>
     );
   }
 }
 
-export default Home;
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    ...bindActionCreators({setLoggedIn: AccountActions.setIsLoggedInAction,
+      setAccount: AccountActions.setAccountAction
+    }, dispatch)
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Home);

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {NavigateActions} from '../../actions';
 
-export function  requireAuthentication(Component) {
+export function requireAuthentication(Component) {
   class AuthenticatedComponent extends React.Component {
     componentWillMount() {
       this.checkAuth();
@@ -32,3 +32,4 @@ export function  requireAuthentication(Component) {
 
   return connect(mapStateToProps)(AuthenticatedComponent);
 }
+

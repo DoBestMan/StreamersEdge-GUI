@@ -37,10 +37,33 @@ class AuthService {
       } catch(err) {
         return reject(err.toString());
       }
-    
-        
+
     });
   }
+
+  // Log authenticated user out of the application
+  static logout() {
+    let response;
+    const query = `${apiRoot}api/v1/auth/logout`;
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+        
+      try {
+        response = await ApiHandler.post(query, headers);
+        console.log(response);
+        return resolve(response.data.result);
+  
+      } catch(err) {
+        return reject(err.toString());
+      }
+  
+    });
+  }
+  
   // Basic Sign-Up via email
   static register(account) {
     let response;

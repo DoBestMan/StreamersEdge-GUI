@@ -1,8 +1,7 @@
 import ActionTypes from '../constants/ActionTypes';
 
+
 const initialState = {
-  isLogin: false,
-  account: null,
   accountId: null
 };
 

@@ -3,21 +3,23 @@ import ActionTypes from '../constants/ActionTypes';
 import NavigateActions from '../actions/NavigateActions';
 import AuthService from '../services/AuthService';
 import AccountActions from '../actions/AccountActions';
+import StorageUtil from '../utility/StorageUtil';
 
 class AppPrivateActions {
   /**
-   *  Private Redux Action Creator (APP_LOGOUT)
+   *  Private Redux Action Creator (ACCOUNT_LOGOUT)
    *  User Logout
    *
    * @returns {{type, payload: {isLogin: boolean, account: null, accountId: null}}}
    */
   static logoutAction() {
+    StorageUtil.remove('se-user');
+
     return {
-      type: ActionTypes.APP_LOGOUT,
+      type: ActionTypes.ACCOUNT_LOGOUT,
       payload: {
         isLoggedin: false,
         account: null,
-        password: null
       }
     };
   }
@@ -30,13 +32,12 @@ class AppPrivateActions {
 
   static processLogin(account) {
     return (dispatch) => AuthService.login(account).then((fullAccount) => {
-      console.log(fullAccount);
       // Save account information
       dispatch(AccountActions.setAccountAction(fullAccount));
-      // Save password
-      dispatch(AccountActions.setPasswordAction(account.password));
       // Set is logged in
       dispatch(AccountActions.setIsLoggedInAction(true));
+      // Persistence
+      StorageUtil.set('se-user', JSON.stringify(fullAccount));
     }).catch((e) => {
       throw e;
     });
@@ -77,6 +78,7 @@ class AppActions {
     return (dispatch) => {
       dispatch(AppPrivateActions.logoutAction());
       dispatch(NavigateActions.navigateToSignIn());
+
     };
   }
 }

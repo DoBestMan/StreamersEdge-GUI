@@ -9,24 +9,19 @@ import AuthFooter from '../Auth/AuthFooter';
 
 class Login extends Component {
 
-  handleSubmit() {
-    // let next;
-
-    // if (this.props.location.search) {
-    //   next = querystring.parse(this.props.location.search).next;
-    // }
-
-    // this.props.login({name: 'freddy3', id: -1}, next);
+  componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.props.history.push('/dashboard');
+    }
   }
-
 
   render() {
     return(
-      <>
-            <div className='profile-header'>
-              <img className='profile-headerlogo' src={ HeaderLogo } alt='Header'></img>
-            </div>
-            <div className='login-divider__top'/>
+    <>
+    <div className='profile-header'>
+      <img className='profile-headerlogo' src={ HeaderLogo } alt='Header'></img>
+    </div>
+        <div className='login-divider__top'/>
           <div className='login-page'>
             <span className='login-title'>STREAMERS EDGE LOGIN</span>
             <LoginForm handleLogin={ this.props.login }></LoginForm>
@@ -37,6 +32,9 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['account', 'isLoggedIn'])});
+
+
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
@@ -44,4 +42,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
