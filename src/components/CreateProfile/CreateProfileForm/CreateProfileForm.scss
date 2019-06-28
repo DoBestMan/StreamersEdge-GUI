@@ -20,10 +20,12 @@
 }
 
 .profileform-email {
-  background-image: url('../../../assets/images/profile/email.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 446px;
+  z-index: 2;
+  width: 456px;
+  // background-image: url('../../../assets/images/profile/email.svg');
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: 446px;
 }
 
 .profileform-one {
@@ -57,7 +59,10 @@
 }
 
 .profileform__helper {
+  margin-top: 15px;
+  margin-left: 45px;
   color: #3399ff;
+  text-align: center;
 }
 
 .profileform-navigation {
@@ -83,4 +88,11 @@
   flex-direction: column;
   align-items: center;
   margin-top:16px;
+}
+
+.linkPeerplays {
+  background-image: url('../../../assets/images/profile/email.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 446px;
 }

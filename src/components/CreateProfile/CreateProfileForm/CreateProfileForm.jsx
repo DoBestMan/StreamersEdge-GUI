@@ -5,16 +5,17 @@
  */
 import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import LinkAccount from './LinkAccount';
 import LinkCrypto from './LinkCrypto';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import ProfilePictureUpload from './ProfilePictureUpload';
 import nextBtnImg from '../../../assets/images/profile/next-green.svg';
 import prevBtnImg from '../../../assets/images/profile/btn__back--green.svg';
 import ActiveAccount from './ActiveAccount/ActiveAccount';
+import Dropdown from '../../Dropdown';
+import InputField from '../../InputField';
+import emailInput from '../../../assets/images/email.svg';
+import emailInputActive from '../../../assets/images/email--active.svg';
 
 
 class CreateProfileForm extends Component{
@@ -25,7 +26,7 @@ class CreateProfileForm extends Component{
     // Set the initial input values
     this.state = {
       email: '',
-      accountType: 'Viewer'
+      platform: 'Viewer'
     };
   } 
 
@@ -38,11 +39,18 @@ class CreateProfileForm extends Component{
     }
   }
 
-  handleChange = (event) => {
-    const {name, value} = event.target;
+  handleEmailChange = (event) => {
+    const {value} = event.target;
     this.setState({
-      [name]: value
-    });    
+      email: value
+    });
+  }
+
+  handleAccountChange = (event) => {
+    const {value} = event.target;
+    this.setState({
+      platform: value
+    });
   }
 
   handleSubmit = (event) => {
@@ -132,6 +140,7 @@ class CreateProfileForm extends Component{
   }
   
   render(){
+    console.log('email: ', this.state.email, '\nplatform: ', this.state.platform);
     let form;
     let active = <ActiveAccount search ={ this.props.location.search }></ActiveAccount>;
     const navigationClass = `profileform-navigation__${this.props.currentStep}`;
@@ -145,25 +154,13 @@ class CreateProfileForm extends Component{
             <ProfilePictureUpload/>
             <div className='profileform-inner'>
               <FormControl margin='normal' required fullWidth>
-                <Select
-                  value={ this.state.accountType }
-                  onChange={ this.handleChange }
-                  inputProps={ {
-                    name: 'accountType',
-                    id: 'accountType'
-                  } }
-                >
-                  <MenuItem value={ 'Viewer' }>Viewer</MenuItem>
-                  <MenuItem value={ 'Gamer' }>Gamer</MenuItem>
-                  <MenuItem value={ 'Sponsor' }>Sponsor</MenuItem>
-                </Select>
+                <Dropdown dropdownList={ ['Viewer', 'Gamer', 'Sponsor'] } handleChange={ this.handleAccountChange } selectedValue = { this.state.platform }/>
                 <FormHelperText className ='profileform__helper'>Select account type</FormHelperText>
-
               </FormControl>
                 
               <div className='profileform-email'>
                 <FormControl margin='normal' required fullWidth>
-                  <TextField className='email-text' name='email' onChange={ this.handleChange }/>
+                  <InputField className='email-text' name='email' inputImage={ emailInput } activeInputImage={ emailInputActive } handleChange={ this.handleEmailChange }/>
                 </FormControl>
               </div>
 

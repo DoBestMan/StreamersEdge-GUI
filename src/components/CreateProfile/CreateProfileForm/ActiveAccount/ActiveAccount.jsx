@@ -6,7 +6,8 @@ import React, {Component} from 'react';
 import querystring from 'query-string';
 import AuthService from './../../../../services/AuthService';
 import ProfileService from './../../../../services/ProfileService';
-
+import placeholder from '../../../../assets/images/profile/email.svg';
+import {Link} from 'react-router-dom';
 class ActiveAccount extends Component {
 
   constructor(props) {
@@ -37,6 +38,11 @@ class ActiveAccount extends Component {
     return (
       <div className='profileform-active'>
         <span className='profileform-title__activelinked'>ACTIVE LINKED ACCOUNTS</span>
+        <div className='linkPeerplays'>
+          <Link to='/peerplays'>
+            <img src={ placeholder } width='456' alt=''/>
+          </Link>
+        </div>
         <p>{this.state.profile.username}</p>
       </div>
     );

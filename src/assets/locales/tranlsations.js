@@ -33,6 +33,9 @@ export const translationObject = {
         beDecimalOrInt: 'must be either a decimal or integer'
       }
     },
+    createProfile: {
+      accountTypes: ['Viewer', 'Gamer', 'Sponsor']
+    },
     codeMe: 'Code Me!!!!!'
   }
 };

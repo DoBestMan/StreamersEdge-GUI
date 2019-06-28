@@ -25,10 +25,6 @@ class InputField extends Component{
     }
   }
 
-  handleChange = (event) => {
-    this.props.handleChange(event.target.value);
-  }
-
   render(){
     const {classes} = this.props;
 
@@ -38,8 +34,7 @@ class InputField extends Component{
           <img className='input--background' src={ this.state.image } alt=''/>
           <TextField
             className={ 'input--text' }
-            disableUnderline={ true }
-            onChange={ this.handleChange }
+            onChange={ this.props.handleChange }
             onMouseOver={ this.mouseOver }
             onMouseOut={ this.mouseOut }
             InputProps={ {className: classes.input, disableUnderline: true} }
