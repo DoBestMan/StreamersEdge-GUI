@@ -9,6 +9,7 @@ class Home extends Component{
   // Redirect to dashboard, if the user is not logged in then they will go to the login page instead.
   componentDidMount() {
     ProfileService.getProfile().then((profile) => {
+      console.log(profile);
       this.props.setAccount(profile);
       this.props.setLoggedIn(true);
       this.props.history.push('/dashboard');
@@ -24,7 +25,7 @@ class Home extends Component{
     
     return(
       <div className='code-me'>
-        Placeholder text
+        You are not logged in
       </div>
     );
   }

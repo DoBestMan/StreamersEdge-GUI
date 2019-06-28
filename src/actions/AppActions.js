@@ -14,6 +14,7 @@ class AppPrivateActions {
    */
   static logoutAction() {
     StorageUtil.remove('se-user');
+    AuthService.logout();
 
     return {
       type: ActionTypes.ACCOUNT_LOGOUT,

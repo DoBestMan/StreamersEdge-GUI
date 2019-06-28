@@ -3,7 +3,6 @@
  */
 
 import React, {Component} from 'react';
-import HeaderLogo from '../../assets/images/profile/streamers_edge_logo.png';
 import AuthService from '../../services/AuthService';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -123,9 +122,6 @@ class ForgotPassword extends Component {
 
     return(
         <>
-          <div className='profile-header'>
-            <img className='profile-headerlogo' src={ HeaderLogo } alt='Header'></img>
-          </div>
           <div className='register-divider__top' />
           <div className='register-page'>
             {passForm}

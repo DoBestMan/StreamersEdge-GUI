@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import HeaderLogo from '../../assets/images/profile/streamers_edge_logo.png';
 import AppActions from '../../actions/AppActions';
 import {bindActionCreators} from 'redux';
 import LoginForm from './LoginForm';
@@ -18,10 +17,6 @@ class Login extends Component {
   render() {
     return(
     <>
-    <div className='profile-header'>
-      <img className='profile-headerlogo' src={ HeaderLogo } alt='Header'></img>
-    </div>
-        <div className='login-divider__top'/>
           <div className='login-page'>
             <span className='login-title'>STREAMERS EDGE LOGIN</span>
             <LoginForm handleLogin={ this.props.login }></LoginForm>

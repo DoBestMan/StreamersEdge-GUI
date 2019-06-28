@@ -16,6 +16,7 @@ import IconUsername from '../../../assets/images/signup_username_input.png';
 import IconUsernameActive from '../../../assets/images/signup_username_active_input.png';
 import {Link} from 'react-router-dom';
 import RegisterButton from '../../../assets/images/signup/register_button.png';
+import RegisterButtonActive from '../../../assets/images/signup/register_active_button.png';
 import ValidationUtil from '../../../utility/ValidationUtil';
 
 class RegisterForm extends Component{
@@ -137,8 +138,10 @@ class RegisterForm extends Component{
          </span>
          <div className='register-button-container'>
            <Button disabled={ this.state.registerDisabled } className='register-button' type='submit' style={ {color: 'white'} }>
-             <img className='register-buttton-img' src={ RegisterButton } alt='Register' type='submit' />
-             <div className='register-button-text'>{this.state.registerBtnText}</div>
+             <img className='register-button-img' src={ RegisterButton } alt='Register' type='submit' 
+               onMouseOver={ (e) => (e.currentTarget.src = RegisterButtonActive) }
+               onMouseOut={ (e) => (e.currentTarget.src = RegisterButton) }
+             />
            </Button>
          </div>
        </form>

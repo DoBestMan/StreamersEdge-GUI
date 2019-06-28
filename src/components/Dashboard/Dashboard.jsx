@@ -10,6 +10,8 @@ class Dashboard extends Component {
   getProfile = () => {
     ProfileService.getProfile().then((profile) => {
       console.log(profile);
+    }).catch((e) => {
+      console.warn(e);
     });
   }
 

@@ -7,6 +7,7 @@ import Dashboard from '../components/Dashboard';
 import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
 import ForgotPassword from '../components/ForgotPassword';
+import Header from '../components/Header';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 import PeerplaysLogin from '../components/PeerplaysLogin/';
 
@@ -14,6 +15,7 @@ import PeerplaysLogin from '../components/PeerplaysLogin/';
 
 const routes = (
   <React.Fragment>
+    <Route path='/' component= { Header }/>
     <Switch>
       <Route exact path='/' component={ Home }/>
       <Route path='/login' component={ Login }/>

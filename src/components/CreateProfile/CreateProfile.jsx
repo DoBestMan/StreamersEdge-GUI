@@ -5,7 +5,6 @@
 
 import React, {Component} from 'react';
 import CreateProfileForm from './CreateProfileForm';
-import HeaderLogo from '../../assets/images/profile/streamers_edge_logo.png';
 import step_1 from '../../assets/images/profile/step_1.svg';
 import step_2 from '../../assets/images/profile/step_2.svg';
 import step_3 from '../../assets/images/profile/step_3.svg';
@@ -39,10 +38,6 @@ class CreateProfile extends Component{
     console.log('location: ', this.props.location);
     return(
       <>
-      <div className='profile-header'>
-        <img className='profile-headerlogo' src={ HeaderLogo } alt='Header'></img>
-      </div>
-      <div className='profile-divider__top'/>
       <div className='profile-page'>
         <div className='profile-form'>
           <CreateProfileForm changeStep={ this.changeStep } currentStep={ this.state.currentStep } location={ this.props.location } />

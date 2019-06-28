@@ -12,6 +12,7 @@ import IconUsernameActive from '../../../assets/images/signup_username_active_in
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import LoginButton from '../../../assets/images/login/login_button.png';
+import LoginButtonActive from '../../../assets/images/login/login_active_button.png';
 import AuthService from '../../../services/AuthService';
 import ProfileService from '../../../services/ProfileService';
 
@@ -80,8 +81,10 @@ class LoginForm extends Component{
          </span>
          <div className='login-button-container'>
            <Button disabled={ false } className='login-button' type='submit' style={ {color: 'white'} }>
-             <img className='login-button-img' src={ LoginButton } alt='Login' type='submit' />
-             <div className='login-button-text'>LOGIN</div>
+             <img className='login-button-img' src={ LoginButton } alt='Login' type='submit' 
+               onMouseOver={ (e) => (e.currentTarget.src = LoginButtonActive) }
+               onMouseOut={ (e) => (e.currentTarget.src = LoginButton) }
+             />
            </Button>
          </div>
        </form>
