@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 import log from 'loglevel';
 
 const MAX_RECURSION_ATTEMPTS = 10;
-const endpointsGist = 'https://api.github.com/gists/defb2aeac2c67e98067823d9b353437f';
+const endpointsGist = 'https://api.github.com/gists/024a306a5dc41fd56bd8656c96d73fd0';
 // const witness_object_type  = parseInt(ChainTypes.object_type.witness, 10);
 // const witness_prefix = '1.' + witness_object_type + '.';
 
