@@ -16,7 +16,6 @@ test('login fail', () => {
     login: '',
     password: ''
   };
-
   AuthService.login(account).catch((err) => {
     expect(err).toBe('Error: Request failed with status code 400');
   });

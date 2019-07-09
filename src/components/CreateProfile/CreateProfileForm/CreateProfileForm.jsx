@@ -156,13 +156,11 @@ class CreateProfileForm extends Component{
                 <Dropdown dropdownList={ ['Viewer', 'Gamer', 'Sponsor'] } handleChange={ this.handleAccountChange } selectedValue = { this.state.platform }/>
                 <FormHelperText className ='profile-form__helper'>Select account type</FormHelperText>
               </FormControl>
-
               <div className='profile-form-email'>
                 <FormControl margin='normal' required fullWidth>
                   <InputField className='email__txt' name='email' inputImage={ emailInput } activeInputImage={ emailInputActive } handleChange={ this.handleEmailChange }/>
                 </FormControl>
               </div>
-
 
               <FormHelperText className ='profile-form__helper'>Edit Streamers Edge account email</FormHelperText>
             </div>

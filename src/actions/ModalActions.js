@@ -16,7 +16,6 @@ class ModalActions {
       type: ActionTypes.MODAL_TOGGLE
     };
   }
-
 }
 
 export default ModalActions;

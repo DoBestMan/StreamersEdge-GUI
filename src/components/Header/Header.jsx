@@ -20,10 +20,10 @@ class Header extends Component {
 
   render() {
     const path = this.props.location.pathname;
-    let logButton = <span onClick = { this.openLoginModal }className='header-link'>{translate('header.login')}</span>;
+    let logButton = <span onClick = { this.openLoginModal } className='header-link'>{translate('header.login')}</span>;
 
     if (this.props.isLoggedIn) {
-      logButton = <span onClick = { this.props.logout }className='header-link'>{translate('header.logout')}</span>;
+      logButton = <span onClick = { this.props.logout } className='header-link'>{translate('header.logout')}</span>;
     }
 
     return(
