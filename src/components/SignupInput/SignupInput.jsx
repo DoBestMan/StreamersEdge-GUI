@@ -2,15 +2,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {FormControl, TextField} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
-// import Input from '../../../src/assets/images/signup_password_input.png';
-// import InputActive from '../../../src/assets/images/signup_password_active_input.png';
 import styles from './MUI.css';
 
 class InputField extends Component{
   state = {
-    image: this.props.inputImage, 
+    image: this.props.inputImage,
     dropdownOpen: false
   };
+
 
   mouseOver = () => {
     this.setState({image: this.props.activeInputImage});
@@ -34,18 +33,19 @@ class InputField extends Component{
     const {classes} = this.props;
 
     return(
-      <div className='input'>
-        <FormControl className='input__form' margin='normal' required fullWidth>
+      <div className='signup-input'>
+        <FormControl className='signup-input__form' margin='normal' required fullWidth>
           <img src={ this.state.image } alt=''/>
           <TextField
             name={ this.props.name }
-            className={ 'input__text' }
+            className={ 'signup-input__txt' }
             onChange={ this.handleChange }
             onMouseOver={ this.mouseOver }
             onMouseOut={ this.mouseOut }
             onBlur = { this.props.onBlur }
-            InputProps={ {className: classes.input, disableUnderline: true} }
+            InputProps={ {classes: {input: classes.input}, disableUnderline: true} }
             type={ this.props.type }
+            placeholder= { this.props.placeholder }
           />
         </FormControl>
       </div>

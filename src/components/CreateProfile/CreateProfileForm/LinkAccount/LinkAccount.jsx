@@ -15,7 +15,7 @@ class LinkAccount extends Component {
 
   constructor(props) {
     super(props);
-    
+
     // Set the initial input values
     this.state = {
       platform: '',
@@ -28,7 +28,7 @@ class LinkAccount extends Component {
       open: true
     });
   }
-  
+
   handleClose = () => {
     this.setState({
       open: false
@@ -50,7 +50,6 @@ class LinkAccount extends Component {
     this.handleClose();
     const platform = this.state.platform;
     AuthUtil.authVia(platform, this.props.location.pathname);
-    
 
   }
 

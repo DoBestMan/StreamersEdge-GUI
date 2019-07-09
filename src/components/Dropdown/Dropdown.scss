@@ -1,3 +1,5 @@
+@import '../../assets/styles/colors';
+
 .dropdown {
   width: fit-content;
   height: 100px;
@@ -7,19 +9,14 @@
     //TODO find a way to set height here in order to fix invisible overlay bug
   }
 
-  &__row {
-    width: 450px;
-    height: 147px;
-  }
-
   &__input {
     bottom: 120px;
     left: 45px;
-    width:  360px;
+    width: 360px;
     height: 90px;
     padding: 0;
     font-size: 20px;
-    color: white;
+    color: $white;
     text-align: center;
 
     &::before {
@@ -31,17 +28,22 @@
     }
   }
 
+  &__row {
+    width: 450px;
+    height: 147px;
+  }
+
   &__menuItem {
     justify-content: center;
     border: solid 1px transparent;
     border-radius: 5px;
     font-size: 20px;
-    color: white;
-    background: radial-gradient(rgb(41, 41, 41) 5%, rgb(41, 41, 41) 25%, rgb(0, 0, 0) 50%, rgb(0, 0, 0) 70%) left bottom no-repeat;
-    background-size:100% 5px;
+    color: $white;
+    background: radial-gradient($brown 5%, $brown 25%, $black 50%, $black 70%) left bottom no-repeat;
+    background-size: 100% 5px;
 
     &:hover {
-      border: solid 1px rgb(221, 222, 223);
+      border: solid 1px $eggshell;
       border-radius: 5px;
     }
   }

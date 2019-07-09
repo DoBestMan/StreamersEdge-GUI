@@ -1,14 +1,22 @@
-import ActionTypes from '../constants/ActionTypes';
+import ActionTypes from '../actions/ActionTypes';
 import Immutable from 'immutable';
 import StorageUtil from '../utility/StorageUtil';
 
 let initialState = Immutable.fromJS({
   isLoggedIn: StorageUtil.get('se-user') ? true : false,
-  account: JSON.parse(StorageUtil.get('se-user'))
+  account: JSON.parse(StorageUtil.get('se-user')),
+  loginErrorText: ''
 });
 
 export default function(state = initialState, action) {
   switch (action.type) {
+
+    case ActionTypes.ACCOUNT_LOGIN_SET_ERROR: {
+      return state.merge({
+        loginErrorText: action.payload.loginErrorText
+      });
+    }
+
     case ActionTypes.ACCOUNT_SET_IS_LOGGED_IN: {
       return state.merge({
         isLoggedIn: action.isLoggedIn

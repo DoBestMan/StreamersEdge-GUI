@@ -6,7 +6,7 @@ import {loadTranslations, setLocale, I18n} from 'react-redux-i18n';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import createRootReducer from '../reducers/index';
 import thunk from 'redux-thunk';
-import {translationObject} from '../assets/locales/tranlsations';
+import {translationObject} from '../assets/locales/translations';
 
 // Session history
 export const history = createBrowserHistory();

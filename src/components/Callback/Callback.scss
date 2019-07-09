@@ -1,9 +1,11 @@
+@import '../../assets/styles/colors';
+
 .callback-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: -webkit-fill-available;
-  color: white;
+  color: $white;
 
   &__content {
     max-width: 50%;

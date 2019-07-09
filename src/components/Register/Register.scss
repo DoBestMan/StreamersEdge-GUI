@@ -1,37 +1,39 @@
+@import '../../assets/styles/colors';
+
 .register {
-  color: red;
-}
+  color: $red;
 
-.register-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height:-webkit-fill-available;
-  margin: auto;
-  background-image: url('../../assets/images/background.png');
-  background-size: cover;
-}
-
-.register-title {
-  margin-top:50px;
-  font-weight: 50;
-  font-size: 30px;
-  color: white;
-}
-
-.register-divider {
-  height:7px;
-  margin: auto;
-
-  &__top {
-    @extend .register-divider;
-
-    background-image: linear-gradient(#ffffff, #5e5f61);
+  &-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: -webkit-fill-available;
+    margin: auto;
+    background-image: url('../../assets/images/background.png');
+    background-size: cover;
   }
 
-  &__bottom {
-    @extend .register-divider;
+  &__title {
+    margin-top: 50px;
+    font-weight: 50;
+    font-size: 30px;
+    color: $white;
+  }
 
-    background-image: linear-gradient(#5e5f61, #ffffff);
+  &__divider {
+    height: 7px;
+    margin: auto;
+
+    &-top {
+      @extend .register__divider;
+
+      background-image: linear-gradient($white, $gray);
+    }
+
+    &-bottom {
+      @extend .register__divider;
+
+      background-image: linear-gradient($gray, $white);
+    }
   }
 }

@@ -23,22 +23,22 @@ class ResetForm extends Component {
       resultText: '',
       passwordErr: ''
     };
-  } 
+  }
 
   handleChange = (event) => {
     const {name, value} = event.target;
     this.setState({
       [name]: value
-    });    
+    });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    
+
     if (this.state.passwordErr !== null) {
       return;
     }
-    
+
     AuthService.resetPassword(this.props.token, this.state.password).then(() =>{
       this.props.redirect('/login');
     }).catch((err) => {
@@ -75,19 +75,19 @@ class ResetForm extends Component {
           </FormControl>
           <InputLabel className='register-error' shrink error={ true }>{this.state.passwordErr}</InputLabel>
 
-          <div className='login-button-container'>
+          <div className='login__btn-container'>
             <Button
-              className='login-button'
+              className='login__btn'
               type='submit'
               style={ {color: 'white'} }
             >
               <img
-                className='login-button-img'
+                className='login__btn-img'
                 src={ SubmitButton }
                 alt='Submit'
                 type='submit'
               />
-              <div className='login-button-text'>SUBMIT</div>
+              <div className='login__btn-txt'>SUBMIT</div>
             </Button>
           </div>
         </form>

@@ -26,9 +26,7 @@ class PeerplaysService {
     let list = [];
     // Get the witness object from the blockchain by id.
     let promise = activeWitnesses.map((witnessId) => {
-      return this.getObject(witnessId).then((res) => {
-        console.log(res.toJS());
-      });
+      return this.getObject(witnessId);
     });
     await Promise.all(promise);
     return {
@@ -50,7 +48,7 @@ class PeerplaysService {
 
       return cleanedValues;
     };
-    
+
     try {
       const res = await fetch(endpointsGist);
       const data = await res.json();
@@ -66,7 +64,7 @@ class PeerplaysService {
           .split(','));
       }
     } catch (err) {
-      return console.log(err);
+      return console.error(err);
     }
   }
 
@@ -104,7 +102,7 @@ class PeerplaysService {
 
     this.getActiveWitnessEndpoints().then(() => {
       let wsConnectionManager = new ConnectionManager({urls: this.peerplaysURLs});
-        
+
       if (this.sortedList.length > 1) {
         return this.reconnectToBlockchain();
       } else {
@@ -163,7 +161,7 @@ class PeerplaysService {
    */
   callBlockchainApi(apiPluginName, methodName, params = []) {
     let apiPlugin;
-    
+
     if (apiPluginName === 'db_api') {
       apiPlugin = Apis.instance().db_api();
 
@@ -188,7 +186,7 @@ class PeerplaysService {
   /**
    * Call blokchain db api
    * Route every call to blockchain db api through this function, so we can see the logging
-   * 
+   *
    * @memberof PeerplaysService
    */
   callBlockchainDbApi(methodName, params = []) {
@@ -261,7 +259,7 @@ class PeerplaysService {
       owner: ownerKeyAuths.toJS()
     };
     isAuth = Login.checkKeys({accountName, password, auths});
-    
+
     return isAuth;
   }
 }

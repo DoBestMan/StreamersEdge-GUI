@@ -35,7 +35,6 @@ class CreateProfile extends Component{
   }
 
   render(){
-    console.log('location: ', this.props.location);
     return(
       <>
       <div className='profile-page'>

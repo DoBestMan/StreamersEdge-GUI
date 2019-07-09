@@ -48,7 +48,7 @@ class ForgotPassword extends Component {
     const {name, value} = event.target;
     this.setState({
       [name]: value
-    });    
+    });
   }
 
   // Update the result message and re-enable the button for submissions
@@ -88,9 +88,9 @@ class ForgotPassword extends Component {
         <span className='forgot-subheader'>Enter your email to reset your Streamers Edge account password.</span>
           <form className='forgot-form' onSubmit={ this.handleSubmit }>
             <FormControl margin='normal' required fullWidth>
-              <SignupInput name='email' handleChange={ this.handleChange } 
+              <SignupInput name='email' handleChange={ this.handleChange }
                 inputValue={ this.state.email } inputImage={ IconEmail } activeInputImage={ IconEmailActive }/>
-            </FormControl>  
+            </FormControl>
             <div className='forgot-button-container'>
               <span className='forgot-result'>{this.state.resultText}</span>
 
@@ -114,7 +114,7 @@ class ForgotPassword extends Component {
           </form>
               </>
     );
-    
+
     if (this.state.step === 2) {
       passForm = <ResetForm redirect={ this.props.history.push } token={ this.state.token }/>;
     }

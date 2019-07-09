@@ -1,4 +1,4 @@
-import ActionTypes from '../constants/ActionTypes';
+import ActionTypes from './ActionTypes';
 
 /**
  * Public actions
@@ -6,7 +6,7 @@ import ActionTypes from '../constants/ActionTypes';
 class AccountActions {
 
   static setIsLoggedInAction(isLoggedIn) {
-    return { 
+    return {
       type: ActionTypes.ACCOUNT_SET_IS_LOGGED_IN,
       isLoggedIn
     };

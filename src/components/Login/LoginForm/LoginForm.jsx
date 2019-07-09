@@ -1,23 +1,24 @@
-
 /**
  * Form that handles account creation
  */
 import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import SignupInput from '../../SignupInput';
-import IconPassword from '../../../assets/images/signup_password_input.png';
-import IconPasswordActive from '../../../assets/images/signup_password_active_input.png';
-import IconUsername from '../../../assets/images/signup_username_input.png';
-import IconUsernameActive from '../../../assets/images/signup_username_active_input.png';
+import IconPassword from '../../../assets/images/login/Password.png';
+import IconPasswordActive from '../../../assets/images/login/Password_Over.png';
+import IconUsername from '../../../assets/images/login/Username_1x.png';
+import IconUsernameActive from '../../../assets/images/login/Username_Over.png';
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import LoginButton from '../../../assets/images/login/login_button.png';
 import LoginButtonActive from '../../../assets/images/login/login_active_button.png';
 import AuthService from '../../../services/AuthService';
 import ProfileService from '../../../services/ProfileService';
+import AuthFooter from '../../Auth/AuthFooter';
+import LogoImage from '../../../assets/images/se-logo-stacked.png';
+import {translate} from '../../../utility/GeneralUtils';
 
-class LoginForm extends Component{
-
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,55 +40,73 @@ class LoginForm extends Component{
     };
 
     this.props.handleLogin(account);
-
-  }
+  };
 
   handleChange = (event) => {
     const {name, value} = event.target;
     this.setState({
       [name]: value
-    });    
-  }
+    });
+  };
 
   logout = () => {
-    AuthService.logout().then((r) => {
-      console.log(r);
-    });
-  }
+    AuthService.logout();
+  };
 
   getProfile = () => {
-    ProfileService.getProfile().then((r) => {
-      console.log(r);
-    });
-  }
-  
-  render(){
-    return(
+    ProfileService.getProfile();
+  };
+
+  render() {
+    return (
       <>
-       <form className='login-form' onSubmit={ this.handleSubmit }>
-         <FormControl margin='normal' required fullWidth>
-           <SignupInput name='username' handleChange={ this.handleChange }
-             inputValue={ this.state.username } inputImage={ IconUsername } activeInputImage={ IconUsernameActive }/>
-         </FormControl>
-         <FormControl margin='normal' required fullWidth>
-           <SignupInput name='password' type='password' handleChange={ this.handleChange }
-             inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
-         </FormControl>
-         <span className='register-textlink'>Don't have a Streamers Edge Account?
-           <Link to={ '/sign-up' } activeclassname='active'> {'Register'} </Link>
-         </span>
-         <span className='register-textlink'>
-           <Link to={ '/forgot-password' } activeclassname='active'>{'Forgot your password?'}</Link>
-         </span>
-         <div className='login-button-container'>
-           <Button disabled={ false } className='login-button' type='submit' style={ {color: 'white'} }>
-             <img className='login-button-img' src={ LoginButton } alt='Login' type='submit' 
-               onMouseOver={ (e) => (e.currentTarget.src = LoginButtonActive) }
-               onMouseOut={ (e) => (e.currentTarget.src = LoginButton) }
-             />
-           </Button>
-         </div>
-       </form>
+        <form className='login-form' onSubmit={ this.handleSubmit }>
+          <img src={ LogoImage } alt='logo' />
+          <FormControl margin='none' required>
+            <SignupInput
+              name='username'
+              handleChange={ this.handleChange }
+              inputValue={ this.state.username }
+              inputImage={ IconUsername }
+              activeInputImage={ IconUsernameActive }
+              placeholder={ translate('login.enterUsername') }
+            />
+          </FormControl>
+          <FormControl margin='none' required>
+            <SignupInput
+              name='password'
+              type='password'
+              handleChange={ this.handleChange }
+              inputValue={ this.state.password }
+              inputImage={ IconPassword }
+              activeInputImage={ IconPasswordActive }
+              placeholder={ translate('login.enterPassword') }
+            />
+          </FormControl>
+          {this.props.errorText}
+          <span className='register__textlink'>
+            {translate('login.dontHaveAccount')}
+            <span onClick = { this.props.goRegister } className='goregister__link'>{translate('login.register')}</span>
+          </span>
+          <span className='register__textlink'>
+            <Link className='login__link' to={ '/forgot-password' } activeclassname='active'>
+              {translate('login.forgotPass')}
+            </Link>
+          </span>
+          <div className='login__btn-container'>
+            <Button disabled={ false } className='login__btn' type='submit' style={ {color: 'white'} }>
+              <img
+                className='login__btn-img'
+                src={ LoginButton }
+                alt='Login'
+                type='submit'
+                onMouseOver={ (e) => (e.currentTarget.src = LoginButtonActive) }
+                onMouseOut={ (e) => (e.currentTarget.src = LoginButton) }
+              />
+            </Button>
+          </div>
+        </form>
+        <AuthFooter />
       </>
     );
   }

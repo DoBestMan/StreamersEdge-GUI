@@ -1,9 +1,14 @@
 .input {
-  width: 320px;
-  height: 52px;
-  margin-left: 45px;
+  height: auto;
+  margin-left: 51px;
   font-size: 20px;
-  color: white;
+  color: rgb(255, 255, 255);
+}
+
+.input::placeholder {
+  font-size: 15px;
+  color: rgb(61, 165, 243);
+  opacity: 1;
 }
 
 .root {

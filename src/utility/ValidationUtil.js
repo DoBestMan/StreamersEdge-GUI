@@ -58,7 +58,7 @@ const ValidationUtil = {
 
   validateEmail(email) {
     let regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    
+
     if(!regex.test(email)) {
       return translate('errors.email.invalid');
     } else {
@@ -89,7 +89,7 @@ const ValidationUtil = {
     if(length < 3 || length > 100) {
       error = translate('errors.search.lengthRequirement');
     }
-    
+
     if(length === 0) {
       error = translate('errors.password.noBlank');
     }
@@ -105,7 +105,7 @@ const ValidationUtil = {
 
   validateDecimalInteger(decimalInt) {
     var regexp = /^[0-9]+([,.][0-9]+)?$/g;
-    
+
     if (!regexp.test('a') && !Number.isNumber(decimalInt)) {
       return translate('errors.general.beDecimalOrInt');
     }
@@ -118,7 +118,7 @@ const ValidationUtil = {
     if (!Date.parse(date)) {
       error = translate('errors.date.invalid');
     }
-  
+
     if (today.toDateString() !== date.toDateString()) {
       error = translate('errors.date.beToday');
     }
@@ -128,11 +128,11 @@ const ValidationUtil = {
 
   validateEndDate(startDate, endDate) {
     let error = null;
-    
+
     if (!Date.parse(startDate) || !Date.parse(endDate)) {
       error = translate('errors.date.invalid');
     }
-  
+
     if (Date.parse(startDate) > Date.parse(endDate)) {
       error = translate('errors.date.startLessThanEnd');
     }

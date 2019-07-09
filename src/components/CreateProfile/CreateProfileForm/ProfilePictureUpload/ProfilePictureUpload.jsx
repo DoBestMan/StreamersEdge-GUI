@@ -15,26 +15,26 @@ class ProfilePictureUpload extends Component{
     super(props);
 
     this.state = {selectedFile: null, loaded: null};
-    
+
     this.onChooseFile = this.onChooseFile.bind(this);
     this.onUpload = this.onUpload.bind(this);
     this.changeImage = this.changeImage.bind(this);
   }
-  
+
   onChooseFile(event) {
     const file = event.target.files[0];
-    
+
     if(!!file && this.checkMimeType(file) && this.maxSelectFile(file)) {
       this.setState({
         selectedFile: file
       });
-      
+
       this.onUpload(file);
     }
   }
 
   onUpload() {
-    const data = new FormData(); 
+    const data = new FormData();
     data.append('file', this.state.selectedFile);
 
     axios.post('http://localhost:8082/upload', data, {
@@ -99,11 +99,11 @@ class ProfilePictureUpload extends Component{
         <div className='profile-picture-wrapper'>
           <label htmlFor='file-input'>
             <img className='profile-picture' src={ URL.createObjectURL(this.state.selectedFile) } alt=''/>
-            <img className='profile-frame' src={ avatar_frame } onMouseOver={ (e) => this.changeImage(e, avatar_frame_over) } onMouseOut={ (e) => this.changeImage(e, avatar_frame) } alt=''/>
+            <img className='profile__frame' src={ avatar_frame } onMouseOver={ (e) => this.changeImage(e, avatar_frame_over) } onMouseOut={ (e) => this.changeImage(e, avatar_frame) } alt=''/>
           </label>
         </div>
 
-        <input className='image-upload ' id='file-input' type='file' onChange={ this.onChooseFile }/>
+        <input className='image__upload ' id='file-input' type='file' onChange={ this.onChooseFile }/>
       </>
     );
   }

@@ -13,10 +13,10 @@ import styles from './MUI.css';
 
 class Dropdown extends React.Component {
   state = {
-    image: dropdown, 
+    image: dropdown,
     dropdownOpen: false
   };
-  
+
   mouseOver = () => {
     this.setState({image: dropdownTouched});
   }
@@ -36,7 +36,7 @@ class Dropdown extends React.Component {
 
   onClose = () => {
     this.setState({dropdownOpen: false});
-    
+
     //switch back to default untouched image if no value is selected
     if(this.props.selectedValue === '') {
       this.setState({image: dropdown});
@@ -52,11 +52,11 @@ class Dropdown extends React.Component {
           <Select
             className='dropdown__input'
             value={ selectedValue }
-            open={ this.state.dropdownOpen } 
+            open={ this.state.dropdownOpen }
             onOpen={ this.onOpen }
             onClose={ this.onClose }
             onChange={ this.props.handleChange }
-            onMouseOver={ this.mouseOver } 
+            onMouseOver={ this.mouseOver }
             onMouseOut={ this.mouseOut }
             IconComponent={ () => <> </> }//remove the default material ui dropdown icon
             inputProps={ {classes: {selectMenu: classes.textBoxStyle}} } //override input/textbox styles

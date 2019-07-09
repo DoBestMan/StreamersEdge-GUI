@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import Config from '../constants/Config';
+import Config from '../utility/Config';
 import StorageUtil from '../utility/StorageUtil';
 
 const ApiHandler = axios.create({
@@ -10,8 +10,10 @@ const ApiHandler = axios.create({
 const apiRoot = Config.isDev ? Config.devApiRoute : Config.prodApiRoute;
 
 class ProfileService {
-
-  // Retrieve information on the user's SE profile.
+  /**
+   * Retrieves information on the currently logged in user's SE profile, and stores it in LS if the promise resolves without issue.
+   * @returns {promise} A promise that resolves to a user profile object.
+  */
   static getProfile() {
     const query = `${apiRoot}api/v1/profile`;
 
@@ -21,11 +23,11 @@ class ProfileService {
       if (response.data.status === 401) {
         StorageUtil.remove('se-user');
       }
-  
+
       if (response.data.status !== 200) {
         return reject(response);
       }
-      
+
       StorageUtil.set('se-user', JSON.stringify(response.data.result));
       return resolve(response.data.result);
     });

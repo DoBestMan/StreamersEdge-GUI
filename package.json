@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-linter-boilerplater",
+  "name": "streamers-edge",
   "version": "1.0.0",
   "description": "",
   "homepage": "./",
@@ -7,6 +7,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
+    "eslint": "eslint src/**/*.{js,jsx}",
+    "eslint-fix": "eslint src/**/*.{js,jsx} --fix",
     "test:coverage": "jest --coverage --colors",
     "start": "node scripts/start.js",
     "sonar": "node scripts/sonar.js"

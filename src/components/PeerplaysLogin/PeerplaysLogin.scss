@@ -1,3 +1,5 @@
+@import '../../assets/styles/colors';
+
 .card {
   display: flex;
   flex-direction: column;
@@ -5,16 +7,16 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #03162e;
+  background-color: $blue-dark-two;
 
-  &--header {
+  &__header {
     font-family: 'Lato', sans-serif;
     font-weight: 50;
     font-size: 30px;
-    color: white;
+    color: $white;
   }
 
-  &--container {
+  &__container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +26,7 @@
     padding-bottom: 0;
   }
 
-  &--body {
+  &__body {
     transform: translate(0, 50px);
     width: 90%;
     height: 100%;
@@ -33,44 +35,46 @@
   }
 }
 
-.form-button-wrapper {
-  flex-direction: row-reverse;
-  padding: 0;
+.form {
+  &__btn {
+    width: 25%;
+    margin: 0;
+    margin-left: 50px;
+    color: $white;
+
+    &-wrapper {
+      flex-direction: row-reverse;
+      padding: 0;
+    }
+  }
+
+  &__input {
+    height: 85px;
+    margin: 0;
+  }
 }
 
-.form-button {
-  width: 25%;
-  margin: 0;
-  margin-left: 50px;
-  color: white;
-}
-
-.back-button {
+.btn-back {
   width: 15%;
   margin: 0;
-  color: white;
+  color: $white;
 }
 
 .label {
   margin-bottom: 5px;
   text-align: left;
 
-  &__black {
+  &--black {
     margin-bottom: 5px;
-    color: black;
+    color: $black;
   }
-}
-
-.form-input {
-  height: 85px;
-  margin: 0;
 }
 
 .signup-link {
   width: 50%;
 
-  &--text {
-    color: white;
+  &__text {
+    color: $white;
   }
 }
 

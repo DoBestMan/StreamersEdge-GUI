@@ -30,8 +30,7 @@ class Callback extends Component {
 
     switch(cb) {
       case 'confirm-email':
-        AuthService.confirmEmail(pathAry[3]).then((response) => {
-          console.log(response);
+        AuthService.confirmEmail(pathAry[3]).then(() => {
           this.props.history.push('/login');
         }).catch((err) => {
           this.setState({

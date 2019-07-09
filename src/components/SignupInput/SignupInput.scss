@@ -1,4 +1,6 @@
-.input {
+@import '../../assets/styles/colors';
+
+.signup-input {
   flex-direction: initial;
   width: fit-content;
   height: 90px;
@@ -7,13 +9,13 @@
     height: 54px;
   }
 
-  &__text {
+  &__txt {
     bottom: 57px;
-    left: 6px;
-    width:  370px;
+    left: 40px;
+    width: 370px;
     height: 54px;
     padding: 0;
-    color: white;
+    color: $white;
     text-align: center;
   }
 }

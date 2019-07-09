@@ -8,7 +8,7 @@ import styles from './MUI.css';
 
 class InputField extends Component{
   state = {
-    image: Input, 
+    image: Input,
     dropdownOpen: false
   };
 
@@ -16,7 +16,7 @@ class InputField extends Component{
     this.setState({image: InputActive});
   }
 
-  //if there is no value switch back to default untouched image
+  // if there is no value switch back to default untouched image
   mouseOut = () => {
     if(this.props.inputValue === '') {
       this.setState({image: Input});
@@ -31,9 +31,9 @@ class InputField extends Component{
     return(
       <div className='input'>
         <FormControl margin='normal' required fullWidth>
-          <img className='input--background' src={ this.state.image } alt=''/>
+          <img className='input__bg' src={ this.state.image } alt=''/>
           <TextField
-            className={ 'input--text' }
+            className='input__txt'
             onChange={ this.props.handleChange }
             onMouseOver={ this.mouseOver }
             onMouseOut={ this.mouseOut }

@@ -1,13 +1,14 @@
+@import '../../assets/styles/colors.scss';
+
 .header {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   position: relative;
-  // width:1100px;
-  height:110px;
+  height: 110px;
   margin: auto;
-  color: white;
-  background-image: linear-gradient(#01002a, #001753);
+  color: $white;
+  background-image: linear-gradient($blue-darkest, $blue);
 }
 
 .headerlogo {
@@ -15,8 +16,8 @@
 }
 
 .headerimage {
-  max-width:100%;
-  height:auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .header-center {
@@ -44,27 +45,32 @@
 .header-link {
   margin-right: 12px;
   font-size: 28px;
-  color: #3399ff;
-  text-decoration:none;
+  color: $blue-light;
+  text-decoration: none;
+  cursor: pointer;
 
   &__active {
-    color: white;
+    color: $white;
   }
 }
 
+.header-link:hover {
+  color: $white;
+}
+
 .header-divider {
-  height:5px;
+  height: 5px;
   margin: auto;
 
   &__top {
     @extend .header-divider;
 
-    background-image: radial-gradient(#ffffff, #000000);
+    background-image: radial-gradient($white, $black);
   }
 
   &__bottom {
     @extend .header-divider;
 
-    background-image: linear-gradient(#5e5f61, #ffffff);
+    background-image: linear-gradient($gray, $white);
   }
 }

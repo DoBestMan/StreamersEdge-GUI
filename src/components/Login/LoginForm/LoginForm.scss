@@ -1,40 +1,56 @@
-.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
+@import '../../../assets/styles/common.scss';
 
-  &__input {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    color:white;
+.login {
+  &-form {
+    @extend .txt--white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__input {
+      @extend .txt--white;
+
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+  }
+
+  &__btn {
+    &-container {
+      @extend .txt--white;
+
+      position: relative;
+      padding-top: 25px;
+      text-align: center;
+    }
+
+    &-txt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__link {
+    @extend .txt--white;
   }
 }
 
-.login-error {
-  width: 350px;
+.goregister__link {
+  @extend .txt--white;
+
+  padding-left: 5px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-.login-success {
-  color: green;
-}
-
-.register-textlink {
-  display: flex;
-  justify-content: center;
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
-
-.login-button-container {
-  position: relative;
-  color: white;
-  text-align: center;
-}
-
-.login-button-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.register {
+  &__text-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
 }

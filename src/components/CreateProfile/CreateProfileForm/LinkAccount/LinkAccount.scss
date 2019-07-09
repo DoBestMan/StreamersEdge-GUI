@@ -1,8 +1,10 @@
+@import '../../../../assets/styles/colors';
+
 .account-select {
   justify-content: center;
   align-items: center;
   min-width: 120px;
-  color: white;
+  color: $white;
 }
 
 .root {

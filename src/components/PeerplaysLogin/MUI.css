@@ -1,11 +1,11 @@
-.loginButton {
-  background-image: linear-gradient(to right, #0c4787, #03162e);
+.btnLogin {
+  background-image: linear-gradient(to right, rgb(12, 71, 135), rgb(3, 22, 46));
 }
 
-.loginButton:disabled {
+.btnLogin:disabled {
   background-image: none;
 }
 
-.backButton {
-  background-image: linear-gradient(to right, #0c4787, #03162e);
+.btnBack {
+  background-image: linear-gradient(to right, rgb(12, 71, 135), rgb(3, 22, 46));
 }

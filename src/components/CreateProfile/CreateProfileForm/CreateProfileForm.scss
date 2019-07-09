@@ -1,93 +1,83 @@
-.MuiInputBase-root-25 {
-  color: white;
-}
+@import '../../../assets/styles/colors';
 
-.profileform-title {
-  margin-bottom:50px;
-  font-weight: 50;
-  font-size: 30px;
+.profile-form {
+  &-active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+  }
 
-  &__activelinked {
-    @extend .profileform-title;
+  &-email {
+    z-index: 2;
+    width: 456px;
+  }
 
-    color: white;
+  &-inner {
+    display: flex;
+    flex-direction: column;
+    width: 397px;
+  }
+
+  &-navigation {
+    display: flex;
+    margin-top: 16px;
+
+    &__1 {
+      @extend .profile-form-navigation;
+
+      justify-content: flex-end;
+    }
+
+    &__2 {
+      @extend .profile-form-navigation;
+
+      justify-content: center;
+      z-index: 2;
+    }
+  }
+
+  &-next {
+    height: 135px;
+    cursor: pointer;
+  }
+
+  &-title {
+    margin-bottom: 50px;
+    font-weight: 50;
+    font-size: 30px;
+
+    &__activelinked {
+      @extend .profile-form-title;
+
+      color: $white;
+    }
+  }
+
+  &-one,
+  &-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $white;
+  }
+
+  &-outer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__helper {
+    margin-top: 15px;
+    margin-left: 45px;
+    color: $blue-light;
+    text-align: center;
   }
 }
 
-.profileform-next {
-  height: 135px;
-  cursor: pointer;
-}
-
-.profileform-email {
-  z-index: 2;
-  width: 456px;
-  // background-image: url('../../../assets/images/profile/email.svg');
-  // background-position: center;
-  // background-repeat: no-repeat;
-  // background-size: 446px;
-}
-
-.profileform-one {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-}
-
-.profileform-two {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-}
-
-.profileform-outer {
-  display: flex;
-  flex-direction: row;
-}
-
-.profileform-inner {
-  display: flex;
-  flex-direction: column;
-  width: 397px;
-}
-
-.email-text {
+.email__text {
   width: 340px;
   margin-left: 20px;
-}
-
-.profileform__helper {
-  margin-top: 15px;
-  margin-left: 45px;
-  color: #3399ff;
-  text-align: center;
-}
-
-.profileform-navigation {
-  display: flex;
-  margin-top: 16px;
-
-  &__1 {
-    @extend .profileform-navigation;
-
-    justify-content: flex-end;
-  }
-
-  &__2 {
-    @extend .profileform-navigation;
-
-    justify-content: center;
-    z-index: 2;
-  }
-}
-
-.profileform-active {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top:16px;
 }
 
 .linkPeerplays {

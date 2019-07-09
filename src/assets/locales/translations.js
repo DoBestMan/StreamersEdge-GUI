@@ -36,6 +36,30 @@ export const translationObject = {
     createProfile: {
       accountTypes: ['Viewer', 'Gamer', 'Sponsor']
     },
+    login: {
+      enterUsername: 'Enter your Streamers Edge Username',
+      enterPassword: 'Enter your Streamers Edge Password',
+      dontHaveAccount: 'Don\'t have a Streamers Edge account?',
+      register: 'Register',
+      forgotPass: 'Forgot your password?',
+      orLoginWith: 'Or Login with',
+      invalidPassword: 'The password you\'ve entered is incorrect'
+    },
+    register: {
+      createAccount: 'CREATE YOUR ACCOUNT',
+      enterEmail: 'Enter your email',
+      enterUsername: 'Enter your username',
+      enterPassword: 'Enter your password',
+      alreadyHaveAccount: 'Already have an account?',
+      login: 'Login'
+    },
+    header: {
+      login: 'Log In',
+      logout: 'Log Out',
+      signup: 'Sign Up',
+      menu: 'Menu',
+      popular: 'Popular'
+    },
     codeMe: 'Code Me!!!!!'
   }
 };

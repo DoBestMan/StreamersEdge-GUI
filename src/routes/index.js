@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Home from '../components/Home';
-import Login from '../components/Login';
 import Register from '../components/Register';
 import Dashboard from '../components/Dashboard';
 import CreateProfile from '../components/CreateProfile';
@@ -10,15 +9,16 @@ import ForgotPassword from '../components/ForgotPassword';
 import Header from '../components/Header';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 import PeerplaysLogin from '../components/PeerplaysLogin/';
+import RootModal from '../components/RootModal';
 
 // https://github.com/supasate/connected-react-router/blob/master/examples/immutable/src/routes/index.js
 
 const routes = (
   <React.Fragment>
     <Route path='/' component= { Header }/>
+    <Route path='/' component= { RootModal }/>
     <Switch>
       <Route exact path='/' component={ Home }/>
-      <Route path='/login' component={ Login }/>
       <Route path='/sign-up' component={ Register }/>
       <Route path='/forgot-password' component={ ForgotPassword }/>
       <Route path='/profile' component={ CreateProfile }/>

@@ -1,30 +1,10 @@
 @import '../../assets/styles/common.scss';
 
-html, body {
+html,
+body {
+  @include bg-gradient;
+
   width: 100%;
   height: 100%;
   margin: 0;
-}
-
-.code-me {
-  @extend .flex;
-
-  flex-direction: column;
-  padding: 10px;
-  color: rgb(0, 255, 98);
-  text-align: center;
-}
-
-.btn {
-  color: white;
-
-  &--red {
-    @extend .btn;
-
-    background-color: rgb(103, 131, 255);
-  }
-
-  &:hover {
-    background-color: rgb(127, 131, 255);
-  }
 }

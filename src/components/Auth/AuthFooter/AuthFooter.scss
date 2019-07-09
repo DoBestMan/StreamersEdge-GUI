@@ -1,11 +1,22 @@
+@import '../../../assets/styles/colors';
+
 .auth-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 110px;
-  color: white;
+  margin-top: 30px;
+  color: $white;
 
   &__icons {
+    margin-left: 10px;
     cursor: pointer;
+  }
+
+  .facebook {
+    margin-left: 22px;
+  }
+
+  .youtube {
+    margin-left: 22px;
   }
 }

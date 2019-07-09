@@ -1,6 +1,6 @@
 
 /**
- * The CreateProfileForm is a 3-step master form component containing all of the create and update 
+ * The CreateProfileForm is a 3-step master form component containing all of the create and update
  * profile features.
  */
 import React, {Component} from 'react';
@@ -28,7 +28,7 @@ class CreateProfileForm extends Component{
       email: '',
       platform: 'Viewer'
     };
-  } 
+  }
 
   componentDidMount() {
     // Redirect Check
@@ -68,7 +68,7 @@ class CreateProfileForm extends Component{
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         result = re.test(this.state.email);
         break;
-        
+
       case 2:
         result = true;
         break;
@@ -83,7 +83,7 @@ class CreateProfileForm extends Component{
     }
 
     return result;
-      
+
   }
 
   next = () => {
@@ -101,7 +101,7 @@ class CreateProfileForm extends Component{
     currentStep = currentStep >= 2? 3: currentStep + 1;
     this.props.changeStep(currentStep);
   }
-    
+
   prev = () => {
     let currentStep = this.props.currentStep;
     // If the current step is 2 or 3, then subtract one on "previous" button click
@@ -117,14 +117,14 @@ class CreateProfileForm extends Component{
     // If the current step is not 1, then render the "previous" button
     if(currentStep !==1){
       return (
-        <img className='profileform-next' src={ prevBtnImg } alt='next' onClick={ this.prev } />
+        <img className='profile-form-next' src={ prevBtnImg } alt='next' onClick={ this.prev } />
       );
     }
 
     // ...else return nothing
     return null;
   }
-  
+
   get nextButton(){
     let currentStep = this.props.currentStep;
 
@@ -138,34 +138,33 @@ class CreateProfileForm extends Component{
     // ...else render nothing
     return null;
   }
-  
+
   render(){
-    console.log('email: ', this.state.email, '\nplatform: ', this.state.platform);
     let form;
     let active = <ActiveAccount search ={ this.props.location.search }></ActiveAccount>;
-    const navigationClass = `profileform-navigation__${this.props.currentStep}`;
+    const navigationClass = `profile-form-navigation__${this.props.currentStep}`;
 
     switch (this.props.currentStep) {
       case 1:
-        form =  <form className='profileform-one' onSubmit={ this.handleSubmit }>
-          <span className='profileform-title'>CREATE YOUR PROFILE</span>
+        form =  <form className='profile-form-one' onSubmit={ this.handleSubmit }>
+          <span className='profile-form-title'>CREATE YOUR PROFILE</span>
 
-          <div className='profileform-outer'>
+          <div className='profile-form-outer'>
             <ProfilePictureUpload/>
-            <div className='profileform-inner'>
+            <div className='profile-form-inner'>
               <FormControl margin='normal' required fullWidth>
                 <Dropdown dropdownList={ ['Viewer', 'Gamer', 'Sponsor'] } handleChange={ this.handleAccountChange } selectedValue = { this.state.platform }/>
-                <FormHelperText className ='profileform__helper'>Select account type</FormHelperText>
+                <FormHelperText className ='profile-form__helper'>Select account type</FormHelperText>
               </FormControl>
-                
-              <div className='profileform-email'>
+
+              <div className='profile-form-email'>
                 <FormControl margin='normal' required fullWidth>
-                  <InputField className='email-text' name='email' inputImage={ emailInput } activeInputImage={ emailInputActive } handleChange={ this.handleEmailChange }/>
+                  <InputField className='email__txt' name='email' inputImage={ emailInput } activeInputImage={ emailInputActive } handleChange={ this.handleEmailChange }/>
                 </FormControl>
               </div>
 
-                
-              <FormHelperText className ='profileform__helper'>Edit Streamers Edge account email</FormHelperText>
+
+              <FormHelperText className ='profile-form__helper'>Edit Streamers Edge account email</FormHelperText>
             </div>
           </div>
         </form>;

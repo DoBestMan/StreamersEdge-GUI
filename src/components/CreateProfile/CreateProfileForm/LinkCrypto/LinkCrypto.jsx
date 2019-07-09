@@ -13,7 +13,7 @@ class LinkCrypto extends Component {
 
   constructor(props) {
     super(props);
-    
+
     // Set the initial input values
     this.state = {
       type: ''
@@ -28,16 +28,14 @@ class LinkCrypto extends Component {
     const {value} = event.target;
     this.setState({
       type: value
-    });    
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const type = this.state.type;
-    console.log(type);
   }
 
-      
+
   render () {
     return (
       <form className='root' autoComplete='off' onSubmit={ this.handleSubmit }>
