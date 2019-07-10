@@ -6,6 +6,7 @@ import styles from './MUI.css';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import LoginForm from '../Login/LoginForm';
+import ForgotPassword from '../ForgotPassword';
 import ModalActions from '../../actions/ModalActions';
 import AppActions from '../../actions/AppActions';
 import NavigateActions from '../../actions/NavigateActions';
@@ -15,6 +16,10 @@ class RootModal extends Component{
     this.props.setErrorText('');
     this.props.toggleModal();
     this.setState({open: false});
+  }
+
+  openPasswordRecovery = () => {
+    this.props.setModalType('forgot');
   }
 
   toggleModalAndRegister = () => {
@@ -29,7 +34,13 @@ class RootModal extends Component{
     // Specify your modals here
     switch(this.props.modalType) {
       case 'login': {
-        modalContent = <LoginForm handleLogin={ this.props.login } errorText = { this.props.errorText } goRegister={ this.toggleModalAndRegister }/>;
+        modalContent = <LoginForm recoverPassword={ this.openPasswordRecovery } goRegister={ this.toggleModalAndRegister }
+          handleLogin={ this.props.login } errorText = { this.props.errorText }/>;
+        break;
+      }
+
+      case 'forgot': {
+        modalContent = <ForgotPassword goRegister={ this.toggleModalAndRegister }/>;
         break;
       }
 
@@ -64,6 +75,7 @@ const mapDispatchToProps = (dispatch) => {
     dispatch,
     ...bindActionCreators({
       toggleModal: ModalActions.toggleModal,
+      setModalType: ModalActions.setModalType,
       login: AppActions.login,
       setErrorText: AppActions.setLoginError,
       navigateToSignUp: NavigateActions.navigateToSignUp

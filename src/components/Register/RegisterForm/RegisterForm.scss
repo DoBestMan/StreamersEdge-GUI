@@ -20,6 +20,12 @@
     width: 350px;
   }
 
+  &-link {
+    padding-left: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
   &-form {
     display: flex;
     flex-direction: column;

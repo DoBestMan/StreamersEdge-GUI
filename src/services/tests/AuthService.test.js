@@ -21,3 +21,17 @@ test('login fail', () => {
   });
 });
 
+test('forgot password success', () => {
+  AuthService.forgotPassword('devs@pbsa.info').then((response) => {
+    expect(response).toBe(true);
+  }).catch((err) => {
+    expect(err).toBe('Error: Request failed with status code 429'); // Email exists but user is on pw recover cooldown
+  });
+});
+
+test('forgot password fail', () => {
+  AuthService.forgotPassword('invalidemail').catch((err) => {
+    expect(err).toBe('Error: Request failed with status code 400');
+  });
+});
+

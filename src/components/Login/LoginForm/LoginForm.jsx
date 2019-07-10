@@ -8,7 +8,6 @@ import IconPassword from '../../../assets/images/login/Password.png';
 import IconPasswordActive from '../../../assets/images/login/Password_Over.png';
 import IconUsername from '../../../assets/images/login/Username_1x.png';
 import IconUsernameActive from '../../../assets/images/login/Username_Over.png';
-import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import LoginButton from '../../../assets/images/login/login_button.png';
 import LoginButtonActive from '../../../assets/images/login/login_active_button.png';
@@ -89,9 +88,7 @@ class LoginForm extends Component {
             <span onClick = { this.props.goRegister } className='goregister__link'>{translate('login.register')}</span>
           </span>
           <span className='register__textlink'>
-            <Link className='login__link' to={ '/forgot-password' } activeclassname='active'>
-              {translate('login.forgotPass')}
-            </Link>
+            <span onClick = { this.props.recoverPassword }className='header-link'>{translate('login.forgotPass')}</span>
           </span>
           <div className='login__btn-container'>
             <Button disabled={ false } className='login__btn' type='submit' style={ {color: 'white'} }>

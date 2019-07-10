@@ -60,6 +60,22 @@ export const translationObject = {
       menu: 'Menu',
       popular: 'Popular'
     },
+    forgotPassword: {
+      header: 'FORGOT YOUR PASSWORD?',
+      subHeader: 'Enter your email to reset your Streamers Edge password.',
+      enterEmail: 'Enter your Streamers Edge Email',
+      resultText: {
+        success:'If an account exists that matches the email provided, an email will be sent to reset your password.',
+        cooldown:'You have attempted to reset your password too many times, please wait before trying again.',
+        invalidEmail:'Please enter a valid email.'
+      },
+      resetForm: {
+        header: 'RESET YOUR PASSWORD',
+        newPassword: 'New password',
+        confirmPassword: 'Confirm password',
+        noMatch: 'Passwords do not match.'
+      }
+    },
     codeMe: 'Code Me!!!!!'
   }
 };

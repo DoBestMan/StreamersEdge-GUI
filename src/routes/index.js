@@ -5,7 +5,7 @@ import Register from '../components/Register';
 import Dashboard from '../components/Dashboard';
 import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
-import ForgotPassword from '../components/ForgotPassword';
+import ResetForm from '../components/ForgotPassword/ResetForm';
 import Header from '../components/Header';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 import PeerplaysLogin from '../components/PeerplaysLogin/';
@@ -20,7 +20,7 @@ const routes = (
     <Switch>
       <Route exact path='/' component={ Home }/>
       <Route path='/sign-up' component={ Register }/>
-      <Route path='/forgot-password' component={ ForgotPassword }/>
+      <Route path='/forgot-password' component={ ResetForm }/>
       <Route path='/profile' component={ CreateProfile }/>
       <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
       <Route path='/peerplays' component={ PeerplaysLogin }/>

@@ -3,15 +3,19 @@
  */
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import InputLabel from '@material-ui/core/InputLabel';
+import {bindActionCreators} from 'redux';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import SignupInput from '../../SignupInput';
-import SubmitButton from '../../../assets/images/login/login_button.png';
-import IconPassword from '../../../assets/images/signup_password_input.png';
-import IconPasswordActive from '../../../assets/images/signup_password_active_input.png';
+import IconPassword from '../../../assets/images/login/Password.png';
+import IconPasswordActive from '../../../assets/images/login/Password_Over.png';
 import AuthService from '../../../services/AuthService';
 import ValidationUtil from '../../../utility/ValidationUtil';
+import NavigateActions from '../../../actions/NavigateActions';
+import querystring from 'query-string';
+import {translate} from '../../../utility/GeneralUtils';
 
 class ResetForm extends Component {
 
@@ -21,8 +25,21 @@ class ResetForm extends Component {
       password: '',
       repeatPassword: '',
       resultText: '',
-      passwordErr: ''
+      passwordErr: '',
+      token: ''
     };
+  }
+
+  componentDidMount() {
+    if (this.props.location.search) {
+      const token = querystring.parse(this.props.location.search).token;
+
+      if (token) {
+        this.setState({
+          token
+        });
+      }
+    }
   }
 
   handleChange = (event) => {
@@ -39,8 +56,8 @@ class ResetForm extends Component {
       return;
     }
 
-    AuthService.resetPassword(this.props.token, this.state.password).then(() =>{
-      this.props.redirect('/login');
+    AuthService.resetPassword(this.state.token, this.state.password).then(() =>{
+      this.props.navigateToDashboard();
     }).catch((err) => {
       console.warn(err);
     });
@@ -49,7 +66,7 @@ class ResetForm extends Component {
   validate = () => {
     if (this.state.password !== this.state.repeatPassword) {
       this.setState({
-        passwordErr: 'Passwords do not match.'
+        passwordErr: translate('forgotPassword.resetForm.noMatch')
       });
     } else {
       this.setState({
@@ -58,42 +75,42 @@ class ResetForm extends Component {
     }
   }
 
-
-
   render(){
     return(
-    <>
-    <span className='register-title'>RESET YOUR PASSWORD</span>
-        <form className='register-form' onSubmit={ this.handleSubmit }>
-          <FormControl margin='normal' required fullWidth>
-            <SignupInput name='password' type='password' onBlur={ this.validate } handleChange={ this.handleChange }
-              inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
-          </FormControl>
-          <FormControl margin='normal' required fullWidth>
-            <SignupInput name='repeatPassword' type='password' onBlur={ this.validate } handleChange={ this.handleChange }
-              inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
-          </FormControl>
-          <InputLabel className='register-error' shrink error={ true }>{this.state.passwordErr}</InputLabel>
+        <>
+          <div className='reset-form'>
+            <span className='register-title'>{translate('forgotPassword.resetForm.header')}</span>
+            <form className='register-form' onSubmit={ this.handleSubmit }>
+              <FormControl margin='normal' required fullWidth>
+                <SignupInput name='password' type='password' onBlur={ this.validate } handleChange={ this.handleChange } placeholder={ translate('forgotPassword.resetForm.newPassword') }
+                  inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
+              </FormControl>
+              <FormControl margin='normal' required fullWidth>
+                <SignupInput name='repeatPassword' type='password' onBlur={ this.validate } handleChange={ this.handleChange } placeholder={ translate('forgotPassword.resetForm.confirmPassword') }
+                  inputValue={ this.state.password } inputImage={ IconPassword } activeInputImage={ IconPasswordActive }/>
+              </FormControl>
+              <InputLabel className='register-error' shrink error={ true }>{this.state.passwordErr}</InputLabel>
 
-          <div className='login__btn-container'>
-            <Button
-              className='login__btn'
-              type='submit'
-              style={ {color: 'white'} }
-            >
-              <img
-                className='login__btn-img'
-                src={ SubmitButton }
-                alt='Submit'
+              <Button
+                variant='outlined'
+                color='secondary'
                 type='submit'
-              />
-              <div className='login__btn-txt'>SUBMIT</div>
-            </Button>
+              >
+                {translate('general.submit')}
+              </Button>
+            </form>
           </div>
-        </form>
-            </>
+        </>
     );
   }
 }
 
-export default ResetForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+    ...bindActionCreators({navigateToDashboard: NavigateActions.navigateToDashboard}, dispatch)
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(ResetForm);
