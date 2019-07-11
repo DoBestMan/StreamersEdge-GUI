@@ -9,6 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import {withRouter} from 'react-router-dom';
 import IconEmail from '../../assets/images/Email_Field.png';
 import IconEmailActive from '../../assets/images/Email_Field_Active.png';
+import ResetButton from '../../assets/images/resetpw/Reset.png';
+import ResetButtonActive from '../../assets/images/resetpw/Reset_Active.png';
 import Logo from '../../assets/images/se-logo-stacked.png';
 import SignupInput from './../SignupInput';
 import AuthFooter from './../Auth/AuthFooter';
@@ -80,13 +82,17 @@ class ForgotPassword extends Component {
             <div className='forgot-button-container'>
               <span className='forgot-result'>{this.state.resultText}</span>
               <Button
-                variant='outlined'
-                color='secondary'
-                type='submit'
-                onClick={ this.handleSubmit }
                 disabled={ this.state.btnDisable }
+                type='submit'
+                style={ {color: 'white'} }
               >
-                {translate('general.submit')}
+                <img
+                  src={ ResetButton }
+                  alt='Submit'
+                  type='submit'
+                  onMouseOver={ (e) => (e.currentTarget.src = ResetButtonActive) }
+                  onMouseOut={ (e) => (e.currentTarget.src = ResetButton) }
+                />
               </Button>
             </div>
           </form>
