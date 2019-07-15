@@ -23,7 +23,7 @@ const routes = (
       <Route path='/forgot-password' component={ ResetForm }/>
       <Route path='/profile' component={ CreateProfile }/>
       <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
-      <Route path='/peerplays' component={ PeerplaysLogin }/>
+      <Route path='/peerplays' component={ requireAuthentication(PeerplaysLogin) }/>
       <Route path='/callback' component={ Callback }/>
     </Switch>
   </React.Fragment>

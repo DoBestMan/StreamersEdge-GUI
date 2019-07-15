@@ -1,0 +1,268 @@
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {FormControl, TextField} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+import styles from './MUI.css';
+
+/**
+ * You may optionally provide some image files:
+ * @iconLeft {Image}
+ * @iconLeftActive {Image}
+ * @iconRight {Image}
+ * @iconRightActive {Image}
+ * Providing the left or right without an active version will result in the active image being supplemented with the provided image.
+ *
+ * You may provide a theme to use
+ * @theme {String}: ie: `basic`, `login`, `minimal`.
+ * `basic` is the default.
+ *
+ * Other optional props, some are required depending on others.
+ * @placeholder {string}
+ * @handleChange {function}: Callback handler for onChange event.
+ * @handleRightIconClick {function}: Callback handler for onClick event for the icon-right.
+ * @hasActiveGlow {bool}: Default `false`. Sets the style that controls whether or not the elements will have a glow on "active" state.
+ * @required {bool}: If true, the label is displayed as required and the input element` will be required.
+ * @multiline {bool}: If true, a textarea element will be rendered instead of an input.
+ * @rows {string | number}: Number of rows to display when multiline option is set to true.
+ * @rowsMax {string | number}: Maximum number of rows to display when multiline option is set to true.
+ * @name {string}: Name attribute of the input element.
+ * @autoFocus {bool}: If true, the input element will be focused during the first mount.
+ * @fullWidth {bool}: Default `true`. If true, the input will take up the full width of its container.
+ * @margin {enum: `none` | `dense` | `normal`}: Default `normal`. If dense or normal, will adjust vertical spacing of this and contained components.
+ * @type {string}: Default `string`. Type of the input element. It should be a valid HTML5 input type.
+ *
+ * @class CSSInput
+ * @extends {Component}
+ */
+class CustomInput extends Component {
+  constructor(props) {
+    super(props);
+
+    const dummyHandler = () => {};
+
+    const theme = this.props.theme || 'basic';
+    const glow = this.props.hasActiveGlow || false;
+    const activeClass = glow ? '--active' : '--active-glowless';
+    const iconLeft = this.props.iconLeft || null;
+    const iconRight = this.props.iconRight || null;
+    const handleChange = this.props.handleChange || dummyHandler;
+    const handleRightIconClick = this.props.handleRightIconClick || dummyHandler;
+    const wrapperClassName = `custom-input-${theme}__wrapper`;
+    let inputClassName = `custom-input-${theme}__mui`;
+    let iconRightWrapperClassName = `custom-input-${theme}__icon-right-wrapper`;
+
+    if (iconLeft && iconRight) {
+      inputClassName += '-icon-both';
+
+      if (handleRightIconClick !== dummyHandler) {
+        iconRightWrapperClassName += '-callback';
+      }
+    } else if (iconRight) {
+      inputClassName += '-icon-right';
+    } else if (iconLeft) {
+      inputClassName += '-icon-left';
+    }
+
+    this.state = {
+      activeClass,
+      inputClassName,
+      iconLeft,
+      iconRight,
+      handleChange,
+      handleRightIconClick,
+      wrapperClassName,
+      iconRightWrapperClassName,
+      value: '',
+      isInputActive: false,
+      theme
+    };
+  }
+
+  toggleActiveImage = (value, type) => {
+    const useActiveImages = () => {
+      this.setState({
+        wrapperClassName: this.state.wrapperClassName + this.state.activeClass,
+        iconRightWrapperClassName: this.state.iconRightWrapperClassName + this.state.activeClass,
+        iconLeft: this.props.iconLeftActive || this.state.iconLeft,
+        iconRight: this.props.iconRightActive || this.state.iconRight
+      });
+    };
+
+    const useDefaultImages = () => {
+      this.setState({
+        wrapperClassName: this.state.wrapperClassName.replace(this.state.activeClass, ''),
+        iconRightWrapperClassName: this.state.iconRightWrapperClassName.replace(this.state.activeClass, ''),
+        iconLeft: this.props.iconLeft || this.state.iconLeft,
+        iconRight: this.props.iconRight || this.state.iconRight
+      });
+    };
+
+    const wrappersAreActive = () => {
+      let hasActive = false;
+
+      if (
+        this.state.wrapperClassName.indexOf(this.state.activeClass) === -1 ||
+        this.state.iconRightWrapperClassName.indexOf(this.state.activeClass) === -1
+      ) {
+        return true;
+      }
+
+      return hasActive;
+    };
+
+    switch(type) {
+      case 'mouseOver':
+        if (wrappersAreActive()) {
+          useActiveImages();
+        }
+
+        break;
+      case 'focus':
+        this.setState({
+          isInputActive: true
+        });
+
+        if (wrappersAreActive()) {
+          useActiveImages();
+        }
+
+        break;
+      case 'mouseOut':
+      case 'divMouseOut':
+        if (!this.state.isInputActive && this.state.value === '') {
+          useDefaultImages();
+        }
+
+        break;
+      case 'blur':
+        if (this.state.value === '') {
+          this.setState({
+            isInputActive: false
+          });
+
+          useDefaultImages();
+        }
+
+        break;
+
+      // no default
+    }
+  }
+
+  onMouseOver = (e) => {
+    this.toggleActiveImage(e.target.value, 'mouseOver');
+  }
+
+  onMouseOut = (e) => {
+    this.toggleActiveImage(e.target.value, 'mouseOut');
+  }
+
+  onDivMouseOut = () => {
+    this.toggleActiveImage('', 'divMouseOut');
+  }
+
+  onFocus = (e) => {
+    this.toggleActiveImage(e.target.value, 'focus');
+  }
+
+  // Equivalent of losing input focus
+  onBlur = (e) => {
+    this.toggleActiveImage(e.target.value, 'blur');
+  }
+
+  onChange = (e) => {
+    this.setState({value: e.target.value});
+    // Use the props onChange handler.
+    this.state.handleChange(e.target.value);
+  }
+
+  render() {
+    const {classes} = this.props;
+    const autofocus = this.props.autofocus || false;
+    const rows = this.props.rows || 5;
+    const rowsMax = this.props.rowsMax || rows;
+    const height = this.props.multiline ? (10 * (rows * 1.7)).toString() + 'px' : '10px';
+    const fullWidth = this.props.fullWidth || true;
+    const margin = this.props.margin || 'normal';
+    const multiline = this.props.multiline || false;
+    const name = this.props.name || '';
+    const placeholder = this.props.placeholder || '';
+    const required = this.props.required || false;
+    const type = this.props.type || 'string';
+    const wrapperStyle = {
+      height: height
+    };
+
+    return (
+      <>
+        <div
+          className={ this.state.wrapperClassName }
+          onMouseOver={ this.onMouseOver }
+          onMouseOut={ this.onDivMouseOut }
+          style={ wrapperStyle }
+        >
+          {
+            this.state.iconLeft
+              ? <div className='custom-input__left'><img className={ `custom-input-${this.state.theme}__icon-left` } src={ this.state.iconLeft } alt=''/></div>
+              : null
+          }
+          {
+            this.state.iconRight
+              ? <div className={ 'custom-input__right' }>
+                <div className={ this.state.iconRightWrapperClassName } onClick={ this.state.handleRightIconClick }>
+                  <img className={ `custom-input-${this.state.theme}__icon-right` } src={ this.state.iconRight } alt=''/>
+                </div></div>
+              : null
+          }
+          <div className='custom-input__center'>
+            <FormControl margin={ margin } fullWidth={ fullWidth }>
+              <TextField
+                autoFocus={ autofocus }
+                className={ this.state.inputClassName }
+                InputProps={ {className: classes.input, disableUnderline: true} }
+                multiline={ multiline }
+                name={ name }
+                onChange={ (e) => this.onChange(e) }
+                onFocus={ (e) => this.onFocus(e) }
+                onBlur={ (e) => this.onBlur(e) }
+                onMouseOver={ this.onMouseOver }
+                onMouseOut={ (e) => this.onMouseOut(e) }
+                placeholder={ placeholder }
+                required={ required }
+                rows={ rows }
+                rowsMax={ rowsMax }
+                type={ type }
+              />
+            </FormControl>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
+CustomInput.propTypes = {
+  classes: PropTypes.object.isRequired,
+  placeholder: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleRightIconClick: PropTypes.func,
+  hasActiveGlow: PropTypes.bool,
+  name: PropTypes.string,
+  theme: PropTypes.string,
+  required: PropTypes.bool,
+  multiline: PropTypes.bool,
+  rows: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  rowsMax: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  autoFocus: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  margin: PropTypes.oneOf(['none', 'dense', 'normal']),
+  type: PropTypes.string
+};
+
+export default withStyles(styles)(CustomInput);

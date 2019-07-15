@@ -1,9 +1,6 @@
 @import './layout';
 @import './colors';
-
-@mixin bg-gradient {
-  background-image: linear-gradient($blue, $blue-dark, $blue-darkest);
-}
+@import './mixins-functions';
 
 .txt {
   &--white {

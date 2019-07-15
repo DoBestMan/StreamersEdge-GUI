@@ -4,8 +4,7 @@ import ProfileService from '../../services/ProfileService';
 import AccountActions from '../../actions/AccountActions';
 import {bindActionCreators} from 'redux';
 
-class Home extends Component{
-
+class Home extends Component {
   // Redirect to dashboard, if the user is not logged in then they will go to the login page instead.
   componentDidMount() {
     ProfileService.getProfile().then((profile) => {
@@ -13,7 +12,6 @@ class Home extends Component{
       this.props.setLoggedIn(true);
       this.props.history.push('/dashboard');
     });
-
   }
 
   handleChange = (val) => {
@@ -24,6 +22,10 @@ class Home extends Component{
 
     return(
       <div className='code-me'>
+        <div className='inputs-center'>
+          <p></p>
+          <p></p>
+        </div>
       </div>
     );
   }
@@ -32,10 +34,11 @@ class Home extends Component{
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({setLoggedIn: AccountActions.setIsLoggedInAction,
-      setAccount: AccountActions.setAccountAction
-    }, dispatch)
+    ...bindActionCreators({setLoggedIn: AccountActions.setIsLoggedInAction, setAccount: AccountActions.setAccountAction}, dispatch)
   };
 }
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home);

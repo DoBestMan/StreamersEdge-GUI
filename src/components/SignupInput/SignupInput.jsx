@@ -12,6 +12,7 @@ class InputField extends Component{
 
 
 
+
   mouseOver = () => {
     this.setState({image: this.props.activeInputImage});
   }
