@@ -77,7 +77,7 @@ class PeerplaysLogin extends Component {
   };
 
   validateUsername = (username) => {
-    const error = ValidationUtil.validateUsername(username);
+    const error = ValidationUtil.username(username);
     this.setState({
       errors: {
         ...this.state.errors,

@@ -87,7 +87,7 @@ class RegisterForm extends Component {
         this.setState({
           errors: {
             ...this.state.errors,
-            email: ValidationUtil.validateEmail(this.state.email)
+            email: ValidationUtil.email(this.state.email)
           }
         });
         break;
@@ -95,7 +95,7 @@ class RegisterForm extends Component {
         this.setState({
           errors: {
             ...this.state.errors,
-            password: ValidationUtil.validatePassword(this.state.password)
+            password: ValidationUtil.password(this.state.password)
           }
         });
         break;
@@ -103,7 +103,7 @@ class RegisterForm extends Component {
         this.setState({
           errors: {
             ...this.state.errors,
-            username: ValidationUtil.validateUsername(this.state.username)
+            username: ValidationUtil.username(this.state.username)
           }
         });
         break;

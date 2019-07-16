@@ -70,7 +70,7 @@ class ResetForm extends Component {
       });
     } else {
       this.setState({
-        passwordErr: ValidationUtil.validatePassword(this.state.password)
+        passwordErr: ValidationUtil.password(this.state.password)
       });
     }
   }

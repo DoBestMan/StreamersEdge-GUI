@@ -1,7 +1,7 @@
 import {translate} from './GeneralUtils';
 
 const ValidationUtil = {
-  validateUsername(value) {
+  username(value) {
     var label = void 0;
     var ref = void 0;
     var prefix = void 0;
@@ -56,7 +56,7 @@ const ValidationUtil = {
     return error;
   },
 
-  validateEmail(email) {
+  email(email) {
     let regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if(!regex.test(email)) {
@@ -66,7 +66,7 @@ const ValidationUtil = {
     }
   },
 
-  validatePassword(password) {
+  password(password) {
     let length = password.length;
     let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[.@$!%^*#])[A-Za-z\d.@$!%^*#]{4,}$/; //(.@!#$%^*)
     let error = null;
@@ -82,7 +82,7 @@ const ValidationUtil = {
     return error;
   },
 
-  validateSearch(searchText) {
+  search(searchText) {
     let length = searchText.length;
     let error = null;
 
@@ -97,13 +97,13 @@ const ValidationUtil = {
     return error;
   },
 
-  validateNumber(number) {
+  number(number) {
     if(typeof number !== 'number') {
       return translate('errors.general.beNumber');
     }
   },
 
-  validateDecimalInteger(decimalInt) {
+  decimalInteger(decimalInt) {
     var regexp = /^[0-9]+([,.][0-9]+)?$/g;
 
     if (!regexp.test('a') && !Number.isNumber(decimalInt)) {
@@ -111,7 +111,7 @@ const ValidationUtil = {
     }
   },
 
-  validateStartDate(date) {
+  startDate(date) {
     const today = new Date();
     let error = null;
 
@@ -126,7 +126,7 @@ const ValidationUtil = {
     return error;
   },
 
-  validateEndDate(startDate, endDate) {
+  endDate(startDate, endDate) {
     let error = null;
 
     if (!Date.parse(startDate) || !Date.parse(endDate)) {
@@ -140,16 +140,16 @@ const ValidationUtil = {
     return error;
   },
 
-  validateInviteGamer(string) {
-    return this.validateUsername(string);
+  inviteGamer(string) {
+    return this.Username(string);
   },
 
-  validateBounty(number) {
-    return this.validateDecimalInteger(number);
+  bounty(number) {
+    return this.DecimalInteger(number);
   },
 
-  validateChallengeConditions(number) {
-    return this.validateDecimalInteger(number);
+  challengeConditions(number) {
+    return this.DecimalInteger(number);
   }
 
 
