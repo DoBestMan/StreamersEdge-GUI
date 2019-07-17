@@ -1,4 +1,4 @@
-# react-redux-linter-boilerplater.git
+# Streamers Edge
 
 [![JavaScript](https://img.shields.io/badge/</>-JavaScript-blue.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
 
@@ -57,8 +57,3 @@ npm run release-patch // patch bump
 // To cut a pre-release:
 npm run pre-release // v0.2.1 to v0.2.2-rc.0
 ```
-
-## TODO
-
-- add generic build script
-- add SonarCloud local executable
