@@ -1,9 +1,13 @@
 import * as GenUtil from './GeneralUtils';
-import ValidationUtil from './ValidationUtil';
+import AuthUtil from './AuthUtil';
+import PeerplaysAuthUtil from './PeerplaysAuthUtil';
 import StorageUtil from './StorageUtil';
+import ValidationUtil from './ValidationUtil';
 
-export default {
+export {
+  AuthUtil,
   GenUtil,
-  ValidationUtil,
-  StorageUtil
+  PeerplaysAuthUtil,
+  StorageUtil,
+  ValidationUtil
 };

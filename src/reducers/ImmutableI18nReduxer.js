@@ -1,7 +1,7 @@
 import {LOAD_TRANSLATIONS, SET_LOCALE} from 'react-redux-i18n';
-import Immutable from 'immutable';
+import {fromJS} from 'immutable';
 
-const initialState = Immutable.Map();
+const initialState = fromJS({});
 
 export default (state = initialState, action) => {
   switch (action.type) {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import ProfileService from '../../services/ProfileService';
-import AccountActions from '../../actions/AccountActions';
+import {ProfileService} from '../../services';
+import {AccountActions} from '../../actions';
 import {bindActionCreators} from 'redux';
 
 class Home extends Component {
@@ -16,27 +16,27 @@ class Home extends Component {
 
   handleChange = (val) => {
     this.setState({inputValue: val});
-  }
+  };
 
-  render(){
-
-    return(
+  render() {
+    return (
       <div className='code-me'>
         <div className='inputs-center'>
-          <p></p>
-          <p></p>
+          <p />
+          <p />
         </div>
       </div>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    ...bindActionCreators({setLoggedIn: AccountActions.setIsLoggedInAction, setAccount: AccountActions.setAccountAction}, dispatch)
-  };
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    setLoggedIn: AccountActions.setIsLoggedInAction,
+    setAccount: AccountActions.setAccountAction
+  },
+  dispatch
+);
 
 export default connect(
   null,

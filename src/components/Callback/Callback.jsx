@@ -1,13 +1,12 @@
 /**
- * Callback Handler on the front end for redirects initiated from the backend
+ * Callback Handler on the front end for redirects initiated from the backend.
  */
 
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import AuthService from '../../services/AuthService';
+import {AuthService} from '../../services';
 
 class Callback extends Component {
-
   constructor() {
     super();
     this.state = {error: ''};
@@ -25,19 +24,21 @@ class Callback extends Component {
 
     // Very simple bounds check
     if (2 >= pathAry.length) {
-      cb =  pathAry[0]; // Return empty string to error handle
+      cb = pathAry[0]; // Return empty string to error handle
     }
 
-    switch(cb) {
+    switch (cb) {
       case 'confirm-email':
-        AuthService.confirmEmail(pathAry[3]).then(() => {
-          this.props.history.push('/login');
-        }).catch((err) => {
-          this.setState({
-            error: err
+        AuthService.confirmEmail(pathAry[3])
+          .then(() => {
+            this.props.history.push('/login');
+          })
+          .catch((err) => {
+            this.setState({
+              error: err
+            });
+            console.error(err);
           });
-          console.error(err);
-        });
         break;
       case 'reset-password':
         this.props.history.push(`/forgot-password?token=${pathAry[3]}`);
@@ -47,16 +48,14 @@ class Callback extends Component {
         console.warn('Error - unidentified callback');
         break;
     }
-  }
+  };
 
-  render(){
-    return(
+  render() {
+    return (
       <>
-      <div className='callback-page'>
-        <div className='callback-page__content'>
-          {this.state.error}
+        <div className='callback-page'>
+          <div className='callback-page__content'>{this.state.error}</div>
         </div>
-      </div>
       </>
     );
   }

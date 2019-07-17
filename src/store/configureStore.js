@@ -4,9 +4,9 @@ import {routerMiddleware} from 'connected-react-router';
 import Immutable from 'immutable';
 import {loadTranslations, setLocale, I18n} from 'react-redux-i18n';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import createRootReducer from '../reducers/index';
 import thunk from 'redux-thunk';
 import {translationObject} from '../assets/locales/translations';
+import createRootReducer from '../reducers';
 
 // Session history
 export const history = createBrowserHistory();
@@ -28,7 +28,7 @@ const syncImmutableTranslationWithStore = (store) => {
   });
 };
 
-export default function configureStore() {
+export default () => {
   // For typescript, this may need tweaking...
   let initialState = Immutable.Map();
 
@@ -61,4 +61,4 @@ export default function configureStore() {
   store.dispatch(setLocale('en'));
 
   return store;
-}
+};

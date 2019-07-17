@@ -1,11 +1,12 @@
 /**
- * Form that handles account creation
+ * Form that handles account creation.
  */
 import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-import AuthService from '../../../services/AuthService';
+import {AuthService} from '../../../services';
+import {ValidationUtil, GenUtil} from '../../../utility';
 import SignupInput from '../../SignupInput';
 import IconEmail from '../../../assets/images/Email_Field.png';
 import IconEmailActive from '../../../assets/images/Email_Field_Active.png';
@@ -15,12 +16,12 @@ import IconUsername from '../../../assets/images/login/Username_1x.png';
 import IconUsernameActive from '../../../assets/images/login/Username_Over.png';
 import RegisterButton from '../../../assets/images/signup/register_button.png';
 import RegisterButtonActive from '../../../assets/images/signup/register_active_button.png';
-import ValidationUtil from '../../../utility/ValidationUtil';
-import {translate} from '../../../utility/GeneralUtils';
+const translate = GenUtil.translate;
 
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       email: '',
       username: '',
@@ -161,14 +162,12 @@ class RegisterForm extends Component {
           <span className='register-success'>{this.state.resultText}</span>
           <span className='login-txt-link'>
             {translate('register.alreadyHaveAccount')}
-            <span className='register-form__gologin' onClick={ this.props.openLoginModal }>{translate('register.login')}</span>
+            <span className='register-form__gologin' onClick={ this.props.openLoginModal }>
+              {translate('register.login')}
+            </span>
           </span>
           <div className='register__btn-container'>
-            <Button
-              disabled={ this.state.registerDisabled }
-              className='register__btn' type='submit'
-              style={ {color: 'white'} }
-            >
+            <Button disabled={ this.state.registerDisabled } className='register__btn' type='submit' style={ {color: 'white'} }>
               <img
                 className='register__btn-img'
                 src={ RegisterButton }

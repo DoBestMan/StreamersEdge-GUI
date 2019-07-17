@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: actions/AppActions.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: actions/AppActions.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import ActionTypes from './ActionTypes';
+import {NavigateActions, AccountActions, ModalActions} from '../actions';
+import {AuthService} from '../services';
+import {StorageUtil, GenUtil} from '../utility';
+import {Action, Dispatch} from 'redux';
+const translate = GenUtil.translate;
+
+/**
+ * Private actions for use in the @AppActions class.
+ *
+ * @class AppPrivateActions
+ */
+class AppPrivateActions {
+  /**
+   * Private Redux action creator.
+   * Call to update redux and local storage with logged out user once logged out.
+   *
+   * @memberof AppPrivateActions
+   * @returns {Action}
+   */
+  static logoutAction() {
+    StorageUtil.remove('se-user');
+    AuthService.logout();
+
+    return {
+      type: ActionTypes.ACCOUNT_LOGOUT,
+      payload: {
+        isLoggedin: false,
+        account: null
+      }
+    };
+  }
+
+  /**
+   * Log the user in given account name and password.
+   * Updates local storage.
+   * This is internal action that is used for the exposed login and signup function.
+   *
+   * @param {object} account - User object:
+   * {
+      "id": 7,
+      "username": "test",
+      "email": "test@email.com",
+      "twitchUserName": "",
+      "googleName": "",
+      "youtube": "",
+      "facebook": "",
+      "twitch": "",
+      "peerplaysAccountName": "",
+      "bitcoinAddress": "",
+      "userType": "viewer",
+      "avatar": ""
+   * }.
+   * @memberof AppPrivateActions
+   * @returns {Dispatch}
+   */
+  static processLogin(account) {
+    return (dispatch) => AuthService.login(account).then((fullAccount) => {
+      // Save account information
+      dispatch(AccountActions.setAccountAction(fullAccount));
+      // Set is logged in
+      dispatch(AccountActions.setIsLoggedInAction(true));
+      // Persistence
+      StorageUtil.set('se-user', JSON.stringify(fullAccount));
+    }).catch((e) => {
+      throw e;
+    });
+  }
+}
+
+
+/**
+ * Public actions related to Application wide actions.
+ *
+ * @class AppActions
+ */
+class AppActions {
+  /**
+   * Public Redux Action Creator.
+   *
+   * @param {object} account - {name: String, id: String}.
+   * @memberof AppActions
+   * @returns {Dispatch}
+   */
+  static login(account) {
+    return (dispatch) => {
+      dispatch(AppPrivateActions.processLogin(account)).then(() => {
+        dispatch(ModalActions.toggleModal());
+        dispatch(NavigateActions.navigateTo('/dashboard'));
+      }).catch(() => {
+        dispatch(AppActions.setLoginError(translate('login.invalidPassword')));
+      });
+    };
+  }
+
+  /**
+   * Public Redux Action Creator.
+   *
+   * @static
+   * @memberof AppActions
+   * @returns {Dispatch}
+   */
+  static logout() {
+    return (dispatch) => {
+      dispatch(AppPrivateActions.logoutAction());
+      dispatch(NavigateActions.navigateToSignIn());
+    };
+  }
+
+  /**
+   * Public Redux Action Creator.
+   * Set error text in Login modal.
+   *
+   * @static
+   * @param {string} text - The error string.
+   * @memberof AppActions
+   * @returns {Action}
+   */
+  static setLoginError(text) {
+    return {
+      type: ActionTypes.ACCOUNT_LOGIN_SET_ERROR,
+      payload: {
+        loginErrorText: text
+      }
+    };
+  }
+}
+
+export default AppActions;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AppPrivateActions.html">AppPrivateActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li></ul><h3>Global</h3><ul><li><a href="global.html#translate">translate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Jul 16 2019 22:06:36 GMT-0300 (Atlantic Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

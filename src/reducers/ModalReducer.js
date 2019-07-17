@@ -1,12 +1,12 @@
 import ActionTypes from '../actions/ActionTypes';
-import Immutable from 'immutable';
+import {fromJS} from 'immutable';
 
-let initialState = Immutable.fromJS({
+let initialState = fromJS({
   isOpen: false,
   type: ''
 });
 
-export default function(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     // If modal is already open, and intent is to open a modal, do not toggle
     case ActionTypes.MODAL_TOGGLE: {
@@ -24,4 +24,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+};

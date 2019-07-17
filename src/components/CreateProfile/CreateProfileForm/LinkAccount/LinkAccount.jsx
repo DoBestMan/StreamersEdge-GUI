@@ -7,12 +7,11 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import LinkAccountConfirmation from './LinkAccountConfirmation';
-import Dropdown from './../../../Dropdown/index';
-import AuthUtil from '../../../../utility/AuthUtil';
+import Dropdown from './../../../Dropdown';
+import {AuthUtil} from '../../../../utility';
 import {withRouter} from 'react-router-dom';
 
 class LinkAccount extends Component {
-
   constructor(props) {
     super(props);
 
@@ -27,13 +26,13 @@ class LinkAccount extends Component {
     this.setState({
       open: true
     });
-  }
+  };
 
   handleClose = () => {
     this.setState({
       open: false
     });
-  }
+  };
 
   handleChange = (event) => {
     const {value} = event.target;
@@ -42,7 +41,7 @@ class LinkAccount extends Component {
     });
 
     this.handleOpen();
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -50,21 +49,22 @@ class LinkAccount extends Component {
     this.handleClose();
     const platform = this.state.platform;
     AuthUtil.authVia(platform, this.props.location.pathname);
+  };
 
-  }
-
-  render () {
+  render() {
     return (
-  <>
-  <LinkAccountConfirmation open={ this.state.open } platform={ this.state.platform } handleClose={ this.handleClose } submit={ this.handleSubmit } />
-      <form className='profileform-two' autoComplete='off' onSubmit={ this.handleSubmit }>
-        <span className='profileform-title'>LINK STREAMING AND GAMING ACCOUNTS</span>
-        <InputLabel htmlFor='account' className='account-select'>Choose your platform</InputLabel>
-        <FormControl className={ 'account-select' }>
-          <Dropdown dropdownList={ ['twitch', 'google', 'facebook'] } handleChange={ this.handleChange }  selectedValue={ this.state.platform }/>
-          <FormHelperText className ='profileform__helper'>Select streaming & gaming accounts</FormHelperText>
-        </FormControl>
-      </form>
+      <>
+        <LinkAccountConfirmation open={ this.state.open } platform={ this.state.platform } handleClose={ this.handleClose } submit={ this.handleSubmit } />
+        <form className='profileform-two' autoComplete='off' onSubmit={ this.handleSubmit }>
+          <span className='profileform-title'>LINK STREAMING AND GAMING ACCOUNTS</span>
+          <InputLabel htmlFor='account' className='account-select'>
+            Choose your platform
+          </InputLabel>
+          <FormControl className={ 'account-select' }>
+            <Dropdown dropdownList={ ['twitch', 'google', 'facebook'] } handleChange={ this.handleChange } selectedValue={ this.state.platform } />
+            <FormHelperText className='profileform__helper'>Select streaming & gaming accounts</FormHelperText>
+          </FormControl>
+        </form>
       </>
     );
   }

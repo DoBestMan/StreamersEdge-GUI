@@ -7,9 +7,9 @@ import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
 import ResetForm from '../components/ForgotPassword/ResetForm';
 import Header from '../components/Header';
-import {requireAuthentication} from '../components/Auth/AuthComponent';
 import PeerplaysLogin from '../components/PeerplaysLogin/';
 import RootModal from '../components/RootModal';
+import {requireAuthentication} from '../components/Auth/AuthComponent';
 
 // https://github.com/supasate/connected-react-router/blob/master/examples/immutable/src/routes/index.js
 
@@ -23,7 +23,7 @@ const routes = (
       <Route path='/forgot-password' component={ ResetForm }/>
       <Route path='/profile' component={ CreateProfile }/>
       <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
-      <Route path='/peerplays' component={ requireAuthentication(PeerplaysLogin) }/>
+      <Route path='/peerplays' component={ PeerplaysLogin }/>
       <Route path='/callback' component={ Callback }/>
     </Switch>
   </React.Fragment>

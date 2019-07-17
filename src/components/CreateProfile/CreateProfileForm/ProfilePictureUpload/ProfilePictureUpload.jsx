@@ -1,16 +1,10 @@
-
-
 import React, {Component} from 'react';
 import axios from 'axios';
 import {avatar, avatar_frame, avatar_frame_over, avatar_over} from '../../../../assets/images/avatar';
-import {translate} from '../../../../utility/GeneralUtils';
-/**
- * @state {File} selectedFile (selected image file),
- * @state {number} loaded (loading percentage of file upload)
- * @props {number} maxFileSize (max file size for image in bytes)
- * @props {function} error (function which takes in a string. Use this to return errors)
- */
-class ProfilePictureUpload extends Component{
+import {GenUtil} from '../../../../utility';
+const translate = GenUtil.translate;
+
+class ProfilePictureUpload extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +18,7 @@ class ProfilePictureUpload extends Component{
   onChooseFile(event) {
     const file = event.target.files[0];
 
-    if(!!file && this.checkMimeType(file) && this.maxSelectFile(file)) {
+    if (!!file && this.checkMimeType(file) && this.maxSelectFile(file)) {
       this.setState({
         selectedFile: file
       });
@@ -37,21 +31,23 @@ class ProfilePictureUpload extends Component{
     const data = new FormData();
     data.append('file', this.state.selectedFile);
 
-    axios.post('http://localhost:8082/upload', data, {
-      onUploadProgress: (ProgressEvent) => {
-        this.setState({
-          loaded: (ProgressEvent.loaded / ProgressEvent.total*100)
-        });
-      }
-    }).catch((err) => {
-      !!this.props.error ? this.props.error(err) : console.log(err);
-    });
+    axios
+      .post('http://localhost:8082/upload', data, {
+        onUploadProgress: (ProgressEvent) => {
+          this.setState({
+            loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100
+          });
+        }
+      })
+      .catch((err) => {
+        !!this.props.error ? this.props.error(err) : console.log(err);
+      });
   }
 
   maxSelectFile(file) {
     const maxFileSize = !!this.props.maxFileSize ? this.props.maxFileSize : 1024000; //1MB
 
-    if(file.size > maxFileSize) {
+    if (file.size > maxFileSize) {
       const err = file.type + translate('errors.username.maxFileSize');
       !!this.props.error ? this.props.error(err) : console.log(err);
 
@@ -66,7 +62,7 @@ class ProfilePictureUpload extends Component{
     // list allow mime type
     const types = ['image/png', 'image/jpeg'];
 
-    if(types.every((type) => file.type !== type)) {
+    if (types.every((type) => file.type !== type)) {
       err = file.type + translate('errors.username.imageTypeUnsupported');
       !!this.props.error ? this.props.error(err) : console.log(err);
 
@@ -74,7 +70,6 @@ class ProfilePictureUpload extends Component{
     } else {
       return true;
     }
-
   }
 
   changeImage(e, image) {
@@ -85,10 +80,10 @@ class ProfilePictureUpload extends Component{
     return (
       <>
         <label htmlFor='file-input'>
-          <img className='profile-frame' src={ avatar }  onMouseOver={ (e) => this.changeImage(e, avatar_over) } onMouseOut={ (e) => this.changeImage(e, avatar) } alt=''/>
+          <img className='profile-frame' src={ avatar } onMouseOver={ (e) => this.changeImage(e, avatar_over) } onMouseOut={ (e) => this.changeImage(e, avatar) } alt='' />
         </label>
 
-        <input className='image-upload' id='file-input' type='file' onChange={ this.onChooseFile }/>
+        <input className='image-upload' id='file-input' type='file' onChange={ this.onChooseFile } />
       </>
     );
   }
@@ -98,22 +93,18 @@ class ProfilePictureUpload extends Component{
       <>
         <div className='profile-picture-wrapper'>
           <label htmlFor='file-input'>
-            <img className='profile-picture' src={ URL.createObjectURL(this.state.selectedFile) } alt=''/>
-            <img className='profile__frame' src={ avatar_frame } onMouseOver={ (e) => this.changeImage(e, avatar_frame_over) } onMouseOut={ (e) => this.changeImage(e, avatar_frame) } alt=''/>
+            <img className='profile-picture' src={ URL.createObjectURL(this.state.selectedFile) } alt='' />
+            <img className='profile__frame' src={ avatar_frame } onMouseOver={ (e) => this.changeImage(e, avatar_frame_over) } onMouseOut={ (e) => this.changeImage(e, avatar_frame) } alt='' />
           </label>
         </div>
 
-        <input className='image__upload ' id='file-input' type='file' onChange={ this.onChooseFile }/>
+        <input className='image__upload ' id='file-input' type='file' onChange={ this.onChooseFile } />
       </>
     );
   }
 
-  render(){
-    return(
-      <>
-        {this.state.loaded === 100 ?  this.userProfilePicture() : this.defaultProfilePicture()}
-      </>
-    );
+  render() {
+    return <>{this.state.loaded === 100 ? this.userProfilePicture() : this.defaultProfilePicture()}</>;
   }
 }
 

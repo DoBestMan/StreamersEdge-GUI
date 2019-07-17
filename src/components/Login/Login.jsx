@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import AppActions from '../../actions/AppActions';
 import {bindActionCreators} from 'redux';
+import {AppActions} from '../../actions';
 import LoginForm from './LoginForm';
 import AuthFooter from '../Auth/AuthFooter';
-// import querystring from 'query-string';
 
 class Login extends Component {
-
   componentDidMount() {
     if (this.props.isLoggedIn) {
       this.props.history.push('/dashboard');
@@ -15,13 +13,13 @@ class Login extends Component {
   }
 
   render() {
-    return(
-    <>
-          <div className='login-page'>
-            <span className='login-title'>STREAMERS EDGE LOGIN</span>
-            <LoginForm handleLogin={ this.props.login }></LoginForm>
-            <AuthFooter></AuthFooter>
-          </div>
+    return (
+      <>
+        <div className='login-page'>
+          <span className='login-title'>STREAMERS EDGE LOGIN</span>
+          <LoginForm handleLogin={ this.props.login } />
+          <AuthFooter />
+        </div>
       </>
     );
   }
@@ -29,12 +27,15 @@ class Login extends Component {
 
 const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['account', 'isLoggedIn'])});
 
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    login: AppActions.login
+  },
+  dispatch
+);
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    ...bindActionCreators({login: AppActions.login}, dispatch)
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

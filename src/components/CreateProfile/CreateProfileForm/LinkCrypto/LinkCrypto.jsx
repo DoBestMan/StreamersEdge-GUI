@@ -10,7 +10,6 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
 class LinkCrypto extends Component {
-
   constructor(props) {
     super(props);
 
@@ -21,7 +20,6 @@ class LinkCrypto extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   handleChange(event) {
@@ -35,12 +33,13 @@ class LinkCrypto extends Component {
     event.preventDefault();
   }
 
-
-  render () {
+  render() {
     return (
       <form className='root' autoComplete='off' onSubmit={ this.handleSubmit }>
         <FormControl className={ 'account-select' }>
-          <InputLabel htmlFor='account' className='account-select'>Link cryptocurrency accounts</InputLabel>
+          <InputLabel htmlFor='account' className='account-select'>
+            Link cryptocurrency accounts
+          </InputLabel>
           <Select
             value={ this.state.type }
             onChange={ this.handleChange }
@@ -55,12 +54,8 @@ class LinkCrypto extends Component {
             <MenuItem value={ 'Wallet' }>Link your wallet</MenuItem>
           </Select>
         </FormControl>
-        <Button
-          type='submit'
-          variant='contained'
-          color='primary'
-        >
-      GO
+        <Button type='submit' variant='contained' color='primary'>
+          GO
         </Button>
       </form>
     );

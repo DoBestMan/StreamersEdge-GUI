@@ -1,17 +1,22 @@
 import ActionTypes from './ActionTypes';
-import NavigateActions from '../actions/NavigateActions';
-import AuthService from '../services/AuthService';
-import AccountActions from '../actions/AccountActions';
-import StorageUtil from '../utility/StorageUtil';
-import ModalActions from '../actions/ModalActions';
-import {translate} from '../utility/GeneralUtils';
+import {NavigateActions, AccountActions, ModalActions} from '../actions';
+import {AuthService} from '../services';
+import {StorageUtil, GenUtil} from '../utility';
+import {Action, Dispatch} from 'redux';
+const translate = GenUtil.translate;
 
+/**
+ * Private actions for use in the @AppActions class.
+ *
+ * @class AppPrivateActions
+ */
 class AppPrivateActions {
   /**
-   *  Private Redux Action Creator (ACCOUNT_LOGOUT)
-   *  User Logout
+   * Private Redux action creator.
+   * Call to update redux and local storage with logged out user once logged out.
    *
-   * @returns {{type, payload: {isLogin: boolean, account: null, accountId: null}}}
+   * @memberof AppPrivateActions
+   * @returns {Action}
    */
   static logoutAction() {
     StorageUtil.remove('se-user');
@@ -27,11 +32,28 @@ class AppPrivateActions {
   }
 
   /**
-   * Log the user in given account name and password
-   * This is internal action that is used for the exposed login and signup function
-   * @param {object} account
+   * Log the user in given account name and password.
+   * Updates local storage.
+   * This is internal action that is used for the exposed login and signup function.
+   *
+   * @param {object} account - User object:
+   * {
+      "id": 7,
+      "username": "test",
+      "email": "test@email.com",
+      "twitchUserName": "",
+      "googleName": "",
+      "youtube": "",
+      "facebook": "",
+      "twitch": "",
+      "peerplaysAccountName": "",
+      "bitcoinAddress": "",
+      "userType": "viewer",
+      "avatar": ""
+   * }.
+   * @memberof AppPrivateActions
+   * @returns {Dispatch}
    */
-
   static processLogin(account) {
     return (dispatch) => AuthService.login(account).then((fullAccount) => {
       // Save account information
@@ -44,16 +66,22 @@ class AppPrivateActions {
       throw e;
     });
   }
-
 }
 
+
+/**
+ * Public actions related to Application wide actions.
+ *
+ * @class AppActions
+ */
 class AppActions {
   /**
- * login in app-Reducer
- *
- * @param {Object} account {name: String, id: String}
- * @returns Navigate action
- */
+   * Public Redux Action Creator.
+   *
+   * @param {object} account - {name: String, id: String}.
+   * @memberof AppActions
+   * @returns {Dispatch}
+   */
   static login(account) {
     return (dispatch) => {
       dispatch(AppPrivateActions.processLogin(account)).then(() => {
@@ -66,10 +94,12 @@ class AppActions {
   }
 
   /**
- *  Reducer: APP Logout action
- *
- * @returns {Function}
- */
+   * Public Redux Action Creator.
+   *
+   * @static
+   * @memberof AppActions
+   * @returns {Dispatch}
+   */
   static logout() {
     return (dispatch) => {
       dispatch(AppPrivateActions.logoutAction());
@@ -77,7 +107,15 @@ class AppActions {
     };
   }
 
-  // Set error text in Login modal
+  /**
+   * Public Redux Action Creator.
+   * Set error text in Login modal.
+   *
+   * @static
+   * @param {string} text - The error string.
+   * @memberof AppActions
+   * @returns {Action}
+   */
   static setLoginError(text) {
     return {
       type: ActionTypes.ACCOUNT_LOGIN_SET_ERROR,

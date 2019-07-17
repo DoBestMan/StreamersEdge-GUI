@@ -1,15 +1,15 @@
 import PeerplaysService from '../services/PeerplaysService';
 
-class AuthPrivateActions {
+class PeerplaysAuthPrivateUtil {
   /**
    * Attempts to retrieve the account from the blockchain as per the provided form username.
    * Authenticated via @PeerplaysService authAcount function.
    *
    * @static
-   * @param {*} accountName
-   * @param {*} password
-   * @returns success object if auth passes, error string if fails (tweak along with TODO: error handling in html markup).
-   * @memberof AuthPrivateActions
+   * @param {string} accountName - The Peerplays account name.
+   * @param {string} password - The Peerplays accounts login/signing password/key.
+   * @returns {object} - Success object if auth passes, error string if fails (tweak along with TODO: error handling in html markup).
+   * @memberof PeerplaysAuthPrivateActions
    */
   static processLogin(accountName, password) {
     // TODO: proper dispatching as required on use-case where this component is used.
@@ -29,28 +29,35 @@ class AuthPrivateActions {
   }
 }
 
-class AuthActions {
+/**
+ * Use for implementing Peerplays blockchain authentication.
+ *
+ * @class PeerplaysAuthActions
+ */
+class PeerplaysAuthActions {
   /**
    * Receive @PeerplaysLogin form submitted parameters.
    *
    * @static
-   * @param {string} accountName: from @PeerplaysLogin submitted form.
-   * @param {string} password: from @PeerplaysLogin submitted form.
-   * @returns async promise for use in form submission.
-   * @memberof AuthActions
+   * @param {string} accountName - From @PeerplaysLogin submitted form.
+   * @param {string} password - From @PeerplaysLogin submitted form.
+   * @returns {Promise} - Async promise for use in form submission.
+   * @memberof PeerplaysAuthActions
    */
   static peerplaysLogin(accountName, password) {
     return async (dispatch) => {
+      // eslint-disable-next-line jsdoc/require-jsdoc
       function onSuccess(success) {
         return success;
       }
 
+      // eslint-disable-next-line jsdoc/require-jsdoc
       function onError(error) {
         return error;
       }
 
       try {
-        const success = await dispatch(AuthPrivateActions.processLogin(accountName, password));
+        const success = await dispatch(PeerplaysAuthPrivateUtil.processLogin(accountName, password));
         return onSuccess(success);
       } catch (error) {
         return onError(error);
@@ -59,4 +66,4 @@ class AuthActions {
   }
 }
 
-export default AuthActions;
+export default PeerplaysAuthActions;

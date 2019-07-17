@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {ConnectedRouter} from 'connected-react-router/immutable';
-import routes from './routes';
 import {hot} from 'react-hot-loader/root';
 import {create} from 'jss';
 import JssProvider from 'react-jss/lib/JssProvider';
 import {createGenerateClassName, jssPreset} from '@material-ui/core/styles';
+import routes from './routes';
 
 const styleNode = document.createComment('insertion-point-jss');
 document.head.insertBefore(styleNode, document.head.firstChild);

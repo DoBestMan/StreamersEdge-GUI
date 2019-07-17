@@ -1,21 +1,21 @@
 /**
- * Form that handles account creation
+ * Form that handles account creation.
  */
 import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import {AuthService, ProfileService} from '../../../services/';
 import SignupInput from '../../SignupInput';
+import AuthFooter from '../../Auth/AuthFooter';
+import {GenUtil} from '../../../utility';
 import IconPassword from '../../../assets/images/login/Password.png';
 import IconPasswordActive from '../../../assets/images/login/Password_Over.png';
 import IconUsername from '../../../assets/images/login/Username_1x.png';
 import IconUsernameActive from '../../../assets/images/login/Username_Over.png';
-import Button from '@material-ui/core/Button';
 import LoginButton from '../../../assets/images/login/login_button.png';
 import LoginButtonActive from '../../../assets/images/login/login_active_button.png';
-import AuthService from '../../../services/AuthService';
-import ProfileService from '../../../services/ProfileService';
-import AuthFooter from '../../Auth/AuthFooter';
 import LogoImage from '../../../assets/images/se-logo-stacked.png';
-import {translate} from '../../../utility/GeneralUtils';
+const translate = GenUtil.translate;
 
 class LoginForm extends Component {
   constructor(props) {
@@ -85,10 +85,14 @@ class LoginForm extends Component {
           {this.props.errorText}
           <span className='register__textlink'>
             {translate('login.dontHaveAccount')}
-            <span onClick = { this.props.goRegister } className='goregister__link'>{translate('login.register')}</span>
+            <span onClick={ this.props.goRegister } className='goregister__link'>
+              {translate('login.register')}
+            </span>
           </span>
           <span className='register__textlink'>
-            <span onClick = { this.props.recoverPassword }className='header-link'>{translate('login.forgotPass')}</span>
+            <span onClick={ this.props.recoverPassword } className='header-link'>
+              {translate('login.forgotPass')}
+            </span>
           </span>
           <div className='login__btn-container'>
             <Button disabled={ false } className='login__btn' type='submit' style={ {color: 'white'} }>

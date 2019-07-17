@@ -15,4 +15,3 @@ describe('<Home/>', () => {
     expect(component).toMatchSnapshot();
   });
 });
-

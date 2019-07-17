@@ -1,6 +1,18 @@
 import {translate} from './GeneralUtils';
 
+/**
+ * Auth Util functions.
+ *
+ * @namespace ValidationUtil
+ */
 const ValidationUtil = {
+  /**
+   * Validate a Streamers Edge username.
+   *
+   * @param {string} value - Value to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   username(value) {
     var label = void 0;
     var ref = void 0;
@@ -56,6 +68,13 @@ const ValidationUtil = {
     return error;
   },
 
+  /**
+   * Validate an email.
+   *
+   * @param {string} email - Email to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   email(email) {
     let regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -66,6 +85,13 @@ const ValidationUtil = {
     }
   },
 
+  /**
+   * Validate a Streamers Edge password.
+   *
+   * @param {string} password - String to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   password(password) {
     let length = password.length;
     let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[.@$!%^*#])[A-Za-z\d.@$!%^*#]{4,}$/; //(.@!#$%^*)
@@ -82,6 +108,13 @@ const ValidationUtil = {
     return error;
   },
 
+  /**
+   * Validate the search text.
+   *
+   * @param {string} searchText - Text ti validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   search(searchText) {
     let length = searchText.length;
     let error = null;
@@ -97,12 +130,26 @@ const ValidationUtil = {
     return error;
   },
 
+  /**
+   * Validate a variable is a number.
+   *
+   * @param {number} number - Passed in variable to check is a number type.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   number(number) {
     if(typeof number !== 'number') {
       return translate('errors.general.beNumber');
     }
   },
 
+  /**
+   * Validate that a variable is a number type with decimals.
+   *
+   * @param {string} decimalInt - Variable to validate is a number.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   decimalInteger(decimalInt) {
     var regexp = /^[0-9]+([,.][0-9]+)?$/g;
 
@@ -111,6 +158,13 @@ const ValidationUtil = {
     }
   },
 
+  /**
+   * Validate a date.
+   *
+   * @param {Date} date - Variable to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   startDate(date) {
     const today = new Date();
     let error = null;
@@ -126,6 +180,14 @@ const ValidationUtil = {
     return error;
   },
 
+  /**
+   * Validate that a pair of dates are correct. EndDate must be greater than start date.
+   *
+   * @param {Date} startDate - Date one.
+   * @param {Date} endDate - Date two.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   endDate(startDate, endDate) {
     let error = null;
 
@@ -140,19 +202,39 @@ const ValidationUtil = {
     return error;
   },
 
+  /**
+   * Validate a string is a username.
+   *
+   * @deprecated
+   * @param {string} string - String to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   inviteGamer(string) {
     return this.Username(string);
   },
 
+  /**
+   * Validate a bounty is a decimal integer.
+   *
+   * @param {string} number - Variable to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   bounty(number) {
     return this.DecimalInteger(number);
   },
 
+  /**
+   * Validate challenge conditions are a decimal integer.
+   *
+   * @param {string} number - Variable to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
   challengeConditions(number) {
     return this.DecimalInteger(number);
   }
-
-
 };
 
 export default ValidationUtil;

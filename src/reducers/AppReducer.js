@@ -1,22 +1,16 @@
+/* eslint-disable jsdoc/require-jsdoc */
 import ActionTypes from '../actions/ActionTypes';
+import {fromJS} from 'immutable';
 
-
-const initialState = {
+const initialState = fromJS({
   accountId: null
-};
+});
 
-export default function(state=initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
-    // login to app
     case ActionTypes.APP_LOGIN:
-      return Object.assign({}, state, {
-        isLogin: action.payload.isLogin,
-        account: action.payload.account,
-        accountId: action.payload.accountId
-      });
-    // logout from app
     case ActionTypes.APP_LOGOUT:
-      return Object.assign({}, state, {
+      return state.merge({
         isLogin: action.payload.isLogin,
         account: action.payload.account,
         accountId: action.payload.accountId
@@ -24,4 +18,4 @@ export default function(state=initialState, action) {
     default:
       return state;
   }
-}
+};

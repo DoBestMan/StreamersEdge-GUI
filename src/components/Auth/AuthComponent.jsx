@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-jsdoc */
 import React from 'react';
 import {connect} from 'react-redux';
 import {NavigateActions} from '../../actions';
@@ -20,11 +21,7 @@ export function requireAuthentication(Component) {
     }
 
     render() {
-      return (
-        this.props.isLoggedIn === true
-          ? <Component { ...this.props }/>
-          : null
-      );
+      return this.props.isLoggedIn === true ? <Component { ...this.props } /> : null;
     }
   }
 
@@ -32,4 +29,3 @@ export function requireAuthentication(Component) {
 
   return connect(mapStateToProps)(AuthenticatedComponent);
 }
-

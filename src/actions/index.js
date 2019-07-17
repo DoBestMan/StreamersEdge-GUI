@@ -1,10 +1,10 @@
-import AuthActions from './AuthActions';
+import AppActions from './AppActions';
 import NavigateActions from './NavigateActions';
 import AccountActions from './AccountActions';
 import ModalActions from './ModalActions';
 
 export {
-  AuthActions,
+  AppActions,
   NavigateActions,
   AccountActions,
   ModalActions

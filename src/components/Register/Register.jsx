@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import RegisterForm from './RegisterForm';
 import AuthFooter from '../Auth/AuthFooter';
-import {bindActionCreators} from 'redux';
-import ModalActions from '../../actions/ModalActions';
-import {translate} from '../../utility/GeneralUtils';
+import {ModalActions} from '../../actions';
+import {ModalTypes} from '../../constants';
+import {GenUtil} from '../../utility';
+const translate = GenUtil.translate;
 
 class Register extends Component {
   componentDidMount() {
-
     if (this.props.isLoggedIn) {
       this.props.history.push('/dashboard');
     }
@@ -16,17 +17,17 @@ class Register extends Component {
 
   // When the user decides to login instead
   openLoginModal = () => {
-    this.props.setModalType('login');
+    this.props.setModalType(ModalTypes.LOGIN);
     this.props.toggleModal();
-  }
+  };
 
   render() {
-    return(
+    return (
       <>
         <div className='register-page'>
           <span className='register__title'>{translate('register.createAccount')}</span>
-          <RegisterForm openLoginModal={ this.openLoginModal }/>
-          <AuthFooter/>
+          <RegisterForm openLoginModal={ this.openLoginModal } />
+          <AuthFooter />
         </div>
       </>
     );
@@ -35,12 +36,16 @@ class Register extends Component {
 
 const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['account', 'isLoggedIn'])});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch,
-    ...bindActionCreators({toggleModal: ModalActions.toggleModal, setModalType: ModalActions.setModalType}, dispatch)
-  };
-};
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    toggleModal: ModalActions.toggleModal,
+    setModalType: ModalActions.setModalType
+  },
+  dispatch
+);
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);

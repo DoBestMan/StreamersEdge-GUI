@@ -1,3 +1,5 @@
+/* eslint-disable jsdoc/require-returns */
+/* eslint-disable jsdoc/require-param */
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -5,11 +7,9 @@ import {Formik, Form, Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {Card, CardActions, Button, InputLabel, CircularProgress} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
+import {PeerplaysAuthUtil, ValidationUtil} from '../../utility';
+import {AuthService, PeerplaysService} from '../../services';
 import styles from './MUI.css';
-import PeerplaysService from '../../services/PeerplaysService';
-import {AuthActions} from '../../actions';
-import ValidationUtil from '../../utility/ValidationUtil';
-import AuthService from '../../services/AuthService';
 
 /**
  * TODO:
@@ -44,18 +44,9 @@ class PeerplaysLogin extends Component {
     this.setState({loading: val});
   };
 
-  /**
-   * Receives values from peerplays login form, processes them with aid of peerplaysjs-lib.
-   * - creates keys based on provided form values
-   * - pulls account from blockchain, if it exists, the keys from the blockchain account data will be compared with the keys generated from the form.
-   *   If they match, users peerplays account can be added to their streamers edge account as a linked crypto account.
-   *
-   * @memberof PeerplaysLogin
-   */
   handleSubmit = (values, {setFieldError, setSubmitting}) => {
     this.setState({loader: true});
     this.props.peerplaysLogin(values.username, values.password).then((res) => {
-      // TODO: remove console logs
       if (res.isAuth) {
         const account = {
           youtube: '',
@@ -152,7 +143,7 @@ class PeerplaysLogin extends Component {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-    peerplaysLogin: AuthActions.peerplaysLogin
+    peerplaysLogin: PeerplaysAuthUtil.peerplaysLogin
   },
   dispatch
 );
