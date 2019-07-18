@@ -1,4 +1,5 @@
 import {translate} from './GeneralUtils';
+import Config from '../utility/Config';
 
 /**
  * Auth Util functions.
@@ -234,6 +235,28 @@ const ValidationUtil = {
    */
   challengeConditions(number) {
     return this.DecimalInteger(number);
+  },
+
+  /**
+   * Validate an uploaded file's type.
+   *
+   * @param {Blob} file - File to validate, must be jpeg or png.
+   * @returns {boolean} An error string if failed, null if passed.
+   * @memberof ValidationUtil
+   */
+  imageType(file) {
+    return (Config.imageUpload.validTypes.every((type) => file.type !== type)) ? translate('errors.profile.imageTypeUnsupported') : null;
+  },
+
+  /**
+   * Validate an uploaded file's size.
+   *
+   * @param {Blob} file - File to validate.
+   * @returns {boolean} An error string if failed, null if passed.
+   * @memberof ValidationUtil
+   */
+  fileSize(file) {
+    return (file.size > Config.imageUpload.sizeLimit) ? translate('errors.profile.maxFileSize') : null;
   }
 };
 

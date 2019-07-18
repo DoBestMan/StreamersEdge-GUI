@@ -62,7 +62,7 @@ class RootModal extends Component {
 const mapStateToProps = (state) => ({
   isModalOpen: state.getIn(['modal', 'isOpen']),
   modalType: state.getIn(['modal', 'type']),
-  errorText: state.getIn(['account', 'loginErrorText'])
+  errorText: state.getIn(['profiles', 'loginErrorText'])
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(

@@ -1,100 +1,90 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import {avatar, avatar_frame, avatar_frame_over, avatar_over} from '../../../../assets/images/avatar';
-import {GenUtil} from '../../../../utility';
-const translate = GenUtil.translate;
+import {profileDefault, profileDefaultActive, uploadFrame, uploadFrameActive} from '../../../../assets/images/avatar';
+import {ValidationUtil, StorageUtil} from '../../../../utility';
+import {ProfileService} from '../../../../services';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {AccountActions} from '../../../../actions';
 
 class ProfilePictureUpload extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {selectedFile: null, loaded: null};
-
-    this.onChooseFile = this.onChooseFile.bind(this);
-    this.onUpload = this.onUpload.bind(this);
-    this.changeImage = this.changeImage.bind(this);
+    this.state = {avatar: this.props.avatar ? this.props.avatar : profileDefault, frame: uploadFrame};
   }
 
-  onChooseFile(event) {
+  onChooseFile = (event) => {
     const file = event.target.files[0];
 
     if (!!file && this.checkMimeType(file) && this.maxSelectFile(file)) {
-      this.setState({
-        selectedFile: file
-      });
-
       this.onUpload(file);
     }
-  }
+  };
 
-  onUpload() {
+  onUpload = (file) => {
     const data = new FormData();
-    data.append('file', this.state.selectedFile);
+    data.append('file', file);
 
-    axios
-      .post('http://localhost:8082/upload', data, {
-        onUploadProgress: (ProgressEvent) => {
-          this.setState({
-            loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100
-          });
-        }
+    ProfileService.uploadProfilePicture(data)
+      .then((profile) => {
+        this.props.setAccount(profile);
+        this.setState({
+          avatar: profile.avatar
+        });
+        StorageUtil.set('se-user', JSON.stringify(profile));
       })
       .catch((err) => {
-        !!this.props.error ? this.props.error(err) : console.log(err);
+        console.log(err);
       });
-  }
+  };
 
   maxSelectFile(file) {
-    const maxFileSize = !!this.props.maxFileSize ? this.props.maxFileSize : 1024000; //1MB
+    const err = ValidationUtil.fileSize(file);
 
-    if (file.size > maxFileSize) {
-      const err = file.type + translate('errors.username.maxFileSize');
+    if (err) {
       !!this.props.error ? this.props.error(err) : console.log(err);
-
       return false;
     } else {
       return true;
     }
   }
 
+  // Return true if pass
   checkMimeType(file) {
-    let err = null;
-    // list allow mime type
-    const types = ['image/png', 'image/jpeg'];
+    const err = ValidationUtil.imageType(file);
 
-    if (types.every((type) => file.type !== type)) {
-      err = file.type + translate('errors.username.imageTypeUnsupported');
+    if (err) {
       !!this.props.error ? this.props.error(err) : console.log(err);
-
       return false;
     } else {
       return true;
     }
   }
 
-  changeImage(e, image) {
-    e.currentTarget.src = image;
-  }
+  mouseOver = () => {
+    if (this.props.avatar) {
+      this.setState({frame: uploadFrameActive});
+    } else {
+      this.setState({frame: uploadFrameActive, avatar: profileDefaultActive});
+    }
+  };
 
-  defaultProfilePicture() {
+  mouseOut = () => {
+    if (this.props.avatar) {
+      this.setState({frame: uploadFrame});
+    } else {
+      this.setState({frame: uploadFrame, avatar: profileDefault});
+    }
+  };
+
+  render() {
+    const {frame, avatar} = this.state;
     return (
       <>
-        <label htmlFor='file-input'>
-          <img className='profile-frame' src={ avatar } onMouseOver={ (e) => this.changeImage(e, avatar_over) } onMouseOut={ (e) => this.changeImage(e, avatar) } alt='' />
-        </label>
-
-        <input className='image-upload' id='file-input' type='file' onChange={ this.onChooseFile } />
-      </>
-    );
-  }
-
-  userProfilePicture() {
-    return (
-      <>
-        <div className='profile-picture-wrapper'>
+        <div className='profile__wrapper'>
           <label htmlFor='file-input'>
-            <img className='profile-picture' src={ URL.createObjectURL(this.state.selectedFile) } alt='' />
-            <img className='profile__frame' src={ avatar_frame } onMouseOver={ (e) => this.changeImage(e, avatar_frame_over) } onMouseOut={ (e) => this.changeImage(e, avatar_frame) } alt='' />
+            <img className='profile__picture' src={ avatar } alt='' />
+            <img className='profile__frame' src={ frame } onMouseOver={ this.mouseOver } onMouseOut={ this.mouseOut } alt='' />
           </label>
         </div>
 
@@ -102,10 +92,21 @@ class ProfilePictureUpload extends Component {
       </>
     );
   }
-
-  render() {
-    return <>{this.state.loaded === 100 ? this.userProfilePicture() : this.defaultProfilePicture()}</>;
-  }
 }
 
-export default ProfilePictureUpload;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+    ...bindActionCreators({setAccount: AccountActions.setAccountAction}, dispatch)
+  };
+};
+
+const mapStateToProps = (state) => ({
+  avatar: state.getIn(['profiles', 'currentAccount', 'avatar']),
+  account: state.getIn(['profiles', 'currentAccount'])
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfilePictureUpload);

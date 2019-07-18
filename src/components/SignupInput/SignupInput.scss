@@ -17,5 +17,9 @@
     padding: 0;
     color: $white;
     text-align: center;
+
+    &:disabled {
+      color: white;
+    }
   }
 }

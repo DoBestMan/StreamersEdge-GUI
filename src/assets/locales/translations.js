@@ -28,6 +28,10 @@ export const translationObject = {
         beToday: 'starting date must be current date',
         startLessThanEnd: 'start date must be less than end date'
       },
+      profile: {
+        imageTypeUnsupported: 'Only JPEG and PNG images are supported.',
+        maxFileSize: 'The image you have uploaded exceeds the file size limit'
+      },
       general: {
         beNumber: 'must be a number',
         beDecimalOrInt: 'must be either a decimal or integer'

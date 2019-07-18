@@ -1,4 +1,11 @@
-export {default as avatar} from './avatar.png';
-export {default as avatar_over} from './avatar_over.png';
-export {default as avatar_frame} from './avatar_frame.svg';
-export {default as avatar_frame_over} from './avatar_frame_over.svg';
+import profileDefault from './profile-default.svg';
+import profileDefaultActive from './profile-default-active.svg';
+import uploadFrame from './upload-frame.png';
+import uploadFrameActive from './upload-frame-active.png';
+
+export {
+  profileDefault,
+  profileDefaultActive,
+  uploadFrame,
+  uploadFrameActive
+};

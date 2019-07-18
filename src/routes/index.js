@@ -8,6 +8,7 @@ import Callback from '../components/Callback';
 import ResetForm from '../components/ForgotPassword/ResetForm';
 import Header from '../components/Header';
 import PeerplaysLogin from '../components/PeerplaysLogin/';
+import UpdateProfile from '../components/UpdateProfile';
 import RootModal from '../components/RootModal';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 
@@ -25,6 +26,7 @@ const routes = (
       <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
       <Route path='/peerplays' component={ PeerplaysLogin }/>
       <Route path='/callback' component={ Callback }/>
+      <Route path='/update-profile' component={ UpdateProfile }/>
     </Switch>
   </React.Fragment>
 );

@@ -4,7 +4,7 @@ import {StorageUtil} from '../utility';
 
 let initialState = fromJS({
   isLoggedIn: StorageUtil.get('se-user') ? true : false,
-  account: JSON.parse(StorageUtil.get('se-user')),
+  currentAccount: JSON.parse(StorageUtil.get('se-user')),
   loginErrorText: ''
 });
 
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
 
     case ActionTypes.ACCOUNT_SET_ACCOUNT: {
       return state.merge({
-        account: action.payload.account
+        currentAccount: action.payload.account
       });
     }
 
@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
     case ActionTypes.ACCOUNT_LOGOUT: {
       return state.merge({
         isLoggedIn: action.payload.isLoggedIn,
-        account: action.payload.account
+        currentAccount: action.payload.account
       });
     }
 

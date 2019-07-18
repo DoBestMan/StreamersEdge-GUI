@@ -1,0 +1,23 @@
+.update-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 50;
+  font-size: 30px;
+  color: white;
+  background-image: linear-gradient(#011462, #07012f);
+
+  &--input {
+    align-items: center;
+    z-index: 2;
+    margin-bottom: 0;
+  }
+
+  &--label {
+    justify-content: center;
+    align-items: center;
+    min-width: 120px;
+    color: #2d7cc4;
+  }
+}

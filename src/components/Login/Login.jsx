@@ -25,7 +25,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['account', 'isLoggedIn'])});
+const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['profiles', 'isLoggedIn'])});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {

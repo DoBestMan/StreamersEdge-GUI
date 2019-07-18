@@ -1,9 +1,13 @@
 const Config = {
   isDev: true,
   // devApiRoute: 'http://localhost:3000/',
-  devApiRoute: 'http://ec2-35-182-55-24.ca-central-1.compute.amazonaws.com:3000/',
+  devApiRoute: 'http://localhost:3000/',
   prodApiRoute: '',
-  supportedPlatforms: ['twitch', 'google', 'facebook']
+  supportedPlatforms: ['twitch', 'google', 'facebook'],
+  imageUpload: {
+    sizeLimit: 1024000, // 1mb
+    validTypes: ['image/png', 'image/jpeg'] // array of valid file upload types
+  }
 };
 
 export default Config;

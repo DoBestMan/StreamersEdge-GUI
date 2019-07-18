@@ -37,6 +37,36 @@ class ProfileService {
       return resolve(response.data.result);
     });
   }
+
+  /**
+   * Reconnect to blockchain in case of disconnect.
+   *
+   * @param {Blob} image - Image as Blob.
+   * @returns {Promise}
+   * @memberof ProfileService
+   */
+  static uploadProfilePicture(image) {
+    // POST /api/v1/profile/avatar
+    let response;
+    const query = `${apiRoot}api/v1/profile/avatar`;
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+
+      try {
+        response = await ApiHandler.post(query, image, headers);
+        return resolve(response.data.result);
+
+      } catch(err) {
+        return reject(err.toString());
+      }
+
+
+    });
+  }
 }
 
 export default ProfileService;

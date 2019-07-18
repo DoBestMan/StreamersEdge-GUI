@@ -11,6 +11,14 @@
   opacity: 1;
 }
 
+.input input {
+  color: white;
+}
+
 .root {
   height: 52px;
+}
+
+.text {
+  color: white;
 }

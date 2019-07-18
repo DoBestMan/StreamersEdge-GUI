@@ -64,7 +64,7 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
   isModalOpen: state.getIn(['modal', 'isOpen']),
   modalType: state.getIn(['modal', 'type']),
-  isLoggedIn: state.getIn(['account', 'isLoggedIn'])
+  isLoggedIn: state.getIn(['profiles', 'isLoggedIn'])
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(

@@ -9,6 +9,6 @@ export default (history) => combineReducers({
   router: connectRouter(history),
   i18n: ImmutableI18nReduxer,
   app: AppReducer,
-  account: AccountReducer,
+  profiles: AccountReducer,
   modal: ModalReducer
 });
