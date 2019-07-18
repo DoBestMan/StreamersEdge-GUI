@@ -1,4 +1,5 @@
 import {push, replace} from 'connected-react-router';
+import {RouteConstants as Routes} from '../constants';
 import {Dispatch} from 'redux';
 
 /**
@@ -8,20 +9,16 @@ import {Dispatch} from 'redux';
  */
 class NavigateActions {
   /**
-   * Redirect the user to another page.
+   * Since we render the Home component if no existing URL/Route exists, we cleanup the browser address bar.
+   * Alter the URl to be the root. Used when a manually entered URL by the end user does not exist.
    *
    * @static
-   * @param {string} path - The destination address.
    * @returns {Dispatch}
    * @memberof NavigateActions
    */
-  static navigateTo(path) {
+  static noValidPathRedirect() {
     return (dispatch) => {
-      if (path) {
-        dispatch(push(path));
-      } else {
-        console.error('Unimplemented path', path);
-      }
+      dispatch(replace(Routes.ROOT));
     };
   }
 

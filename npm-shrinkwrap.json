@@ -2688,7 +2688,8 @@
     "better-docs": {
       "version": "1.1.6",
       "resolved": "https://registry.npmjs.org/better-docs/-/better-docs-1.1.6.tgz",
-      "integrity": "sha512-2mSRSThIIIM/RLatcrFRfTJ6tKNGV8vzSLmM/2hWOwDZWtsyG9WttrQpzmA/izCcqxL0o8DpKfjlAxq8fuaHSw=="
+      "integrity": "sha512-2mSRSThIIIM/RLatcrFRfTJ6tKNGV8vzSLmM/2hWOwDZWtsyG9WttrQpzmA/izCcqxL0o8DpKfjlAxq8fuaHSw==",
+      "dev": true
     },
     "big.js": {
       "version": "5.2.2",

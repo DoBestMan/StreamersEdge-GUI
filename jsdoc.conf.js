@@ -5,6 +5,7 @@ module.exports = {
     'node_modules/better-docs/category'
   ],
   'opts': {
+    'template': 'node_modules/better-docs',
     'encoding': 'utf8',
     'destination': 'docs/',
     'readme': 'readme.md',

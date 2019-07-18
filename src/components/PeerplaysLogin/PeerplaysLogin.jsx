@@ -1,5 +1,8 @@
 /* eslint-disable jsdoc/require-returns */
 /* eslint-disable jsdoc/require-param */
+/**
+ * HOT RELOADING WILL NOT WORK ON THIS COMPONENT.
+ */
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';

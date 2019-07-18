@@ -3,6 +3,7 @@ import configureStore, {history} from './store/configureStore';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+
 // Initialize store
 const store = configureStore();
 
@@ -16,5 +17,3 @@ const render = () => {
 };
 
 render();
-
-// ReactDOM.render(<App />, document.getElementById('content'));

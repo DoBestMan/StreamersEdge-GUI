@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ProfileService} from '../../services';
-import {AccountActions} from '../../actions';
 import {bindActionCreators} from 'redux';
+import {ProfileService} from '../../services';
+import {AccountActions, NavigateActions} from '../../actions';
 
 class Home extends Component {
   // Redirect to dashboard, if the user is not logged in then they will go to the login page instead.
@@ -20,12 +20,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div className='code-me'>
-        <div className='inputs-center'>
-          <p />
-          <p />
-        </div>
-      </div>
+      <>
+        <div className='code-me'></div>
+      </>
     );
   }
 }
@@ -33,7 +30,8 @@ class Home extends Component {
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     setLoggedIn: AccountActions.setIsLoggedInAction,
-    setAccount: AccountActions.setAccountAction
+    setAccount: AccountActions.setAccountAction,
+    navigateToRoot: NavigateActions.noValidPathRedirect
   },
   dispatch
 );

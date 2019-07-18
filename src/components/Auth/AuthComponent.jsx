@@ -1,7 +1,9 @@
 /* eslint-disable jsdoc/require-jsdoc */
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {NavigateActions} from '../../actions';
+import Config from '../../utility/Config';
 
 export function requireAuthentication(Component) {
   class AuthenticatedComponent extends React.Component {
@@ -14,18 +16,29 @@ export function requireAuthentication(Component) {
     }
 
     checkAuth() {
-      if (!this.props.isLoggedIn) {
+      if (!this.props.isLoggedIn && !Config.requireAuthentication) {
         let redirectAfterLogin = this.props.location.pathname;
-        this.props.dispatch(NavigateActions.navigateToSignIn(redirectAfterLogin));
+        this.props.navigateToSignIn(redirectAfterLogin);
       }
     }
 
     render() {
-      return this.props.isLoggedIn === true ? <Component { ...this.props } /> : null;
+      if (Config.requireAuthentication) {
+        return this.props.isLoggedIn ? <Component { ...this.props } /> : null;
+      } else {
+        return <Component { ...this.props } />;
+      }
     }
   }
 
   const mapStateToProps = (state) => ({isLoggedIn: state.getIn(['profiles', 'isLoggedIn'])});
 
-  return connect(mapStateToProps)(AuthenticatedComponent);
+  const mapDispatchToProps = (dispatch) => bindActionCreators(
+    {
+      navigateToSignIn: NavigateActions.navigateToSignIn
+    },
+    dispatch
+  );
+
+  return connect(mapStateToProps, mapDispatchToProps)(AuthenticatedComponent);
 }

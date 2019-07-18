@@ -86,7 +86,7 @@ class AppActions {
     return (dispatch) => {
       dispatch(AppPrivateActions.processLogin(account)).then(() => {
         dispatch(ModalActions.toggleModal());
-        dispatch(NavigateActions.navigateTo('/dashboard'));
+        dispatch(NavigateActions.navigateToDashboard());
       }).catch(() => {
         dispatch(AppActions.setLoginError(translate('login.invalidPassword')));
       });

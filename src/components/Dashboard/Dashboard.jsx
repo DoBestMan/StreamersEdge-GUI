@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Button from '@material-ui/core/Button';
-import AppActions from '../../actions/AppActions';
+import {AppActions} from '../../actions';
 
 class Dashboard extends Component {
   handleLogout = () => {

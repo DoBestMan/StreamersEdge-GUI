@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {NavLink} from 'react-router-dom';
 import {AppActions, ModalActions} from '../../actions';
 import {GenUtil} from '../../utility';
-import {ModalTypes} from '../../constants';
+import {ModalTypes, RouteConstants as Routes} from '../../constants';
 import HeaderLogo from '../../assets/images/se-logo.png';
 import loginIcon from '../../assets/images/loginicon.png';
 import loginIconActive from '../../assets/images/loginicon_active.png';
@@ -17,7 +17,6 @@ class Header extends Component {
   };
 
   render() {
-    const path = this.props.location.pathname;
     let logButton = (
       <span onClick={ this.openLoginModal } className='header-link'>
         {translate('header.login')}
@@ -48,11 +47,11 @@ class Header extends Component {
             <img className='headerimage' src={ HeaderLogo } alt='Header' />
           </div>
           <div className='header-right'>
-            <NavLink exact className='header-link' activeClassName='header-link__active' to='/sign-up'>
+            <NavLink exact className='header-link' activeClassName='header-link__active' to={ Routes.SIGN_UP }>
               {translate('header.signup')}
             </NavLink>
             {logButton}
-            <img src={ path === '/login' ? loginIconActive : loginIcon } alt='avatar' />
+            <img src={ this.props.path === '/login' ? loginIconActive : loginIcon } alt='avatar' />
           </div>
         </div>
         <div className='header-divider__top' />

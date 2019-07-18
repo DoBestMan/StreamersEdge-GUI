@@ -6,29 +6,26 @@ import Dashboard from '../components/Dashboard';
 import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
 import ResetForm from '../components/ForgotPassword/ResetForm';
-import Header from '../components/Header';
 import PeerplaysLogin from '../components/PeerplaysLogin/';
 import UpdateProfile from '../components/UpdateProfile';
-import RootModal from '../components/RootModal';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
+import {RouteConstants as Routes} from '../constants';
 
 // https://github.com/supasate/connected-react-router/blob/master/examples/immutable/src/routes/index.js
 
 const routes = (
-  <React.Fragment>
-    <Route path='/' component= { Header }/>
-    <Route path='/' component= { RootModal }/>
+  <>
     <Switch>
-      <Route exact path='/' component={ Home }/>
-      <Route path='/sign-up' component={ Register }/>
-      <Route path='/forgot-password' component={ ResetForm }/>
-      <Route path='/profile' component={ CreateProfile }/>
-      <Route path='/dashboard' component={ requireAuthentication(Dashboard) }/>
-      <Route path='/peerplays' component={ PeerplaysLogin }/>
-      <Route path='/callback' component={ Callback }/>
+      <Route exact path={ Routes.ROOT } component={ Home }/>
+      <Route path={ Routes.PEERPLAYS } component={ requireAuthentication(PeerplaysLogin) } />
+      <Route path={ Routes.SIGN_UP } component={ Register }/>
+      <Route path={ Routes.FORGOT_PASSWORD } component={ ResetForm }/>
+      <Route path={ Routes.PROFILE } component={ requireAuthentication(CreateProfile) }/>
+      <Route path={ Routes.DASHBOARD } component={ requireAuthentication(Dashboard) }/>
+      <Route path={ Routes.CALLBACK } component={ Callback }/>
       <Route path='/update-profile' component={ UpdateProfile }/>
     </Switch>
-  </React.Fragment>
+  </>
 );
 
 export default routes;
