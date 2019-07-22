@@ -1,0 +1,21 @@
+@import '../../../assets/styles/common';
+
+.notifications {
+  display: flex;
+  padding-top: 30px;
+  color: $white;
+
+  &__image {
+    margin-bottom: 10px;
+    padding-right: 20px;
+    object-fit: contain;
+  }
+
+  &__text {
+    margin: 5px 32px 0 0;
+    font-family: $lato;
+    font-weight: $lato-light;
+    font-style: italic;
+    font-size: $preferencesChildHeader;
+  }
+}

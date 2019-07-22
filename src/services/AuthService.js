@@ -91,8 +91,7 @@ class AuthService {
   static register(account) {
     let response;
     const query = `${apiRoot}api/v1/auth/sign-up`;
-
-    return new Promise(async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const headers = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -262,6 +261,40 @@ class AuthService {
       }
     });
   };
+  /**
+   * Calls the users API to obtain a full list of every user in the app, up to the limit parameter provided.
+   *
+   * @static
+   * @returns {number} A promise indicating success by listing user objects.
+   * @memberof AuthService
+   */
+  static getUserList() {
+    let response;
+    const query = `${apiRoot}api/v1/users`;
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const parameters = {params:
+        {
+          search: '',
+          limit: Config.userSearchLimit
+        }
+      };
+
+      try {
+        response = await ApiHandler.get(query, parameters, headers);
+        return resolve(response.data.result);
+
+      } catch(err) {
+        return reject(err.toString());
+      }
+
+    });
+  }
 }
 
 export default AuthService;

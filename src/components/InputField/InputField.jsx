@@ -37,7 +37,13 @@ class InputField extends Component{
             onChange={ this.props.handleChange }
             onMouseOver={ this.mouseOver }
             onMouseOut={ this.mouseOut }
-            InputProps={ {className: classes.input, disableUnderline: true} }
+            InputProps={ {className: classes.input, input: {
+              '&::placeholder': {
+                textOverflow: 'ellipsis !important',
+                color: 'blue',
+                fontSize: 14
+              }
+            }} }
           />
         </FormControl>
       </div>

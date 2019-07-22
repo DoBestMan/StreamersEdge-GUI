@@ -51,7 +51,14 @@ const Config = {
   imageUpload: {
     sizeLimit: 1024000, // 1mb
     validTypes: ['image/png', 'image/jpeg'] // array of valid file upload types
-  }
+  },
+  /**
+   * Specifies how many results are returned when calling get all users.
+   *
+   * @type {number}
+   * @memberof Config
+   */
+  userSearchLimit: 100
 };
 
 export default Config;

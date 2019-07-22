@@ -38,6 +38,29 @@ export const translationObject = {
         beDecimalOrInt: 'must be either a decimal or integer'
       }
     },
+    preferences: {
+      header: 'PREFERENCES',
+      invites: {
+        header: 'Invites',
+        option1: 'Everyone can send me an invite',
+        option2: 'Receive invites from specific users',
+        option3: 'Receive invites for specific games',
+        option4: 'Don\'t receive invites from anyone',
+        bounty: 'Minimum bounty for invite',
+        ppy: 'PPY',
+        searchUsersPlaceholder: 'Search users - Begin typing username',
+        bountyPlaceholder: '10,000',
+        errors: {
+          alreadyAdded: 'user already added',
+          notFound: 'user not found'
+        }
+      },
+      notifications: {
+        header: 'Notifications',
+        option1: 'Get notifications for all challenges',
+        option2: 'Don\'t receive any notifications'
+      }
+    },
     createProfile: {
       accountTypes: ['Viewer', 'Gamer', 'Sponsor']
     },

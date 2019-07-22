@@ -1,0 +1,41 @@
+.expansion {
+  background: none;
+  box-shadow: none;
+}
+
+.header {
+  margin: 0 !important;
+  padding: 0;
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.label {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 27.52px;
+  color: rgb(61, 165, 243);
+}
+
+.bountyTextbox {
+  padding: 2px;
+  font-size: 18px;
+  color: rgb(61, 165, 243);
+  text-align: center;
+}
+
+.bountyTextbox::-webkit-input-placeholder, .userSearchTextbox::-webkit-input-placeholder {
+  opacity: 1;
+}
+
+.userSearchTextbox {
+  padding: 10px 5px;
+  font-family: 'myriad-pro', sans-serif;
+  font-size: 12px;
+  color: rgb(61, 165, 243);
+}
+
+.textboxBorder {
+  border-radius: 0;
+  border-color: rgb(61, 165, 243) !important;
+}

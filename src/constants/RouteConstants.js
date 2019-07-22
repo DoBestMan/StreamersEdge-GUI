@@ -6,5 +6,7 @@ export default {
   PROFILE: '/profile',
   DASHBOARD: '/dashboard',
   CALLBACK: '/callback',
-  PEERPLAYS: '/peerplays'
+  PEERPLAYS: '/peerplays',
+  PREFERENCES: '/preferences',
+  UPDATE_PROFILE: '/update-profile'
 };

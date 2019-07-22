@@ -1,5 +1,7 @@
 @import './layout';
 @import './colors';
+@import './fontSizes';
+@import './fonts';
 @import './mixins-functions';
 
 * {
@@ -60,4 +62,11 @@ select:-webkit-autofill:focus {
 
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+//remove number dial for number textfield inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
 }

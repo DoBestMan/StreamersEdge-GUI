@@ -1,0 +1,92 @@
+@import '../../../assets/styles/common';
+
+.invites {
+  display: flex;
+  padding-top: 30px;
+  color: $white;
+
+  &__image {
+    margin-bottom: 10px;
+    padding-right: 20px;
+    object-fit: contain;
+  }
+
+  &__text {
+    margin: 5px 32px 0 0;
+    font-family: $lato;
+    font-weight: $lato-light;
+    font-style: italic;
+    font-size: $preferencesChildHeader;
+  }
+
+  &__details {
+    padding-top: 0;
+  }
+}
+
+.userSearch {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+  font-size: $preferencesLabel;
+
+  &__textbox {
+    width: 310px;
+    margin: 0 5px;
+  }
+}
+
+.bounty {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+
+  &__textbox {
+    width: 100px;
+    margin: 0 5px;
+    font-family: $myriad-pro;
+    font-size: $preferencesLabel;
+  }
+
+  &__text {
+    font-family: $myriad-pro;
+    font-size: $preferencesBountyText;
+  }
+}
+
+.expand-icon {
+  font-size: $expandIcon;
+  color: white;
+}
+
+.whitelistedUsers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 310px;
+  margin: 0;
+  border-bottom: 1px solid $blue-light;
+
+  &__text {
+    margin: 0 10px 0 0;
+    margin-left: 20px;
+    padding: 0;
+    font-family: $lato;
+    font-weight: $lato-light;
+    font-style: italic;
+    font-size: $preferencesUserSearch;
+  }
+
+  &__image {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.errorLabel {
+  font-size: $preferencesLabel;
+}
+
+.search-column {
+  flex-direction: column;
+}

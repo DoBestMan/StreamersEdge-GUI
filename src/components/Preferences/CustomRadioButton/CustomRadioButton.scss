@@ -1,0 +1,9 @@
+@import '../../../assets/styles/colors';
+
+.checked {
+  fill: $radio-button-green;
+}
+
+.unchecked {
+  fill: $blue-light;
+}

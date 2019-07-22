@@ -1,5 +1,5 @@
-// Declare color constants with rgb() and comment at end of line with their hex equivalent.
 
+// Declare color constants with rgb() and comment at end of line with their hex equivalent.
 $black: rgb(0, 0, 0); // 000000
 $black-blue: rgb(1, 0, 42); // 01002a
 $brighter-gray: rgb(136, 136, 136); // 888888
@@ -17,7 +17,9 @@ $blue-dark-two: rgb(3, 22, 46); // 03162e
 $blue-darkest: rgb(6, 0, 42); // 06002a
 $red: rgb(255, 0, 0); // ff0000
 $white: rgb(255, 255, 255); // ffffff
-
+$radio-button-green: rgb(6, 254, 3);// #06fe03
+$preferencesStartGradient: rgb(0, 18, 93);//#00125d
+$preferencesFinishGradient: rgb(7, 1, 46);//#07012e
 $input-blue: rgb(0, 0, 51); // 003
 $input-blue-glow: rgba(51, 153, 255, 0.23);
 $input-green: rgb(67, 235, 2); // 43eb02

@@ -1,0 +1,63 @@
+@import '../../assets/styles/common';
+
+.preferences {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 886px;
+  background-image: linear-gradient($preferencesStartGradient, $preferencesFinishGradient);
+
+  &__header {
+    display: flex;
+    margin-top: 20px;
+    font-family: $lato;
+    font-weight: $lato-light;
+    font-style: italic;
+    font-size: $preferenceHeaderSize;
+    color:$white;
+  }
+
+  &__image {
+    margin-bottom: 10px;
+    padding-right: 20px;
+    object-fit: contain;
+  }
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 344px;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.button {
+  width: 130px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 130px;
+
+  &-save {
+    @extend .button;
+
+    background-image: url('../../assets/images/preferences/Save.png');
+
+    &:hover {
+      background-image: url('../../assets/images/preferences/Save_Over.png');
+    }
+  }
+
+  &-cancel {
+    @extend .button;
+
+    background-image: url('../../assets/images/preferences/Cancel.png');
+  }
+
+  &-cancel:hover {
+    @extend .button;
+
+    background-image: url('../../assets/images/preferences/Cancel_Over.png');
+  }
+}
