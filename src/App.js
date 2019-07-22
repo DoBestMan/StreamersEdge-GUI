@@ -12,6 +12,7 @@ import RootModal from './components/RootModal';
 import routes from './routes';
 import {RouteConstants} from './constants';
 import {NavigateActions} from './actions';
+import {TokenUtil} from './utility';
 
 const styleNode = document.createComment('insertion-point-jss');
 document.head.insertBefore(styleNode, document.head.firstChild);
@@ -37,8 +38,9 @@ class App extends Component {
       const routeValues = Object.values(RouteConstants);
 
       if (
-        routeValues.indexOf(this.props.path) !== -1 &&
-        routeValues.indexOf('login?next=/') === -1
+        (routeValues.indexOf(this.props.path) !== -1 &&
+        routeValues.indexOf('login?next=/') === -1) ||
+        (this.props.path.indexOf(RouteConstants.RESET_PASSWORD) !== -1 && TokenUtil.checkUrlLength(this.props.path))
       ) {
         return true;
       }

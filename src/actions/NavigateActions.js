@@ -68,6 +68,20 @@ class NavigateActions {
       }
     };
   }
+
+  /**
+   * Navigate the user to password reset page.
+   *
+   * @static
+   * @param {string} [token] - The token required by the backend to initiate a password reset.
+   * @returns {Dispatch}
+   * @memberof NavigateActions
+   */
+  static navigateToPasswordReset(token) {
+    return (dispatch) => {
+      dispatch(push(Routes.FORGOT_PASSWORD + `/${token}`));
+    };
+  }
 }
 
 export default NavigateActions;

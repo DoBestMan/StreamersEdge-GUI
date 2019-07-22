@@ -3,22 +3,24 @@
  */
 
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
 import {AuthService} from '../../services';
+import {NavigateActions} from '../../actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class Callback extends Component {
-  constructor() {
-    super();
-    this.state = {error: ''};
-  }
 
   componentDidMount() {
     this.handleCallback();
   }
 
+  state = {
+    error: ''
+  };
+
   // Handle callback based on type passed
   handleCallback = () => {
-    const path = this.props.location.pathname;
+    const path = this.props.location;
     const pathAry = path.split('/');
     let cb = pathAry[2]; // 2 = Callback type, 3 = Token
 
@@ -31,17 +33,16 @@ class Callback extends Component {
       case 'confirm-email':
         AuthService.confirmEmail(pathAry[3])
           .then(() => {
-            this.props.history.push('/login');
+            this.props.navigateToDashboard();
           })
           .catch((err) => {
             this.setState({
               error: err
             });
-            console.error(err);
           });
         break;
       case 'reset-password':
-        this.props.history.push(`/forgot-password?token=${pathAry[3]}`);
+        this.props.navigateToPasswordReset(pathAry[3]);
         break;
       default:
         // an error occurred.
@@ -61,4 +62,15 @@ class Callback extends Component {
   }
 }
 
-export default withRouter(Callback);
+const mapStateToProps = (state) => ({location: state.getIn(['router', 'location', 'pathname'])});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    navigateToDashboard: NavigateActions.navigateToDashboard,
+    navigateToPasswordReset: NavigateActions.navigateToPasswordReset
+  },
+  dispatch
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Callback);
+
