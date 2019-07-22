@@ -1,20 +1,16 @@
 import {translate} from './GeneralUtils';
 import Config from '../utility/Config';
+import {UploadFileTypes} from '../constants';
 
-/**
- * Auth Util functions.
- *
- * @namespace ValidationUtil
- */
-const ValidationUtil = {
+const PrivateValidationUtils = {
   /**
    * Validate a Streamers Edge username.
    *
    * @param {string} value - Value to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
-  username(value) {
+  seUsername(value) {
     var label = void 0;
     var ref = void 0;
     var prefix = void 0;
@@ -74,12 +70,12 @@ const ValidationUtil = {
    *
    * @param {string} email - Email to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   email(email) {
     let regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if(!regex.test(email)) {
+    if (!regex.test(email)) {
       return translate('errors.email.invalid');
     } else {
       return null;
@@ -91,9 +87,9 @@ const ValidationUtil = {
    *
    * @param {string} password - String to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
-  password(password) {
+  sePassword(password) {
     let length = password.length;
     let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[.@$!%^*#])[A-Za-z\d.@$!%^*#]{4,}$/; //(.@!#$%^*)
     let error = null;
@@ -102,7 +98,7 @@ const ValidationUtil = {
       error = translate('errors.password.lengthRequirement');
     }
 
-    if(!regex.test(password)) {
+    if (!regex.test(password)) {
       error = translate('errors.password.requires');
     }
 
@@ -114,17 +110,17 @@ const ValidationUtil = {
    *
    * @param {string} searchText - Text ti validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   search(searchText) {
     let length = searchText.length;
     let error = null;
 
-    if(length < 3 || length > 100) {
+    if (length < 3 || length > 100) {
       error = translate('errors.search.lengthRequirement');
     }
 
-    if(length === 0) {
+    if (length === 0) {
       error = translate('errors.password.noBlank');
     }
 
@@ -136,10 +132,10 @@ const ValidationUtil = {
    *
    * @param {number} number - Passed in variable to check is a number type.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   number(number) {
-    if(typeof number !== 'number') {
+    if (typeof number !== 'number') {
       return translate('errors.general.beNumber');
     }
   },
@@ -149,7 +145,7 @@ const ValidationUtil = {
    *
    * @param {string} decimalInt - Variable to validate is a number.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   decimalInteger(decimalInt) {
     var regexp = /^[0-9]+([,.][0-9]+)?$/g;
@@ -164,7 +160,7 @@ const ValidationUtil = {
    *
    * @param {Date} date - Variable to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   startDate(date) {
     const today = new Date();
@@ -187,7 +183,7 @@ const ValidationUtil = {
    * @param {Date} startDate - Date one.
    * @param {Date} endDate - Date two.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   endDate(startDate, endDate) {
     let error = null;
@@ -204,17 +200,43 @@ const ValidationUtil = {
   },
 
   /**
-   * Validate a string is a username.
+   * Validate an uploaded file's type.
    *
-   * @deprecated
-   * @param {string} string - String to validate.
-   * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @param {Blob} file - File to validate, must be jpeg or png.
+   * @returns {boolean} An error string if failed, null if passed.
+   * @memberof PrivateValidationUtil
    */
-  inviteGamer(string) {
-    return this.Username(string);
+  isImageType(file) {
+    return (Config.imageUpload.validTypes.every((type) => file.type !== type))
+      ? translate('errors.profile.invalidImageType')
+      : null;
   },
 
+  /**
+   * Validate an uploaded file's size.
+   *
+   * @param {Blob} file - File to validate.
+   * @param {string} type - Type of file to validate.
+   * @returns {string} An error string if failed, null if passed.
+   * @memberof PrivateValidationUtil
+   */
+  fileSize(file, type) {
+    switch (type) {
+      case UploadFileTypes.IMAGE.PROFILE:
+        return (file.size > Config.imageUpload.sizeLimit)
+          ? translate('errors.profile.invalidImageSize')
+          : null;
+      // no default
+    }
+  }
+};
+
+/**
+ * Auth Util functions.
+ *
+ * @namespace ValidationUtil
+ */
+const ValidationUtil = {
   /**
    * Validate a bounty is a decimal integer.
    *
@@ -223,7 +245,7 @@ const ValidationUtil = {
    * @memberof ValidationUtil
    */
   bounty(number) {
-    return this.DecimalInteger(number);
+    return PrivateValidationUtils.decimalInteger(number);
   },
 
   /**
@@ -234,29 +256,87 @@ const ValidationUtil = {
    * @memberof ValidationUtil
    */
   challengeConditions(number) {
-    return this.DecimalInteger(number);
+    return PrivateValidationUtils.decimalInteger(number);
   },
 
   /**
-   * Validate an uploaded file's type.
-   *
-   * @param {Blob} file - File to validate, must be jpeg or png.
-   * @returns {boolean} An error string if failed, null if passed.
-   * @memberof ValidationUtil
-   */
-  imageType(file) {
-    return (Config.imageUpload.validTypes.every((type) => file.type !== type)) ? translate('errors.profile.imageTypeUnsupported') : null;
-  },
-
-  /**
-   * Validate an uploaded file's size.
+   * Checks if the profile image to upload is valid depending on the use case defined by `type`.
    *
    * @param {Blob} file - File to validate.
-   * @returns {boolean} An error string if failed, null if passed.
+   * @param {string} type - Type of file to validate.
+   * @returns {string}
    * @memberof ValidationUtil
    */
-  fileSize(file) {
-    return (file.size > Config.imageUpload.sizeLimit) ? translate('errors.profile.maxFileSize') : null;
+  imageUpload(file, type) {
+    const validType = PrivateValidationUtils.isImageType(file);
+    const validSize = PrivateValidationUtils.fileSize(file, type);
+    let err;
+
+    // The type is invalid but the size is valid.
+    if (!!validType && !validSize) {
+      err = validType;
+    }
+
+    // The size is invalid but the type is valid.
+    if (!!validSize && !validType) {
+      err = validSize;
+    }
+
+    // Both are invalid.
+    if (!!validType && !!validSize) {
+      err = translate('errors.profile.invalidTypeAndSize');
+    }
+
+    if (!validType && !validSize) {
+      err = null;
+    }
+
+    return err;
+  },
+
+  /**
+   * Validate a string is a username.
+   *
+   * @deprecated
+   * @param {string} string - String to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  inviteGamer(string) {
+    return PrivateValidationUtils.username(string);
+  },
+
+  /**
+   * Validate a Streamers Edge password.
+   *
+   * @param {string} pass - Password from form to validate.
+   * @returns {string} - Error if one is found.
+   * @memberof ValidationUtil
+   */
+  sePassword(pass) {
+    return PrivateValidationUtils.sePassword(pass);
+  },
+
+  /**
+   * Validate an email.
+   *
+   * @param {string} email - Email to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  email(email) {
+    return PrivateValidationUtils.email(email);
+  },
+
+  /**
+   * Validate a Streamers Edge username.
+   *
+   * @param {string} string - Value to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  seUsername(string) {
+    return PrivateValidationUtils.seUsername(string);
   }
 };
 

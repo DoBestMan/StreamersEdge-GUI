@@ -4,7 +4,6 @@
   &__btn {
     &-container {
       position: relative;
-      color: $white;
       text-align: center;
     }
 
@@ -30,12 +29,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: $white;
 
     &__input {
       margin-top: 6px;
       margin-bottom: 6px;
-      color: $white;
     }
 
     &__gologin {

@@ -5,11 +5,6 @@ import {StorageUtil, GenUtil} from '../utility';
 import {Action, Dispatch} from 'redux';
 const translate = GenUtil.translate;
 
-/**
- * Private actions for use in the @AppActions class.
- *
- * @class AppPrivateActions
- */
 class AppPrivateActions {
   /**
    * Private Redux action creator.

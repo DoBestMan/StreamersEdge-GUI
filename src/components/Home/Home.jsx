@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ProfileService} from '../../services';
 import {AccountActions, NavigateActions} from '../../actions';
+import {GenUtil} from '../../utility';
+const translate = GenUtil.translate;
 
 class Home extends Component {
   // Redirect to dashboard, if the user is not logged in then they will go to the login page instead.
@@ -21,7 +23,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <div className='code-me'></div>
+        <div className='home'>{translate('lorem')}</div>
       </>
     );
   }

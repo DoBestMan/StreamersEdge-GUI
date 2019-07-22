@@ -1,11 +1,3 @@
-@import '../../assets/styles/common.scss';
-@import '../../assets/styles/colors';
-
-html,
-body {
-  @include bg-gradient;
-
-  width: 100%;
-  height: 100%;
-  margin: 0;
+.home {
+  margin: 20px 70px 30px;
 }

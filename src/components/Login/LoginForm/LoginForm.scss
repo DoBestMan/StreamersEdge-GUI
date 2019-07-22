@@ -2,15 +2,11 @@
 
 .login {
   &-form {
-    @extend .txt--white;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 
     &__input {
-      @extend .txt--white;
-
       margin-top: 6px;
       margin-bottom: 6px;
     }
@@ -18,8 +14,6 @@
 
   &__btn {
     &-container {
-      @extend .txt--white;
-
       position: relative;
       padding-top: 25px;
       text-align: center;
@@ -32,15 +26,9 @@
       transform: translate(-50%, -50%);
     }
   }
-
-  &__link {
-    @extend .txt--white;
-  }
 }
 
 .goregister__link {
-  @extend .txt--white;
-
   padding-left: 5px;
   text-decoration: underline;
   cursor: pointer;

@@ -2,4 +2,5 @@
 
 @mixin bg-gradient {
   background-image: linear-gradient($blue, $blue-dark, $blue-darkest);
+  background-attachment: fixed;
 }

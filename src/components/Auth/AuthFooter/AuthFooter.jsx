@@ -10,6 +10,7 @@ import twitchImgBlue from '../../../assets/images/socials/Twitch_1.png';
 const translate = GenUtil.translate;
 
 // Auth footer component, contains third party auth services banner
+// TODO: refactor, remove inline functions
 class AuthFooter extends Component {
   render() {
     return (
@@ -22,7 +23,7 @@ class AuthFooter extends Component {
             alt='twitch'
             onMouseOver={ (e) => (e.currentTarget.src = twitchImg) }
             onMouseOut={ (e) => (e.currentTarget.src = twitchImgBlue) }
-            onClick={ () => AuthUtil.authVia('twitch', this.props.location.pathname) }
+            onClick={ () => AuthUtil.authVia('twitch', this.props.location.pathname) } // TODO: refactor to use redux path.
           />
           <img
             className='facebook'
@@ -30,7 +31,7 @@ class AuthFooter extends Component {
             alt='facebook'
             onMouseOver={ (e) => (e.currentTarget.src = facebookImg) }
             onMouseOut={ (e) => (e.currentTarget.src = facebookImgBlue) }
-            onClick={ () => AuthUtil.authVia('facebook', this.props.location.pathname) }
+            onClick={ () => AuthUtil.authVia('facebook', this.props.location.pathname) } // TODO: refactor to use redux path.
           />
           <img
             className='youtube'
@@ -38,7 +39,7 @@ class AuthFooter extends Component {
             alt='youtube'
             onMouseOver={ (e) => (e.currentTarget.src = youtubeImg) }
             onMouseOut={ (e) => (e.currentTarget.src = youtubeImgBlue) }
-            onClick={ () => AuthUtil.authVia('google', this.props.location.pathname) }
+            onClick={ () => AuthUtil.authVia('google', this.props.location.pathname) } // TODO: refactor to use redux path.
           />
         </div>
       </div>

@@ -5,6 +5,7 @@ import {ProfileService} from '../../../../services';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AccountActions} from '../../../../actions';
+import {UploadFileTypes} from '../../../../constants';
 
 class ProfilePictureUpload extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class ProfilePictureUpload extends Component {
   onChooseFile = (event) => {
     const file = event.target.files[0];
 
-    if (!!file && this.checkMimeType(file) && this.maxSelectFile(file)) {
+    if (!!file && this.isValidImage(file)) {
       this.onUpload(file);
     }
   };
@@ -38,20 +39,8 @@ class ProfilePictureUpload extends Component {
       });
   };
 
-  maxSelectFile(file) {
-    const err = ValidationUtil.fileSize(file);
-
-    if (err) {
-      !!this.props.error ? this.props.error(err) : console.log(err);
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  // Return true if pass
-  checkMimeType(file) {
-    const err = ValidationUtil.imageType(file);
+  isValidImage = (file) => {
+    const err = ValidationUtil.imageUpload(file, UploadFileTypes.IMAGE.PROFILE);
 
     if (err) {
       !!this.props.error ? this.props.error(err) : console.log(err);

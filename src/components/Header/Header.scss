@@ -5,72 +5,67 @@
   flex-direction: row;
   justify-content: flex-start;
   position: relative;
-  height: 110px;
+  height: $height__header;
   margin: auto;
-  color: $white;
   background-image: linear-gradient($blue-darkest, $blue);
-}
 
-.headerlogo {
-  margin: auto;
-}
+  &__divider {
+    height: 5px;
+    margin: auto;
 
-.headerimage {
-  max-width: 100%;
-  height: auto;
-}
+    &-top {
+      @extend .header__divider;
 
-.header-center {
-  display: flex;
-  flex: 0 1 auto;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
+      background-image: radial-gradient($white, $black);
+    }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  margin-right: 50px;
-  margin-left: auto;
-}
+    &-bottom {
+      @extend .header__divider;
 
-.header-left {
-  display: flex;
-  align-items: center;
-  margin-right: auto;
-  margin-left: 50px;
-}
-
-.header-link {
-  margin-right: 12px;
-  font-size: 28px;
-  color: $blue-light;
-  text-decoration: none;
-  cursor: pointer;
-
-  &__active {
-    color: $white;
-  }
-}
-
-.header-link:hover {
-  color: $white;
-}
-
-.header-divider {
-  height: 5px;
-  margin: auto;
-
-  &__top {
-    @extend .header-divider;
-
-    background-image: radial-gradient($white, $black);
+      background-image: linear-gradient($gray, $white);
+    }
   }
 
-  &__bottom {
-    @extend .header-divider;
+  &__image {
+    max-width: 100%;
+    height: auto;
+  }
 
-    background-image: linear-gradient($gray, $white);
+  &__link {
+    margin-right: 12px;
+    font-size: 28px;
+    color: $blue-light;
+    text-decoration: none;
+    cursor: pointer;
+
+    &__active, &:hover {
+      color: $white;
+    }
+  }
+
+  &__logo {
+    margin: auto;
+  }
+
+  &--left {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: 50px;
+  }
+
+  &--center {
+    display: flex;
+    flex: 0 1 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--right {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    margin-left: auto;
   }
 }

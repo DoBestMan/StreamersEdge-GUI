@@ -99,7 +99,6 @@
       &-icon-left, &-icon-right, &-icon-both {
         @extend .custom-input-basic__mui;
         // Font size is set within the MUI.css to override MUI style default of 16px.
-        color: $white;
       }
     }
 

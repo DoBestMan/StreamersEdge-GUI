@@ -18,14 +18,14 @@ class Header extends Component {
 
   render() {
     let logButton = (
-      <span onClick={ this.openLoginModal } className='header-link'>
+      <span onClick={ this.openLoginModal } className='header__link'>
         {translate('header.login')}
       </span>
     );
 
     if (this.props.isLoggedIn) {
       logButton = (
-        <span onClick={ this.props.logout } className='header-link'>
+        <span onClick={ this.props.logout } className='header__link'>
           {translate('header.logout')}
         </span>
       );
@@ -34,27 +34,27 @@ class Header extends Component {
     return (
       <>
         <div className='header'>
-          <div className='header-left'>
+          <div className='header--left'>
             <img src={ menuIcon } alt='menuIcon' />
-            <NavLink exact className='header-link' activeClassName='' to=''>
+            <NavLink exact className='header__link' activeClassName='' to=''>
               {translate('header.menu')}
             </NavLink>
-            <NavLink exact className='header-link' activeClassName='' to=''>
+            <NavLink exact className='header__link' activeClassName='' to=''>
               {translate('header.popular')}
             </NavLink>
           </div>
-          <div className='header-center'>
-            <img className='headerimage' src={ HeaderLogo } alt='Header' />
+          <div className='header--center'>
+            <img className='header__image' src={ HeaderLogo } alt='Header' />
           </div>
-          <div className='header-right'>
-            <NavLink exact className='header-link' activeClassName='header-link__active' to={ Routes.SIGN_UP }>
+          <div className='header--right'>
+            <NavLink exact className='header__link' activeClassName='header__link--active' to={ Routes.SIGN_UP }>
               {translate('header.signup')}
             </NavLink>
             {logButton}
             <img src={ this.props.path === '/login' ? loginIconActive : loginIcon } alt='avatar' />
           </div>
         </div>
-        <div className='header-divider__top' />
+        <div className='header__divider-top' />
       </>
     );
   }

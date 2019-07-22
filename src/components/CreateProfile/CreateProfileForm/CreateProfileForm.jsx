@@ -29,7 +29,7 @@ class CreateProfileForm extends Component {
 
   componentDidMount() {
     // Redirect Check
-    if (this.props.location.search) {
+    if (this.props.location.search) { // TODO: refactor use redux path
       this.setState({
         currentStep: 2
       });

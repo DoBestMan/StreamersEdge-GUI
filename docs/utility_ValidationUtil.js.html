@@ -44,7 +44,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AppPrivateActions.html">AppPrivateActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li></ul><h3>Global</h3><ul><li><a href="global.html#translate">translate</a></li></ul></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li></ul><h3>Global</h3><ul><li><a href="global.html#translate">translate</a></li></ul></div>
                     </nav>
                 </div>
             </div>
@@ -64,21 +64,17 @@
         <article>
             <pre class="prettyprint source linenums"><code>import {translate} from './GeneralUtils';
 import Config from '../utility/Config';
+import {UploadFileTypes} from '../constants';
 
-/**
- * Auth Util functions.
- *
- * @namespace ValidationUtil
- */
-const ValidationUtil = {
+const PrivateValidationUtils = {
   /**
    * Validate a Streamers Edge username.
    *
    * @param {string} value - Value to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
-  username(value) {
+  seUsername(value) {
     var label = void 0;
     var ref = void 0;
     var prefix = void 0;
@@ -138,12 +134,12 @@ const ValidationUtil = {
    *
    * @param {string} email - Email to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   email(email) {
     let regex = /^(([^&lt;>()[\]\\.,;:\s@\"]+(\.[^&lt;>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if(!regex.test(email)) {
+    if (!regex.test(email)) {
       return translate('errors.email.invalid');
     } else {
       return null;
@@ -155,9 +151,9 @@ const ValidationUtil = {
    *
    * @param {string} password - String to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
-  password(password) {
+  sePassword(password) {
     let length = password.length;
     let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[.@$!%^*#])[A-Za-z\d.@$!%^*#]{4,}$/; //(.@!#$%^*)
     let error = null;
@@ -166,7 +162,7 @@ const ValidationUtil = {
       error = translate('errors.password.lengthRequirement');
     }
 
-    if(!regex.test(password)) {
+    if (!regex.test(password)) {
       error = translate('errors.password.requires');
     }
 
@@ -178,17 +174,17 @@ const ValidationUtil = {
    *
    * @param {string} searchText - Text ti validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   search(searchText) {
     let length = searchText.length;
     let error = null;
 
-    if(length &lt; 3 || length > 100) {
+    if (length &lt; 3 || length > 100) {
       error = translate('errors.search.lengthRequirement');
     }
 
-    if(length === 0) {
+    if (length === 0) {
       error = translate('errors.password.noBlank');
     }
 
@@ -200,10 +196,10 @@ const ValidationUtil = {
    *
    * @param {number} number - Passed in variable to check is a number type.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   number(number) {
-    if(typeof number !== 'number') {
+    if (typeof number !== 'number') {
       return translate('errors.general.beNumber');
     }
   },
@@ -213,7 +209,7 @@ const ValidationUtil = {
    *
    * @param {string} decimalInt - Variable to validate is a number.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   decimalInteger(decimalInt) {
     var regexp = /^[0-9]+([,.][0-9]+)?$/g;
@@ -228,7 +224,7 @@ const ValidationUtil = {
    *
    * @param {Date} date - Variable to validate.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   startDate(date) {
     const today = new Date();
@@ -251,7 +247,7 @@ const ValidationUtil = {
    * @param {Date} startDate - Date one.
    * @param {Date} endDate - Date two.
    * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @memberof PrivateValidationUtil
    */
   endDate(startDate, endDate) {
     let error = null;
@@ -268,17 +264,43 @@ const ValidationUtil = {
   },
 
   /**
-   * Validate a string is a username.
+   * Validate an uploaded file's type.
    *
-   * @deprecated
-   * @param {string} string - String to validate.
-   * @returns {string} Error if one is found.
-   * @memberof ValidationUtil
+   * @param {Blob} file - File to validate, must be jpeg or png.
+   * @returns {boolean} An error string if failed, null if passed.
+   * @memberof PrivateValidationUtil
    */
-  inviteGamer(string) {
-    return this.Username(string);
+  isImageType(file) {
+    return (Config.imageUpload.validTypes.every((type) => file.type !== type))
+      ? translate('errors.profile.invalidImageType')
+      : null;
   },
 
+  /**
+   * Validate an uploaded file's size.
+   *
+   * @param {Blob} file - File to validate.
+   * @param {string} type - Type of file to validate.
+   * @returns {string} An error string if failed, null if passed.
+   * @memberof PrivateValidationUtil
+   */
+  fileSize(file, type) {
+    switch (type) {
+      case UploadFileTypes.IMAGE.PROFILE:
+        return (file.size > Config.imageUpload.sizeLimit)
+          ? translate('errors.profile.invalidImageSize')
+          : null;
+      // no default
+    }
+  }
+};
+
+/**
+ * Auth Util functions.
+ *
+ * @namespace ValidationUtil
+ */
+const ValidationUtil = {
   /**
    * Validate a bounty is a decimal integer.
    *
@@ -287,7 +309,7 @@ const ValidationUtil = {
    * @memberof ValidationUtil
    */
   bounty(number) {
-    return this.DecimalInteger(number);
+    return PrivateValidationUtils.decimalInteger(number);
   },
 
   /**
@@ -298,29 +320,87 @@ const ValidationUtil = {
    * @memberof ValidationUtil
    */
   challengeConditions(number) {
-    return this.DecimalInteger(number);
+    return PrivateValidationUtils.decimalInteger(number);
   },
 
   /**
-   * Validate an uploaded file's type.
-   *
-   * @param {Blob} file - File to validate, must be jpeg or png.
-   * @returns {boolean} An error string if failed, null if passed.
-   * @memberof ValidationUtil
-   */
-  imageType(file) {
-    return (Config.imageUpload.validTypes.every((type) => file.type !== type)) ? translate('errors.profile.imageTypeUnsupported') : null;
-  },
-
-  /**
-   * Validate an uploaded file's size.
+   * Checks if the profile image to upload is valid depending on the use case defined by `type`.
    *
    * @param {Blob} file - File to validate.
-   * @returns {boolean} An error string if failed, null if passed.
+   * @param {string} type - Type of file to validate.
+   * @returns {string}
    * @memberof ValidationUtil
    */
-  fileSize(file) {
-    return (file.size > Config.imageUpload.sizeLimit) ? translate('errors.profile.maxFileSize') : null;
+  imageUpload(file, type) {
+    const validType = PrivateValidationUtils.isImageType(file);
+    const validSize = PrivateValidationUtils.fileSize(file, type);
+    let err;
+
+    // The type is invalid but the size is valid.
+    if (!!validType &amp;&amp; !validSize) {
+      err = validType;
+    }
+
+    // The size is invalid but the type is valid.
+    if (!!validSize &amp;&amp; !validType) {
+      err = validSize;
+    }
+
+    // Both are invalid.
+    if (!!validType &amp;&amp; !!validSize) {
+      err = translate('errors.profile.invalidTypeAndSize');
+    }
+
+    if (!validType &amp;&amp; !validSize) {
+      err = null;
+    }
+
+    return err;
+  },
+
+  /**
+   * Validate a string is a username.
+   *
+   * @deprecated
+   * @param {string} string - String to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  inviteGamer(string) {
+    return PrivateValidationUtils.username(string);
+  },
+
+  /**
+   * Validate a Streamers Edge password.
+   *
+   * @param {string} pass - Password from form to validate.
+   * @returns {string} - Error if one is found.
+   * @memberof ValidationUtil
+   */
+  sePassword(pass) {
+    return PrivateValidationUtils.sePassword(pass);
+  },
+
+  /**
+   * Validate an email.
+   *
+   * @param {string} email - Email to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  email(email) {
+    return PrivateValidationUtils.email(email);
+  },
+
+  /**
+   * Validate a Streamers Edge username.
+   *
+   * @param {string} string - Value to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  seUsername(string) {
+    return PrivateValidationUtils.seUsername(string);
   }
 };
 
@@ -338,7 +418,7 @@ export default ValidationUtil;</code></pre>
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Jul 18 2019 15:23:15 GMT-0300 (ADT)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri Jul 19 2019 16:30:51 GMT-0300 (ADT)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>

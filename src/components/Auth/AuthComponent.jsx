@@ -3,7 +3,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {NavigateActions} from '../../actions';
-import Config from '../../utility/Config';
+import {Config} from '../../utility';
 
 export function requireAuthentication(Component) {
   class AuthenticatedComponent extends React.Component {
@@ -16,7 +16,7 @@ export function requireAuthentication(Component) {
     }
 
     checkAuth() {
-      if (!this.props.isLoggedIn && !Config.requireAuthentication) {
+      if (!this.props.isLoggedIn && !!Config.requireAuthentication) {
         let redirectAfterLogin = this.props.location.pathname;
         this.props.navigateToSignIn(redirectAfterLogin);
       }

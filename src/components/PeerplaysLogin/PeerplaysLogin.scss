@@ -13,7 +13,6 @@
     font-family: 'Lato', sans-serif;
     font-weight: 50;
     font-size: 30px;
-    color: $white;
   }
 
   &__container {
@@ -40,7 +39,6 @@
     width: 25%;
     margin: 0;
     margin-left: 50px;
-    color: $white;
 
     &-wrapper {
       flex-direction: row-reverse;
@@ -57,7 +55,6 @@
 .btn-back {
   width: 15%;
   margin: 0;
-  color: $white;
 }
 
 .label {
@@ -72,18 +69,9 @@
 
 .signup-link {
   width: 50%;
-
-  &__text {
-    color: $white;
-  }
 }
 
 .loader {
   width: 24px;
   height: 24px;
-}
-
-#content {
-  width: 100%;
-  height: 100%;
 }

@@ -30,7 +30,7 @@ class ResetForm extends Component {
   }
 
   componentDidMount() {
-    if (this.props.location.search) {
+    if (this.props.location.search) { // TODO: refactor use redux path
       const token = querystring.parse(this.props.location.search).token;
 
       if (token) {
@@ -71,7 +71,7 @@ class ResetForm extends Component {
       });
     } else {
       this.setState({
-        passwordErr: ValidationUtil.password(this.state.password)
+        passwordErr: ValidationUtil.sePassword(this.state.password)
       });
     }
   };

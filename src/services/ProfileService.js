@@ -1,6 +1,5 @@
 import axios from 'axios';
-import Config from '../utility/Config';
-import {StorageUtil} from '../utility';
+import {Config, StorageUtil} from '../utility';
 
 const ApiHandler = axios.create({withCredentials: true});
 

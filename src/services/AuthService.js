@@ -1,6 +1,6 @@
 import axios from 'axios';
 import querystring from 'query-string';
-import Config from '../utility/Config';
+import {Config} from '../utility';
 
 const ApiHandler = axios.create({withCredentials: true});
 

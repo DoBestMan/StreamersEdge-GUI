@@ -2,10 +2,25 @@
 @import './colors';
 @import './mixins-functions';
 
-.txt {
-  &--white {
-    color: $white;
-  }
+* {
+  color: $white;
+  scrollbar-color: $darker-gray transparent;
+}
+
+html, body {
+  @include bg-gradient;
+
+  height: 100%;
+  margin: 0;
+}
+
+.body {
+  height: $height__body;
+}
+
+#content {
+  min-height: $height__content;
+  white-space: pre-line;
 }
 
 /* Change Autocomplete styles in Chrome*/
@@ -22,10 +37,6 @@ select:-webkit-autofill:focus {
   box-shadow: 0 0 0 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
   -webkit-text-fill-color: $white;
-}
-
-* {
-  scrollbar-color: $darker-gray transparent;
 }
 
 ::-webkit-scrollbar {

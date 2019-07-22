@@ -27,6 +27,6 @@ module.exports = {
     'cleverLinks': false,
     'monospaceLinks': false,
     'name': 'Streamers Edge Front End Documentation',
-    'footerText': 'Peerplays Labs©'
+    'footerText': 'Peerplays Global©'
   }
 };

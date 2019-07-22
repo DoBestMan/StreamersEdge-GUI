@@ -12,6 +12,7 @@ import RootModal from './components/RootModal';
 import routes from './routes';
 import {RouteConstants} from './constants';
 import {NavigateActions} from './actions';
+import Footer from './components/Footer';
 import {TokenUtil} from './utility';
 
 const styleNode = document.createComment('insertion-point-jss');
@@ -58,7 +59,10 @@ class App extends Component {
         <ConnectedRouter history={ this.props.history }>
           <Header/>
           <RootModal/>
-          {routes}
+          <div className='body'>
+            {routes}
+          </div>
+          <Footer/>
         </ConnectedRouter>
       </JssProvider>
     );

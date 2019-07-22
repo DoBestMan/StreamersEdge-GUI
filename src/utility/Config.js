@@ -1,3 +1,5 @@
+import {version} from '../../package.json';
+
 /**
  * @namespace Config
  */
@@ -7,6 +9,12 @@ const Config = {
    * @memberof Config
    */
   isDev: true,
+  /**
+   * The current version of the app pulled from package.json.
+   *
+   * @type {string}
+   */
+  version,
   /**
    * The root endpoint to hit for development.
    *
