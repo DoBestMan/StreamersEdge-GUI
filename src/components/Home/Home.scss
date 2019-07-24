@@ -1,3 +1,9 @@
+@import '../../assets/styles/common';
+
 .home {
-  margin: 20px 70px 30px;
+  margin: $base-margins;
+
+  .lorem {
+    margin: $base-margins;
+  }
 }

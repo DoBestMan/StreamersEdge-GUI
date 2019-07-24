@@ -8,5 +8,8 @@ export default {
   CALLBACK: '/callback',
   PEERPLAYS: '/peerplays',
   PREFERENCES: '/preferences',
-  UPDATE_PROFILE: '/update-profile'
+  UPDATE_PROFILE: '/update-profile',
+  STREAMS: '/streams',
+  CATEGORIES: '/categories',
+  CHALLENGES: '/challenges'
 };

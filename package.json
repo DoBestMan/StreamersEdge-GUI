@@ -15,8 +15,15 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors"
   },
-  "author": "",
+  "author": "Peerplays Labs",
   "license": "ISC",
+  "browserslist": [
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "not ie < 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
@@ -64,6 +71,7 @@
     "react-router": "^5.0.0",
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.3",
+    "reselect": "^4.0.0",
     "sass-loader": "^7.1.0",
     "sinon": "^7.3.2",
     "standard-version": "^5.0.2",

@@ -17,21 +17,4 @@
     font-weight: 50;
     font-size: 30px;
   }
-
-  &__divider {
-    height: 7px;
-    margin: auto;
-
-    &-top {
-      @extend .register__divider;
-
-      background-image: linear-gradient($white, $gray);
-    }
-
-    &-bottom {
-      @extend .register__divider;
-
-      background-image: linear-gradient($gray, $white);
-    }
-  }
 }

@@ -5,23 +5,6 @@ body {
 }
 
 .profile {
-  &-divider {
-    height: 7px;
-    margin: auto;
-
-    &__top {
-      @extend .profile-divider;
-
-      background-image: linear-gradient($white, $gray);
-    }
-
-    &__bottom {
-      @extend .profile-divider;
-
-      background-image: linear-gradient($gray, $white);
-    }
-  }
-
   &-form {
     display: flex;
     flex-direction: column;

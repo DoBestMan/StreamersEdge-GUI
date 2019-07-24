@@ -9,6 +9,20 @@ import {Dispatch} from 'redux';
  */
 class NavigateActions {
   /**
+   * Redirect the browser to another path.
+   *
+   * @static
+   * @param {string} path - Path to redirect to.
+   * @returns {Dispatch}
+   * @memberof NavigateActions
+   */
+  static navigate(path) {
+    return (dispatch) => {
+      dispatch(push(path));
+    };
+  }
+
+  /**
    * Since we render the Home component if no existing URL/Route exists, we cleanup the browser address bar.
    * Alter the URl to be the root. Used when a manually entered URL by the end user does not exist.
    *

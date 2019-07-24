@@ -12,8 +12,8 @@ import RootModal from './components/RootModal';
 import routes from './routes';
 import {RouteConstants} from './constants';
 import {NavigateActions} from './actions';
-import Footer from './components/Footer';
 import {TokenUtil} from './utility';
+import Footer from './components/Footer';
 
 const styleNode = document.createComment('insertion-point-jss');
 document.head.insertBefore(styleNode, document.head.firstChild);

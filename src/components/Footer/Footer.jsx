@@ -6,7 +6,8 @@ class Footer extends Component {
   render() {
     return(
       <footer className='footer'>
-        {translate('copyright')}
+        <div className='divider-radial'/>
+        <span className='footer__copyright'>{translate('copyright')}</span>
         <div className='app__version'>{Config.version}</div>
       </footer>
     );

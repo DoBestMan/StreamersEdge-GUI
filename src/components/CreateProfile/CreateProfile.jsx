@@ -42,7 +42,7 @@ class CreateProfile extends Component {
             <CreateProfileForm changeStep={ this.changeStep } currentStep={ this.state.currentStep } location={ this.props.location } />
           </div>
         </div>
-        <div className='profile-divider__bottom' />
+        <div className='divider-linear__bottom' />
         <div className='profile-footer'>{this.renderStep()}</div>
       </>
     );

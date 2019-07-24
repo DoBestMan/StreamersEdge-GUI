@@ -59,7 +59,7 @@ class Preferences extends Component {
       <div className='preferences'>
         <div className='preferences__header'>
           <img className='preferences__image' src={ preferences } alt=''/>
-          <p> {translate('preferences.header')}</p>
+          <p> {translate('preferences.h1')}</p>
         </div>
 
         <InvitesForm inviteType={ inviteType } userWhitelist={ userWhitelist } userList={ userList } errors={ errors }

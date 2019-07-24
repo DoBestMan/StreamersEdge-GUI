@@ -136,7 +136,7 @@ detect(DEFAULT_PORT).then((port) => {
 
   if (isInteractive) {
     clearConsole();
-    
+
     function changePort(answer) {
       if (answer.newPort) {
         console.log(chalk.green('Using port: ' + port + ' instead.'));

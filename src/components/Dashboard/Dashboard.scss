@@ -1,0 +1,55 @@
+@import '../../assets/styles/common';
+
+.dashboard {
+  min-width: 100%;
+
+  &__carousel {
+    height: 620px;
+    background: $dashboard__carousel-gradient;
+  }
+
+  &__header {
+    display: flow-root;
+    width: 100%;
+    line-height: $dashboard__header-height;
+    background: linear-gradient($blue, $blue-darkest);
+
+    &-txt {
+      margin-left: 87px;
+      font-family: $lato;
+      font-size: $dashboard__header;
+
+      .streams, .categories, .challenges {
+        font-family: $lato;
+        font-size: $dashboard__header-category;
+      }
+
+      .streams {
+        color: $dashboard__header-streams;
+      }
+
+      .categories {
+        color: $dashboard__header-main;
+      }
+
+      .challenges {
+        color: $dashboard__header-challenges;
+      }
+    }
+  }
+
+  &__streams, &__categories, &__challenges {
+    height: 431px;
+    background: $dashboard__recommend-gradient;
+  }
+
+  &__view-more {
+    display: block;
+    float: right;
+    margin-right: 87px;
+
+    &-img {
+      vertical-align: middle;
+    }
+  }
+}

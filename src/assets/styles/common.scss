@@ -1,7 +1,7 @@
-@import './layout';
 @import './colors';
-@import './fontSizes';
 @import './fonts';
+@import './fontSizes';
+@import './layout';
 @import './mixins-functions';
 
 * {
@@ -12,17 +12,47 @@
 html, body {
   @include bg-gradient;
 
+  width: 100vw;
+  min-width: 100%;
   height: 100%;
   margin: 0;
 }
 
 .body {
+  display: inline-flex;
+  min-width: 100%;
   height: $height__body;
+  min-height: 100vh;
 }
 
 #content {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 100%;
   min-height: $height__content;
   white-space: pre-line;
+}
+
+.divider {
+  height: 5px;
+
+  &-radial {
+    @extend .divider;
+
+    background-image: radial-gradient($white, $black);
+  }
+
+  &-linear {
+    height: 7px;
+
+    &--top {
+      background-image: linear-gradient($white, $gray);
+    }
+
+    &--bottom {
+      background-image: linear-gradient($gray, $white);
+    }
+  }
 }
 
 /* Change Autocomplete styles in Chrome*/

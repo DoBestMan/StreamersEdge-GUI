@@ -1,11 +1,13 @@
-import AppActions from './AppActions';
-import NavigateActions from './NavigateActions';
 import AccountActions from './AccountActions';
+import AppActions from './AppActions';
 import ModalActions from './ModalActions';
+import NavigateActions from './NavigateActions';
+import StreamActions from './StreamActions';
 
 export {
-  AppActions,
-  NavigateActions,
   AccountActions,
-  ModalActions
+  AppActions,
+  ModalActions,
+  NavigateActions,
+  StreamActions
 };

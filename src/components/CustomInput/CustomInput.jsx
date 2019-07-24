@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/valid-types */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {FormControl, TextField} from '@material-ui/core';
@@ -5,34 +6,45 @@ import {withStyles} from '@material-ui/core/styles';
 import styles from './MUI.css';
 
 /**
- * You may optionally provide some image files:
- * @iconLeft {Image}
- * @iconLeftActive {Image}
- * @iconRight {Image}
- * @iconRightActive {Image}
+ * @enum {margin}
+ */
+const margin = {
+  NONE: 'none',
+  DENSE: 'dense',
+  NORMAL: 'normal'
+};
+
+/**
+ * @private
+ * You may optionally provide some image files.
+ *
+ * @param {Image} iconLeft - The default state of the left side icon.
+ * @param {Image} iconLeftActive - The active state of the left side icon.
+ * @param {Image} iconRight - The default state of the right side icon.
+ * @param {Image} iconRightActive - The active state of the right side icon.
  * Providing the left or right without an active version will result in the active image being supplemented with the provided image.
  *
- * You may provide a theme to use
- * @theme {String}: ie: `basic`, `login`, `minimal`.
+ * You may provide a theme to use.
+ * @param {string} theme - Ie: `basic`, `login`, `minimal`.
  * `basic` is the default.
  *
  * Other optional props, some are required depending on others.
- * @placeholder {string}
- * @handleChange {function}: Callback handler for onChange event.
- * @handleRightIconClick {function}: Callback handler for onClick event for the icon-right.
- * @hasActiveGlow {bool}: Default `false`. Sets the style that controls whether or not the elements will have a glow on "active" state.
- * @required {bool}: If true, the label is displayed as required and the input element` will be required.
- * @multiline {bool}: If true, a textarea element will be rendered instead of an input.
- * @rows {string | number}: Number of rows to display when multiline option is set to true.
- * @rowsMax {string | number}: Maximum number of rows to display when multiline option is set to true.
- * @name {string}: Name attribute of the input element.
- * @autoFocus {bool}: If true, the input element will be focused during the first mount.
- * @fullWidth {bool}: Default `true`. If true, the input will take up the full width of its container.
- * @margin {enum: `none` | `dense` | `normal`}: Default `normal`. If dense or normal, will adjust vertical spacing of this and contained components.
- * @type {string}: Default `string`. Type of the input element. It should be a valid HTML5 input type.
+ * @param {string} placeholder - Placeholder text.
+ * @param {Function} handleChange - Callback handler for onChange event.
+ * @param {Function} handleRightIconClick - Callback handler for onClick event for the icon-right.
+ * @param {boolean} hasActiveGlow - Default `false`. Sets the style that controls whether or not the elements will have a glow on "active" state.
+ * @param {boolean} required - If true, the label is displayed as required and the input element` will be required.
+ * @param {boolean} multiline - If true, a textarea element will be rendered instead of an input.
+ * @param {string | number} rows - Number of rows to display when multiline option is set to true.
+ * @param {string | number} rowsMax - Maximum number of rows to display when multiline option is set to true.
+ * @param {string} name - Name attribute of the input element.
+ * @param {boolean} autoFocus - If true, the input element will be focused during the first mount.
+ * @param {boolean} fullWidth - Default `true`. If true, the input will take up the full width of its container.
+ * @param {margin} margin - Default `normal`. If dense or normal, will adjust vertical spacing of this and contained components.
+ * @param {string} type - Default `string`. Type of the input element. It should be a valid HTML5 input type.
  *
  * @class CSSInput
- * @extends {Component}
+ * @augments {Component}
  */
 class CustomInput extends Component {
   constructor(props) {

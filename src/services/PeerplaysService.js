@@ -84,10 +84,10 @@ class PeerplaysService {
       .instance(connectionString, true)
       .init_promise
       .then(() => {
-        console.log(`%cConnected to: ${connectionString}.`, 'background: #222 color: green; font-size: large');
+        console.info(`%cConnected to: ${connectionString}.`, 'background: #222 color: green; font-size: large');
       })
       .catch(() => {
-        console.error(`%cConnection to: ${connectionString} failed.`, 'background: #222; color: red; font-size: large');
+        console.info(`%cConnection to: ${connectionString} failed.`, 'background: #222; color: red; font-size: large');
 
         return Promise.reject();
       });
@@ -114,7 +114,6 @@ class PeerplaysService {
           return wsConnectionManager
             .sortNodesByLatency()
             .then((list) => {
-              console.log(list);
               return list;
             })
             .then((list) => {
@@ -157,7 +156,7 @@ class PeerplaysService {
   closeConnectionToBlockchain() {
     // Close connection
     Apis.close();
-    console.log('Disconnected from blockchain.');
+    console.info('Disconnected from blockchain.');
 
     // Reset the index if we've gone past the end.
     if (this.blockchainUrlIndex >= this.peerplaysURLs.length) {

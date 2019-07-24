@@ -33,6 +33,9 @@ export const translationObject = {
         invalidImageSize: 'Image must be less than 1 MB.',
         invalidTypeAndSize: 'Image must be JPEG or PNG and be less than 1 MB.'
       },
+      streams: {
+        addError: 'Could not retrieve stream %{id}'
+      },
       general: {
         beNumber: 'must be a number',
         beDecimalOrInt: 'must be either a decimal or integer'
@@ -102,6 +105,22 @@ export const translationObject = {
         newPassword: 'New password',
         confirmPassword: 'Confirm password',
         noMatch: 'Passwords do not match.'
+      }
+    },
+    dashboard: {
+      featured: {
+        desc: 'Streamers Edge Rivals brings streamers and esports together! Competitors in the Streamers Edge Rivals Fortnite Showdown will compete against each other numerous game modes: FFA, ' +
+        'Skirmish and Horde mode.'
+      },
+      recommended: 'Recommended',
+      streams: 'Live Streams',
+      categories: 'Categories',
+      challenges: 'Challenges'
+    },
+    previewCard: {
+      status: {
+        live: 'LIVE',
+        join: 'JOIN'
       }
     },
     copyright: 'Peerplays Global©',

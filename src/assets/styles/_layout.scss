@@ -1,4 +1,30 @@
 $height__header: 110px;
-$height__footer: 20px;
-$height__body: calc(100% - 20px);
+$height__footer: 74px;
+$height__body: calc(100% - 74px); // 100 percent minus the footer height.
 $height__content: 100%;
+
+// pc = preview card.
+$pc-w: 977px;
+$pc-h: 474px;
+$pc-status-w: 170.775px;
+$pc-status-h: 67.018px;
+$pc-status-top: 54.27px;
+
+$pc-desc-w: 357.686px;
+$pc-desc-h: 474px;
+$pc-desc-content-w: 300px;
+$pc-desc-content-h: 415px;
+$pc-desc-content-description-w: 288.55px;
+$pc-desc-content-description-h: 266.875px;
+$pc-desc-content-profile-h: 113.2px;
+$pc-desc-content-profile-data-h: 75px;
+$pc-desc-content-margin-top-left: 31.41px;
+
+$pc-header-h: calc(28.43px - 3.35px);
+$pc-header-viewers-h: 21.77px;
+$pc-header-viewers-w: 48.37px;
+
+$dashboard__header-height: 71.078px;
+$dashboard__header-txt-pad: $dashboard__header-height / 2;
+
+$base-margins: 20px 70px 30px;

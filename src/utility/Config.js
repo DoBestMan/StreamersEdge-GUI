@@ -1,5 +1,8 @@
 import {version} from '../../package.json';
 
+const isDev = true;
+const [devApiRoute, prodApiRoute] = ['http://localhost:3000/', ''];
+
 /**
  * @namespace Config
  */
@@ -8,7 +11,7 @@ const Config = {
    * @type {boolean}
    * @memberof Config
    */
-  isDev: true,
+  isDev: isDev,
   /**
    * The current version of the app pulled from package.json.
    *
@@ -21,21 +24,22 @@ const Config = {
    * @type {string}
    * @memberof Config
    */
-  devApiRoute: 'http://localhost:3000/',
+  devApiRoute: devApiRoute,
   /**
    * The root endpoint to hit for production.
    *
    * @type {string}
    * @memberof Config
    */
-  prodApiRoute: '',
+  prodApiRoute: prodApiRoute,
+  apiRoute: isDev ? devApiRoute : prodApiRoute,
   /**
    * Toggles the requirement for authenticated routes needing a logged in user.
    *
    * @type {boolean}
    * @memberof Config
    */
-  requireAuthentication: true,
+  requireAuthentication: false,
   /**
    * List of platforms supported for OAuth.
    *

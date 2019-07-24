@@ -44,12 +44,12 @@
   &__textbox {
     width: 100px;
     margin: 0 5px;
-    font-family: $myriad-pro;
+    font-family: $myriad-pro--bold;
     font-size: $preferencesLabel;
   }
 
   &__text {
-    font-family: $myriad-pro;
+    font-family: $myriad-pro--bold;
     font-size: $preferencesBountyText;
   }
 }

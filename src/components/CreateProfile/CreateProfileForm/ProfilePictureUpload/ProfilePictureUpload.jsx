@@ -35,7 +35,7 @@ class ProfilePictureUpload extends Component {
         StorageUtil.set('se-user', JSON.stringify(profile));
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -43,7 +43,7 @@ class ProfilePictureUpload extends Component {
     const err = ValidationUtil.imageUpload(file, UploadFileTypes.IMAGE.PROFILE);
 
     if (err) {
-      !!this.props.error ? this.props.error(err) : console.log(err);
+      !!this.props.error ? this.props.error(err) : console.error(err);
       return false;
     } else {
       return true;

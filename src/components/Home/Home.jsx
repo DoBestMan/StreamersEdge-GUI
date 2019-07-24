@@ -23,7 +23,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <div className='home'>{translate('lorem')}</div>
+        <div className='home'><div className='lorem'>{translate('lorem')}</div></div>
       </>
     );
   }

@@ -54,7 +54,7 @@ class Header extends Component {
             <img src={ this.props.path === '/login' ? loginIconActive : loginIcon } alt='avatar' />
           </div>
         </div>
-        <div className='header__divider-top' />
+        <div className='divider-radial' />
       </>
     );
   }

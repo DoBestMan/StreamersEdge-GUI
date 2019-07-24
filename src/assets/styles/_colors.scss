@@ -17,10 +17,28 @@ $blue-dark-two: rgb(3, 22, 46); // 03162e
 $blue-darkest: rgb(6, 0, 42); // 06002a
 $red: rgb(255, 0, 0); // ff0000
 $white: rgb(255, 255, 255); // ffffff
+
+// Component specific colors.
 $radio-button-green: rgb(6, 254, 3);// #06fe03
-$preferencesStartGradient: rgb(0, 18, 93);//#00125d
-$preferencesFinishGradient: rgb(7, 1, 46);//#07012e
+
+$preferencesStartGradient: rgb(0, 18, 93); // 00125d
+$preferencesFinishGradient: rgb(7, 1, 46); // 07012e
+
 $input-blue: rgb(0, 0, 51); // 003
 $input-blue-glow: rgba(51, 153, 255, 0.23);
 $input-green: rgb(67, 235, 2); // 43eb02
 $input-green-glow: rgba(67, 235, 2, 0.23);
+
+$pc-desc-bg-clr: linear-gradient(rgba(0, 22, 104, 1) 0.04%, rgba(1, 17, 91, 1) 5.73%, rgba(3, 10, 69, 1) 19.68%, rgba(3, 9, 67, 1) 26.64%, rgba(3, 10, 68, 1) 27.34%, rgba(5, 4, 54, 1) 42.42%, rgba(6, 1, 45, 1) 57.04%, rgba(6, 0, 42, 1) 75.74%);
+
+$pc-header-viewers-border-clr: rgb(0, 102, 153); // 006699
+$pc-header-viewers-content-clr: rgb(0, 204, 255); // 00ccff
+$pc-header-viewers-bg-clr: rgb(0, 51, 153); // 003399
+$pc-header-bg-clr: rgb(10, 21, 74); // 0a154a
+
+$dashboard__carousel-gradient: linear-gradient(rgb(0, 70, 191), rgb(0, 48, 135), rgb(0, 29, 85));
+$dashboard__recommend-gradient: linear-gradient(rgba(0, 70, 191, 1), rgba(0, 48, 135, 1), rgba(0, 29, 85, 1));
+
+$dashboard__header-main: rgb(61, 168, 244); // 3da8f4
+$dashboard__header-streams: $red;
+$dashboard__header-challenges: rgb(0, 255, 0); // 00ff00

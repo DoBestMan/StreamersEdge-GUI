@@ -23,8 +23,6 @@ const AuthUtil = {
     StorageUtil.set('se-platform', platform);
     StorageUtil.set('se-page', page);
 
-    console.log('Redirecting from - ' + page);
-
     if (supportedPlatforms.includes(platform.toLowerCase())) {
       let authUrl;
 

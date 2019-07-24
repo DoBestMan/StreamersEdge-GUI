@@ -1,0 +1,6 @@
+export default {
+  MAIN: 'MAIN',
+  STREAMS: 'STREAMS',
+  CATEGORIES: 'CATEGORIES',
+  CHALLENGES: 'CHALLENGES'
+};

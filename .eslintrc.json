@@ -80,6 +80,9 @@
     "jsdoc/valid-types": "warn" // Recommended
   },
   "settings": {
-    "import/resolver": "webpack"
+    "import/resolver": "webpack",
+    "jsdoc": {
+      "ignorePrivate": true
+    }
   }
 }

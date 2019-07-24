@@ -1,9 +1,18 @@
 @import '../../assets/styles/common.scss';
 
 .footer {
+  @include bg-gradient;
+
+  bottom: $height__footer;
+  left: 0;
+  width: 100%;
   height: $height__footer;
-  margin-top: -$height__footer;
   text-align: center;
+
+  &__copyright {
+    display: block;
+    padding-top: 20px;
+  }
 
   .app__version {
     color: $green;

@@ -61,6 +61,33 @@ class AppPrivateActions {
       throw e;
     });
   }
+
+  static addAppLoadingStatus(status) {
+    return {
+      type: ActionTypes.APP_ADD_LOADING_STATUS,
+      payload: {
+        status: status
+      }
+    };
+  }
+
+  static resetAppLoadingStatus() {
+    return {
+      type: ActionTypes.APP_RESET_LOADING_STATUS,
+      payload: {
+        loading: ''
+      }
+    };
+  }
+
+  static removeLoadingStatus(status) {
+    return {
+      type: ActionTypes.APP_REMOVE_LOADING_STATUS,
+      payload: {
+        status
+      }
+    };
+  }
 }
 
 
@@ -117,6 +144,24 @@ class AppActions {
       payload: {
         loginErrorText: text
       }
+    };
+  }
+
+  static addAppLoadingStatus(status) {
+    return (dispatch) => {
+      dispatch(AppPrivateActions.addAppLoadingStatus(status));
+    };
+  }
+
+  static removeLoadingStatus(status) {
+    return (dispatch) => {
+      dispatch(AppPrivateActions.removeLoadingStatus(status));
+    };
+  }
+
+  static resetLoadingStatus() {
+    return (dispatch) => {
+      dispatch(AppPrivateActions.resetAppLoadingStatus());
     };
   }
 }
