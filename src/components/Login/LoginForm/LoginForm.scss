@@ -10,6 +10,14 @@
       margin-top: 6px;
       margin-bottom: 6px;
     }
+
+    &__apiTxt {
+      &--error {
+        height: 0;
+        margin-bottom: 20px;
+        color: red;
+      }
+    }
   }
 
   &__btn {

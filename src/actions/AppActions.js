@@ -1,9 +1,8 @@
 import ActionTypes from './ActionTypes';
 import {NavigateActions, AccountActions, ModalActions} from '../actions';
 import {AuthService} from '../services';
-import {StorageUtil, GenUtil} from '../utility';
+import {StorageUtil} from '../utility';
 import {Action, Dispatch} from 'redux';
-const translate = GenUtil.translate;
 
 class AppPrivateActions {
   /**
@@ -109,8 +108,8 @@ class AppActions {
       dispatch(AppPrivateActions.processLogin(account)).then(() => {
         dispatch(ModalActions.toggleModal());
         dispatch(NavigateActions.navigateToDashboard());
-      }).catch(() => {
-        dispatch(AppActions.setLoginError(translate('login.invalidPassword')));
+      }).catch((err) => {
+        dispatch(AppActions.setLoginError(err));
       });
     };
   }

@@ -82,7 +82,7 @@ class LoginForm extends Component {
               placeholder={ translate('login.enterPassword') }
             />
           </FormControl>
-          {this.props.errorText}
+          <span className='login-form__apiTxt--error'>{this.props.errorText}</span>
           <span className='register__textlink'>
             {translate('login.dontHaveAccount')}
             <span onClick={ this.props.goRegister } className='goregister__link'>
