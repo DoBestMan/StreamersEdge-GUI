@@ -42,8 +42,16 @@
     }
   }
 
-  &-success {
-    color: $green;
+  &__apiTxt {
+    &--success {
+      color: $green;
+    }
+
+    &--error {
+      display: flex;
+      justify-content: center;
+      color: $red;
+    }
   }
 }
 

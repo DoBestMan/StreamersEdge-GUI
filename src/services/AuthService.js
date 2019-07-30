@@ -107,10 +107,10 @@ class AuthService {
 
       try {
         response = await ApiHandler.post(query, querystring.stringify(body), headers);
-
         return resolve(response.data.result);
       } catch (err) {
-        return reject(err.toString());
+        let errorObj = err.response.data.error;
+        return reject(errorObj[Object.keys(errorObj)[0]]);
       }
 
     });

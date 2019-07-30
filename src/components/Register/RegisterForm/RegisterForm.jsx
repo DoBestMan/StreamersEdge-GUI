@@ -27,6 +27,7 @@ class RegisterForm extends Component {
       username: '',
       password: '',
       resultText: '',
+      errText: '',
       registerDisabled: false,
       registerBtnText: 'REGISTER',
       errors: {
@@ -60,6 +61,7 @@ class RegisterForm extends Component {
     AuthService.register(account)
       .then(() => {
         this.setState({
+          errText: '',
           resultText: 'Confirmation email sent',
           registerDisabled: false,
           registerBtnText: 'REGISTER'
@@ -68,7 +70,8 @@ class RegisterForm extends Component {
       .catch((e) => {
         console.error(e);
         this.setState({
-          resultText: e,
+          errText: e,
+          resultText: '',
           registerDisabled: false,
           registerBtnText: 'REGISTER'
         });
@@ -159,7 +162,8 @@ class RegisterForm extends Component {
           <InputLabel shrink error={ true }>
             {this.state.errors.username}
           </InputLabel>
-          <span className='register-success'>{this.state.resultText}</span>
+          <span className='register__apiTxt--success'>{this.state.resultText}</span>
+          <span className='register__apiTxt--error'>{this.state.errText}</span>
           <span className='login-txt-link'>
             {translate('register.alreadyHaveAccount')}
             <span className='register-form__gologin' onClick={ this.props.openLoginModal }>
