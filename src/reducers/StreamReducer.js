@@ -2,6 +2,7 @@ import ActionTypes from '../actions/ActionTypes';
 import Immutable, {fromJS} from 'immutable';
 
 /**
+ * @private
  * Sample stream entry vanilla js object:
  * {
     "result": {

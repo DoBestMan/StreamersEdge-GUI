@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: utility/StorageUtil.js</title>
+    <title>JSDoc: utility/TokenUtil.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>utility/StorageUtil.js</h1>
+                        <h1>utility/TokenUtil.js</h1>
                     </header>
                     
                     
@@ -62,53 +62,36 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let ls = window.localStorage;
+            <pre class="prettyprint source linenums"><code>
 /**
- * Base Storage service.
+ * Token Util Functions.
  *
- * Used to interact with the browser's local storage.
+ * @namespace TokenUtil
  */
-class StorageUtil {
+//TODO: Create a more robust client side Token verification system.
+
+const TokenUtil = {
   /**
-   * Get an item from local storage by its key.
+   * Verify if the URL format is constructed properly. Ensures there is nothing extra appeneded to the path.
    *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {object}
-   * @memberof StorageUtil
+   * @param {string} path - The URL to check.
+   * @returns {string} True or False depending on the reuslt.
+   * @memberof TokenUtil
    */
-  static get(key) {
-    return ls.getItem(key);
+
+  checkUrlLength(path) {
+    const urlAry = path.split('/');
+
+    if (urlAry.length === 4) {
+      return true;
+    }
+
+    return false;
   }
 
-  /**
-   * Set the value of something in local storage by key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @param {object} value - Value being stored.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static set(key, value) {
-    return ls.setItem(key, value);
-  }
+};
 
-  /**
-   * Remove something from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static remove(key) {
-    return ls.removeItem(key);
-  }
-}
-
-export default StorageUtil;
-</code></pre>
+export default TokenUtil;</code></pre>
         </article>
     </section>
 

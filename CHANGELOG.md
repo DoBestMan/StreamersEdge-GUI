@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.2-v.0"></a>
+## 0.1.2-v.0 (2019-07-31)
+
+### Bug Fixes
+
+* STRM-415 ([#52](https://github.com/PBSA/StreamersEdge-GUI/issues/52))
+  * Better error handling on the register form.
+* STRM-416 ([#55](https://github.com/PBSA/StreamersEdge-GUI/issues/55))
+  * More specific errors on the login in form.
+* STRM-430 ([#53](https://github.com/PBSA/StreamersEdge-GUI/issues/5))
+  * Text wrapping issue on the login form.
+
+
 <a name="0.1.1"></a>
 ## 0.1.1 (2019-07-19)
 

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: ModalActions</title>
+    <title>JSDoc: TokenUtil</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -49,8 +49,8 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Class</p>
-                        <h1>ModalActions</h1>
+                        <p>Namespace</p>
+                        <h1>TokenUtil</h1>
                     </header>
                     
                     
@@ -62,7 +62,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ModalActions<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2>TokenUtil</h2>
         
     
 </header>
@@ -71,37 +71,10 @@
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <h3 class="title"><span>Constructor</span></h3>
-                <div class="members">
-                    <div class="member">
-
-    
-    <h4 class="name" id="ModalActions">
+            <div class="description"><script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Token Util Functions.</p></div>
         
-        <span class="code-name">
-            new ModalActions<span class="signature">()</span><span class="type-signature"></span>
-        </span>
-    </h4>
-    
 
-    
-    
-    <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public actions related to Modals.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 <dl class="details">
@@ -137,37 +110,15 @@
 
     
         <p class="tag-source">
-            <a href="actions_ModalActions.js.html" class="button">View Source</a>
+            <a href="utility_TokenUtil.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_ModalActions.js.html">actions/ModalActions.js</a>, <a href="actions_ModalActions.js.html#line4">line 4</a>
+                <a href="utility_TokenUtil.js.html">utility/TokenUtil.js</a>, <a href="utility_TokenUtil.js.html#line2">line 2</a>
             </span>
         </p>
     
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-                </div>
-            </div>
         
     
     </div>
@@ -194,14 +145,14 @@
                 <div class="member">
 
     
-    <h4 class="name" id=".setModalType">
+    <h4 class="name" id=".checkUrlLength">
         
             
                 <span class='tag'>static</span>
             
         
         <span class="code-name">
-            setModalType<span class="signature">(modalType)</span><span class="type-signature"> &rarr; {Action}</span>
+            checkUrlLength<span class="signature">(path)</span><span class="type-signature"> &rarr; {string}</span>
         </span>
     </h4>
     
@@ -209,8 +160,7 @@
     
     
     <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Change the type of modal to display.
-Valid types are in ModalTypes.js.</p>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Verify if the URL format is constructed properly. Ensures there is nothing extra appeneded to the path.</p>
     </div>
     
 
@@ -248,7 +198,7 @@ Valid types are in ModalTypes.js.</p>
         
 <tr class="deep-level-0">
   
-      <td class="name"><code>modalType</code></td>
+      <td class="name"><code>path</code></td>
   
 
   <td class="type">
@@ -264,7 +214,7 @@ Valid types are in ModalTypes.js.</p>
 
   
 
-  <td class="description last"><p>See ModalTypes.js.</p></td>
+  <td class="description last"><p>The URL to check.</p></td>
 </tr>
 
 
@@ -309,9 +259,9 @@ Valid types are in ModalTypes.js.</p>
 
     
         <p class="tag-source">
-            <a href="actions_ModalActions.js.html" class="button">View Source</a>
+            <a href="utility_TokenUtil.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_ModalActions.js.html">actions/ModalActions.js</a>, <a href="actions_ModalActions.js.html#line19">line 19</a>
+                <a href="utility_TokenUtil.js.html">utility/TokenUtil.js</a>, <a href="utility_TokenUtil.js.html#line18">line 18</a>
             </span>
         </p>
     
@@ -342,131 +292,13 @@ Valid types are in ModalTypes.js.</p>
 
 <div class="columns">
     
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Action</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".toggleModal">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            toggleModal<span class="signature">()</span><span class="type-signature"> &rarr; {Action}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Toggles the display of the modal component.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="actions_ModalActions.js.html" class="button">View Source</a>
-            <span>
-                <a href="actions_ModalActions.js.html">actions/ModalActions.js</a>, <a href="actions_ModalActions.js.html#line30">line 30</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
+    <div class='param-desc column is-7'><p>True or False depending on the reuslt.</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Action</span>
+<span class="param-type">string</span>
 
 
     </div>
