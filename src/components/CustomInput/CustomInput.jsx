@@ -31,6 +31,7 @@ const margin = {
  * Other optional props, some are required depending on others.
  * @param {string} placeholder - Placeholder text.
  * @param {Function} handleChange - Callback handler for onChange event.
+ * @param {Function} onBlur - Callback handler for onBlur event.
  * @param {Function} handleRightIconClick - Callback handler for onClick event for the icon-right.
  * @param {boolean} hasActiveGlow - Default `false`. Sets the style that controls whether or not the elements will have a glow on "active" state.
  * @param {boolean} required - If true, the label is displayed as required and the input element` will be required.
@@ -58,6 +59,7 @@ class CustomInput extends Component {
     const iconLeft = this.props.iconLeft || null;
     const iconRight = this.props.iconRight || null;
     const handleChange = this.props.handleChange || dummyHandler;
+    const onBlur = this.props.onBlur || dummyHandler;
     const handleRightIconClick = this.props.handleRightIconClick || dummyHandler;
     const wrapperClassName = `custom-input-${theme}__wrapper`;
     let inputClassName = `custom-input-${theme}__mui`;
@@ -86,7 +88,8 @@ class CustomInput extends Component {
       iconRightWrapperClassName,
       value: '',
       isInputActive: false,
-      theme
+      theme,
+      onBlur
     };
   }
 
@@ -177,8 +180,9 @@ class CustomInput extends Component {
     this.toggleActiveImage(e.target.value, 'focus');
   }
 
-  // Equivalent of losing input focus
+  // Equivalent to losing input focus
   onBlur = (e) => {
+    this.state.onBlur();
     this.toggleActiveImage(e.target.value, 'blur');
   }
 
@@ -257,6 +261,7 @@ CustomInput.propTypes = {
   classes: PropTypes.object.isRequired,
   placeholder: PropTypes.string,
   handleChange: PropTypes.func,
+  onBlur: PropTypes.func,
   handleRightIconClick: PropTypes.func,
   hasActiveGlow: PropTypes.bool,
   name: PropTypes.string,

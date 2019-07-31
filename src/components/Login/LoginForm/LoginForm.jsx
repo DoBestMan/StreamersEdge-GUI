@@ -5,16 +5,12 @@ import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import {AuthService, ProfileService} from '../../../services/';
-import SignupInput from '../../SignupInput';
 import AuthFooter from '../../Auth/AuthFooter';
 import {GenUtil} from '../../../utility';
-import IconPassword from '../../../assets/images/login/Password.png';
-import IconPasswordActive from '../../../assets/images/login/Password_Over.png';
-import IconUsername from '../../../assets/images/login/Username_1x.png';
-import IconUsernameActive from '../../../assets/images/login/Username_Over.png';
-import LoginButton from '../../../assets/images/login/login_button.png';
-import LoginButtonActive from '../../../assets/images/login/login_active_button.png';
+import {UserIcon, UserIconActive, IconPassword, IconPasswordActive, LoginButton, LoginButtonActive} from '../../../assets/images/login';
 import LogoImage from '../../../assets/images/se-logo-stacked.png';
+import CustomInput from '../../CustomInput';
+
 const translate = GenUtil.translate;
 
 class LoginForm extends Component {
@@ -41,12 +37,17 @@ class LoginForm extends Component {
     this.props.handleLogin(account);
   };
 
-  handleChange = (event) => {
-    const {name, value} = event.target;
+  handleUsernameChange = (user) => {
     this.setState({
-      [name]: value
+      username: user
     });
   };
+
+  handlePasswordChange = (password) => {
+    this.setState({
+      password: password
+    });
+  }
 
   logout = () => {
     AuthService.logout();
@@ -57,29 +58,30 @@ class LoginForm extends Component {
   };
 
   render() {
+
     return (
       <>
         <form className='login-form' onSubmit={ this.handleSubmit }>
           <img src={ LogoImage } alt='logo' />
-          <FormControl margin='none' required>
-            <SignupInput
+          <FormControl className='login-form__input' margin='none' required>
+            <CustomInput
               name='username'
-              handleChange={ this.handleChange }
-              inputValue={ this.state.username }
-              inputImage={ IconUsername }
-              activeInputImage={ IconUsernameActive }
+              hasActiveGlow={ true }
               placeholder={ translate('login.enterUsername') }
+              handleChange={ this.handleUsernameChange }
+              iconLeft={ UserIcon }
+              iconLeftActive={ UserIconActive }
             />
           </FormControl>
-          <FormControl margin='none' required>
-            <SignupInput
+          <FormControl className='login-form__input' margin='none' required>
+            <CustomInput
               name='password'
               type='password'
-              handleChange={ this.handleChange }
-              inputValue={ this.state.password }
-              inputImage={ IconPassword }
-              activeInputImage={ IconPasswordActive }
+              hasActiveGlow={ true }
               placeholder={ translate('login.enterPassword') }
+              handleChange={ this.handlePasswordChange }
+              iconLeft={ IconPassword }
+              iconLeftActive={ IconPasswordActive }
             />
           </FormControl>
           <span className='login-form__apiTxt--error'>{this.props.errorText}</span>

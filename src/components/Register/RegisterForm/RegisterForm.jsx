@@ -7,15 +7,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {AuthService} from '../../../services';
 import {ValidationUtil, GenUtil} from '../../../utility';
-import SignupInput from '../../SignupInput';
-import IconEmail from '../../../assets/images/Email_Field.png';
-import IconEmailActive from '../../../assets/images/Email_Field_Active.png';
-import IconPassword from '../../../assets/images/login/Password.png';
-import IconPasswordActive from '../../../assets/images/login/Password_Over.png';
-import IconUsername from '../../../assets/images/login/Username_1x.png';
-import IconUsernameActive from '../../../assets/images/login/Username_Over.png';
-import RegisterButton from '../../../assets/images/signup/register_button.png';
-import RegisterButtonActive from '../../../assets/images/signup/register_active_button.png';
+import {EmailIcon, EmailIconActive, RegisterButton, RegisterButtonActive} from '../../../assets/images/signup';
+import {UserIcon, UserIconActive, IconPassword, IconPasswordActive} from '../../../assets/images/login';
+import CustomInput from '../../CustomInput';
+
 const translate = GenUtil.translate;
 
 class RegisterForm extends Component {
@@ -78,12 +73,23 @@ class RegisterForm extends Component {
       });
   };
 
-  handleChange = (event) => {
-    const {name, value} = event.target;
+  handleEmailChange = (email) => {
     this.setState({
-      [name]: value
+      email: email
+    });
+  }
+
+  handleUsernameChange = (user) => {
+    this.setState({
+      username: user
     });
   };
+
+  handlePasswordChange = (password) => {
+    this.setState({
+      password: password
+    });
+  }
 
   validate = (type) => {
     switch (type) {
@@ -120,46 +126,47 @@ class RegisterForm extends Component {
       <>
         <form className='register-form' onSubmit={ this.handleSubmit }>
           <FormControl margin='normal' required fullWidth>
-            <SignupInput
-              onBlur={ () => this.validate('email') }
+            <CustomInput
               name='email'
-              handleChange={ this.handleChange }
-              inputValue={ this.state.email }
-              inputImage={ IconEmail }
-              activeInputImage={ IconEmailActive }
+              type='email'
+              onBlur={ () => this.validate('email') }
+              hasActiveGlow={ true }
               placeholder={ translate('register.enterEmail') }
+              handleChange={ this.handleEmailChange }
+              iconLeft={ EmailIcon }
+              iconLeftActive={ EmailIconActive }
             />
           </FormControl>
-          <InputLabel shrink error={ true }>
+          <InputLabel className='register-error' shrink error={ true }>
             {this.state.errors.email}
           </InputLabel>
           <FormControl margin='normal' required fullWidth>
-            <SignupInput
-              onBlur={ () => this.validate('password') }
+            <CustomInput
               name='password'
               type='password'
-              handleChange={ this.handleChange }
-              inputValue={ this.state.password }
-              inputImage={ IconPassword }
-              activeInputImage={ IconPasswordActive }
+              onBlur={ () => this.validate('password') }
+              hasActiveGlow={ true }
               placeholder={ translate('register.enterPassword') }
+              handleChange={ this.handlePasswordChange }
+              iconLeft={ IconPassword }
+              iconLeftActive={ IconPasswordActive }
             />
           </FormControl>
           <InputLabel className='register-error' shrink error={ true }>
             {this.state.errors.password}
           </InputLabel>
           <FormControl margin='normal' required fullWidth>
-            <SignupInput
-              onBlur={ () => this.validate('username') }
+            <CustomInput
               name='username'
-              handleChange={ this.handleChange }
-              inputValue={ this.state.username }
-              inputImage={ IconUsername }
-              activeInputImage={ IconUsernameActive }
-              placeholder={ translate('register.enterUsername') }
+              onBlur={ () => this.validate('username') }
+              hasActiveGlow={ true }
+              placeholder={ translate('login.enterUsername') }
+              handleChange={ this.handleUsernameChange }
+              iconLeft={ UserIcon }
+              iconLeftActive={ UserIconActive }
             />
           </FormControl>
-          <InputLabel shrink error={ true }>
+          <InputLabel className='register-error' shrink error={ true }>
             {this.state.errors.username}
           </InputLabel>
           <span className='register__apiTxt--success'>{this.state.resultText}</span>
