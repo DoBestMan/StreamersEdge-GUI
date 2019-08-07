@@ -9,7 +9,7 @@ export default {
   PEERPLAYS: '/peerplays',
   PREFERENCES: '/preferences',
   UPDATE_PROFILE: '/update-profile',
+  CREATE_CHALLENGE: '/create-challenge',
   STREAMS: '/streams',
-  CATEGORIES: '/categories',
-  CHALLENGES: '/challenges'
+  CATEGORIES: '/categories'
 };
