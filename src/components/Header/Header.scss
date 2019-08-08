@@ -29,6 +29,10 @@
 
   &__logo {
     margin: auto;
+
+    &--display-none {
+      display: none;
+    }
   }
 
   &--left {

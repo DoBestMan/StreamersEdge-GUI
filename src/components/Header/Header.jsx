@@ -51,7 +51,8 @@ class Header extends Component {
               {translate('header.signup')}
             </NavLink>
             {logButton}
-            <img src={ this.props.path === '/login' ? loginIconActive : loginIcon } alt='avatar' />
+            <img className={ this.props.isLoggedIn ? 'header__logo' : 'header__logo--display-none' } src={ loginIcon }
+              onMouseOver={ (e) => e.currentTarget.src = loginIconActive } onMouseOut={ (e) => e.currentTarget.src =  loginIcon } alt='avatar' />
           </div>
         </div>
         <div className='divider-radial' />
