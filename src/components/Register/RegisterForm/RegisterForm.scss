@@ -50,6 +50,22 @@
       color: $red;
     }
   }
+
+  &-input::after {
+    content: ' *';
+    display:inline;
+    position: absolute;
+    left: 425px;
+    color: $red;
+  }
+
+  &__required-asterisk {
+    color: $red;
+  }
+
+  &__requiredTxt {
+    font-size: 10px;
+  }
 }
 
 .login-txt-link {

@@ -125,7 +125,7 @@ class RegisterForm extends Component {
     return (
       <>
         <form className='register-form' onSubmit={ this.handleSubmit }>
-          <FormControl margin='normal' required fullWidth>
+          <FormControl className='register-input' margin='normal' required fullWidth>
             <CustomInput
               name='email'
               type='email'
@@ -140,7 +140,7 @@ class RegisterForm extends Component {
           <InputLabel className='register-error' shrink error={ true }>
             {this.state.errors.email}
           </InputLabel>
-          <FormControl margin='normal' required fullWidth>
+          <FormControl className='register-input' margin='normal' required fullWidth>
             <CustomInput
               name='password'
               type='password'
@@ -155,7 +155,7 @@ class RegisterForm extends Component {
           <InputLabel className='register-error' shrink error={ true }>
             {this.state.errors.password}
           </InputLabel>
-          <FormControl margin='normal' required fullWidth>
+          <FormControl className='register-input' margin='normal' required fullWidth>
             <CustomInput
               name='username'
               onBlur={ () => this.validate('username') }
@@ -171,6 +171,7 @@ class RegisterForm extends Component {
           </InputLabel>
           <span className='register__apiTxt--success'>{this.state.resultText}</span>
           <span className='register__apiTxt--error'>{this.state.errText}</span>
+          <span className='register__requiredTxt'>All fields marked with an asterisk <span className='register__required-asterisk'>*</span> are required </span>
           <span className='login-txt-link'>
             {translate('register.alreadyHaveAccount')}
             <span className='register-form__gologin' onClick={ this.props.openLoginModal }>
