@@ -92,7 +92,7 @@ class LoginForm extends Component {
             </span>
           </span>
           <span className='register__textlink'>
-            <span onClick={ this.props.recoverPassword } className='header-link'>
+            <span onClick={ this.props.recoverPassword } className='login__link'>
               {translate('login.forgotPass')}
             </span>
           </span>

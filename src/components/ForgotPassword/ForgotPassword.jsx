@@ -7,14 +7,13 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import {withRouter} from 'react-router-dom';
 import {AuthService} from '../../services';
-import SignupInput from './../SignupInput';
 import AuthFooter from './../Auth/AuthFooter';
-import {GenUtil} from '../../utility';
-import IconEmail from '../../assets/images/Email_Field.png';
-import IconEmailActive from '../../assets/images/Email_Field_Active.png';
+import {GenUtil, ValidationUtil} from '../../utility';
 import ResetButton from '../../assets/images/resetpw/Reset.png';
 import ResetButtonActive from '../../assets/images/resetpw/Reset_Active.png';
 import Logo from '../../assets/images/se-logo-stacked.png';
+import {EmailIcon, EmailIconActive} from '../../assets/images/signup';
+import CustomInput from '../CustomInput';
 const translate = GenUtil.translate;
 
 class ForgotPassword extends Component {
@@ -23,15 +22,19 @@ class ForgotPassword extends Component {
     this.state = {
       email: '',
       resultText: '',
+      resultStatus: '',
       token: '',
-      btnDisable: false
+      btnDisable: true
     };
   }
 
-  handleChange = (event) => {
-    const {name, value} = event.target;
+  handleChange = (text) => {
+    const validation = ValidationUtil.email(text);
     this.setState({
-      [name]: value
+      email: text,
+      resultText: ValidationUtil.email(text),
+      resultStatus: validation ? '--error' : '--success',
+      btnDisable: validation ? true : false
     });
   };
 
@@ -60,9 +63,11 @@ class ForgotPassword extends Component {
       })
       .catch((err) => {
         if (err.includes(429)) {
-          this.updateResultMessage(translate('forgotPassword.resultText.cooldown'));
+          this.setState({
+            resultStatus: '--error'
+          }, this.updateResultMessage(translate('forgotPassword.resultText.cooldown')));
         } else {
-          this.updateResultMessage(translate('forgotPassword.resultText.invalidEmail'));
+          this.updateResultMessage(translate('forgotPassword.resultText.success'));
         }
       });
   };
@@ -75,13 +80,13 @@ class ForgotPassword extends Component {
           <span className='forgot-title'>{translate('forgotPassword.header')}</span>
           <span className='forgot-subheader'>{translate('forgotPassword.subHeader')}</span>
           <FormControl margin='normal' required>
-            <SignupInput
+            <CustomInput
               name='email'
-              handleChange={ this.handleChange }
-              inputValue={ this.state.email }
-              inputImage={ IconEmail }
-              activeInputImage={ IconEmailActive }
+              hasActiveGlow={ true }
               placeholder={ translate('forgotPassword.enterEmail') }
+              handleChange={ this.handleChange }
+              iconLeft={ EmailIcon }
+              iconLeftActive={ EmailIconActive }
             />
           </FormControl>
           <span className='forgot-register'>
@@ -91,7 +96,7 @@ class ForgotPassword extends Component {
             </span>
           </span>
           <div className='forgot-button-container'>
-            <span className='forgot-result'>{this.state.resultText}</span>
+            <span className={ `forgot-result${this.state.resultStatus}` }>{this.state.resultText}</span>
             <Button disabled={ this.state.btnDisable } type='submit' style={ {color: 'white'} }>
               <img src={ ResetButton } alt='Submit' type='submit' onMouseOver={ (e) => (e.currentTarget.src = ResetButtonActive) } onMouseOut={ (e) => (e.currentTarget.src = ResetButton) } />
             </Button>
