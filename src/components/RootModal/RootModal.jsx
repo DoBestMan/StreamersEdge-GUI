@@ -18,10 +18,12 @@ class RootModal extends Component {
   };
 
   openPasswordRecovery = () => {
+    this.props.setErrorText('');
     this.props.setModalType(ModalTypes.FORGOT);
   };
 
   toggleModalAndRegister = () => {
+    this.props.setErrorText('');
     this.props.toggleModal();
     this.props.navigateToSignUp();
   };
