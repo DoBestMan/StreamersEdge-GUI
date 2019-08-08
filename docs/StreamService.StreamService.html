@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: AccountActions</title>
+    <title>JSDoc: StreamService</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -50,7 +50,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Class</p>
-                        <h1>AccountActions</h1>
+                        <h1>StreamService</h1>
                     </header>
                     
                     
@@ -62,7 +62,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>AccountActions<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>StreamService<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise}</span></h2>
         
     
 </header>
@@ -77,10 +77,10 @@
                     <div class="member">
 
     
-    <h4 class="name" id="AccountActions">
+    <h4 class="name" id="StreamService">
         
         <span class="code-name">
-            new AccountActions<span class="signature">()</span><span class="type-signature"></span>
+            new StreamService<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise}</span>
         </span>
     </h4>
     
@@ -88,7 +88,7 @@
     
     
     <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public actions related to Account actions.</p>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
     </div>
     
 
@@ -99,6 +99,56 @@
 
 
 
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>id</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Id of stream object.</p></td>
+</tr>
+
+
+    
+    </tbody>
+</table>
 
 
 
@@ -137,9 +187,9 @@
 
     
         <p class="tag-source">
-            <a href="actions_AccountActions.js.html" class="button">View Source</a>
+            <a href="services_StreamService.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_AccountActions.js.html">actions/AccountActions.js</a>, <a href="actions_AccountActions.js.html#line4">line 4</a>
+                <a href="services_StreamService.js.html">services/StreamService.js</a>, <a href="services_StreamService.js.html#line41">line 41</a>
             </span>
         </p>
     
@@ -161,6 +211,31 @@
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Promise indicating success or failure wrapped in dummy data wrapper.</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Promise</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
@@ -186,369 +261,6 @@
 
     
 
-    
-        <div class='vertical-section'>
-            <h3 class="title"><span>Methods</span></h3>
-            <div class="members">
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".setAccountAction">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            setAccountAction<span class="signature">(account)</span><span class="type-signature"> &rarr; {Action}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux action creator.
-Call to update redux with the passed in user login &amp; password.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>account</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>User object:
-{
-&quot;id&quot;: 7,
-&quot;username&quot;: &quot;test&quot;,
-&quot;email&quot;: &quot;test@email.com&quot;,
-&quot;twitchUserName&quot;: &quot;&quot;,
-&quot;googleName&quot;: &quot;&quot;,
-&quot;youtube&quot;: &quot;&quot;,
-&quot;facebook&quot;: &quot;&quot;,
-&quot;twitch&quot;: &quot;&quot;,
-&quot;peerplaysAccountName&quot;: &quot;&quot;,
-&quot;bitcoinAddress&quot;: &quot;&quot;,
-&quot;userType&quot;: &quot;viewer&quot;,
-&quot;avatar&quot;: &quot;&quot;
-}.</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="actions_AccountActions.js.html" class="button">View Source</a>
-            <span>
-                <a href="actions_AccountActions.js.html">actions/AccountActions.js</a>, <a href="actions_AccountActions.js.html#line46">line 46</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Action</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".setIsLoggedInAction">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            setIsLoggedInAction<span class="signature">(isLoggedIn)</span><span class="type-signature"> &rarr; {Action}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux action creator.
-Call to update redux with a boolean to define the user as logged in or not.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>isLoggedIn</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">boolean</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>True/false.</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="actions_AccountActions.js.html" class="button">View Source</a>
-            <span>
-                <a href="actions_AccountActions.js.html">actions/AccountActions.js</a>, <a href="actions_AccountActions.js.html#line19">line 19</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Action</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-            </div>
-        </div>
     
 
     

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import querystring from 'query-string';
-import {Config} from '../utility';
-
+import {Config, GenUtil} from '../utility';
 const ApiHandler = axios.create({withCredentials: true});
 
 const apiRoot = Config.isDev
@@ -9,11 +8,11 @@ const apiRoot = Config.isDev
   : Config.prodApiRoute;
 
 /**
- * Handles all server calls related to Streamers Edge accounts.
+ * Private class used to wrap functions with dummy data wrapper.
  *
- * @class AuthService
+ * @class PrivateAuthService
  */
-class AuthService {
+class PrivateAuthService {
   /**
    * Login via Username and Password.
    *
@@ -24,7 +23,7 @@ class AuthService {
       password: 'password
    * }.
    * @returns {Promise}
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static login(account) {
     let response;
@@ -56,7 +55,7 @@ class AuthService {
    *
    * @static
    * @returns {Promise} - A promise that indicates success or failure.
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static logout() {
     let response;
@@ -85,7 +84,7 @@ class AuthService {
    * @static
    * @param {object} account - User credentials object: {email, username, password, repeatPassword}.
    * @returns {Promise} - A promise that indicates success or failure.
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static register(account) {
     let response;
@@ -121,7 +120,7 @@ class AuthService {
    * @static
    * @param {string} token - Token generated from the backend api.
    * @returns {Promise} - A promise that indicates success or failure.
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static confirmEmail(token) {
     let response;
@@ -150,7 +149,7 @@ class AuthService {
    * @static
    * @param {string} email - The email of the account.
    * @returns {Promise} A promise that indicates success or failure.
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static forgotPassword(email) {
     let response;
@@ -185,7 +184,7 @@ class AuthService {
    * @param {string} token - Token generated from the backend api.
    * @param {string} newPassword - The user's new password.
    * @returns {Promise} - A promise that indicates success or failure.
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static resetPassword(token, newPassword) {
     let response;
@@ -234,7 +233,7 @@ class AuthService {
       "avatar": ""
    * }.
    * @returns {Promise} - A promise that indicates success or failure.
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static linkPeerplaysAccount(account) {
     let response;
@@ -260,12 +259,13 @@ class AuthService {
       }
     });
   };
+
   /**
    * Calls the users API to obtain a full list of every user in the app, up to the limit parameter provided.
    *
    * @static
    * @returns {number} A promise indicating success by listing user objects.
-   * @memberof AuthService
+   * @memberof PrivateAuthService
    */
   static getUserList() {
     let response;
@@ -293,6 +293,108 @@ class AuthService {
       }
 
     });
+  }
+}
+
+/**
+ * Handles all server calls related to Streamers Edge accounts.
+ *
+ * @class AuthService
+ */
+class AuthService {
+  /**
+   *
+   *
+   * @static
+   * @param {object} account - Account object.
+   * @returns {Promise} Returns login promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static login(account) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.login(account));
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @returns {Promise} Returns logout promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static logout() {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.logout());
+  }
+
+  /**
+   *
+   * @static
+   * @param {object} account
+   * @returns Returns register promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+
+  static register(account) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.register(account));
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {string} token - Token generated from the backend api.
+   * @returns {Promise} Returns confirmEmail promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static confirmEmail(token) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.confirmEmail(token));
+  }
+
+  /**
+   * Send an email that contains a password reset token.
+   *
+   * @static
+   * @param {string} email - The email of the account.
+   * @returns {Promise} Returns forgotPassword promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static forgotPassword(email) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.forgotPassword(email));
+  }
+
+  /**
+   * Reset the user's password.
+   *
+   * @static
+   * @param {string} token - Token generated from the backend api.
+   * @param {string} newPassword - The user's new password.
+   * @returns {Promise} - Returns resetPassword promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static resetPassword(token, newPassword) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.resetPassword(token, newPassword));
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {object} account - User object.
+   * @returns {Promise} - Returns linkPeerplaysAccount promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static linkPeerplaysAccount(account) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.linkPeerplaysAccount(account));
+  }
+
+  /**
+   * Calls the users API to obtain a full list of every user in the app, up to the limit parameter provided.
+   *
+   * @static
+   * @returns {number} Returns getUserList promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static getUserList() {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.getUserList());
   }
 }
 

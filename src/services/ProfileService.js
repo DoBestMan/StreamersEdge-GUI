@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Config, StorageUtil} from '../utility';
+import {Config, StorageUtil, GenUtil} from '../utility';
 
 const ApiHandler = axios.create({withCredentials: true});
 
@@ -10,9 +10,9 @@ const apiRoot = Config.isDev
 /**
  * Handles all server calls related to profiles.
  *
- * @class ProfileService
+ * @class PrivateProfileService
  */
-class ProfileService {
+class PrivateProfileService {
   /**
    * Retrieves information on the currently logged in user's SE profile, and stores it in LS if the promise resolves without issue.
    *
@@ -20,7 +20,6 @@ class ProfileService {
    */
   static getProfile() {
     const query = `${apiRoot}api/v1/profile`;
-
     return new Promise(async(resolve, reject) => {
       const response = await ApiHandler.get(query);
 
@@ -42,7 +41,7 @@ class ProfileService {
    *
    * @param {Blob} image - Image as Blob.
    * @returns {Promise}
-   * @memberof ProfileService
+   * @memberof PrivateProfileService
    */
   static uploadProfilePicture(image) {
     // POST /api/v1/profile/avatar
@@ -66,6 +65,34 @@ class ProfileService {
 
     });
   }
+}
+
+/**
+ * Handles all server calls related to profiles.
+ *
+ * @class ProfileService
+ */
+class ProfileService {
+  /**
+   * Retrieves information on the currently logged in user's SE profile, and stores it in LS if the promise resolves without issue.
+   *
+   * @returns {Promise} A promise that resolves to a user profile object wrapped by dummy data wrapper.
+   */
+  static getProfile() {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.getProfile());
+  }
+
+  /**
+   * Reconnect to blockchain in case of disconnect.
+   *
+   * @param {Blob} image - Image as Blob.
+   * @returns {Promise} - A promise that indicates success or failure wrapped in dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static uploadProfilePicture(image) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.uploadProfilePicture(image));
+  }
+
 }
 
 export default ProfileService;

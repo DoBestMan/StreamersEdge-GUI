@@ -13,6 +13,12 @@ const Config = {
    */
   isDev: isDev,
   /**
+   * If set to true the app will use a set of dummy data. Use this when APIs are not working.
+   *
+   * @type {boolean}
+   */
+  useDummy: false,
+  /**
    * The current version of the app pulled from package.json.
    *
    * @type {string}

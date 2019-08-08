@@ -1,7 +1,27 @@
 import ActionTypes from '../actions/ActionTypes';
 import Immutable, {fromJS} from 'immutable';
+import {Config} from '../utility';
 
-let initialState = fromJS({
+const dummyState = fromJS({
+  1: {
+    'name': 'Test name',
+    'startDate': '2019-04-04T08:32:19.818Z',
+    'endDate': '2019-04-04T08:32:19.818Z',
+    'game': 'pubg',
+    'accessRule': 'anyone',
+    'ppyAmount': 100,
+    'invitedAccounts': [],
+    'conditionsText': [],
+    'conditions': [{
+      'param': 'resultPlace',
+      'operator': '>',
+      'value': 1,
+      'join': 'END'
+    }]
+  }
+});
+
+let initialState = Config.useDummy ? dummyState : fromJS({
   1: new Immutable.Map()
 });
 

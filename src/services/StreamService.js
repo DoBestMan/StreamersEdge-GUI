@@ -1,11 +1,19 @@
 // TODO: write unit tests
 // TODO: document
 import axios from 'axios';
-import {Config} from '../utility';
+import {Config, GenUtil} from '../utility';
 
 const ApiHandler = axios.create({withCredentials: true});
 
-class StreamService {
+class PrivateStreamService {
+  /**
+   *
+   *
+   * @static
+   * @param {number} id - Id of stream object.
+   * @returns {Promise} Promise indicating success or failure.
+   * @memberof PrivateStreamService
+   */
   static fetchStream(id) {
     let response;
     const query = `${Config.apiRoute}api/v1/stream/${id}`;
@@ -19,6 +27,20 @@ class StreamService {
         return reject(err.toString());
       }
     });
+  }
+}
+
+/**
+ *
+ *
+ * @static
+ * @param {number} id - Id of stream object.
+ * @returns {Promise} Promise indicating success or failure wrapped in dummy data wrapper.
+ * @memberof StreamService
+ */
+class StreamService {
+  static fetchStream(id) {
+    return GenUtil.dummyDataWrapper(PrivateStreamService.fetchStream(id));
   }
 }
 

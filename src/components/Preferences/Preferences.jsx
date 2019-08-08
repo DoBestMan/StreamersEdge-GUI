@@ -3,9 +3,10 @@ import {Button} from '@material-ui/core';
 import preferences from '../../assets/images/preferences/settings.png';
 import InvitesForm from './InvitesForm';
 import NotificationsForm from './NotificationsForm';
-import {translate} from '../../../src/utility/GeneralUtils';
+import {GenUtil} from '../../../src/utility';
 import AuthService from '../../services/AuthService';
 
+const translate = GenUtil.translate;
 class Preferences extends Component {
   constructor() {
     super();
@@ -53,13 +54,13 @@ class Preferences extends Component {
     })});
   }
 
-  render(){
+  render() {
     const {inviteType, userWhitelist, userList, notificationType, errors} = this.state;
     return (
       <div className='preferences'>
         <div className='preferences__header'>
           <img className='preferences__image' src={ preferences } alt=''/>
-          <p> {translate('preferences.h1')}</p>
+          <p> {translate('preferences.header')}</p>
         </div>
 
         <InvitesForm inviteType={ inviteType } userWhitelist={ userWhitelist } userList={ userList } errors={ errors }

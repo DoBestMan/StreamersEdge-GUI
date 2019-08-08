@@ -1,8 +1,33 @@
 /* eslint-disable jsdoc/require-jsdoc */
 import ActionTypes from '../actions/ActionTypes';
 import Immutable, {fromJS} from 'immutable';
+import {Config} from '../utility';
 
-const initialState = fromJS({
+const dummyState = fromJS({
+  accountId: 1,
+  loading: Immutable.List([])
+});
+
+const mergeDummyAccountState = {
+  isLogin: true,
+  account: {
+    'user': {
+      'id': 10,
+      'username': 'jotprabh',
+      'email': 'pbsa_dev@gmail.com',
+      'twitchUserName': 'pbsa_dev',
+      'googleName': 'pbsa_dev',
+      'youtube': 'test@youtube.com',
+      'facebook': 'pbsa_dev',
+      'peerplaysAccountName': 'pbsa_dev',
+      'bitcoinAddress': '1NbhnkGbiaRxNUvKnTNfEomH1Nk1dVUxAR',
+      'userType': 'gamer'
+    }
+  },
+  accountId: 10
+};
+
+const initialState = Config.useDummy ? dummyState : fromJS({
   accountId: null,
   loading: Immutable.List([])
 });
@@ -13,7 +38,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.APP_LOGIN:
     case ActionTypes.APP_LOGOUT:
-      return state.merge({
+      return Config.useDummy ? state.merge({mergeDummyAccountState}) : state.merge({
         isLogin: action.payload.isLogin,
         account: action.payload.account,
         accountId: action.payload.accountId

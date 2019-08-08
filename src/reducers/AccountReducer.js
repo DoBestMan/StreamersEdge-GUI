@@ -1,8 +1,27 @@
 import ActionTypes from '../actions/ActionTypes';
 import {fromJS} from 'immutable';
-import {StorageUtil} from '../utility';
+import {StorageUtil, Config} from '../utility';
 
-let initialState = fromJS({
+export const dummyState = fromJS({
+  isLoggedIn: true,
+  currentAccount: {
+    'user': {
+      'id': 10,
+      'username': 'jotprabh',
+      'email': 'pbsa_dev@gmail.com',
+      'twitchUserName': 'pbsa_dev',
+      'googleName': 'pbsa_dev',
+      'youtube': 'test@youtube.com',
+      'facebook': 'pbsa_dev',
+      'peerplaysAccountName': 'pbsa_dev',
+      'bitcoinAddress': '1NbhnkGbiaRxNUvKnTNfEomH1Nk1dVUxAR',
+      'userType': 'gamer'
+    }
+  },
+  loginErrorText: ''
+});
+
+let initialState = Config.useDummy ? dummyState : fromJS({
   isLoggedIn: StorageUtil.get('se-user') ? true : false,
   currentAccount: JSON.parse(StorageUtil.get('se-user')),
   loginErrorText: ''

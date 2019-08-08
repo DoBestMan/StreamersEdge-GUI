@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: actions/ModalActions.js</title>
+    <title>JSDoc: actions/ChallengeActions.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>actions/ModalActions.js</h1>
+                        <h1>actions/ChallengeActions.js</h1>
                     </header>
                     
                     
@@ -66,37 +66,31 @@
 import {Action} from 'redux';
 
 /**
- * Public actions related to Modals.
+ * Public actions related to Challenge actions.
  *
- * @class ModalActions
+ * @class ChallengeActions
  */
-class ModalActions {
-  /**
-   * Change the type of modal to display.
-   * Valid types are in ModalTypes.js.
-   *
-   * @static
-   * @param {string} modalType - See ModalTypes.js.
-   * @returns {Action}
-   * @memberof ModalActions
-   */
-  static setModalType(modalType) {
-    return {type: ActionTypes.MODAL_SET_TYPE, modalType: modalType};
-  }
 
+class ChallengeActions {
   /**
-   * Toggles the display of the modal component.
+   * Call to update redux with a full list of challenges.
    *
    * @static
+   * @param {Map} challenges - Key value pair where the key is the challenge id and the value is the challenge object.
    * @returns {Action}
-   * @memberof ModalActions
+   * @memberof ChallengeActions
    */
-  static toggleModal() {
-    return {type: ActionTypes.MODAL_TOGGLE};
+  static setChallengeAction(challenges) {
+    return {
+      type: ActionTypes.CHALLENGE_SET_CHALLENGES,
+      payload: {
+        challenges: challenges
+      }
+    };
   }
 }
 
-export default ModalActions;</code></pre>
+export default ChallengeActions;</code></pre>
         </article>
     </section>
 

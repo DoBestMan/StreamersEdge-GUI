@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: actions/ModalActions.js</title>
+    <title>JSDoc: services/StreamService.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>actions/ModalActions.js</h1>
+                        <h1>services/StreamService.js</h1>
                     </header>
                     
                     
@@ -62,41 +62,54 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import ActionTypes from './ActionTypes';
-import {Action} from 'redux';
+            <pre class="prettyprint source linenums"><code>// TODO: write unit tests
+// TODO: document
+import axios from 'axios';
+import {Config, GenUtil} from '../utility';
 
-/**
- * Public actions related to Modals.
- *
- * @class ModalActions
- */
-class ModalActions {
+const ApiHandler = axios.create({withCredentials: true});
+
+class PrivateStreamService {
   /**
-   * Change the type of modal to display.
-   * Valid types are in ModalTypes.js.
+   *
    *
    * @static
-   * @param {string} modalType - See ModalTypes.js.
-   * @returns {Action}
-   * @memberof ModalActions
+   * @param {number} id - Id of stream object.
+   * @returns {Promise} Promise indicating success or failure.
+   * @memberof PrivateStreamService
    */
-  static setModalType(modalType) {
-    return {type: ActionTypes.MODAL_SET_TYPE, modalType: modalType};
-  }
+  static fetchStream(id) {
+    let response;
+    const query = `${Config.apiRoute}api/v1/stream/${id}`;
 
-  /**
-   * Toggles the display of the modal component.
-   *
-   * @static
-   * @returns {Action}
-   * @memberof ModalActions
-   */
-  static toggleModal() {
-    return {type: ActionTypes.MODAL_TOGGLE};
+    return new Promise(async(resolve, reject) => {
+      try {
+        response = await ApiHandler.get(query);
+
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.toString());
+      }
+    });
   }
 }
 
-export default ModalActions;</code></pre>
+/**
+ *
+ *
+ * @static
+ * @param {number} id - Id of stream object.
+ * @returns {Promise} Promise indicating success or failure wrapped in dummy data wrapper.
+ * @memberof StreamService
+ */
+class StreamService {
+  static fetchStream(id) {
+    return GenUtil.dummyDataWrapper(PrivateStreamService.fetchStream(id));
+  }
+}
+
+export default StreamService;
+</code></pre>
         </article>
     </section>
 
