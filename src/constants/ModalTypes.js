@@ -1,4 +1,5 @@
 export default {
   FORGOT: 'FORGOT',
-  LOGIN: 'LOGIN'
+  LOGIN: 'LOGIN',
+  REPORT_USER: 'REPORT_USER'
 };

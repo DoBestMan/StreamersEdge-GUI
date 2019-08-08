@@ -1,0 +1,79 @@
+@import '../../assets/styles/common.scss';
+
+.report {
+  margin: 30px;
+}
+
+.report-form {
+  display: flex;
+  flex-direction: column;
+
+  &--center {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 32px;
+    width: 45px;
+  }
+
+  &__title {
+    font-family: $lato;
+    font-style: italic;
+    font-size: 50px;
+    text-align: center;
+  }
+
+  &__subTitle {
+    font-family: $lato-light;
+    font-style: normal;
+    font-size: 36px;
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__textArea {
+    width: 50%;
+    margin-top: 50px;
+    margin-right: 45px;
+  }
+
+  &__submit {
+    width: 264px;
+    height: 68px;
+    border: 2px solid silver;
+    font-family: $lato;
+    font-style: italic;
+    font-size: 31px;
+    background-image: $report__submit-gradient;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+    outline-style: solid;
+    outline-color: black;
+  }
+
+  &__txt {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+
+    &--error {
+      @extend .report-form__txt;
+
+      height: 0;
+      color: white;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .report-form__controls {
+      flex-direction: column;
+    }
+  }
+}

@@ -43,6 +43,7 @@ const margin = {
  * @param {boolean} fullWidth - Default `true`. If true, the input will take up the full width of its container.
  * @param {margin} margin - Default `normal`. If dense or normal, will adjust vertical spacing of this and contained components.
  * @param {string} type - Default `string`. Type of the input element. It should be a valid HTML5 input type.
+ * @param {string} inputClass - Name of class to pass into MUI's InputProps.
  *
  * @class CSSInput
  * @augments {Component}
@@ -205,6 +206,7 @@ class CustomInput extends Component {
     const placeholder = this.props.placeholder || '';
     const required = this.props.required || false;
     const type = this.props.type || 'string';
+    const muiInputClass = classes[this.props.muiInputClass] || classes.input;
     const wrapperStyle = {
       height: height
     };
@@ -235,7 +237,9 @@ class CustomInput extends Component {
               <TextField
                 autoFocus={ autofocus }
                 className={ this.state.inputClassName }
-                InputProps={ {className: classes.input, disableUnderline: true} }
+                InputProps={ {disableUnderline: true} }
+                // eslint-disable-next-line react/jsx-no-duplicate-props
+                inputProps={ {className: muiInputClass} }
                 multiline={ multiline }
                 name={ name }
                 onChange={ (e) => this.onChange(e) }
@@ -266,6 +270,7 @@ CustomInput.propTypes = {
   hasActiveGlow: PropTypes.bool,
   name: PropTypes.string,
   theme: PropTypes.string,
+  inputClass: PropTypes.string,
   required: PropTypes.bool,
   multiline: PropTypes.bool,
   rows: PropTypes.oneOfType([

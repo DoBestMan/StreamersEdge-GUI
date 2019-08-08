@@ -123,6 +123,19 @@ export const translationObject = {
         join: 'JOIN'
       }
     },
+    reportUser: {
+      report: 'REPORT',
+      selectableReasons: 'Selectable reasons for reports:',
+      giveDescription: 'Please give a brief description..',
+      attachLink: 'Attach a link to reported video:',
+      error: 'Please ensure all fields are filled.',
+      reasons: {
+        one: 'Vulgarity on stream',
+        two: 'Sexist comments on stream',
+        three: 'Offends my religious sentiments',
+        four: 'Offensive profile pic'
+      }
+    },
     copyright: 'Peerplays Global©',
     lorem: 'Spicy jalapeno bacon ipsum dolor amet corned beef reprehenderit chicken duis tail sirloin spare ribs salami burgdoggen tongue drumstick ut. Quis laboris pig drumstick fatback prosciutto' +
     ' in cupim aliqua jowl bacon. Irure ullamco buffalo picanha est jerky shoulder beef sint mollit ut boudin ground round proident. Id lorem turducken et eiusmod. Buffalo tri-tip tenderloin ' +

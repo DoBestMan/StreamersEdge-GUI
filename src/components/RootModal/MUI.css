@@ -3,3 +3,12 @@
   border-radius: 35px;
   background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));
 }
+
+.report {
+  width: 1417px;
+  max-width: 1417px;
+  height: 640px;
+  border: 2px solid rgb(190, 195, 210);
+  border-radius: 35px;
+  background-image: linear-gradient(to right, rgb(163, 0, 0), rgb(173, 16, 11), rgb(187, 36, 25));
+}
