@@ -55,11 +55,16 @@
     content: ' *';
     display:inline;
     position: absolute;
-    left: 425px;
+    top: 24px;
+    left: 430px;
+    transform: scale(2);
     color: $red;
+    size: 10px;
   }
 
   &__required-asterisk {
+    vertical-align: sub;
+    font-size: 15px;
     color: $red;
   }
 
