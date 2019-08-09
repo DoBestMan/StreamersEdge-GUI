@@ -1,6 +1,7 @@
 import {translate} from './GeneralUtils';
 import Config from '../utility/Config';
 import {UploadFileTypes} from '../constants';
+import supportedEmailDomains from '../assets/locales/SupportedEmailDomains.txt';
 
 const PrivateValidationUtils = {
   /**
@@ -75,11 +76,30 @@ const PrivateValidationUtils = {
   email(email) {
     let regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+    const validEmailDomain = email.length > 0 ? this.emailDomain(email) : false;
+
     if (!regex.test(email)) {
       return translate('errors.email.invalid');
+    } else if(!validEmailDomain) {
+      return translate('errors.email.invalidDomain');
     } else {
       return null;
     }
+  },
+  /**
+   *
+   *
+   * @param {string} email - Email to validate.
+   * @returns {boolean} False if domain name is not valid, otherwise true.
+   * @memberof PrivateValidationUtil
+   */
+  emailDomain(email) {
+    const regex=/\.([^\.]+?)$/;
+
+    const acceptedDomains = supportedEmailDomains.split('\n');
+    const extractedDomain = regex.exec(email)[1];
+
+    return acceptedDomains.includes(extractedDomain.toUpperCase());
   },
 
   /**

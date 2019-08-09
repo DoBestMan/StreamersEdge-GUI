@@ -13,7 +13,8 @@ export const translationObject = {
         endAlphanumeric: 'end with a letter or digit.'
       },
       email: {
-        invalid: 'invalid email address'
+        invalid: 'invalid email address',
+        invalidDomain: 'invalid top level domain name'
       },
       password: {
         lengthRequirement: 'password must be between 3 and 63 characters in length',

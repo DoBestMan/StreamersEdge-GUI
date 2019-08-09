@@ -6,6 +6,7 @@ import AuthFooter from '../Auth/AuthFooter';
 import {ModalActions} from '../../actions';
 import {ModalTypes} from '../../constants';
 import {GenUtil} from '../../utility';
+
 const translate = GenUtil.translate;
 
 class Register extends Component {
