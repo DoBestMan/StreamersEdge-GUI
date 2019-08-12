@@ -22,12 +22,17 @@ class Register extends Component {
     this.props.toggleModal();
   };
 
+  openRecoverModal = () => {
+    this.props.setModalType(ModalTypes.FORGOT);
+    this.props.toggleModal();
+  };
+
   render() {
     return (
       <>
         <div className='register-page'>
           <span className='register__title'>{translate('register.createAccount')}</span>
-          <RegisterForm openLoginModal={ this.openLoginModal } />
+          <RegisterForm openLoginModal={ this.openLoginModal } openRecoverModal = { this.openRecoverModal } />
           <AuthFooter />
         </div>
       </>

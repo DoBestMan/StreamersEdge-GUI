@@ -21,6 +21,7 @@ class RegisterForm extends Component {
       email: '',
       username: '',
       password: '',
+      confirmPassword: '',
       resultText: '',
       errText: '',
       registerDisabled: false,
@@ -28,7 +29,8 @@ class RegisterForm extends Component {
       errors: {
         email: '',
         username: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
       }
     };
   }
@@ -36,7 +38,7 @@ class RegisterForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.errors.email !== null || this.state.errors.username !== null || this.state.errors.password !== null) {
+    if (this.state.errors.email !== null || this.state.errors.username !== null || this.state.errors.password !== null || this.state.errors.confirmPassword !== null) {
       console.warn('Registration failed');
       return;
     }
@@ -91,6 +93,12 @@ class RegisterForm extends Component {
     });
   }
 
+  handleConfirmPasswordChange = (password) => {
+    this.setState({
+      confirmPassword: password
+    });
+  }
+
   validate = (type) => {
     switch (type) {
       case 'email':
@@ -105,7 +113,16 @@ class RegisterForm extends Component {
         this.setState({
           errors: {
             ...this.state.errors,
-            password: ValidationUtil.sePassword(this.state.password)
+            password: ValidationUtil.sePassword(this.state.password),
+            confirmPassword: ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword)
+          }
+        });
+        break;
+      case 'confirmPassword':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            confirmPassword: ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword)
           }
         });
         break;
@@ -157,6 +174,21 @@ class RegisterForm extends Component {
           </InputLabel>
           <FormControl className='register-input' margin='normal' required fullWidth>
             <CustomInput
+              name='confirmPassword'
+              type='password'
+              onBlur={ () => this.validate('confirmPassword') }
+              hasActiveGlow={ true }
+              placeholder={ translate('register.confirmPassword') }
+              handleChange={ this.handleConfirmPasswordChange }
+              iconLeft={ IconPassword }
+              iconLeftActive={ IconPasswordActive }
+            />
+          </FormControl>
+          <InputLabel className='register-error' shrink error={ true }>
+            {this.state.errors.confirmPassword}
+          </InputLabel>
+          <FormControl className='register-input' margin='normal' required fullWidth>
+            <CustomInput
               name='username'
               onBlur={ () => this.validate('username') }
               hasActiveGlow={ true }
@@ -190,6 +222,11 @@ class RegisterForm extends Component {
               />
             </Button>
           </div>
+          <span className='register__textlink'>
+            <span onClick={ this.props.openRecoverModal } className='login__link'>
+              {translate('login.forgotPass')}
+            </span>
+          </span>
         </form>
       </>
     );

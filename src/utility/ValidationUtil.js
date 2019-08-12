@@ -95,11 +95,10 @@ const PrivateValidationUtils = {
    */
   emailDomain(email) {
     const regex=/\.([^\.]+?)$/;
-
     const acceptedDomains = supportedEmailDomains.split('\n');
-    const extractedDomain = regex.exec(email)[1];
+    const extractedDomain = regex.exec(email);
 
-    return acceptedDomains.includes(extractedDomain.toUpperCase());
+    return extractedDomain === null ? false : acceptedDomains.includes(extractedDomain[1].toUpperCase());
   },
 
   /**
@@ -124,6 +123,25 @@ const PrivateValidationUtils = {
 
     return error;
   },
+
+  /**
+   * Confirm a Streamers Edge password.
+   *
+   * @param {string} password - Password from form to validate.
+   * @param {string} confirmPassword - Password from form to validate.
+   * @returns {string} - Error if one is found.
+   * @memberof ValidationUtil
+   */
+  seConfirmPassword(password, confirmPassword) {
+    let error = null;
+
+    if (password !== confirmPassword) {
+      error = translate('errors.password.confirmPassword');
+    }
+
+    return error;
+  },
+
 
   /**
    * Validate the search text.
@@ -336,6 +354,19 @@ const ValidationUtil = {
   sePassword(pass) {
     return PrivateValidationUtils.sePassword(pass);
   },
+
+  /**
+   * Confirm a Streamers Edge password.
+   *
+   * @param {string} pass - Password from form to validate.
+   * @param {string} confirmPass - Password from form to validate.
+   * @returns {string} - Error if one is found.
+   * @memberof ValidationUtil
+   */
+  seConfirmPassword(pass, confirmPass) {
+    return PrivateValidationUtils.seConfirmPassword(pass, confirmPass);
+  },
+
 
   /**
    * Validate an email.

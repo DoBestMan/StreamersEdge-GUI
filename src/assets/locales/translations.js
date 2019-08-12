@@ -18,7 +18,8 @@ export const translationObject = {
       },
       password: {
         lengthRequirement: 'password must be between 3 and 63 characters in length',
-        requires: 'password must contain at least one number, one special character (.@$!%^*#), and no spaces'
+        requires: 'password must contain at least one number, one special character (.@$!%^*#), and no spaces',
+        confirmPassword: 'passwords must match'
       },
       search: {
         lengthRequirement: 'search text must be greater than 3 and less than 100 characters',
@@ -82,6 +83,7 @@ export const translationObject = {
       enterEmail: 'Enter your email',
       enterUsername: 'Enter your username',
       enterPassword: 'Enter your password',
+      confirmPassword: 'Confirm your password',
       alreadyHaveAccount: 'Already have an account?',
       login: 'Login'
     },
