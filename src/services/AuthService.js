@@ -396,6 +396,41 @@ class AuthService {
   static getUserList() {
     return GenUtil.dummyDataWrapper(PrivateAuthService.getUserList());
   }
+
+  /**
+   * Donate Stream_USD.
+   * TODO: Update once backend is ready.
+   *
+   * @static
+   * @param {string} account - The account name to donate to.
+   * @param {string} value - The amount of Stream_USD to send.
+   * @returns {Promise}
+   * @memberof AuthService
+   */
+  static donate(account, value) {
+    let response;
+    const query = `${apiRoot}api/v1/payment`;
+
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const body = {
+        account,
+        value
+      };
+
+      try {
+        response = await ApiHandler.post(query, querystring.stringify(body), headers);
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.toString());
+      }
+    });
+  }
 }
 
 export default AuthService;

@@ -93,7 +93,7 @@ class NavigateActions {
    */
   static navigateToPasswordReset(token) {
     return (dispatch) => {
-      dispatch(push(Routes.FORGOT_PASSWORD + `/${token}`));
+      dispatch(push(Routes.FORGOT_PASSWORD + `/?token=${token}`));
     };
   }
 }

@@ -20,16 +20,18 @@ class Home extends Component {
     this.setState({inputValue: val});
   };
 
-  testModal = () => {
-    this.props.setModalType('REPORT_USER');
+  testModal = (type) => {
+    this.props.setModalType(type);
     this.props.toggleModal();
   }
+
 
   render() {
     return (
       <>
         <div className='home'><div className='lorem'>{translate('lorem')}</div></div>
-        <span onClick={ this.testModal }>Test Report Modal</span>
+        <div onClick={ () => this.testModal('REPORT_USER') }>Test Report Modal</div>
+        <div onClick={ () => this.testModal('DONATE')  }>Test Donate</div>
       </>
     );
   }

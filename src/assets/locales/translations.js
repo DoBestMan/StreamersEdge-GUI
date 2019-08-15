@@ -139,6 +139,15 @@ export const translationObject = {
         four: 'Offensive profile pic'
       }
     },
+    donate: {
+      donateTo: 'Donate to: ',
+      balance: 'Balance: ',
+      usd: 'USD',
+      insufficientHeader: 'Not enough funds',
+      insufficientSubHeader: 'We recommend adding funds to your account',
+      successHeader: 'Success!',
+      successSubHeader: 'Your donation was completed successfully'
+    },
     copyright: 'Peerplays Global©',
     lorem: 'Spicy jalapeno bacon ipsum dolor amet corned beef reprehenderit chicken duis tail sirloin spare ribs salami burgdoggen tongue drumstick ut. Quis laboris pig drumstick fatback prosciutto' +
     ' in cupim aliqua jowl bacon. Irure ullamco buffalo picanha est jerky shoulder beef sint mollit ut boudin ground round proident. Id lorem turducken et eiusmod. Buffalo tri-tip tenderloin ' +

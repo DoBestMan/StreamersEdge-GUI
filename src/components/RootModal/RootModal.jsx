@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import LoginForm from '../Login/LoginForm';
 import ForgotPassword from '../ForgotPassword';
 import ReportUser from '../ReportUser';
+import Donate from '../Donate';
 import {AppActions, ModalActions, NavigateActions} from '../../actions/';
 import {ModalTypes} from '../../constants';
 import styles from './MUI.css';
@@ -52,6 +53,12 @@ class RootModal extends Component {
       case ModalTypes.REPORT_USER: {
         modalContent = <ReportUser />;
         modalClass = classes.report;
+        break;
+      }
+
+      case ModalTypes.DONATE: {
+        modalContent = <Donate />;
+        modalClass = classes.donate;
         break;
       }
 
