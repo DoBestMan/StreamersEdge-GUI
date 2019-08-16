@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-v.0"></a>
+
+### Features
+* Donation screen visuals ([#70](https://github.com/PBSA/StreamersEdge-GUI/pull/70))
+* Dummy data wrapper ([#60](https://github.com/PBSA/StreamersEdge-GUI/pull/60))
+* Report user modal ([#64](https://github.com/PBSA/StreamersEdge-GUI/pull/64))
+* setup for challenge redux architecture and API calls ([#58](https://github.com/PBSA/StreamersEdge-GUI/pull/58))
+
+### Bug Fixes
+* STRM-414 ([#69](https://github.com/PBSA/StreamersEdge-GUI/pull/69))
+* STRM-420 ([#66](https://github.com/PBSA/StreamersEdge-GUI/pull/66))
+  * Added list of accepted top level domains
+* STRM-425 ([#68](https://github.com/PBSA/StreamersEdge-GUI/pull/68))
+  * added asterisk to required fields in signup
+* STRM-460 ([#62](https://github.com/PBSA/StreamersEdge-GUI/pull/62))
+  * properly reset login error message
+* STRM-429 ([#61](https://github.com/PBSA/StreamersEdge-GUI/pull/61))
+  * removed user icon from header before login
+* STRM-431 ([#59](https://github.com/PBSA/StreamersEdge-GUI/pull/59))
+  * Add email validation to onChange.
+  * Disable submit button if validation is failing
 <a name="0.1.2-v.0"></a>
 ## 0.1.2-v.0 (2019-07-31)
 
