@@ -8,7 +8,7 @@ export const translationObject = {
         longer: 'be longer.',
         shorter: 'be shorter.',
         startLetter: 'start with a letter.',
-        lettersDigitsDashes: 'have only letters, digits, or dashes.',
+        lettersDigitsDashes: 'have only lowercase letters, digits, or dashes.',
         oneDash: 'have only one dash in a row.',
         endAlphanumeric: 'end with a letter or digit.'
       },
