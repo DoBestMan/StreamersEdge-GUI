@@ -38,6 +38,12 @@
       transform: translate(-50%, -50%);
     }
   }
+
+  &-error {
+    width: 350px;
+    height: 20px;
+    margin-bottom: 5px;
+  }
 }
 
 .goregister__link {

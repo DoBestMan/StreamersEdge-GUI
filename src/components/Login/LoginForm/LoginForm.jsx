@@ -3,10 +3,11 @@
  */
 import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {AuthService, ProfileService} from '../../../services/';
 import AuthFooter from '../../Auth/AuthFooter';
-import {GenUtil} from '../../../utility';
+import {ValidationUtil, GenUtil} from '../../../utility';
 import {UserIcon, UserIconActive, IconPassword, IconPasswordActive, LoginButton, LoginButtonActive} from '../../../assets/images/login';
 import LogoImage from '../../../assets/images/se-logo-stacked.png';
 import CustomInput from '../../CustomInput';
@@ -18,14 +19,24 @@ class LoginForm extends Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors:{
+        username: null,
+        password: null
+      }
     };
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.username < 3 || this.state.password < 4) {
+    if ((this.state.errors.username !== null || this.state.errors.password !== null)) {
+      console.warn('Login failed');
+
+      this.setState({
+        loginDisabled: true
+      });
+
       return;
     }
 
@@ -41,12 +52,14 @@ class LoginForm extends Component {
     this.setState({
       username: user
     });
+
   };
 
   handlePasswordChange = (password) => {
     this.setState({
       password: password
     });
+
   }
 
   logout = () => {
@@ -57,7 +70,45 @@ class LoginForm extends Component {
     ProfileService.getProfile();
   };
 
+  allowLogin = () => {
+
+    if ((this.state.errors.username === null && this.state.errors.password === null) && (this.state.username.length&& this.state.password.length)) {
+      console.log('true');
+      return true;
+    } else {
+      console.log('false');
+      return false;
+    }
+  };
+
+  validate = (type) => {
+
+    switch (type) {
+      case 'password':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            password: ValidationUtil.sePassword(this.state.password)
+          }
+        });
+        break;
+      case 'username':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            username: ValidationUtil.seUsername(this.state.username)
+          }
+        });
+        break;
+      default:
+    }
+  };
+
   render() {
+    const isDisabled = () => {
+      const {username, password, errors} = this.state;
+      return username.length < 1 || password < 1 || !!errors.username || !!errors.password;
+    };
 
     return (
       <>
@@ -71,8 +122,12 @@ class LoginForm extends Component {
               handleChange={ this.handleUsernameChange }
               iconLeft={ UserIcon }
               iconLeftActive={ UserIconActive }
+              onBlur={ () => this.validate('username') }
             />
           </FormControl>
+          <InputLabel className='login-error' shrink error={ true }>
+            {this.state.errors.username}
+          </InputLabel>
           <FormControl className='login-form__input' margin='none' required>
             <CustomInput
               name='password'
@@ -82,8 +137,12 @@ class LoginForm extends Component {
               handleChange={ this.handlePasswordChange }
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
+              onBlur={ () => this.validate('password') }
             />
           </FormControl>
+          <InputLabel className='login-error' shrink error={ true }>
+            {this.state.errors.password}
+          </InputLabel>
           <span className='login-form__apiTxt--error'>{this.props.errorText}</span>
           <span className='register__textlink'>
             {translate('login.dontHaveAccount')}
@@ -97,7 +156,7 @@ class LoginForm extends Component {
             </span>
           </span>
           <div className='login__btn-container'>
-            <Button disabled={ false } className='login__btn' type='submit' style={ {color: 'white'} }>
+            <Button disabled={ isDisabled() } className='login__btn' type='submit' style={ {color: 'white'} }>
               <img
                 className='login__btn-img'
                 src={ LoginButton }
