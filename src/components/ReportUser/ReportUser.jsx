@@ -16,7 +16,7 @@ const translate = GenUtil.translate;
 
 class ReportUser extends Component {
   state = {
-    reportType: '',
+    reportType: '1',
     link: '',
     desc: '',
     error: ''
