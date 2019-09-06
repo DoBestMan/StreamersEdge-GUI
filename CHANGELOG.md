@@ -2,8 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0-v.0"></a>
+## 0.6.0-v.0 (2019-09-06)
+
+### Features
+* New Signup Modal ([#79](https://github.com/PBSA/StreamersEdge-GUI/pull/79))
+  * Contains the following bug fixes
+    * [STRM 459](https://peerplays.atlassian.net/browse/STRM-459)
+      * Clear signup after navigating away from page
+    * [STRM 470](https://peerplays.atlassian.net/browse/STRM-470)
+      * Fixed overlaping error messages in signup
+    * [STRM 499](https://peerplays.atlassian.net/browse/STRM-499)
+      * Signup throws error for min or max password
+    * [STRM 501](https://peerplays.atlassian.net/browse/STRM-501)
+  * Contains the following tasks
+    * [STRM 510](https://peerplays.atlassian.net/browse/STRM-510)
+      * Password strength indicator
+
+### Bug Fixes
+* STRM-420 ([#73](https://github.com/PBSA/StreamersEdge-GUI/pull/73))
+  * Fixed regex overriding TLD domain check
+* STRM-496 ([#74](https://github.com/PBSA/StreamersEdge-GUI/pull/74))
+  * Added username validation to login page
+* STRM-498 ([#75](https://github.com/PBSA/StreamersEdge-GUI/pull/75))
+  * Added username validation for capital letter signup page
+* STRM-472 ([#76](https://github.com/PBSA/StreamersEdge-GUI/pull/76))
+  * Report user radio selection now has default
+
 <a name="0.5.0-v.0"></a>
-## 0.5.0-v.0 (2019-16-19)
+## 0.5.0-v.0 (2019-08-19)
 
 ### Features
 * Donation screen visuals ([#70](https://github.com/PBSA/StreamersEdge-GUI/pull/70))
