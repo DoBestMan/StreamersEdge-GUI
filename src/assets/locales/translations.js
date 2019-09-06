@@ -3,7 +3,7 @@ export const translationObject = {
     errors: {
       username: {
         prefix1: 'Account name should ',
-        prefix2: 'each account segment should ',
+        prefix2: 'Each account segment should ',
         notEmpty: 'not be empty.',
         longer: 'be longer.',
         shorter: 'be shorter.',
@@ -13,13 +13,13 @@ export const translationObject = {
         endAlphanumeric: 'end with a letter or digit.'
       },
       email: {
-        invalid: 'invalid email address',
-        invalidDomain: 'invalid top level domain name'
+        invalid: 'Invalid email address',
+        invalidDomain: 'Invalid top level domain name'
       },
       password: {
-        lengthRequirement: 'password must be between 3 and 63 characters in length',
-        requires: 'password must contain at least one number, one special character (.@$!%^*#), and no spaces',
-        confirmPassword: 'passwords must match'
+        lengthRequirement: 'Password must be between 6 and 60 characters in length',
+        requires: 'Password must contain at least one number, one special character (.@$!%^*#), and no spaces',
+        confirmPassword: 'Passwords must match'
       },
       search: {
         lengthRequirement: 'search text must be greater than 3 and less than 100 characters',
@@ -79,13 +79,20 @@ export const translationObject = {
       invalidPassword: 'The password you\'ve entered is incorrect'
     },
     register: {
-      createAccount: 'CREATE YOUR ACCOUNT',
+      createAccount: 'Create an Account',
+      createAccountSubHeader: 'Welcome, you will be surprised here!',
       enterEmail: 'Enter your email',
       enterUsername: 'Enter your username',
       enterPassword: 'Enter your password',
       confirmPassword: 'Confirm your password',
-      alreadyHaveAccount: 'Already have an account?',
-      login: 'Login'
+      alreadyHaveAccount: 'Already have a Streamers Edge account?',
+      login: 'Login',
+      passwordStrength: {
+        veryWeak: 'Very Weak',
+        weak: 'Weak',
+        medium: 'Medium',
+        strong: 'Strong'
+      }
     },
     header: {
       login: 'Log In',

@@ -113,7 +113,7 @@ const PrivateValidationUtils = {
     let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[.@$!%^*#])[A-Za-z\d.@$!%^*#]{4,}$/; //(.@!#$%^*)
     let error = null;
 
-    if (length < 3 || length > 63) {
+    if (length < 6 || length > 60) {
       error = translate('errors.password.lengthRequirement');
     }
 

@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {NavLink} from 'react-router-dom';
 import {AppActions, ModalActions} from '../../actions';
 import {GenUtil} from '../../utility';
-import {ModalTypes, RouteConstants as Routes} from '../../constants';
+import {ModalTypes} from '../../constants';
 import HeaderLogo from '../../assets/images/se-logo.png';
 import loginIcon from '../../assets/images/loginicon.png';
 import loginIconActive from '../../assets/images/loginicon_active.png';
@@ -16,10 +16,21 @@ class Header extends Component {
     this.props.toggleModal();
   };
 
+  openSignUpModal = () => {
+    this.props.setModalType(ModalTypes.SIGN_UP);
+    this.props.toggleModal();
+  };
+
   render() {
     let logButton = (
       <span onClick={ this.openLoginModal } className='header__link'>
         {translate('header.login')}
+      </span>
+    );
+
+    const signUpButton = (
+      <span onClick={ this.openSignUpModal } className='header__link'>
+        {translate('header.signup')}
       </span>
     );
 
@@ -47,9 +58,7 @@ class Header extends Component {
             <img className='header__image' src={ HeaderLogo } alt='Header' />
           </div>
           <div className='header--right'>
-            <NavLink exact className='header__link' activeClassName='header__link--active' to={ Routes.SIGN_UP }>
-              {translate('header.signup')}
-            </NavLink>
+            {signUpButton}
             {logButton}
             <img className={ this.props.isLoggedIn ? 'header__logo' : 'header__logo--display-none' } src={ loginIcon }
               onMouseOver={ (e) => e.currentTarget.src = loginIconActive } onMouseOut={ (e) => e.currentTarget.src =  loginIcon } alt='avatar' />

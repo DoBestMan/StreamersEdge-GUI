@@ -8,6 +8,7 @@ import LoginForm from '../Login/LoginForm';
 import ForgotPassword from '../ForgotPassword';
 import ReportUser from '../ReportUser';
 import Donate from '../Donate';
+import Register from '../Register';
 import {AppActions, ModalActions, NavigateActions} from '../../actions/';
 import {ModalTypes} from '../../constants';
 import styles from './MUI.css';
@@ -26,8 +27,7 @@ class RootModal extends Component {
 
   toggleModalAndRegister = () => {
     this.props.setErrorText('');
-    this.props.toggleModal();
-    this.props.navigateToSignUp();
+    this.props.setModalType(ModalTypes.SIGN_UP);
   };
 
   render() {
@@ -45,8 +45,14 @@ class RootModal extends Component {
         break;
       }
 
+      case ModalTypes.SIGN_UP: {
+        modalContent = <Register />;
+        break;
+      }
+
       case ModalTypes.FORGOT: {
         modalContent = <ForgotPassword goRegister={ this.toggleModalAndRegister } />;
+        modalClass = classes.register;
         break;
       }
 

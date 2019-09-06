@@ -4,7 +4,6 @@
   &__btn {
     &-container {
       position: relative;
-      padding-bottom: 25px;
       text-align: center;
     }
 
@@ -17,7 +16,12 @@
   }
 
   &__textlink {
+    padding-bottom: 30px;
     font-size: 13px;
+  }
+
+  &__blue {
+    color: $blue-light;
   }
 
   &-error {
@@ -39,6 +43,7 @@
 
     &__gologin {
       padding-left: 5px;
+      font-style: italic;
       text-decoration: underline;
       cursor: pointer;
     }
@@ -83,5 +88,5 @@
   display: flex;
   justify-content: center;
   margin-top: 25px;
-  margin-bottom: 25px;
+  margin-bottom: 12px;
 }

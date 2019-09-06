@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Home from '../components/Home';
-import Register from '../components/Register';
 import Dashboard from '../components/Dashboard';
 import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
@@ -19,7 +18,6 @@ const routes = (
     <Switch>
       <Route exact path={ Routes.ROOT } component={ Home }/>
       <Route path={ Routes.PEERPLAYS } component={ requireAuthentication(PeerplaysLogin) } />
-      <Route path={ Routes.SIGN_UP } component={ Register }/>
       <Route path={ Routes.FORGOT_PASSWORD } component={ ResetForm }/>
       <Route path={ Routes.PROFILE } component={ requireAuthentication(CreateProfile) }/>
       <Route path={ Routes.DASHBOARD } component={ requireAuthentication(Dashboard) }/>

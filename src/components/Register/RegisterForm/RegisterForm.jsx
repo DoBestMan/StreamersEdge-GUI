@@ -10,6 +10,7 @@ import {ValidationUtil, GenUtil} from '../../../utility';
 import {EmailIcon, EmailIconActive, RegisterButton, RegisterButtonActive} from '../../../assets/images/signup';
 import {UserIcon, UserIconActive, IconPassword, IconPasswordActive} from '../../../assets/images/login';
 import CustomInput from '../../CustomInput';
+import PasswordStrengthIndicator from './PasswordStrengthIndicator';
 
 const translate = GenUtil.translate;
 
@@ -78,25 +79,25 @@ class RegisterForm extends Component {
   handleEmailChange = (email) => {
     this.setState({
       email: email
-    });
+    }, () => this.validate('email'));
   }
 
   handleUsernameChange = (user) => {
     this.setState({
       username: user
-    });
+    }, () => this.validate('username'));
   };
 
   handlePasswordChange = (password) => {
     this.setState({
       password: password
-    });
+    }, () => this.validate('password'));
   }
 
   handleConfirmPasswordChange = (password) => {
     this.setState({
       confirmPassword: password
-    });
+    }, () => this.validate('confirmPassword'));
   }
 
   validate = (type) => {
@@ -168,6 +169,7 @@ class RegisterForm extends Component {
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
             />
+            <PasswordStrengthIndicator password = { this.state.password } error={ this.state.errors.password }/>
           </FormControl>
           <InputLabel className='register-error' shrink error={ true }>
             {this.state.errors.password}
@@ -192,7 +194,7 @@ class RegisterForm extends Component {
               name='username'
               onBlur={ () => this.validate('username') }
               hasActiveGlow={ true }
-              placeholder={ translate('login.enterUsername') }
+              placeholder={ translate('register.enterUsername') }
               handleChange={ this.handleUsernameChange }
               iconLeft={ UserIcon }
               iconLeftActive={ UserIconActive }
@@ -204,12 +206,19 @@ class RegisterForm extends Component {
           <span className='register__apiTxt--success'>{this.state.resultText}</span>
           <span className='register__apiTxt--error'>{this.state.errText}</span>
           <span className='register__requiredTxt'>All fields marked with an asterisk <span className='register__required-asterisk'>*</span> are required </span>
-          <span className='login-txt-link'>
-            {translate('register.alreadyHaveAccount')}
-            <span className='register-form__gologin' onClick={ this.props.openLoginModal }>
-              {translate('register.login')}
+          <div className='register-links'>
+            <span className='login-txt-link'>
+              <span className='register__blue'>{translate('register.alreadyHaveAccount')}</span>
+              <span className='register-form__gologin' onClick={ this.props.openLoginModal }>
+                {translate('register.login')}
+              </span>
             </span>
-          </span>
+            <span className='register__textlink'>
+              <span onClick={ this.props.openRecoverModal } className='login__link'>
+                {translate('login.forgotPass')}
+              </span>
+            </span>
+          </div>
           <div className='register__btn-container'>
             <Button disabled={ this.state.registerDisabled } className='register__btn' type='submit' style={ {color: 'white'} }>
               <img
@@ -222,11 +231,6 @@ class RegisterForm extends Component {
               />
             </Button>
           </div>
-          <span className='register__textlink'>
-            <span onClick={ this.props.openRecoverModal } className='login__link'>
-              {translate('login.forgotPass')}
-            </span>
-          </span>
         </form>
       </>
     );
