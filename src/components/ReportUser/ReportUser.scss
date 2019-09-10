@@ -21,6 +21,16 @@
     width: 45px;
   }
 
+  &__radioGroup {
+    align-items: center;
+  }
+
+  &__btn {
+    &-img {
+      position: absolute;
+    }
+  }
+
   &__title {
     font-family: $lato;
     font-style: italic;
@@ -36,7 +46,8 @@
 
   &__controls {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__textArea {
@@ -49,31 +60,18 @@
     width: 264px;
     height: 68px;
     border: 2px solid silver;
-    font-family: $lato;
-    font-style: italic;
-    font-size: 31px;
-    background-image: $report__submit-gradient;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-    outline-style: solid;
-    outline-color: black;
   }
 
   &__txt {
     display: flex;
     justify-content: center;
-    padding-top: 10px;
+    padding-top: 20px;
 
     &--error {
       @extend .report-form__txt;
 
       height: 0;
       color: white;
-    }
-  }
-
-  @media (max-width: 500px) {
-    .report-form__controls {
-      flex-direction: column;
     }
   }
 }

@@ -140,10 +140,9 @@ export const translationObject = {
       attachLink: 'Attach a link to reported video:',
       error: 'Please ensure all fields are filled.',
       reasons: {
-        one: 'Vulgarity on stream',
-        two: 'Sexist comments on stream',
-        three: 'Offends my religious sentiments',
-        four: 'Offensive profile pic'
+        one: 'Offends my religious sentiments',
+        two: 'Offensive profile pic',
+        three: 'Other'
       }
     },
     donate: {

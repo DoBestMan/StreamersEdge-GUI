@@ -10,6 +10,7 @@ import {Radio, RadioGroup, FormControl, FormControlLabel, Button, IconButton} fr
 import CloseIcon from '@material-ui/icons/Close';
 import {GenUtil} from '../../utility';
 import {withStyles} from '@material-ui/core/styles';
+import ReportButton from '../../assets/images/report/report_button.png';
 import styles from './MUI.css';
 
 const translate = GenUtil.translate;
@@ -17,7 +18,6 @@ const translate = GenUtil.translate;
 class ReportUser extends Component {
   state = {
     reportType: '1',
-    link: '',
     desc: '',
     error: ''
   };
@@ -29,12 +29,6 @@ class ReportUser extends Component {
     });
   }
 
-  handleLinkChange = (link) => {
-    this.setState({
-      link
-    });
-  };
-
   handleDescChange = (desc) => {
     this.setState({
       desc
@@ -44,7 +38,7 @@ class ReportUser extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!this.state.reportType || !this.state.link || !this.state.desc) {
+    if (!this.state.reportType || !this.state.desc) {
       this.setState({
         error: translate('reportUser.error')
       });
@@ -82,20 +76,20 @@ class ReportUser extends Component {
                 <FormControlLabel classes={ {label: classes.label} } value='1' control={ <Radio color='primary' /> } label={ translate('reportUser.reasons.one') } />
                 <FormControlLabel classes={ {label: classes.label} } value='2' control={ <Radio color='primary' /> } label={ translate('reportUser.reasons.two') } />
                 <FormControlLabel classes={ {label: classes.label} } value='3' control={ <Radio color='primary' /> } label={ translate('reportUser.reasons.three') } />
-                <FormControlLabel classes={ {label: classes.label} } value='4' control={ <Radio color='primary' /> } label={ translate('reportUser.reasons.four') } />
               </RadioGroup>
             </FormControl>
             <FormControl className='report-form__textArea'>
               <CustomInput theme='white' muiInputClass='inputBlack' multiline fullwidth={ false } handleChange={ this.handleDescChange }placeholder={ translate('reportUser.giveDescription') }/>
             </FormControl>
           </div>
-          <FormControl className='report-form__linkInput'>
-            <span className='report-form__subTitle'>{translate('reportUser.attachLink')}</span>
-            <CustomInput theme='white' muiInputClass='inputBlack' fullWidth handleChange={ this.handleLinkChange }/>
-          </FormControl>
           <div className='report-form--center'>
-            <Button className = 'report-form__submit' type='submit' variant='outlined'>
-              { translate('reportUser.report') }
+            <Button className = 'report-form__submit' type='submit'>
+              <img
+                className='report-form__btn-img'
+                src={ ReportButton }
+                alt='Report'
+                type='submit'
+              />
             </Button>
           </div>
           <div className='report-form__txt--error'>{this.state.error}</div>
