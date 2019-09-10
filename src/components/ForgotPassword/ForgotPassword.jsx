@@ -10,7 +10,6 @@ import {AuthService} from '../../services';
 import AuthFooter from './../Auth/AuthFooter';
 import {GenUtil, ValidationUtil} from '../../utility';
 import ResetButton from '../../assets/images/resetpw/Reset.png';
-import ResetButtonActive from '../../assets/images/resetpw/Reset_Active.png';
 import Logo from '../../assets/images/se-logo-stacked.png';
 import {EmailIcon, EmailIconActive} from '../../assets/images/signup';
 import CustomInput from '../CustomInput';
@@ -98,7 +97,7 @@ class ForgotPassword extends Component {
           <div className='forgot-button-container'>
             <span className={ `forgot-result${this.state.resultStatus}` }>{this.state.resultText}</span>
             <Button disabled={ this.state.btnDisable } type='submit' style={ {color: 'white'} }>
-              <img src={ ResetButton } alt='Submit' type='submit' onMouseOver={ (e) => (e.currentTarget.src = ResetButtonActive) } onMouseOut={ (e) => (e.currentTarget.src = ResetButton) } />
+              <img src={ ResetButton } alt='Submit' type='submit' />
             </Button>
           </div>
         </form>
