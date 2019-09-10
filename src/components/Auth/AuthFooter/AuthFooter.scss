@@ -6,6 +6,11 @@
   align-items: center;
   margin-top: 15px;
 
+  &-title {
+    font-style: italic;
+    color: $blue-light;
+  }
+
   &__icons {
     margin-left: 10px;
     cursor: pointer;

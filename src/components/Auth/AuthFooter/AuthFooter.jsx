@@ -15,7 +15,7 @@ class AuthFooter extends Component {
   render() {
     return (
       <div className='auth-footer'>
-        <p>{translate('login.orLoginWith')}</p>
+        <p className='auth-footer-title'>{translate('login.orLoginWith')}</p>
         <div className='auth-footer__icons'>
           <img
             className='twitch'

@@ -75,7 +75,7 @@ export const translationObject = {
       dontHaveAccount: 'Don\'t have a Streamers Edge account?',
       register: 'Register',
       forgotPass: 'Forgot your password?',
-      orLoginWith: 'Or Login with',
+      orLoginWith: 'or Login using our Sign In Partners',
       invalidPassword: 'The password you\'ve entered is incorrect'
     },
     register: {
@@ -102,7 +102,7 @@ export const translationObject = {
       popular: 'Popular'
     },
     forgotPassword: {
-      header: 'FORGOT YOUR PASSWORD?',
+      header: 'Forgot Your Password?',
       subHeader: 'Enter your email to reset your Streamers Edge password.',
       enterEmail: 'Enter your Streamers Edge Email',
       resultText: {

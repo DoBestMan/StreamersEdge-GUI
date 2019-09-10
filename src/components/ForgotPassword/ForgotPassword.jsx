@@ -10,9 +10,13 @@ import {AuthService} from '../../services';
 import AuthFooter from './../Auth/AuthFooter';
 import {GenUtil, ValidationUtil} from '../../utility';
 import ResetButton from '../../assets/images/resetpw/Reset.png';
-import Logo from '../../assets/images/se-logo-stacked.png';
 import {EmailIcon, EmailIconActive} from '../../assets/images/signup';
 import CustomInput from '../CustomInput';
+import {IconButton} from '@material-ui/core';
+import BackIcon from '@material-ui/icons/ArrowBack';
+import {ModalTypes} from '../../constants';
+import PropTypes from 'prop-types';
+
 const translate = GenUtil.translate;
 
 class ForgotPassword extends Component {
@@ -37,16 +41,18 @@ class ForgotPassword extends Component {
     });
   };
 
-  // Update the result message and re-enable the button for submissions
+  back = () => {
+    if (this.props.prev in ModalTypes) {
+      this.props.setModalType(this.props.prev);
+    }
+  };
+
+  // Update the result message and re-enable the button fssubmissions
   updateResultMessage = (message) => {
     this.setState({
       resultText: message,
       btnDisable: false
     });
-  };
-
-  back = () => {
-    this.props.history.push('/login');
   };
 
   handleSubmit = (event) => {
@@ -74,8 +80,10 @@ class ForgotPassword extends Component {
   render() {
     return (
       <>
+        <IconButton className='forgot__back' aria-label='Back' onClick={ this.back }>
+          <BackIcon />
+        </IconButton>
         <form className='login-form' onSubmit={ this.handleSubmit }>
-          <img src={ Logo } alt='logo' />
           <span className='forgot-title'>{translate('forgotPassword.header')}</span>
           <span className='forgot-subheader'>{translate('forgotPassword.subHeader')}</span>
           <FormControl margin='normal' required>
@@ -97,7 +105,7 @@ class ForgotPassword extends Component {
           <div className='forgot-button-container'>
             <span className={ `forgot-result${this.state.resultStatus}` }>{this.state.resultText}</span>
             <Button disabled={ this.state.btnDisable } type='submit' style={ {color: 'white'} }>
-              <img src={ ResetButton } alt='Submit' type='submit' />
+              <img className='forgot-button' src={ ResetButton } alt='Submit' type='submit' />
             </Button>
           </div>
         </form>
@@ -106,5 +114,11 @@ class ForgotPassword extends Component {
     );
   }
 }
+
+ForgotPassword.propTypes = {
+  goRegister: PropTypes.func.isRequired,
+  setModalType: PropTypes.func.isRequired,
+  prev: PropTypes.string
+};
 
 export default withRouter(ForgotPassword);

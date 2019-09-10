@@ -3,6 +3,7 @@ import {fromJS} from 'immutable';
 
 let initialState = fromJS({
   isOpen: false,
+  previous: '',
   type: ''
 });
 
@@ -17,6 +18,7 @@ export default (state = initialState, action) => {
 
     case ActionTypes.MODAL_SET_TYPE: {
       return state.merge({
+        previous: state.get('type'),
         type: action.modalType
       });
     }

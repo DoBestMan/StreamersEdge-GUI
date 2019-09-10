@@ -14,6 +14,7 @@ import {ModalTypes} from '../../constants';
 import styles from './MUI.css';
 
 class RootModal extends Component {
+
   handleClose = () => {
     this.props.setErrorText('');
     this.props.toggleModal();
@@ -51,8 +52,8 @@ class RootModal extends Component {
       }
 
       case ModalTypes.FORGOT: {
-        modalContent = <ForgotPassword goRegister={ this.toggleModalAndRegister } />;
-        modalClass = classes.register;
+        modalContent = <ForgotPassword goRegister={ this.toggleModalAndRegister } prev={ this.props.previousModal } setModalType={ this.props.setModalType }/>;
+        modalClass = classes.forgot;
         break;
       }
 
@@ -87,6 +88,7 @@ class RootModal extends Component {
 const mapStateToProps = (state) => ({
   isModalOpen: state.getIn(['modal', 'isOpen']),
   modalType: state.getIn(['modal', 'type']),
+  previousModal: state.getIn(['modal', 'previous']),
   errorText: state.getIn(['profiles', 'loginErrorText'])
 });
 
