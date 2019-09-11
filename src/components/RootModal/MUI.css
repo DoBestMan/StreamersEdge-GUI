@@ -5,6 +5,7 @@
 }
 
 .register {
+  width: 700px;
   border: 2px solid rgb(190, 195, 210);
   border-radius: 35px;
   background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));

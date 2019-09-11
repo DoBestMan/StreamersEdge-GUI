@@ -12,6 +12,7 @@
   }
 
   &__icons {
+    display: flex;
     margin-left: 10px;
     cursor: pointer;
   }
@@ -22,5 +23,11 @@
 
   .youtube {
     margin-left: 22px;
+  }
+
+  .peerplays {
+    position: relative;
+    bottom: 17px;
+    margin-left: 10px;
   }
 }

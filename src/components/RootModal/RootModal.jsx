@@ -48,6 +48,7 @@ class RootModal extends Component {
 
       case ModalTypes.SIGN_UP: {
         modalContent = <Register />;
+        modalClass = classes.register;
         break;
       }
 
