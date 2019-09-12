@@ -49,7 +49,7 @@ class RegisterForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.errors.email !== null || this.state.errors.username !== null || this.state.errors.password !== null || this.state.errors.confirmPassword !== null) {
+    if (this.state.errors.email !== '' || this.state.errors.username !== '' || this.state.errors.password !== '' || this.state.errors.confirmPassword !== '') {
       console.warn('Registration failed');
       return;
     }
