@@ -14,6 +14,7 @@ import {RouteConstants} from './constants';
 import {NavigateActions} from './actions';
 import {TokenUtil} from './utility';
 import Footer from './components/Footer';
+import ErrorBoxValidation from './components/ErrorBoxValidation';
 
 const styleNode = document.createComment('insertion-point-jss');
 document.head.insertBefore(styleNode, document.head.firstChild);
@@ -58,6 +59,7 @@ class App extends Component {
       <JssProvider jss={ jss } generateClassName={ generateClassName }>
         <ConnectedRouter history={ this.props.history }>
           <Header/>
+          <ErrorBoxValidation />
           <RootModal/>
           <div className='body'>
             {routes}

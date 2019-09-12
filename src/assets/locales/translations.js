@@ -2,6 +2,13 @@ export const translationObject = {
   en: {
     errors: {
       username: {
+        requirement: {
+          length: 'should be between 3 & 60 chars long',
+          beginsWithLetter: 'Begins with letter',
+          endsWithLowercaseOrDigit: 'Ends with lowercase letter or digit',
+          onlyContainsLettersDigitHyphens: 'Only contains letters, digits, hyphens',
+          noUppercase: 'No Uppercase'
+        },
         prefix1: 'Account name should ',
         prefix2: 'Each account segment should ',
         notEmpty: 'not be empty.',
@@ -17,8 +24,14 @@ export const translationObject = {
         invalidDomain: 'Invalid top level domain name'
       },
       password: {
-        lengthRequirement: 'Password must be between 6 and 60 characters in length',
-        requires: 'Password must contain at least one number, one special character (.@$!%^*#), and no spaces',
+        requirement: {
+          length: 'Should be between 6 & 60 chars long',
+          capitalLetter: 'Contains at least 1 capital letter',
+          number: 'Contains at least 1 number',
+          specialChar: 'Contains a special character from (.@!#$%^*)',
+          unallowedSpecialChar: 'No Unallowed special character',
+          noSpaces: 'No Spaces'
+        },
         confirmPassword: 'Passwords must match'
       },
       search: {

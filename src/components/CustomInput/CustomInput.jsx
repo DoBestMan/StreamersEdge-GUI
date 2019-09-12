@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import {FormControl, TextField} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import styles from './MUI.css';
+import {ErrorBoxActions} from '../../actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 /**
  * @enum {margin}
@@ -86,6 +89,10 @@ class CustomInput extends Component {
       handleChange,
       handleRightIconClick,
       wrapperClassName,
+      errorBoxValidation: {
+        visibility: false,
+        validationConditions: []
+      },
       iconRightWrapperClassName,
       value: '',
       isInputActive: false,
@@ -207,14 +214,36 @@ class CustomInput extends Component {
     const required = this.props.required || false;
     const type = this.props.type || 'string';
     const muiInputClass = classes[this.props.muiInputClass] || classes.input;
+
+    const showErrorBox = (visibility, validationConditions, position) => {
+      this.props.setErrorBox(visibility, validationConditions, position);
+      setTimeout(() => {
+        this.props.hideErrorBox();
+      }, 3500);
+
+    };
+
     const wrapperStyle = {
       height: height
     };
 
+    let wrapperClassName = this.state.wrapperClassName;
+    let iconRight = this.props.iconRight || this.props.iconRightActive || null;
+
+    if (this.props.isValid){
+      if (this.props.isValid()){
+        iconRight = null;
+      } else {
+        if (wrapperClassName.endsWith('--active')) {
+          wrapperClassName += '-red';
+        }
+      }
+    }
+
     return (
       <>
         <div
-          className={ this.state.wrapperClassName }
+          className={ wrapperClassName }
           onMouseOver={ this.onMouseOver }
           onMouseOut={ this.onDivMouseOut }
           style={ wrapperStyle }
@@ -225,9 +254,9 @@ class CustomInput extends Component {
               : null
           }
           {
-            this.state.iconRight
+            iconRight
               ? <div className={ 'custom-input__right' }>
-                <div className={ this.state.iconRightWrapperClassName } onClick={ this.state.handleRightIconClick }>
+                <div className={ this.state.iconRightWrapperClassName } onClick={ (e) => showErrorBox(true, this.state.handleRightIconClick(), e.target.getBoundingClientRect()) }>
                   <img className={ `custom-input-${this.state.theme}__icon-right` } src={ this.state.iconRight } alt=''/>
                 </div></div>
               : null
@@ -270,6 +299,7 @@ CustomInput.propTypes = {
   hasActiveGlow: PropTypes.bool,
   name: PropTypes.string,
   theme: PropTypes.string,
+  isValid: PropTypes.func,
   inputClass: PropTypes.string,
   required: PropTypes.bool,
   multiline: PropTypes.bool,
@@ -287,4 +317,19 @@ CustomInput.propTypes = {
   type: PropTypes.string
 };
 
-export default withStyles(styles)(CustomInput);
+
+const mapStateToProps = () => ({
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    setErrorBox: ErrorBoxActions.setErrorBox,
+    hideErrorBox: ErrorBoxActions.hideErrorBox
+  },
+  dispatch
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(CustomInput));

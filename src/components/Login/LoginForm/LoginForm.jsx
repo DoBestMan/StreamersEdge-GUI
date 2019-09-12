@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {AuthService, ProfileService} from '../../../services/';
 import AuthFooter from '../../Auth/AuthFooter';
-import {ValidationUtil, GenUtil} from '../../../utility';
+import {GenUtil} from '../../../utility';
 import {UserIcon, UserIconActive, IconPassword, IconPasswordActive, LoginButton, LoginButtonActive} from '../../../assets/images/login';
 import LogoImage from '../../../assets/images/se-logo-stacked.png';
 import CustomInput from '../../CustomInput';
@@ -81,28 +81,7 @@ class LoginForm extends Component {
     }
   };
 
-  validate = (type) => {
 
-    switch (type) {
-      case 'password':
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            password: ValidationUtil.sePassword(this.state.password)
-          }
-        });
-        break;
-      case 'username':
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            username: ValidationUtil.seUsername(this.state.username)
-          }
-        });
-        break;
-      default:
-    }
-  };
 
   render() {
     const isDisabled = () => {
@@ -122,7 +101,6 @@ class LoginForm extends Component {
               handleChange={ this.handleUsernameChange }
               iconLeft={ UserIcon }
               iconLeftActive={ UserIconActive }
-              onBlur={ () => this.validate('username') }
             />
           </FormControl>
           <InputLabel className='login-error' shrink error={ true }>
@@ -137,7 +115,6 @@ class LoginForm extends Component {
               handleChange={ this.handlePasswordChange }
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
-              onBlur={ () => this.validate('password') }
             />
           </FormControl>
           <InputLabel className='login-error' shrink error={ true }>

@@ -7,84 +7,77 @@ const PrivateValidationUtils = {
   /**
    * Validate a Streamers Edge username.
    *
-   * @param {string} value - Value to validate.
+   * @param {string} username - Username to validate.
    * @returns {string} Error if one is found.
    * @memberof PrivateValidationUtil
    */
-  seUsername(value) {
-    var label = void 0;
-    var ref = void 0;
-    var prefix = void 0;
+  seUsername(username) {
+    const length = username.length;
+    const lowercaseRegex = /[a-z]/g;
+    const uppercaseRegex = /[A-Z]/g;
+    const digitOrLetterRegex = /[0-9a-z]/g;
+    const digitLetterHyphenRegex = /[^0-9a-z-]/g;
 
-    prefix = translate('errors.username.prefix1');
+    let beginsWithLetter = false, endsWithLetterOrDigit = false, containsOnlyNumberDigitHyphens = true, uppercasePresent = true, validLength=false;
 
-    var length = value.length;
-    let error = null;
-
-    if (length === 0) {
-      error = prefix + translate('errors.username.notEmpty');
+    if (length >= 3 && length <=60) {
+      validLength = true;
     }
 
-    if (length < 3) {
-      error = prefix + translate('errors.username.longer');
+    if (lowercaseRegex.test(username[0])) {
+      beginsWithLetter = true;
     }
 
-    if (length > 63) {
-      error = prefix + translate('errors.username.shorter');
+    if (uppercaseRegex.test(username[0])) {
+      uppercasePresent = true;
     }
 
-    if (/\./.test(value)) {
-      prefix = translate('errors.username.prefix2');
+    if(digitOrLetterRegex.test(username[length-1])){
+      endsWithLetterOrDigit = true;
     }
 
-    ref = value.split('.');
-
-    for (var i = 0, len = ref.length; i < len; i++) {
-      label = ref[i];
-
-      if (!/^[~a-z]/.test(label)) {
-        error = prefix + translate('errors.username.startLetter');
-      }
-
-      if (!/^[~a-z0-9-]*$/.test(label)) {
-        error = prefix + translate('errors.username.lettersDigitsDashes');
-      }
-
-      if (/--/.test(label)) {
-        error = prefix + translate('errors.username.oneDash');
-      }
-
-      if (!/[a-z0-9]$/.test(label)) {
-        error = prefix + translate('errors.username.endAlphanumeric');
-      }
-
-      if (!(label.length >= 3)) {
-        error = prefix + translate('errors.username.longer');
-      }
+    if(digitLetterHyphenRegex.test(username)){
+      containsOnlyNumberDigitHyphens = false;
     }
 
-    return error;
+    const errorBoxUsernameValidation = [
+      {errorString: translate('errors.username.requirement.length'), success: validLength},
+      {errorString: translate('errors.username.requirement.beginsWithLetter'), success: beginsWithLetter},
+      {errorString: translate('errors.username.requirement.endsWithLowercaseOrDigit'), success: endsWithLetterOrDigit},
+      {errorString: translate('errors.username.requirement.onlyContainsLettersDigitHyphens'), success: containsOnlyNumberDigitHyphens},
+      {errorString: translate('errors.username.requirement.noUppercase'), success: uppercasePresent}
+    ];
+    return {
+      errors: errorBoxUsernameValidation,
+      success: errorBoxUsernameValidation.filter((err) => !err.success).length <= 0
+    };
   },
 
   /**
    * Validate an email.
    *
    * @param {string} email - Email to validate.
-   * @returns {string} Error if one is found.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
    * @memberof PrivateValidationUtil
    */
   email(email) {
     let regex = /(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/;
 
     const validEmailDomain = email.length > 0 ? this.emailDomain(email) : false;
+    let validEmail = true;
 
     if (!regex.test(email)) {
-      return translate('errors.email.invalid');
-    } else if(!validEmailDomain) {
-      return translate('errors.email.invalidDomain');
-    } else {
-      return null;
+      validEmail = false;
     }
+
+    const errorBoxEmailValidation = [
+      {errorString: translate('errors.email.invalid'), success: validEmail},
+      {errorString: translate('errors.email.invalidDomain'), success: validEmailDomain}
+    ];
+    return {
+      errors: errorBoxEmailValidation,
+      success: errorBoxEmailValidation.filter((err) => !err.success).length <= 0
+    };
   },
   /**
    *
@@ -105,23 +98,58 @@ const PrivateValidationUtils = {
    * Validate a Streamers Edge password.
    *
    * @param {string} password - String to validate.
-   * @returns {string} Error if one is found.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
    * @memberof PrivateValidationUtil
    */
   sePassword(password) {
-    let length = password.length;
-    let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[.@$!%^*#])[A-Za-z\d.@$!%^*#]{4,}$/; //(.@!#$%^*)
-    let error = null;
+    const length = password.length;
+    const uppercaseRegex = /[A-Z]/g;
+    const digitRegex = /[0-9]/g;
+    const specialCharRegex = /[().@$!%^*#]/g;
+    const spaceRegex = /[ ]/g;
+    const unallowedCharsRegex = /[&/:;<=>+?_{},'"|~`]/g;
 
-    if (length < 6 || length > 60) {
-      error = translate('errors.password.lengthRequirement');
+
+    let minLength = false, uppercasePresent = false, numberPresent = false, specialCharacterPresent = false,
+      spacePresent = false, unallowedSpecialCharacter = false;
+
+    if (length >= 6 && length <=60) {
+      minLength = true;
     }
 
-    if (!regex.test(password)) {
-      error = translate('errors.password.requires');
+    if(uppercaseRegex.test(password)){
+      uppercasePresent = true;
     }
 
-    return error;
+    if(digitRegex.test(password)){
+      numberPresent = true;
+    }
+
+    if(specialCharRegex.test(password)){
+      specialCharacterPresent = true;
+    }
+
+    if(spaceRegex.test(password)){
+      spacePresent = true;
+    }
+
+    if(unallowedCharsRegex.test(password)){
+      console.log('Inside');
+      unallowedSpecialCharacter = true;
+    }
+
+    const errorBoxPasswordValidation = [
+      {errorString: translate('errors.password.requirement.length'), success: minLength},
+      {errorString: translate('errors.password.requirement.capitalLetter'), success: uppercasePresent},
+      {errorString: translate('errors.password.requirement.number'), success: numberPresent},
+      {errorString: translate('errors.password.requirement.specialChar'), success: specialCharacterPresent},
+      {errorString: translate('errors.password.requirement.unallowedSpecialChar'), success: !unallowedSpecialCharacter},
+      {errorString: translate('errors.password.requirement.noSpaces'), success: !spacePresent}
+    ];
+    return {
+      errors: errorBoxPasswordValidation,
+      success: errorBoxPasswordValidation.filter((err) => !err.success).length <= 0
+    };
   },
 
   /**
@@ -129,17 +157,17 @@ const PrivateValidationUtils = {
    *
    * @param {string} password - Password from form to validate.
    * @param {string} confirmPassword - Password from form to validate.
-   * @returns {string} - Error if one is found.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
    * @memberof ValidationUtil
    */
   seConfirmPassword(password, confirmPassword) {
-    let error = null;
-
-    if (password !== confirmPassword) {
-      error = translate('errors.password.confirmPassword');
-    }
-
-    return error;
+    const errorBoxPasswordValidation = [
+      {errorString: translate('errors.password.confirmPassword'), success: password === confirmPassword}
+    ];
+    return {
+      errors: errorBoxPasswordValidation,
+      success: password === confirmPassword
+    };
   },
 
 
@@ -375,7 +403,7 @@ const ValidationUtil = {
    * @returns {string} Error if one is found.
    * @memberof ValidationUtil
    */
-  email(email) {
+  seEmail(email) {
     return PrivateValidationUtils.email(email);
   },
 

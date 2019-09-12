@@ -7,7 +7,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {AuthService} from '../../../services';
 import {ValidationUtil, GenUtil} from '../../../utility';
-import {EmailIcon, EmailIconActive, RegisterButton, RegisterButtonActive} from '../../../assets/images/signup';
+import {
+  EmailIcon,
+  EmailIconActive,
+  RegisterButton,
+  RegisterButtonActive,
+  InvalidIcon
+} from '../../../assets/images/signup';
 import {UserIcon, UserIconActive, IconPassword, IconPasswordActive} from '../../../assets/images/login';
 import CustomInput from '../../CustomInput';
 import PasswordStrengthIndicator from './PasswordStrengthIndicator';
@@ -27,6 +33,10 @@ class RegisterForm extends Component {
       errText: '',
       registerDisabled: false,
       registerBtnText: 'REGISTER',
+      isPasswordInputClicked: false,
+      isConfirmPasswordConfirmed: false,
+      isUsernameInputClicked: false,
+      isEmailInputClicked: false,
       errors: {
         email: '',
         username: '',
@@ -78,66 +88,31 @@ class RegisterForm extends Component {
 
   handleEmailChange = (email) => {
     this.setState({
-      email: email
-    }, () => this.validate('email'));
+      email: email,
+      isEmailInputClicked: true
+    });
   }
 
   handleUsernameChange = (user) => {
     this.setState({
-      username: user
-    }, () => this.validate('username'));
+      username: user,
+      isUsernameInputClicked: true
+    });
   };
 
   handlePasswordChange = (password) => {
     this.setState({
-      password: password
-    }, () => this.validate('password'));
+      password: password,
+      isPasswordInputClicked: true
+    });
   }
 
   handleConfirmPasswordChange = (password) => {
     this.setState({
-      confirmPassword: password
-    }, () => this.validate('confirmPassword'));
+      confirmPassword: password,
+      isConfirmPasswordConfirmed: true
+    });
   }
-
-  validate = (type) => {
-    switch (type) {
-      case 'email':
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            email: ValidationUtil.email(this.state.email)
-          }
-        });
-        break;
-      case 'password':
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            password: ValidationUtil.sePassword(this.state.password),
-            confirmPassword: ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword)
-          }
-        });
-        break;
-      case 'confirmPassword':
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            confirmPassword: ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword)
-          }
-        });
-        break;
-      case 'username':
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            username: ValidationUtil.seUsername(this.state.username)
-          }
-        });
-        break;
-      default:
-    }
-  };
 
   render() {
     return (
@@ -147,12 +122,22 @@ class RegisterForm extends Component {
             <CustomInput
               name='email'
               type='email'
-              onBlur={ () => this.validate('email') }
               hasActiveGlow={ true }
               placeholder={ translate('register.enterEmail') }
               handleChange={ this.handleEmailChange }
               iconLeft={ EmailIcon }
               iconLeftActive={ EmailIconActive }
+              iconRightActive={ InvalidIcon }
+              handleRightIconClick={ () => {
+                return  ValidationUtil.seEmail(this.state.email).errors;
+              } }
+              isValid={ () => {
+                if (this.state.isEmailInputClicked) {
+                  return ValidationUtil.seEmail(this.state.email).success;
+                } else {
+                  return true;
+                }
+              }  }
             />
           </FormControl>
           <InputLabel className='register-error' shrink error={ true }>
@@ -162,28 +147,49 @@ class RegisterForm extends Component {
             <CustomInput
               name='password'
               type='password'
-              onBlur={ () => this.validate('password') }
               hasActiveGlow={ true }
               placeholder={ translate('register.enterPassword') }
               handleChange={ this.handlePasswordChange }
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
+              iconRightActive={ InvalidIcon }
+              handleRightIconClick={ () => {
+                return  ValidationUtil.sePassword(this.state.password).errors;
+              } }
+              isValid={ () => {
+                if (this.state.isPasswordInputClicked) {
+                  return ValidationUtil.sePassword(this.state.password).success;
+                } else {
+                  return true;
+                }
+              }  }
             />
-            <PasswordStrengthIndicator password = { this.state.password } error={ this.state.errors.password }/>
+            <PasswordStrengthIndicator password = { this.state.password } error={ !ValidationUtil.sePassword(this.state.password).success }/>
           </FormControl>
           <InputLabel className='register-error' shrink error={ true }>
             {this.state.errors.password}
           </InputLabel>
           <FormControl className='register-input' margin='normal' required fullWidth>
+
             <CustomInput
               name='confirmPassword'
               type='password'
-              onBlur={ () => this.validate('confirmPassword') }
               hasActiveGlow={ true }
               placeholder={ translate('register.confirmPassword') }
               handleChange={ this.handleConfirmPasswordChange }
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
+              iconRightActive={ InvalidIcon }
+              handleRightIconClick={ () => {
+                return  ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword).errors;
+              } }
+              isValid={ () => {
+                if (this.state.isConfirmPasswordConfirmed) {
+                  return ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword).success;
+                } else {
+                  return true;
+                }
+              }  }
             />
           </FormControl>
           <InputLabel className='register-error' shrink error={ true }>
@@ -192,12 +198,22 @@ class RegisterForm extends Component {
           <FormControl className='register-input' margin='normal' required fullWidth>
             <CustomInput
               name='username'
-              onBlur={ () => this.validate('username') }
               hasActiveGlow={ true }
               placeholder={ translate('register.enterUsername') }
               handleChange={ this.handleUsernameChange }
               iconLeft={ UserIcon }
               iconLeftActive={ UserIconActive }
+              iconRightActive={ InvalidIcon }
+              handleRightIconClick={ () => {
+                return  ValidationUtil.seUsername(this.state.username).errors;
+              } }
+              isValid={ () => {
+                if (this.state.isUsernameInputClicked) {
+                  return ValidationUtil.seUsername(this.state.username).success;
+                } else {
+                  return true;
+                }
+              }  }
             />
           </FormControl>
           <InputLabel className='register-error' shrink error={ true }>

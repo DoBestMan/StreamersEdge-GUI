@@ -125,6 +125,13 @@
             box-shadow: none;
           }
         }
+
+        &-red {
+          @extend .custom-input-white__wrapper;
+
+          border: 3px solid red;
+          background: white;
+        }
       }
     }
   }
@@ -146,19 +153,17 @@
           flex-direction: column;
           justify-content: center;
           position: absolute;
-          top: 4px;
-          right: -20px;
+          top: 7px;
+          right: 7px;
           z-index: 1;
           width: 35px;
           height: 35px;
-          border: 3px solid $blue-light;
           border-radius: 50%;
           background: $input-blue;
 
           &--active {
             @extend .custom-input-basic__icon-right-wrapper;
 
-            border: 3px solid $input-green;
             background: $black;
 
             &::after {
@@ -170,7 +175,6 @@
               width: 50%;
               height: 100%;
               border-radius: 50%;
-              box-shadow: 0 0 20px 10px $input-green-glow;
             }
 
             &-glowless {
@@ -241,6 +245,14 @@
         background: $black;
         box-shadow: 0 0 20px 10px $input-green-glow;
 
+        &-red {
+          @extend .custom-input-basic__wrapper;
+
+          border: 2px solid red;
+          background: $black;
+          box-shadow: 0 0 2px red;
+        }
+
         &-glowless {
           @extend .custom-input-basic__wrapper--active;
 
@@ -253,5 +265,12 @@
         }
       }
     }
+  }
+
+  &__errorBox {
+    position: absolute;
+    top:0;
+    right:-330px;
+    z-index: 2500;
   }
 }

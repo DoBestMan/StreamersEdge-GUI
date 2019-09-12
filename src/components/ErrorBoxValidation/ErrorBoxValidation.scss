@@ -1,0 +1,38 @@
+.errorBox {
+  border:2px solid white;
+
+  &__validation {
+    width: 300px;
+    border:2px solid white;
+    border-radius: 10px;
+    background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));
+
+    &__img {
+      width: 15px;
+      min-width: 15px;
+      height:15px;
+      min-height: 15px;
+      padding: 4px 8px 0;
+    }
+
+    &_header {
+      border-radius: 6px;
+      color:white;
+      text-align: center;
+      background-color: red;
+
+      p {
+        margin: 0;
+        padding: 10px 0;
+      }
+    }
+
+    &_text {
+      padding: 20px 0;
+
+      div {
+        padding: 5px 0;
+      }
+    }
+  }
+}
