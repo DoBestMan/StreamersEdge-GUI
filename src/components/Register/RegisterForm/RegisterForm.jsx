@@ -3,7 +3,6 @@
  */
 import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {AuthService} from '../../../services';
 import {ValidationUtil, GenUtil} from '../../../utility';
@@ -122,6 +121,7 @@ class RegisterForm extends Component {
             <CustomInput
               name='email'
               type='email'
+              muiInputClass='inputRegister'
               hasActiveGlow={ true }
               placeholder={ translate('register.enterEmail') }
               handleChange={ this.handleEmailChange }
@@ -140,13 +140,11 @@ class RegisterForm extends Component {
               }  }
             />
           </FormControl>
-          <InputLabel className='register-error' shrink error={ true }>
-            {this.state.errors.email}
-          </InputLabel>
           <FormControl className='register-input' margin='normal' required fullWidth>
             <CustomInput
               name='password'
               type='password'
+              muiInputClass='inputRegister'
               hasActiveGlow={ true }
               placeholder={ translate('register.enterPassword') }
               handleChange={ this.handlePasswordChange }
@@ -166,14 +164,11 @@ class RegisterForm extends Component {
             />
             <PasswordStrengthIndicator password = { this.state.password } error={ !ValidationUtil.sePassword(this.state.password).success }/>
           </FormControl>
-          <InputLabel className='register-error' shrink error={ true }>
-            {this.state.errors.password}
-          </InputLabel>
           <FormControl className='register-input' margin='normal' required fullWidth>
-
             <CustomInput
               name='confirmPassword'
               type='password'
+              muiInputClass='inputRegister'
               hasActiveGlow={ true }
               placeholder={ translate('register.confirmPassword') }
               handleChange={ this.handleConfirmPasswordChange }
@@ -192,12 +187,10 @@ class RegisterForm extends Component {
               }  }
             />
           </FormControl>
-          <InputLabel className='register-error' shrink error={ true }>
-            {this.state.errors.confirmPassword}
-          </InputLabel>
           <FormControl className='register-input' margin='normal' required fullWidth>
             <CustomInput
               name='username'
+              muiInputClass='inputRegister'
               hasActiveGlow={ true }
               placeholder={ translate('register.enterUsername') }
               handleChange={ this.handleUsernameChange }
@@ -216,9 +209,6 @@ class RegisterForm extends Component {
               }  }
             />
           </FormControl>
-          <InputLabel className='register-error' shrink error={ true }>
-            {this.state.errors.username}
-          </InputLabel>
           <span className='register__apiTxt--success'>{this.state.resultText}</span>
           <span className='register__apiTxt--error'>{this.state.errText}</span>
           <span className='register__requiredTxt'>All fields marked with an asterisk <span className='register__required-asterisk'>*</span> are required </span>

@@ -1,14 +1,11 @@
 @import '../../assets/styles/common';
 
 .register {
-  color: $red;
-
   &-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 545px;
-    height: -webkit-fill-available;
     margin: auto;
     background-size: cover;
   }

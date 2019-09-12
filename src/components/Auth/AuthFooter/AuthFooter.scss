@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15px;
+  position: fixed;
+  bottom: 0;
+  margin-top: 12px;
 
   &-title {
     font-style: italic;
@@ -29,5 +31,11 @@
     position: relative;
     bottom: 17px;
     margin-left: 10px;
+  }
+}
+
+@media screen and (max-height: 905px) {
+  .auth-footer {
+    position: inherit;
   }
 }

@@ -14,7 +14,7 @@ class PasswordStrengthIndicator extends Component {
     let values = [0, 0, 0, 0];
     let rootBarStyles = [classes.rootBar, classes.rootBar, classes.rootBar, classes.rootBar];
     let stage = classes.stage1;
-    let rank = translate('register.passwordStrength.veryWeak');
+    let rank = '';
 
     if (password) {
       let score = zxcvbn(password).score;
@@ -25,9 +25,11 @@ class PasswordStrengthIndicator extends Component {
 
       if (score === 0) {
         stage = classes.stage1;
+        rank = translate('register.passwordStrength.veryWeak');
       } else if (score === 1) {
         stage = classes.stage1;
         rootBarStyles[0] = classes.rootBarFilled;
+        rank = translate('register.passwordStrength.veryWeak');
       } else if (score === 2) {
         stage = classes.stage2;
         rootBarStyles[0] = classes.rootBarFilled;

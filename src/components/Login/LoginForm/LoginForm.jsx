@@ -143,8 +143,8 @@ class LoginForm extends Component {
               />
             </Button>
           </div>
+          <AuthFooter />
         </form>
-        <AuthFooter />
       </>
     );
   }
