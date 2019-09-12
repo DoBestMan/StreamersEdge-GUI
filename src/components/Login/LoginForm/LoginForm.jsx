@@ -82,7 +82,6 @@ class LoginForm extends Component {
   };
 
 
-
   render() {
     const isDisabled = () => {
       const {username, password, errors} = this.state;

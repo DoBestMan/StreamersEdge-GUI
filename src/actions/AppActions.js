@@ -3,6 +3,7 @@ import {NavigateActions, AccountActions, ModalActions} from '../actions';
 import {AuthService} from '../services';
 import {StorageUtil} from '../utility';
 import {Action, Dispatch} from 'redux';
+import ModalTypes from '../constants/ModalTypes';
 
 class AppPrivateActions {
   /**
@@ -109,7 +110,14 @@ class AppActions {
         dispatch(ModalActions.toggleModal());
         dispatch(NavigateActions.navigateToDashboard());
       }).catch((err) => {
-        dispatch(AppActions.setLoginError(err));
+        if(err.status === 403){
+          dispatch(ModalActions.toggleModal());
+          dispatch(ModalActions.setModalType(ModalTypes.BAN));
+          dispatch(ModalActions.toggleModal());
+        } else {
+          dispatch(AppActions.setLoginError(err.data.error));
+        }
+
       });
     };
   }

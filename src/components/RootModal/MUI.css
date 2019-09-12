@@ -34,3 +34,11 @@
   border-radius: 35px;
   background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));
 }
+
+.ban {
+  width: 500px;
+  max-width: 500px;
+  border: 2px solid rgb(190, 195, 210);
+  background: transparent linear-gradient(to right, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0 0 no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}

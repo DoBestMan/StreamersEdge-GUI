@@ -12,6 +12,7 @@ import Register from '../Register';
 import {AppActions, ModalActions, NavigateActions} from '../../actions/';
 import {ModalTypes} from '../../constants';
 import styles from './MUI.css';
+import BanModal from '../BanModal';
 
 class RootModal extends Component {
 
@@ -67,6 +68,12 @@ class RootModal extends Component {
       case ModalTypes.DONATE: {
         modalContent = <Donate />;
         modalClass = classes.donate;
+        break;
+      }
+
+      case ModalTypes.BAN: {
+        modalContent = <BanModal />;
+        modalClass = classes.ban;
         break;
       }
 

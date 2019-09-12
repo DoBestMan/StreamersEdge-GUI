@@ -167,6 +167,14 @@ export const translationObject = {
       successHeader: 'Success!',
       successSubHeader: 'Your donation was completed successfully'
     },
+    ban: {
+      primary: 'You have been banned',
+      secondary: 'You have been banned for violating the ',
+      secondaryUnderlined: 'StreamersEdge Rules.',
+      contact: 'Contact Support',
+      orSend: ', or send us an email to ',
+      email: 'ban@streamersedge.com'
+    },
     copyright: 'Peerplays Global©',
     lorem: 'Spicy jalapeno bacon ipsum dolor amet corned beef reprehenderit chicken duis tail sirloin spare ribs salami burgdoggen tongue drumstick ut. Quis laboris pig drumstick fatback prosciutto' +
     ' in cupim aliqua jowl bacon. Irure ullamco buffalo picanha est jerky shoulder beef sint mollit ut boudin ground round proident. Id lorem turducken et eiusmod. Buffalo tri-tip tenderloin ' +

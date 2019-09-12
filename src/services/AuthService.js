@@ -45,7 +45,7 @@ class PrivateAuthService {
         response = await ApiHandler.post(query, querystring.stringify(body), headers);
         return resolve(response.data.result);
       } catch (err) {
-        return reject(err.response.data.error);
+        return reject(err.response);
       }
     });
   }
