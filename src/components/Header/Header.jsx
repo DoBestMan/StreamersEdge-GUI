@@ -28,7 +28,7 @@ class Header extends Component {
       </span>
     );
 
-    const signUpButton = (
+    let signUpButton = (
       <span onClick={ this.openSignUpModal } className='header__link'>
         {translate('header.signup')}
       </span>
@@ -40,6 +40,8 @@ class Header extends Component {
           {translate('header.logout')}
         </span>
       );
+
+      signUpButton = null;
     }
 
     return (
