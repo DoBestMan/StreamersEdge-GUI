@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button} from '@material-ui/core';
-import preferences from '../../assets/images/preferences/settings.png';
+import preferences from '../../assets/images/preferences/Settings.png';
 import InvitesForm from './InvitesForm';
 import NotificationsForm from './NotificationsForm';
 import {GenUtil} from '../../../src/utility';
