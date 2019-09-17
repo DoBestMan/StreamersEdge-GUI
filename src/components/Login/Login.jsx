@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AppActions} from '../../actions';
 import LoginForm from './LoginForm';
-import AuthFooter from '../Auth/AuthFooter';
+import LoginFooter from './LoginFooter/LoginFooter';
 
 class Login extends Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ class Login extends Component {
         <div className='login-page'>
           <span className='login-title'>STREAMERS EDGE LOGIN</span>
           <LoginForm handleLogin={ this.props.login } />
-          <AuthFooter />
+          <LoginFooter />
         </div>
       </>
     );

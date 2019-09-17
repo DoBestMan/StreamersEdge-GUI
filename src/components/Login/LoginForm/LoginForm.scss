@@ -6,8 +6,17 @@
     flex-direction: column;
     align-items: center;
 
-    &__input {
-      margin: 15px 0;
+    &__title {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 30px;
+    }
+
+    &__subHeader {
+      margin-bottom: 40px;
+      font-style: italic;
+      font-size: 20px;
+      color: $blue-light;
     }
 
     &__apiTxt {
@@ -16,6 +25,18 @@
         margin-bottom: 20px;
         color: red;
       }
+    }
+  }
+
+  &-forgot {
+    display: block;
+    width: 400px;
+    text-align: right;
+
+    &__text {
+      font-style: italic;
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 
@@ -30,6 +51,7 @@
       position: relative;
       padding-top: 25px;
       text-align: center;
+      cursor: pointer;
     }
 
     &-txt {
@@ -45,19 +67,25 @@
     height: 20px;
     margin-bottom: 5px;
   }
+
+  &__textlink {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-style: italic;
+    color: $blue-light-one;
+
+    &-register {
+      margin-left: 5px;
+      text-decoration: underline;
+      cursor:pointer;
+    }
+  }
 }
 
 .goregister__link {
   padding-left: 5px;
   text-decoration: underline;
   cursor: pointer;
-}
-
-.register {
-  &__text-link {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
 }

@@ -6,11 +6,11 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {AuthService, ProfileService} from '../../../services/';
-import AuthFooter from '../../Auth/AuthFooter';
-import {GenUtil} from '../../../utility';
-import {UserIcon, UserIconActive, IconPassword, IconPasswordActive, LoginButton, LoginButtonActive} from '../../../assets/images/login';
-import LogoImage from '../../../assets/images/se-logo-stacked.png';
+import {GenUtil, ValidationUtil} from '../../../utility';
+import {UserIcon, UserIconActive, IconPassword, IconPasswordActive, LoginButton} from '../../../assets/images/login';
 import CustomInput from '../../CustomInput';
+import {InvalidIcon} from '../../../assets/images/signup';
+import LoginFooter from '../LoginFooter';
 
 const translate = GenUtil.translate;
 
@@ -20,6 +20,8 @@ class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
+      isPasswordClicked: false,
+      isUsernameClicked: false,
       errors:{
         username: null,
         password: null
@@ -50,14 +52,15 @@ class LoginForm extends Component {
 
   handleUsernameChange = (user) => {
     this.setState({
-      username: user
+      username: user,
+      isUsernameClicked: true
     });
-
   };
 
   handlePasswordChange = (password) => {
     this.setState({
-      password: password
+      password: password,
+      isPasswordClicked: true
     });
 
   }
@@ -91,7 +94,12 @@ class LoginForm extends Component {
     return (
       <>
         <form className='login-form' onSubmit={ this.handleSubmit }>
-          <img src={ LogoImage } alt='logo' />
+          <span className='login-form__title'>
+            {translate('login.header')}
+          </span>
+          <span className='login-form__subHeader'>
+            {translate('login.welcome')}
+          </span>
           <FormControl className='login-form__input' margin='none' required>
             <CustomInput
               name='username'
@@ -100,6 +108,17 @@ class LoginForm extends Component {
               handleChange={ this.handleUsernameChange }
               iconLeft={ UserIcon }
               iconLeftActive={ UserIconActive }
+              iconRightActive={ InvalidIcon }
+              isValid={ () => {
+                if (this.state.isUsernameClicked) {
+                  return ValidationUtil.seUsername(this.state.username).success;
+                } else {
+                  return true;
+                }
+              }  }
+              handleRightIconClick={ () => {
+                return  ValidationUtil.seUsername(this.state.username).errors;
+              } }
             />
           </FormControl>
           <InputLabel className='login-error' shrink error={ true }>
@@ -114,20 +133,22 @@ class LoginForm extends Component {
               handleChange={ this.handlePasswordChange }
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
+              iconRightActive={ InvalidIcon }
+              isValid={ () => {
+                if (this.state.isPasswordClicked) {
+                  return ValidationUtil.sePassword(this.state.password).success;
+                } else {
+                  return true;
+                }
+              }  }
+              handleRightIconClick={ () => {
+                return  ValidationUtil.sePassword(this.state.password).errors;
+              } }
             />
           </FormControl>
-          <InputLabel className='login-error' shrink error={ true }>
-            {this.state.errors.password}
-          </InputLabel>
           <span className='login-form__apiTxt--error'>{this.props.errorText}</span>
-          <span className='register__textlink'>
-            {translate('login.dontHaveAccount')}
-            <span onClick={ this.props.goRegister } className='goregister__link'>
-              {translate('login.register')}
-            </span>
-          </span>
-          <span className='register__textlink'>
-            <span onClick={ this.props.recoverPassword } className='login__link'>
+          <span className='login-forgot'>
+            <span onClick={ this.props.recoverPassword } className='login-forgot__text'>
               {translate('login.forgotPass')}
             </span>
           </span>
@@ -138,12 +159,16 @@ class LoginForm extends Component {
                 src={ LoginButton }
                 alt='Login'
                 type='submit'
-                onMouseOver={ (e) => (e.currentTarget.src = LoginButtonActive) }
-                onMouseOut={ (e) => (e.currentTarget.src = LoginButton) }
               />
             </Button>
           </div>
-          <AuthFooter />
+          <span className='login__textlink'>
+            {translate('login.dontHaveAccount')}
+            <span onClick={ this.props.goRegister } className='login__textlink-register'>
+              {translate('login.register')}
+            </span>
+          </span>
+          <LoginFooter/>
         </form>
       </>
     );

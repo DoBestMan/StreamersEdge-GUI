@@ -3,7 +3,7 @@ export const translationObject = {
     errors: {
       username: {
         requirement: {
-          length: 'should be between 3 & 60 chars long',
+          length: 'Should be between 3 & 60 chars long',
           beginsWithLetter: 'Begins with letter',
           endsWithLowercaseOrDigit: 'Ends with lowercase letter or digit',
           onlyContainsLettersDigitHyphens: 'Only contains letters, digits, hyphens',
@@ -83,6 +83,8 @@ export const translationObject = {
       accountTypes: ['Viewer', 'Gamer', 'Sponsor']
     },
     login: {
+      header: 'Login',
+      welcome: 'Hello, welcome again!',
       enterUsername: 'Enter your Streamers Edge Username',
       enterPassword: 'Enter your Streamers Edge Password',
       dontHaveAccount: 'Don\'t have a Streamers Edge account?',
