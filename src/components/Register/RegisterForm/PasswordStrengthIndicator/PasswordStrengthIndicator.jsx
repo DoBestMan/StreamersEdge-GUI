@@ -15,6 +15,7 @@ class PasswordStrengthIndicator extends Component {
     let rootBarStyles = [classes.rootBar, classes.rootBar, classes.rootBar, classes.rootBar];
     let stage = classes.stage1;
     let rank = '';
+    let barState = '';
 
     if (password) {
       let score = zxcvbn(password).score;
@@ -25,6 +26,7 @@ class PasswordStrengthIndicator extends Component {
 
       if (score === 0) {
         stage = classes.stage1;
+        rootBarStyles[0] = classes.rootBarFilled;
         rank = translate('register.passwordStrength.veryWeak');
       } else if (score === 1) {
         stage = classes.stage1;
@@ -53,21 +55,25 @@ class PasswordStrengthIndicator extends Component {
       for (const index of values.keys()) {
         if (score-1 >= index) {
           values[index] = 100;
+        } else if (score === 0) {
+          values[0] = 100;
         } else {
           values[index] = 0;
         }
       }
+    } else {
+      barState = '--hidden';
     }
 
     return (
       <>
-      <div className='password-indicator'>
+      <div className={ `password-indicator${barState}` }>
         <LinearProgress classes={  {root: rootBarStyles[0], bar: stage} } color='primary' variant='determinate' value={ values[0] }/>
         <LinearProgress classes={  {root: rootBarStyles[1], bar: stage} } color='primary' variant='determinate' value={ values[1] }/>
         <LinearProgress classes={  {root: rootBarStyles[2], bar: stage} } color='primary' variant='determinate' value={ values[2] }/>
         <LinearProgress classes={  {root: rootBarStyles[3], bar: stage} } color='primary' variant='determinate' value={ values[3] }/>
       </div>
-      <div className='password-indicator__status'>{rank}</div>
+      <div className={ `password-indicator__status${barState}` }>{rank}</div>
       </>
     );
   }
