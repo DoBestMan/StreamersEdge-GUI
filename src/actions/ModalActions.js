@@ -30,6 +30,18 @@ class ModalActions {
   static toggleModal() {
     return {type: ActionTypes.MODAL_TOGGLE};
   }
+
+  /**
+   * Allows for passing of data to the modal: E.G modal content such as text.
+   *
+   * @static
+   * @param {string} data - The data to be passed in to the modal.
+   * @returns {Action}
+   * @memberof ModalActions
+   */
+  static setModalData(data) {
+    return {type: ActionTypes.MODAL_SET_DATA, modalData: data};
+  }
 }
 
 export default ModalActions;

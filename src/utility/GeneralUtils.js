@@ -34,3 +34,15 @@ export const dummyDataWrapper = (callback) => {
       }
     });
 };
+
+export const validPage = (url) => {
+  const path = url.split('/');
+  const page = path[2];
+  const route = path[1];
+
+  if(route === 'profile' && (page === '1' || page === '2')) {
+    return true;
+  } else {
+    return false;
+  }
+};

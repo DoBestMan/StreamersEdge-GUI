@@ -96,6 +96,12 @@ class NavigateActions {
       dispatch(push(Routes.FORGOT_PASSWORD + `/?token=${token}`));
     };
   }
+
+  static navigateToCreateProfile(step) {
+    return (dispatch) => {
+      dispatch(push('/profile/' + step));
+    };
+  }
 }
 
 export default NavigateActions;

@@ -79,9 +79,6 @@ export const translationObject = {
         option2: 'Don\'t receive any notifications'
       }
     },
-    createProfile: {
-      accountTypes: ['Viewer', 'Gamer', 'Sponsor']
-    },
     login: {
       header: 'Login',
       welcome: 'Hello, welcome again!',
@@ -160,6 +157,32 @@ export const translationObject = {
         three: 'Other'
       }
     },
+
+    createProfile: {
+      header: 'Create Profile'
+    },
+
+    updateProfile: {
+      userInfo: {
+        header: 'User Info',
+        userType: 'Select account type',
+        email: 'Enter your email',
+        avatar: 'Customize Avatar'
+      },
+      accountConnections: {
+        cryptoHeader: 'Peerplays Wallet',
+        cryptoSelect: 'SELECT YOUR CRYPTOCURRENCY ACCOUNT',
+        cryptoDescription: 'Connect your Peerplays wallet and unlock special Streamer Edge integrations',
+        cryptoLabel: 'Wallet Address',
+
+        socialHeader:'Social Connections',
+        gameHeader: 'Game Connections',
+        connectionSelect: 'Connect these accounts and unlock special streamers edge integrations',
+        connectionDescription: 'CONNECT YOUR ACCOUNTS',
+        connectionLabel: 'Account Name'
+      }
+    },
+
     donate: {
       donateTo: 'Donate to: ',
       balance: 'Balance: ',
@@ -169,6 +192,7 @@ export const translationObject = {
       successHeader: 'Success!',
       successSubHeader: 'Your donation was completed successfully'
     },
+
     ban: {
       primary: 'You have been banned',
       secondary: 'You have been banned for violating the ',
@@ -177,6 +201,12 @@ export const translationObject = {
       orSend: ', or send us an email to ',
       email: 'ban@streamersedge.com'
     },
+
+    link: {
+      header: 'Confirm You Want To Link Your Account',
+      terms: 'Terms & Conditions'
+    },
+
     copyright: 'Peerplays Global©',
     lorem: 'Spicy jalapeno bacon ipsum dolor amet corned beef reprehenderit chicken duis tail sirloin spare ribs salami burgdoggen tongue drumstick ut. Quis laboris pig drumstick fatback prosciutto' +
     ' in cupim aliqua jowl bacon. Irure ullamco buffalo picanha est jerky shoulder beef sint mollit ut boudin ground round proident. Id lorem turducken et eiusmod. Buffalo tri-tip tenderloin ' +

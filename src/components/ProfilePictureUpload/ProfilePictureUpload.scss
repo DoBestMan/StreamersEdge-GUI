@@ -1,0 +1,27 @@
+.profile {
+  &__frame {
+    position: relative;
+    width: 197px;
+    height: 190px;
+  }
+
+  &__picture {
+    position: absolute;
+    top: 18px;
+    left: 40px;
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 230px;
+  }
+}
+
+.image__upload {
+  display: none;
+}

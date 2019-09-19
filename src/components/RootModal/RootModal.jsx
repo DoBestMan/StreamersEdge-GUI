@@ -12,13 +12,15 @@ import Register from '../Register';
 import {AppActions, ModalActions, NavigateActions} from '../../actions/';
 import {ModalTypes} from '../../constants';
 import styles from './MUI.css';
-import BanModal from '../BanModal';
+import BanModal from '../Modals/BanModal';
+import LinkAccountModal from '../Modals/LinkAccountModal';
 
 class RootModal extends Component {
 
   handleClose = () => {
     this.props.setErrorText('');
     this.props.toggleModal();
+    this.props.setModalData();
     this.setState({open: false});
   };
 
@@ -77,6 +79,12 @@ class RootModal extends Component {
         break;
       }
 
+      case ModalTypes.LINK_ACCOUNT: {
+        modalContent = <LinkAccountModal />;
+        modalClass = classes.link;
+        break;
+      }
+
       default: {
         break;
       }
@@ -104,6 +112,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal,
     setModalType: ModalActions.setModalType,
+    setModalData: ModalActions.setModalData,
     login: AppActions.login,
     setErrorText: AppActions.setLoginError,
     navigateToSignUp: NavigateActions.navigateToSignUp

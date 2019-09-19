@@ -1,52 +1,178 @@
-/**
- * CreateProfile.jsx is the container for the Create/Update profile page, and contains the master form.
- * This would be the Redux injection point if needed.
- */
-
 import React, {Component} from 'react';
-import CreateProfileForm from './CreateProfileForm';
-import step_1 from '../../assets/images/profile/step_1.svg';
-import step_2 from '../../assets/images/profile/step_2.svg';
-import step_3 from '../../assets/images/profile/step_3.svg';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import styles from './MUI.css';
+import {withStyles} from '@material-ui/core/styles';
+import UserInfo from './UserInfo';
+import AccountConnections from './AccountConnections';
+import {ModalActions} from '../../actions';
+import {ModalTypes} from '../../constants';
+import ProfileFooter from './ProfileFooter';
+import {
+  facebookBox,
+  twitchBox,
+  youtubeBox,
+  facebookIcon,
+  twitchIcon,
+  youtubeIcon,
+  fortniteBox,
+  pubgBox,
+  leagueBox,
+  fortniteIcon,
+  pubgIcon,
+  leagueIcon
+} from '../../assets/images/profile';
+import {GenUtil} from '../../utility';
+const translate = GenUtil.translate;
+// import AccountActions from '../../actions/AccountActions';
+// import {bindActionCreators} from 'redux';
 
 class CreateProfile extends Component {
-  constructor() {
-    super();
-    this.state = {currentStep: 1};
+  constructor(props) {
+    super(props);
+
+    const {twitchUsername, youtubeUsername, facebookUsername} = props;
+    const path = this.props.location.pathname;
+    const pathAry = path.split('/')[2];
+
+    this.state = {
+      currentStep: pathAry || '1',
+      email: this.props.email || this.props.twitch || this.props.youtube || this.props.facebook || '',
+      userType: '',
+      errors: {
+        email: ''
+      },
+      connections: {
+        social: {//twitch, facebook, youtube
+          header: translate('updateProfile.accountConnections.socialHeader'),
+          headerLabel: translate('updateProfile.accountConnections.connectionSelect'),
+          headerDescription: translate('updateProfile.accountConnections.connectionDescription'),
+
+          connections: [
+            {//twitch
+              name: 'twitch',
+              headerIcon: twitchBox,
+              bodyIcon: twitchIcon,
+              bodyUsername: twitchUsername
+            },
+            {//facebook
+              name: 'facebook',
+              headerIcon: facebookBox,
+              bodyIcon: facebookIcon,
+              bodyUsername: youtubeUsername
+            },
+            {//youtube
+              name: 'youtube',
+              headerIcon: youtubeBox,
+              bodyIcon: youtubeIcon,
+              bodyUsername: facebookUsername
+            }
+          ]
+        },
+        game: {//fortnite, pubg, league of legends
+          header: translate('updateProfile.accountConnections.gameHeader'),
+          headerLabel: translate('updateProfile.accountConnections.connectionSelect'),
+          headerDescription: translate('updateProfile.accountConnections.connectionDescription'),
+
+          connections: [
+            {//fortnite
+              name: 'fortnite',
+              headerIcon: fortniteBox,
+              bodyIcon: fortniteIcon,
+              bodyUsername: ''
+            },
+            {//pubg
+              name: 'pubg',
+              headerIcon: pubgBox,
+              bodyIcon: leagueIcon,
+              bodyUsername: ''
+            },
+            {//league of legends
+              name: 'league of legends',
+              headerIcon: leagueBox,
+              bodyIcon: pubgIcon,
+              bodyUsername: ''
+            }
+          ]
+        }
+      }
+    };
   }
 
-  changeStep = (step) => {
-    this.setState({currentStep: step});
-  };
+  handleEmailChange = (email) => {
+    this.setState({email: email});
+  }
 
-  renderStep() {
-    const step = this.state.currentStep;
+  handleUserTypeChange = (userType) => {
+    this.setState({userType: userType});
+  }
 
-    switch (step) {
-      case 1:
-        return <img src={ step_1 } alt='' />;
-      case 2:
-        return <img src={ step_2 } alt='' />;
-      case 3:
-        return <img src={ step_3 } alt='' />;
+  setStep = (currentStep) => {
+    this.props.history.push('/profile/'+currentStep);
+    this.setState({currentStep});
+  }
+
+  validation = (type) => {
+    switch (type) {
+      case 'email':
+        this.setState({
+          errors: {
+            ...this.state.errors
+          }
+        });
+        break;
       default:
         return;
     }
   }
 
+  openLinkAccountModal = (authRoute) => {
+    this.props.setModalType(ModalTypes.LINK_ACCOUNT);
+    this.props.setModalData(authRoute);
+    this.props.toggleModal();
+  }
+
+  closeLinkAccountModal = () => {
+    this.props.toggleModal();
+  }
+
   render() {
+    const {errors, connections, currentStep} = this.state;
+
     return (
-      <>
-        <div className='profile-page'>
-          <div className='profile-form'>
-            <CreateProfileForm changeStep={ this.changeStep } currentStep={ this.state.currentStep } location={ this.props.location } />
+      <div className='update-profile__wrapper'>
+        <form className='update-profile' onSubmit={ this.handleSubmit }>
+          <div className='update-profile__header'>
+            { translate('createProfile.header') }
           </div>
-        </div>
-        <div className='divider-linear__bottom' />
-        <div className='profile-footer'>{this.renderStep()}</div>
-      </>
+          {currentStep === '1' ?
+            <UserInfo handleEmailChange={ this.handleEmailChange } handleUserTypeChange={ this.handleUserTypeChange } validation={ this.validation } errors={ errors }/>
+            :
+            <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } closeLinkAccountModal={ this.closeLinkAccountModal }/>
+          }
+        </form>
+        <ProfileFooter currentStep={ currentStep } setStep={ this.setStep }/>
+      </div>
     );
   }
 }
 
-export default CreateProfile;
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    toggleModal: ModalActions.toggleModal,
+    setModalType: ModalActions.setModalType,
+    setModalData: ModalActions.setModalData
+  },
+  dispatch
+);
+
+const mapStateToProps = (state) => ({
+  account: state.getIn(['profiles', 'currentAccount']),
+  emailUsername: state.getIn(['profiles', 'currentAccount', 'email']),
+  userType: state.getIn(['profiles', 'currentAccount', 'userType']),
+  twitchUsername: state.getIn(['profiles', 'currentAccount', 'twitch']),
+  youtubeUsername: state.getIn(['profiles', 'currentAccount', 'youtube']),
+  facebookUsername: state.getIn(['profiles', 'currentAccount', 'facebook'])
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateProfile));

@@ -4,5 +4,6 @@ export default {
   SIGN_UP: 'SIGN_UP',
   REPORT_USER: 'REPORT_USER',
   DONATE: 'DONATE',
-  BAN: 'BAN'
+  BAN: 'BAN',
+  LINK_ACCOUNT: 'LINK_ACCOUNT'
 };

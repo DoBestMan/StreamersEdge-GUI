@@ -7,7 +7,7 @@ import {AuthService} from '../../services';
 import {NavigateActions} from '../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-
+import {StorageUtil} from '../../utility';
 class Callback extends Component {
 
   componentDidMount() {
@@ -22,12 +22,8 @@ class Callback extends Component {
   handleCallback = () => {
     const path = this.props.location;
     const pathAry = path.split('/');
-    let cb = pathAry[2]; // 2 = Callback type, 3 = Token
-
-    // Very simple bounds check
-    if (2 >= pathAry.length) {
-      cb = pathAry[0]; // Return empty string to error handle
-    }
+    const lastAccessedPage = StorageUtil.get('se-page');
+    let cb = pathAry[2] ? pathAry[2] : lastAccessedPage.split('/')[1];
 
     switch (cb) {
       case 'confirm-email':
@@ -43,6 +39,9 @@ class Callback extends Component {
         break;
       case 'reset-password':
         this.props.navigateToPasswordReset(pathAry[3]);
+        break;
+      case 'profile':
+        this.props.navigateToCreateProfile('2');
         break;
       default:
         // an error occurred.
@@ -67,7 +66,8 @@ const mapStateToProps = (state) => ({location: state.getIn(['router', 'location'
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     navigateToDashboard: NavigateActions.navigateToDashboard,
-    navigateToPasswordReset: NavigateActions.navigateToPasswordReset
+    navigateToPasswordReset: NavigateActions.navigateToPasswordReset,
+    navigateToCreateProfile: NavigateActions.navigateToCreateProfile
   },
   dispatch
 );

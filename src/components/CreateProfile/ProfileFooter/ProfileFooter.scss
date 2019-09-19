@@ -1,0 +1,25 @@
+@import '../../../assets/styles/common.scss';
+
+.profile-footer {
+  @include bg-gradient;
+
+  width: 100%;
+  height: 100px;
+  margin-top: 50px;
+  text-align: center;
+
+  &__step-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 200px;
+  }
+
+  &__item {
+    align-self: center;
+
+    &--hide {
+      visibility: hidden;
+    }
+  }
+}

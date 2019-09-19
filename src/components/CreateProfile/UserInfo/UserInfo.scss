@@ -1,0 +1,81 @@
+@import '../../../assets/styles/common';
+
+.user-info {
+  &__header {
+    display: flex;
+    font-family: $lato;
+    font-style: Italic;
+    font-size: 35px;
+    text-align: left;
+  }
+
+  &__card {
+    width: 50%;
+    max-width: 960px;
+    min-height: 300px;
+    margin: 67px 5px 0;
+    padding: 76px;
+    border: 2px solid $white;
+    border-radius: 25px;
+    background-image: $profile-gradient;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-width: 650px;
+    padding-bottom: 20px;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__account-type {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 23px;
+
+    &__label {
+      margin-right: 38px;
+      font-family: $lato;
+      font-style: Italic;
+    }
+  }
+
+  &__email {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 23px;
+
+    &__label {
+      margin-right: 70px;
+      font-family: $lato;
+      font-style: Italic;
+    }
+
+    &__input {
+      width: 330px;
+    }
+  }
+
+  &__avatar {
+    display: flex;
+    flex-direction: column;
+
+    &-label {
+      font-family: $lato;
+      font-style: Italic;
+      font-size: 23px;
+      color: $white;
+      text-align: center;
+      opacity: 1;
+      letter-spacing: 0;
+    }
+  }
+}

@@ -13,7 +13,7 @@ import routes from './routes';
 import {RouteConstants} from './constants';
 import {NavigateActions} from './actions';
 import {TokenUtil} from './utility';
-import Footer from './components/Footer';
+import {validPage} from './utility/GeneralUtils';
 import ErrorBoxValidation from './components/ErrorBoxValidation';
 
 const styleNode = document.createComment('insertion-point-jss');
@@ -42,7 +42,8 @@ class App extends Component {
       if (
         (routeValues.indexOf(this.props.path) !== -1 &&
         routeValues.indexOf('login?next=/') === -1) ||
-        (this.props.path.indexOf(RouteConstants.RESET_PASSWORD) !== -1 && TokenUtil.checkUrlLength(this.props.path))
+        (this.props.path.indexOf(RouteConstants.RESET_PASSWORD) !== -1 && TokenUtil.checkUrlLength(this.props.path)) ||
+        (this.props.path.indexOf(RouteConstants.PROFILE) !== -1 && validPage(this.props.path))
       ) {
         return true;
       }
@@ -64,7 +65,6 @@ class App extends Component {
           <div className='body'>
             {routes}
           </div>
-          <Footer/>
         </ConnectedRouter>
       </JssProvider>
     );

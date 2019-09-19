@@ -4,7 +4,8 @@ import {fromJS} from 'immutable';
 let initialState = fromJS({
   isOpen: false,
   previous: '',
-  type: ''
+  type: '',
+  data: ''
 });
 
 export default (state = initialState, action) => {
@@ -20,6 +21,12 @@ export default (state = initialState, action) => {
       return state.merge({
         previous: state.get('type'),
         type: action.modalType
+      });
+    }
+
+    case ActionTypes.MODAL_SET_DATA: {
+      return state.merge({
+        data: action.modalData
       });
     }
 

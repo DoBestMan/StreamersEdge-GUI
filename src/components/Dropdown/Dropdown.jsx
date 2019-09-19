@@ -14,7 +14,8 @@ import styles from './MUI.css';
 class Dropdown extends Component {
   state = {
     image: dropdown,
-    dropdownOpen: false
+    dropdownOpen: false,
+    selectedValue: this.props.defaultValue ? this.props.defaultValue : ''
   };
 
   mouseOver = () => {
@@ -23,7 +24,7 @@ class Dropdown extends Component {
 
   //if there is no value switch back to default untouched image
   mouseOut = () => {
-    if (this.props.selectedValue === '') {
+    if (this.state.selectedValue === '') {
       this.setState({image: dropdown});
     } else {
       this.setState({image: dropdownTouched});
@@ -38,13 +39,22 @@ class Dropdown extends Component {
     this.setState({dropdownOpen: false});
 
     //switch back to default untouched image if no value is selected
-    if (this.props.selectedValue === '') {
+    if (this.state.selectedValue === '') {
       this.setState({image: dropdown});
     }
   };
 
+  handleChange = (e) => {
+    const selectedValue = e.target.value;
+
+    this.setState({selectedValue: selectedValue});
+    this.props.handleChange(selectedValue);
+  }
+
   render() {
-    const {classes, dropdownList, selectedValue} = this.props;
+    const {classes, dropdownList} = this.props;
+    const {selectedValue} = this.state;
+
     return (
       <div className='dropdown'>
         <FormControl className='dropdown__form'>
@@ -55,13 +65,13 @@ class Dropdown extends Component {
             open={ this.state.dropdownOpen }
             onOpen={ this.onOpen }
             onClose={ this.onClose }
-            onChange={ this.props.handleChange }
+            onChange={ this.handleChange }
             onMouseOver={ this.mouseOver }
             onMouseOut={ this.mouseOut }
-            IconComponent={ () => <> </> } //remove the default material ui dropdown icon
-            inputProps={ {classes: {selectMenu: classes.textBoxStyle}} } //override input/textbox styles
+            IconComponent={ () => <> </> } //this removes the default material ui dropdown icon
+            inputProps={ {classes: {selectMenu: classes.textBoxStyle}} } //overrides input/textbox styles
             MenuProps={ {
-              classes: {paper: classes.dropdownStyle}, //override dropdown styles
+              classes: {paper: classes.dropdownStyle}, //overrides dropdown styles
               getContentAnchorEl: null
             } }
           >

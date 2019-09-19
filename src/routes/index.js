@@ -6,7 +6,6 @@ import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
 import ResetForm from '../components/ForgotPassword/ResetForm';
 import PeerplaysLogin from '../components/PeerplaysLogin/';
-import UpdateProfile from '../components/UpdateProfile';
 import Preferences from '../components/Preferences';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 import {RouteConstants as Routes} from '../constants';
@@ -23,7 +22,6 @@ const routes = (
       <Route path={ Routes.DASHBOARD } component={ requireAuthentication(Dashboard) }/>
       <Route path={ Routes.CALLBACK } component={ Callback }/>
       <Route path={ Routes.PREFERENCES } component={ requireAuthentication(Preferences) } />
-      <Route path={ Routes.UPDATE_PROFILE } component={ requireAuthentication(UpdateProfile) }/>
     </Switch>
   </>
 );
