@@ -31,7 +31,6 @@ class RegisterForm extends Component {
       resultText: '',
       errText: '',
       registerDisabled: false,
-      registerBtnText: 'REGISTER',
       isPasswordInputClicked: false,
       isConfirmPasswordConfirmed: false,
       isUsernameInputClicked: false,
@@ -48,8 +47,19 @@ class RegisterForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.errors.email !== '' || this.state.errors.username !== '' || this.state.errors.password !== '' || this.state.errors.confirmPassword !== '') {
-      console.warn('Registration failed');
+    if (this.state.email === '' || this.state.username === '' || this.state.password === '' || this.state.confirmPassword === '') {
+      console.error('Registration failed');
+      this.setState({
+        errText: translate('register.responses.errorMissing')
+      });
+      return;
+    }
+
+    if (this.state.errors.email.success !== true || this.state.errors.username.success !== true || this.state.errors.password.success !== true || this.state.errors.confirmPassword.success !== true) {
+      console.error('Registration failed');
+      this.setState({
+        errText: ''
+      });
       return;
     }
 
@@ -61,17 +71,15 @@ class RegisterForm extends Component {
     };
 
     this.setState({
-      registerDisabled: true,
-      registerBtnText: 'LOADING...'
+      registerDisabled: true
     });
 
     AuthService.register(account)
       .then(() => {
         this.setState({
           errText: '',
-          resultText: 'Confirmation email sent',
-          registerDisabled: false,
-          registerBtnText: 'REGISTER'
+          resultText: translate('register.responses.confirmSent'),
+          registerDisabled: false
         });
       })
       .catch((e) => {
@@ -79,8 +87,7 @@ class RegisterForm extends Component {
         this.setState({
           errText: e,
           resultText: '',
-          registerDisabled: false,
-          registerBtnText: 'REGISTER'
+          registerDisabled: false
         });
       });
   };
@@ -88,30 +95,73 @@ class RegisterForm extends Component {
   handleEmailChange = (email) => {
     this.setState({
       email: email,
-      isEmailInputClicked: true
-    });
+      isEmailInputClicked: true,
+      errors: {
+        ...this.state.errors,
+        email: ValidationUtil.seEmail(this.state.email)
+      }
+    }, () => this.validate('email'));
   }
 
   handleUsernameChange = (user) => {
     this.setState({
       username: user,
       isUsernameInputClicked: true
-    });
+    }, () => this.validate('username'));
   };
 
   handlePasswordChange = (password) => {
     this.setState({
       password: password,
       isPasswordInputClicked: true
-    });
+    }, () => this.validate('password'));
   }
 
   handleConfirmPasswordChange = (password) => {
     this.setState({
       confirmPassword: password,
       isConfirmPasswordConfirmed: true
-    });
+    }, () => this.validate('confirmPassword'));
   }
+
+  validate = (type) => {
+    switch (type) {
+      case 'email':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            email: ValidationUtil.seEmail(this.state.email)
+          }
+        });
+        break;
+      case 'password':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            password: ValidationUtil.sePassword(this.state.password),
+            confirmPassword: ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword)
+          }
+        });
+        break;
+      case 'confirmPassword':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            confirmPassword: ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword)
+          }
+        });
+        break;
+      case 'username':
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            username: ValidationUtil.seUsername(this.state.username)
+          }
+        });
+        break;
+      default:
+    }
+  };
 
   render() {
     return (

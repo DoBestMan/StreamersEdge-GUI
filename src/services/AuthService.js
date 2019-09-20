@@ -108,6 +108,11 @@ class PrivateAuthService {
         return resolve(response.data.result);
       } catch (err) {
         let errorObj = err.response.data.error;
+
+        if (typeof errorObj === 'string') {
+          return reject(errorObj);
+        }
+
         return reject(errorObj[Object.keys(errorObj)[0]]);
       }
 

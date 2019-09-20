@@ -104,6 +104,10 @@ export const translationObject = {
         weak: 'Weak',
         medium: 'Medium',
         strong: 'Strong'
+      },
+      responses: {
+        errorMissing: 'All of the required fields must be filled.',
+        confirmSent: 'Confirmation email sent.'
       }
     },
     header: {

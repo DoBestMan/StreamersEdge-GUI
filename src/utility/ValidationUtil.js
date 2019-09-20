@@ -88,7 +88,7 @@ const PrivateValidationUtils = {
    */
   emailDomain(email) {
     const regex=/\.([^\.]+?)$/;
-    const acceptedDomains = supportedEmailDomains.split('\n');
+    const acceptedDomains = supportedEmailDomains.split('\r\n');
     const extractedDomain = regex.exec(email);
 
     return extractedDomain === null ? false : acceptedDomains.includes(extractedDomain[1].toUpperCase());
