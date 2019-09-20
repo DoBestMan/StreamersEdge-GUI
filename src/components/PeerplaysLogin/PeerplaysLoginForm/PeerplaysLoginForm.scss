@@ -1,0 +1,59 @@
+@import '../../../assets/styles/common.scss';
+
+.peerplayslogin {
+  &-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 30px;
+  }
+
+  &__flex {
+    display: flex;
+    align-items: center;
+  }
+
+  &-error {
+    width: 350px;
+    height: 20px;
+    margin-bottom: 5px;
+  }
+
+  &__btn {
+    &-container {
+      position: relative;
+      padding-top: 25px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    &-txt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__textlink {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-style: italic;
+    color: $blue-light-one;
+
+    &-register {
+      margin-left: 5px;
+      text-decoration: underline;
+      cursor:pointer;
+    }
+  }
+
+  &-help {
+    margin-left: 10px;
+    padding: 0 6px;
+    border-radius: 50%;
+    background: transparent linear-gradient(to top, #00b0ff 0%, #0066d8 83%, #0057d1 100%) 0% 0% no-repeat padding-box;
+  }
+}

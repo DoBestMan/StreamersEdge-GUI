@@ -133,6 +133,19 @@ export const translationObject = {
         noMatch: 'Passwords do not match.'
       }
     },
+    peerplays: {
+      login: 'Login with Peerplays Global',
+      enterUsername: 'Enter your username',
+      enterPassword: 'Enter your password',
+      dontHaveAccount: 'Don\'t have a Peerplays Global account?',
+      register: 'Register',
+      information: {
+        title: 'Information',
+        content: 'The username you enter is powered by the Peerplays blockchain. If you already have a username at Peerplays, ' +
+        'please enter it here to link your Streamers Edge profile too it. If you don\'t have one, simply proceed to ',
+        register: 'register your account'
+      }
+    },
     dashboard: {
       featured: {
         desc: 'Streamers Edge Rivals brings streamers and esports together! Competitors in the Streamers Edge Rivals Fortnite Showdown will compete against each other numerous game modes: FFA, ' +

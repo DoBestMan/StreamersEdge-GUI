@@ -5,7 +5,7 @@ export default {
   PROFILE: '/profile',
   DASHBOARD: '/dashboard',
   CALLBACK: '/callback',
-  PEERPLAYS: '/peerplays',
+  PEERPLAYS_WALLET_LOGIN: '/peerplays',
   PREFERENCES: '/preferences',
   UPDATE_PROFILE: '/update-profile',
   CREATE_CHALLENGE: '/create-challenge',

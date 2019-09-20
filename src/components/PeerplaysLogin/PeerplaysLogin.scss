@@ -1,77 +1,18 @@
-@import '../../assets/styles/common';
-
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: $blue-dark-two;
-
-  &__header {
-    font-family: 'Lato', sans-serif;
-    font-weight: 50;
-    font-size: 30px;
-  }
-
-  &__container {
+.peerplayslogin {
+  &-page {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 50%;
-    height: 340px;
-    margin-bottom: 10px;
-    padding-bottom: 0;
+    width: 545px;
+    margin: auto;
+    background-size: cover;
   }
 
-  &__body {
-    transform: translate(0, 50px);
-    width: 90%;
-    height: 100%;
-    padding: 0;
-    text-align: center;
+  &__subHeader {
+    margin-top: 60px;
+    font-style: italic;
+    font-size: 30px;
+    color: #ffffff;
+    text-shadow: 3px 3px 4px #003366;
   }
-}
-
-.form {
-  &__btn {
-    width: 25%;
-    margin: 0;
-    margin-left: 50px;
-
-    &-wrapper {
-      flex-direction: row-reverse;
-      padding: 0;
-    }
-  }
-
-  &__input {
-    height: 85px;
-    margin: 0;
-  }
-}
-
-.btn-back {
-  width: 15%;
-  margin: 0;
-}
-
-.label {
-  margin-bottom: 5px;
-  text-align: left;
-
-  &--black {
-    margin-bottom: 5px;
-    color: $black;
-  }
-}
-
-.signup-link {
-  width: 50%;
-}
-
-.loader {
-  width: 24px;
-  height: 24px;
 }

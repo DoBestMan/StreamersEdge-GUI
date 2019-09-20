@@ -1,0 +1,29 @@
+.infobox {
+  &-container {
+    position: fixed;
+    top: 554px;
+    left: 1195px;
+    width: 340px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background: transparent linear-gradient(to right, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 2px 6px 11px #000000bf;
+  }
+
+  &-header {
+    padding: 10px 0;
+    border-radius: 5px 5px 0 0;
+    font-weight: 800;
+    font-size: 17px;
+    text-align: center;
+    background: transparent linear-gradient(to top, #00b0ff 0%, #0066d8 83%, #0057d1 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0 3px 6px #00000029;
+  }
+
+  &-body {
+    padding: 15px 30px 30px;
+    color: #ffffff;
+    text-align: left;
+    letter-spacing: 0;
+  }
+}

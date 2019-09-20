@@ -1,5 +1,7 @@
-import {withRouter} from 'react-router-dom';
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {AuthUtil, GenUtil} from '../../../utility';
 import {
   youtubeImgBlue,
@@ -11,7 +13,8 @@ import {
   twitchImg,
   peerplaysImgBlue
 } from '../../../assets/images/socials';
-
+import ModalTypes from '../../../constants/ModalTypes';
+import {ModalActions} from '../../../actions';
 
 const translate = GenUtil.translate;
 
@@ -54,7 +57,7 @@ class LoginFooter extends Component {
               alt='peerplays'
               onMouseOut={ (e) => (e.currentTarget.src = peerplaysImgBlue) }
               onMouseOver={ (e) => (e.currentTarget.src = peerplaysImg) }
-              onClick={ () => AuthUtil.authVia('peerplays', this.props.location.pathname) }
+              onClick={ () => this.props.setModalType(ModalTypes.PEERPLAYS_LOGIN) }
             />
           </div>
         </div>
@@ -63,4 +66,14 @@ class LoginFooter extends Component {
   }
 }
 
-export default withRouter(LoginFooter);
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    setModalType: ModalActions.setModalType
+  },
+  dispatch
+);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(LoginFooter));

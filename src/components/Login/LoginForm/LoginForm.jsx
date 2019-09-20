@@ -62,7 +62,6 @@ class LoginForm extends Component {
       password: password,
       isPasswordClicked: true
     });
-
   }
 
   logout = () => {

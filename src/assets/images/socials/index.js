@@ -6,7 +6,7 @@ import youtubeImgBlue from './YouTube_1.png';
 import facebookImgBlue from './Facebook_1.png';
 import twitchImgBlue from './Twitch_1.png';
 import peerplaysImgBlue from './Peerplays_1.png';
-
+import peerplaysImg2X from './Peerplays_2X.png';
 
 export {
   youtubeImg,
@@ -16,5 +16,6 @@ export {
   twitchImg,
   twitchImgBlue,
   peerplaysImg,
-  peerplaysImgBlue
+  peerplaysImgBlue,
+  peerplaysImg2X
 };

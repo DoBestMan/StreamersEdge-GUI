@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {AuthUtil, GenUtil} from '../../../utility';
 import {
@@ -11,7 +13,8 @@ import {
   peerplaysImg,
   peerplaysImgBlue
 } from '../../../assets/images/socials';
-
+import ModalTypes from '../../../constants/ModalTypes';
+import {ModalActions} from '../../../actions';
 
 const translate = GenUtil.translate;
 
@@ -56,7 +59,7 @@ class AuthFooter extends Component {
               alt='peerplays'
               onMouseOver={ (e) => (e.currentTarget.src = peerplaysImg) }
               onMouseOut={ (e) => (e.currentTarget.src = peerplaysImgBlue) }
-              onClick={ () => AuthUtil.authVia('peerplays', this.props.location.pathname) } // TODO: refactor to use redux path.
+              onClick={ () => this.props.setModalType(ModalTypes.PEERPLAYS_LOGIN) }
             />
           </div>
         </div>
@@ -65,4 +68,14 @@ class AuthFooter extends Component {
   }
 }
 
-export default withRouter(AuthFooter);
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    setModalType: ModalActions.setModalType
+  },
+  dispatch
+);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(AuthFooter));

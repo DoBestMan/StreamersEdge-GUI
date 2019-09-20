@@ -5,6 +5,7 @@ import {withStyles} from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import LoginForm from '../Login/LoginForm';
+import PeerplaysLogin from '../PeerplaysLogin';
 import ForgotPassword from '../ForgotPassword';
 import ReportUser from '../ReportUser';
 import Donate from '../Donate';
@@ -82,6 +83,12 @@ class RootModal extends Component {
       case ModalTypes.LINK_ACCOUNT: {
         modalContent = <LinkAccountModal />;
         modalClass = classes.link;
+        break;
+      }
+
+      case ModalTypes.PEERPLAYS_LOGIN: {
+        modalContent = <PeerplaysLogin goRegister={ this.toggleModalAndRegister }/>;
+        modalClass = classes.peerplays;
         break;
       }
 
