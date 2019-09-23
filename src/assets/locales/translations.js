@@ -127,10 +127,17 @@ export const translationObject = {
         invalidEmail:'Please enter a valid email.'
       },
       resetForm: {
-        header: 'RESET YOUR PASSWORD',
-        newPassword: 'New password',
-        confirmPassword: 'Confirm password',
-        noMatch: 'Passwords do not match.'
+        header: 'Reset your password',
+        subHeader: 'Please choose a new password to finish signing in.',
+        newPassword: 'Enter your new password',
+        confirmPassword: 'Confirm your new password',
+        noMatch: 'Passwords do not match.',
+        passwordStrength: {
+          veryWeak: 'Very Weak',
+          weak: 'Weak',
+          medium: 'Medium',
+          strong: 'Strong'
+        }
       }
     },
     peerplays: {

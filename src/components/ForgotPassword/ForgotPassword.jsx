@@ -65,6 +65,7 @@ class ForgotPassword extends Component {
     AuthService.forgotPassword(this.state.email)
       .then(() => {
         this.updateResultMessage(translate('forgotPassword.resultText.success'));
+        this.props.setModalType(ModalTypes.RESET_PASSWORD);
       })
       .catch((err) => {
         if (err.includes(429)) {

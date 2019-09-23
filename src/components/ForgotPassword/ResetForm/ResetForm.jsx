@@ -5,16 +5,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
+import {Button, FormControl, Card} from '@material-ui/core';
 import querystring from 'query-string';
-import SignupInput from '../../SignupInput';
+
 import {AuthService} from '../../../services';
 import {NavigateActions} from '../../../actions';
 import {ValidationUtil, GenUtil} from '../../../utility';
-import IconPassword from '../../../assets/images/login/Password.png';
-import IconPasswordActive from '../../../assets/images/login/Password_Over.png';
+
+import CustomInput from '../../CustomInput';
+import PasswordStrengthIndicator from '../../Register/RegisterForm/PasswordStrengthIndicator';
+import ChangePasswordButton from '../../../assets/images/change_password.svg';
+import {InvalidIcon} from '../../../assets/images/signup';
+import {IconPassword, IconPasswordActive} from '../../../assets/images/login';
+
 const translate = GenUtil.translate;
 
 class ResetForm extends Component {
@@ -22,7 +25,9 @@ class ResetForm extends Component {
     super(props);
     this.state = {
       password: '',
-      repeatPassword: '',
+      confirmPassword: '',
+      isPasswordInputClicked: false,
+      isConfirmPasswordConfirmed: false,
       resultText: '',
       passwordErr: '',
       token: ''
@@ -41,12 +46,19 @@ class ResetForm extends Component {
     }
   }
 
-  handleChange = (event) => {
-    const {name, value} = event.target;
+  handlePasswordChange = (password) => {
     this.setState({
-      [name]: value
+      password: password,
+      isPasswordInputClicked: true
     });
-  };
+  }
+
+  handleConfirmPasswordChange = (password) => {
+    this.setState({
+      confirmPassword: password,
+      isConfirmPasswordConfirmed: true
+    });
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -79,42 +91,73 @@ class ResetForm extends Component {
   render() {
     return (
       <>
-        <div className='reset-form'>
-          <span className='register-title'>{translate('forgotPassword.resetForm.header')}</span>
-          <form className='register-form' onSubmit={ this.handleSubmit }>
-            <FormControl margin='normal' required fullWidth>
-              <SignupInput
-                name='password'
-                type='password'
-                onBlur={ this.validate }
-                handleChange={ this.handleChange }
-                placeholder={ translate('forgotPassword.resetForm.newPassword') }
-                inputValue={ this.state.password }
-                inputImage={ IconPassword }
-                activeInputImage={ IconPasswordActive }
-              />
-            </FormControl>
-            <FormControl margin='normal' required fullWidth>
-              <SignupInput
-                name='repeatPassword'
-                type='password'
-                onBlur={ this.validate }
-                handleChange={ this.handleChange }
-                placeholder={ translate('forgotPassword.resetForm.confirmPassword') }
-                inputValue={ this.state.password }
-                inputImage={ IconPassword }
-                activeInputImage={ IconPasswordActive }
-              />
-            </FormControl>
-            <InputLabel className='register-error' shrink error={ true }>
-              {this.state.passwordErr}
-            </InputLabel>
+        <Card className='reset-card'>
+          <div className='reset-form'>
+            <span className='reset__title'>{translate('forgotPassword.resetForm.header')}</span>
+            <span className='reset__subHeader'>{translate('forgotPassword.resetForm.subHeader')}</span>
+            <form className='reset-form' onSubmit={ this.handleSubmit }>
+              <FormControl className='register-input' margin='normal' required fullWidth>
+                <CustomInput
+                  name='password'
+                  type='password'
+                  muiInputClass='inputRegister'
+                  hasActiveGlow={ true }
+                  placeholder={ translate('register.enterPassword') }
+                  onBlur={ this.validate }
+                  handleChange={ this.handlePasswordChange }
+                  iconLeft={ IconPassword }
+                  iconLeftActive={ IconPasswordActive }
+                  iconRightActive={ InvalidIcon }
+                  handleRightIconClick={ () => {
+                    return  ValidationUtil.sePassword(this.state.password).errors;
+                  } }
+                  isValid={ () => {
+                    if (this.state.isPasswordInputClicked) {
+                      return ValidationUtil.sePassword(this.state.password).success;
+                    } else {
+                      return true;
+                    }
+                  }  }
+                />
+                <PasswordStrengthIndicator password = { this.state.password } error={ !ValidationUtil.sePassword(this.state.password).success }/>
+              </FormControl>
+              <FormControl className='register-input' margin='normal' required fullWidth>
+                <CustomInput
+                  name='confirmPassword'
+                  type='password'
+                  muiInputClass='inputRegister'
+                  hasActiveGlow={ true }
+                  placeholder={ translate('forgotPassword.resetForm.confirmPassword') }
+                  onBlur={ this.validate }
+                  handleChange={ this.handleConfirmPasswordChange }
+                  iconLeft={ IconPassword }
+                  iconLeftActive={ IconPasswordActive }
+                  iconRightActive={ InvalidIcon }
+                  handleRightIconClick={ () => {
+                    return  ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword).errors;
+                  } }
+                  isValid={ () => {
+                    if (this.state.isConfirmPasswordConfirmed) {
+                      return ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword).success;
+                    } else {
+                      return true;
+                    }
+                  }  }
+                />
+              </FormControl>
 
-            <Button variant='outlined' color='secondary' type='submit'>
-              {translate('general.submit')}
-            </Button>
-          </form>
-        </div>
+              <div className='reset__btn-container'>
+                <Button className='reset__btn' type='submit'>
+                  <img
+                    src={ ChangePasswordButton }
+                    alt='Change Password'
+                    type='submit'
+                  />
+                </Button>
+              </div>
+            </form>
+          </div>
+        </Card>
       </>
     );
   }
