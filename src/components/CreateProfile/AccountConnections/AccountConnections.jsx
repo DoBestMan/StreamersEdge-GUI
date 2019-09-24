@@ -51,21 +51,16 @@ class AccountConnections extends Component {
 
   renderConnections = (connections) => {
     // eslint-disable-next-line array-callback-return
-    connections.map((connection) => {
-
-      if(connection.bodyUsername) {
-        return (
-          <CardContent key={ connection.bodyIcon } className='link-accounts__connection'>
-            <img className='link-accounts__connection-icon' src={ connection.bodyIcon } alt='' /> {/* white peerplays icon: iconWhite*/}
-            <div className='link-accounts__connection-wrapper'>
-              <p className='link-accounts__connection-user'>{ connection.bodyUsername }</p> {/* private key: 1F1XBVCFJKASH23J2LsXBNDOIJWIO2XJ*/}
-              <p className='link-accounts__connection-label'>{ connection.bodyLabel }</p> {/* label: Wallet Address*/}
-            </div>
-            <div className='link-accounts__connection-close'/>
-          </CardContent>
-        );
-      }
-    });
+    return connections.map((connection) => connection.bodyUsername ? (
+      <CardContent key={ connection.bodyIcon } className='link-accounts__connection'>
+        <img className='link-accounts__connection-icon' src={ connection.bodyIcon } alt='' /> {/* white peerplays icon: iconWhite*/}
+        <div className='link-accounts__connection-wrapper'>
+          <p className='link-accounts__connection-user'>{ connection.bodyUsername }</p> {/* private key: 1F1XBVCFJKASH23J2LsXBNDOIJWIO2XJ*/}
+          <p className='link-accounts__connection-label'>{ connection.bodyLabel }</p> {/* label: Wallet Address*/}
+        </div>
+        <div className='link-accounts__connection-close' onClick={ () => this.props.openUnlinkAccountModal(connection.name) }/>
+      </CardContent>
+    ) : null);
   }
 
   /**

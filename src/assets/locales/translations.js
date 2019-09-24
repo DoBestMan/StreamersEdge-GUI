@@ -227,7 +227,8 @@ export const translationObject = {
     },
 
     link: {
-      header: 'Confirm You Want To Link Your Account',
+      header: 'Confirm you want to link your account',
+      unlinkHeader: 'Confirm you want to unlink your account',
       terms: 'Terms & Conditions'
     },
 

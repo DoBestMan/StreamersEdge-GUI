@@ -1,6 +1,6 @@
 @import '../../../assets/styles/common';
 
-.link-account {
+.unlink-account {
   &__wrapper {
     position: relative;
     text-align: center;
@@ -9,11 +9,11 @@
   &__cross {
     position: absolute;
     right:0;
+    cursor: pointer;
 
     &-img {
       width: 10px;
       max-width: 10px;
-      cursor: pointer;
     }
   }
 

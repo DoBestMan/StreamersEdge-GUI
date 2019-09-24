@@ -73,6 +73,7 @@
 
     &-icon {
       margin: 20px 20px 0 0;
+      cursor: pointer;
     }
   }
 
@@ -118,6 +119,7 @@
       background-image: url('../../../assets/images/profile/close_white.png');
       background-repeat: no-repeat;
       background-size: 18px;
+      cursor: pointer;
 
       &:hover {
         background-image: url('../../../assets/images/profile/close_grey.png');

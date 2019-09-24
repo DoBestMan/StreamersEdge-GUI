@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {Config, StorageUtil, GenUtil} from '../utility';
+import querystring from 'query-string';
 
 const ApiHandler = axios.create({withCredentials: true});
 
@@ -33,6 +34,44 @@ class PrivateProfileService {
 
       StorageUtil.set('se-user', JSON.stringify(response.data.result));
       return resolve(response.data.result);
+    });
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {object} account - Contains object with updated account fields.
+   * @returns {Promise} - A promise that resolves to an updated user profile object wrapped by dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static updateProfile(account) {
+    let response;
+    const query = `${apiRoot}api/v1/profile`;
+
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const body = {
+        twitchUserName: account.twitchUserName,
+        googleName: account.googleName,
+        facebook: account.facebook,
+        pubgUsername: account.pubgUsername,
+        peerplaysAccountName: account.peerplaysAccountName,
+        userType: account.userType
+      };
+
+      try {
+        response = await ApiHandler.patch(query, querystring.stringify(body), headers);
+        console.log(response);
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.response);
+      }
     });
   }
 
@@ -80,6 +119,17 @@ class ProfileService {
    */
   static getProfile() {
     return GenUtil.dummyDataWrapper(PrivateProfileService.getProfile());
+  }
+
+  /**
+   *
+   * @param {object} account - Contains object with updated account fields.
+   * @static
+   * @returns {Promise} A promise that resolves to an updated user profile object wrapped by dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static updateProfile(account) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.updateProfile(account));
   }
 
   /**

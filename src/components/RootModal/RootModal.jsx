@@ -16,6 +16,7 @@ import {ModalTypes} from '../../constants';
 import styles from './MUI.css';
 import BanModal from '../Modals/BanModal';
 import LinkAccountModal from '../Modals/LinkAccountModal';
+import UnlinkAccountModal from '../Modals/UnlinkAccountModal';
 
 class RootModal extends Component {
 
@@ -83,6 +84,12 @@ class RootModal extends Component {
 
       case ModalTypes.LINK_ACCOUNT: {
         modalContent = <LinkAccountModal />;
+        modalClass = classes.link;
+        break;
+      }
+
+      case ModalTypes.UNLINK_ACCOUNT: {
+        modalContent = <UnlinkAccountModal />;
         modalClass = classes.link;
         break;
       }

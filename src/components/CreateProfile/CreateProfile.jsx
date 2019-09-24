@@ -35,7 +35,21 @@ class CreateProfile extends Component {
     const path = this.props.location.pathname;
     const pathAry = path.split('/')[2];
 
-    this.state = {
+    this.state = this.constructState(twitchUsername, youtubeUsername, facebookUsername, pathAry);
+  }
+
+  componentDidUpdate(prevProps) {
+
+    if (this.props.account !== prevProps.account) {
+      const {twitchUsername, youtubeUsername, facebookUsername} = this.props;
+      const path = this.props.location.pathname;
+      const pathAry = path.split('/')[2];
+      this.setState(this.constructState(twitchUsername, youtubeUsername, facebookUsername, pathAry));
+    }
+  }
+
+  constructState = (twitchUsername, youtubeUsername, facebookUsername, pathAry) => {
+    return {
       currentStep: pathAry || '1',
       email: this.props.email || this.props.twitch || this.props.youtube || this.props.facebook || '',
       userType: '',
@@ -59,13 +73,13 @@ class CreateProfile extends Component {
               name: 'facebook',
               headerIcon: facebookBox,
               bodyIcon: facebookIcon,
-              bodyUsername: youtubeUsername
+              bodyUsername: facebookUsername
             },
             {//youtube
               name: 'youtube',
               headerIcon: youtubeBox,
               bodyIcon: youtubeIcon,
-              bodyUsername: facebookUsername
+              bodyUsername: youtubeUsername
             }
           ]
         },
@@ -88,7 +102,7 @@ class CreateProfile extends Component {
               bodyUsername: ''
             },
             {//league of legends
-              name: 'league of legends',
+              name: 'league',
               headerIcon: leagueBox,
               bodyIcon: pubgIcon,
               bodyUsername: ''
@@ -132,13 +146,18 @@ class CreateProfile extends Component {
     this.props.toggleModal();
   }
 
+  openUnlinkAccountModal = (authRoute) => {
+    this.props.setModalType(ModalTypes.UNLINK_ACCOUNT);
+    this.props.setModalData(authRoute);
+    this.props.toggleModal();
+  }
+
   closeLinkAccountModal = () => {
     this.props.toggleModal();
   }
 
   render() {
     const {errors, connections, currentStep} = this.state;
-
     return (
       <div className='update-profile__wrapper'>
         <form className='update-profile' onSubmit={ this.handleSubmit }>
@@ -148,7 +167,8 @@ class CreateProfile extends Component {
           {currentStep === '1' ?
             <UserInfo handleEmailChange={ this.handleEmailChange } handleUserTypeChange={ this.handleUserTypeChange } validation={ this.validation } errors={ errors }/>
             :
-            <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } closeLinkAccountModal={ this.closeLinkAccountModal }/>
+            <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } openUnlinkAccountModal={ this.openUnlinkAccountModal }
+              closeLinkAccountModal={ this.closeLinkAccountModal }/>
           }
         </form>
         <ProfileFooter currentStep={ currentStep } setStep={ this.setStep }/>
@@ -170,8 +190,8 @@ const mapStateToProps = (state) => ({
   account: state.getIn(['profiles', 'currentAccount']),
   emailUsername: state.getIn(['profiles', 'currentAccount', 'email']),
   userType: state.getIn(['profiles', 'currentAccount', 'userType']),
-  twitchUsername: state.getIn(['profiles', 'currentAccount', 'twitch']),
-  youtubeUsername: state.getIn(['profiles', 'currentAccount', 'youtube']),
+  twitchUsername: state.getIn(['profiles', 'currentAccount', 'twitchUserName']),
+  youtubeUsername: state.getIn(['profiles', 'currentAccount', 'googleName']),
   facebookUsername: state.getIn(['profiles', 'currentAccount', 'facebook'])
 });
 
