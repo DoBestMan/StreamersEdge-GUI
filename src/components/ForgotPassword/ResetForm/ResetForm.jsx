@@ -17,6 +17,7 @@ import PasswordStrengthIndicator from '../../Register/RegisterForm/PasswordStren
 import ChangePasswordButton from '../../../assets/images/change_password.svg';
 import {InvalidIcon} from '../../../assets/images/signup';
 import {IconPassword, IconPasswordActive} from '../../../assets/images/login';
+import {withRouter} from 'react-router-dom';
 
 const translate = GenUtil.translate;
 
@@ -63,7 +64,7 @@ class ResetForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.passwordErr !== null) {
+    if (!this.state.passwordErr.success) {
       return;
     }
 
@@ -77,7 +78,8 @@ class ResetForm extends Component {
   };
 
   validate = () => {
-    if (this.state.password !== this.state.repeatPassword) {
+
+    if (this.state.password !== this.state.confirmPassword) {
       this.setState({
         passwordErr: translate('forgotPassword.resetForm.noMatch')
       });
@@ -147,7 +149,8 @@ class ResetForm extends Component {
               </FormControl>
 
               <div className='reset__btn-container'>
-                <Button className='reset__btn' type='submit'>
+                <Button className='reset__btn' type='submit'
+                  disabled={ this.state.passwordErr.success  && this.state.isPasswordInputClicked && this.state.isConfirmPasswordConfirmed ? false : true }>
                   <img
                     src={ ChangePasswordButton }
                     alt='Change Password'
@@ -173,4 +176,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
 export default connect(
   null,
   mapDispatchToProps
-)(ResetForm);
+)(withRouter(ResetForm));

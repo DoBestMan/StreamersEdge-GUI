@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import LoginForm from '../Login/LoginForm';
 import PeerplaysLogin from '../PeerplaysLogin';
 import ForgotPassword from '../ForgotPassword';
-import ResetPassword from '../ForgotPassword/ResetForm';
 import ReportUser from '../ReportUser';
 import Donate from '../Donate';
 import Register from '../Register';
@@ -91,12 +90,6 @@ class RootModal extends Component {
       case ModalTypes.UNLINK_ACCOUNT: {
         modalContent = <UnlinkAccountModal />;
         modalClass = classes.link;
-        break;
-      }
-
-      case ModalTypes.RESET_PASSWORD: {
-        modalContent = <ResetPassword />;
-        modalClass = classes.reset;
         break;
       }
 

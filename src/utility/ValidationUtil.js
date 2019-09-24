@@ -2,6 +2,7 @@ import {translate} from './GeneralUtils';
 import Config from '../utility/Config';
 import {UploadFileTypes} from '../constants';
 import supportedEmailDomains from '../assets/locales/SupportedEmailDomains.txt';
+import {EOL} from 'os';
 
 const PrivateValidationUtils = {
   /**
@@ -88,7 +89,8 @@ const PrivateValidationUtils = {
    */
   emailDomain(email) {
     const regex=/\.([^\.]+?)$/;
-    const acceptedDomains = supportedEmailDomains.split('\r\n');
+    const lineBreak = EOL;
+    const acceptedDomains = supportedEmailDomains.split(lineBreak);
     const extractedDomain = regex.exec(email);
     return extractedDomain === null ? false : acceptedDomains.includes(extractedDomain[1].toUpperCase());
   },
