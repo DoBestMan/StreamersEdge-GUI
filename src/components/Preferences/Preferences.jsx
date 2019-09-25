@@ -1,23 +1,36 @@
 import React, {Component} from 'react';
 import {Button} from '@material-ui/core';
-import preferences from '../../assets/images/preferences/Settings.png';
+
 import InvitesForm from './InvitesForm';
 import NotificationsForm from './NotificationsForm';
+import preferences from '../../assets/images/preferences/Settings.png';
+
 import {GenUtil} from '../../../src/utility';
-import AuthService from '../../services/AuthService';
+import {AuthService, UserService} from '../../services';
 
 const translate = GenUtil.translate;
+
+const INVITATIONS = [
+  'all',
+  'all',
+  'users',
+  'games',
+  'none'
+];
+
 class Preferences extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       inviteType: null,
-      userWhitelist: [],
+      userWhiteList: [],
       userList: [],
+      gameList: ['fortnite', 'pubg'],
+      gameWhiteList: [],
       notificationType: null,
       errors: {
-        userSearch: null,
+        search: null,
         save: null
       }
     };
@@ -44,18 +57,75 @@ class Preferences extends Component {
     });
   }
 
-  addUser = (user) => {
-    this.setState({userWhitelist: [...this.state.userWhitelist, user]});
+  handleSave = () => {
+    // Update notification
+    UserService
+      .updateNotification(this.state.notificationType)
+      .then((res) => {
+        console.log('Update notification successfully', res);
+      })
+      .catch((err) => {
+        console.log('Update notification failed', err);
+      });
+
+    // Update invitation
+    UserService
+      .updateInvitation({
+        invitations: INVITATIONS[+this.state.inviteType],
+        users: this.state.userWhiteList.map((user) => {
+          const findUser = this.state.userList.find((usr) => {
+            return usr.username === user;
+          });
+
+          return findUser.id;
+        }),
+        games: this.state.gameWhiteList
+      })
+      .then((res) => {
+        console.log('Update invitation successfully', res);
+      })
+      .catch((err) => {
+        console.log('Update invitation failed', err);
+      });
   }
 
-  removeUser = (user, index) => {
-    this.setState({userWhitelist: this.state.userWhitelist.filter((user) => {
-      return user !== index;
-    })});
+  addUser = (user) => {
+    this.setState({userWhiteList: [...this.state.userWhiteList, user]});
+  }
+
+  removeUser = (user) => {
+    this.setState({
+      userWhiteList: [
+        ...this.state.userWhiteList.slice(0, user),
+        ...this.state.userWhiteList.slice(user + 1)
+      ]
+    });
+  }
+
+  addGame = (game) => {
+    this.setState({gameWhiteList: [...this.state.gameWhiteList, game]});
+  }
+
+  removeGame = (game) => {
+    this.setState({
+      gameWhiteList: [
+        ...this.state.gameWhiteList.slice(0, game),
+        ...this.state.gameWhiteList.slice(game + 1)
+      ]
+    });
   }
 
   render() {
-    const {inviteType, userWhitelist, userList, notificationType, errors} = this.state;
+    const {
+      inviteType,
+      userWhiteList,
+      userList,
+      gameList,
+      gameWhiteList,
+      notificationType,
+      errors
+    } = this.state;
+
     return (
       <div className='preferences'>
         <div className='preferences__header'>
@@ -63,13 +133,29 @@ class Preferences extends Component {
           <p> {translate('preferences.header')}</p>
         </div>
 
-        <InvitesForm inviteType={ inviteType } userWhitelist={ userWhitelist } userList={ userList } errors={ errors }
-          addUser={ this.addUser } removeUser={ this.removeUser } handleChange={ this.handleChange } setError={ this.setError }/>
-        <NotificationsForm notificationType={ notificationType } handleChange={ this.handleChange }/>
+        <InvitesForm
+          inviteType={ inviteType }
+          userWhiteList={ userWhiteList }
+          userList={ userList }
+          errors={ errors }
+          addUser={ this.addUser }
+          removeUser={ this.removeUser }
+          gameList={ gameList }
+          gameWhiteList={ gameWhiteList }
+          addGame={ this.addGame }
+          removeGame={ this.removeGame }
+          handleChange={ this.handleChange }
+          setError={ this.setError }
+        />
+
+        <NotificationsForm
+          notificationType={ notificationType }
+          handleChange={ this.handleChange }
+        />
 
         <div className='form-buttons'>
           <Button className='button-cancel'> </Button>
-          <Button className='button-save'> </Button>
+          <Button className='button-save' onClick={ this.handleSave }> </Button>
         </div>
       </div>
     );

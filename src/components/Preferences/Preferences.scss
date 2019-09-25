@@ -5,8 +5,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 663px;
   min-height: 886px;
-  background-image: linear-gradient($preferencesStartGradient, $preferencesFinishGradient);
+  margin: auto;
+  background: #06002a 0% 0% no-repeat padding-box;
+  box-shadow: 0 7px 9px #000000bf;
 
   &__header {
     display: flex;
@@ -28,8 +31,7 @@
 .form-buttons {
   display: flex;
   justify-content: space-between;
-  width: 344px;
-  height: 50px;
+  height: 70px;
   margin: 30px 0;
 }
 
@@ -42,22 +44,15 @@
   &-save {
     @extend .button;
 
-    background-image: url('../../assets/images/preferences/Save.png');
-
-    &:hover {
-      background-image: url('../../assets/images/preferences/Save_Over.png');
-    }
+    width: 298px;
+    margin-left: 31px;
+    background: transparent url('../../assets/images/preferences/Save.png') 0% 0% no-repeat padding-box;
   }
 
   &-cancel {
     @extend .button;
 
-    background-image: url('../../assets/images/preferences/Cancel.png');
-  }
-
-  &-cancel:hover {
-    @extend .button;
-
-    background-image: url('../../assets/images/preferences/Cancel_Over.png');
+    width: 205px;
+    background: transparent url('../../assets/images/preferences/Cancel.png') 0% 0% no-repeat padding-box;
   }
 }

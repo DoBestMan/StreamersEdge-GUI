@@ -67,10 +67,17 @@ export const translationObject = {
         bounty: 'Minimum bounty for invite',
         ppy: 'PPY',
         searchUsersPlaceholder: 'Search users - Begin typing username',
+        searchGamesPlaceholder: 'Search games - Begin typing game',
         bountyPlaceholder: '10,000',
         errors: {
-          alreadyAdded: 'user already added',
-          notFound: 'user not found'
+          user: {
+            alreadyAdded: 'user already added',
+            notFound: 'user not found'
+          },
+          game: {
+            alreadyAdded: 'game already added',
+            notFound: 'game not found'
+          }
         }
       },
       notifications: {
