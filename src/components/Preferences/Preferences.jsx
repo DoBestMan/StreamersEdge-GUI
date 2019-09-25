@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Button} from '@material-ui/core';
 
 import InvitesForm from './InvitesForm';
@@ -6,12 +8,12 @@ import NotificationsForm from './NotificationsForm';
 import preferences from '../../assets/images/preferences/Settings.png';
 
 import {GenUtil} from '../../../src/utility';
-import {AuthService, UserService} from '../../services';
+import {AuthService, UserService, ProfileService} from '../../services';
+import AccountActions from '../../actions/AccountActions';
 
 const translate = GenUtil.translate;
 
 const INVITATIONS = [
-  'all',
   'all',
   'users',
   'games',
@@ -23,12 +25,12 @@ class Preferences extends Component {
     super(props);
 
     this.state = {
-      inviteType: null,
+      inviteType: INVITATIONS.indexOf(this.props.invitations).toString(),
       userWhiteList: [],
       userList: [],
       gameList: ['fortnite', 'pubg'],
       gameWhiteList: [],
-      notificationType: null,
+      notificationType: this.props.notifications ? '1' : '2',
       errors: {
         search: null,
         save: null
@@ -58,16 +60,6 @@ class Preferences extends Component {
   }
 
   handleSave = () => {
-    // Update notification
-    UserService
-      .updateNotification(this.state.notificationType)
-      .then((res) => {
-        console.log('Update notification successfully', res);
-      })
-      .catch((err) => {
-        console.log('Update notification failed', err);
-      });
-
     // Update invitation
     UserService
       .updateInvitation({
@@ -83,6 +75,25 @@ class Preferences extends Component {
       })
       .then((res) => {
         console.log('Update invitation successfully', res);
+
+        // Update notification
+        UserService
+          .updateNotification((this.state.notificationType || '1') === '1')
+          .then((res) => {
+            console.log('Update notification successfully', res);
+
+            ProfileService
+              .getProfile()
+              .then((profile) => {
+                this.props.setAccount(profile);
+              })
+              .catch((err) => {
+                console.log('Get profile failed', err);
+              });
+          })
+          .catch((err) => {
+            console.log('Update notification failed', err);
+          });
       })
       .catch((err) => {
         console.log('Update invitation failed', err);
@@ -162,4 +173,20 @@ class Preferences extends Component {
   }
 }
 
-export default Preferences;
+const mapStateToProps = (state) => ({
+  notifications: state.getIn(['profiles', 'currentAccount', 'notifications']),
+  invitations: state.getIn(['profiles', 'currentAccount', 'invitations']),
+  account: state.getIn(['profiles', 'currentAccount'])
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    setAccount: AccountActions.setAccountAction
+  },
+  dispatch
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Preferences);

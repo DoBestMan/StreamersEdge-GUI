@@ -54,7 +54,7 @@ class PrivateUserService {
     return new Promise(async (resolve, reject) => {
       const headers = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         }
       };
 
@@ -63,7 +63,7 @@ class PrivateUserService {
       };
 
       try {
-        const response = await ApiHandler.patch(query, querystring.stringify(body), headers);
+        const response = await ApiHandler.patch(query, JSON.stringify(body), headers);
         return resolve(response.status);
       } catch (err) {
         reject(err.response);

@@ -15,7 +15,9 @@ export const dummyState = fromJS({
       'facebook': 'pbsa_dev',
       'peerplaysAccountName': 'pbsa_dev',
       'bitcoinAddress': '1NbhnkGbiaRxNUvKnTNfEomH1Nk1dVUxAR',
-      'userType': 'gamer'
+      'userType': 'gamer',
+      'notifications': true,
+      'invitations': 'all'
     }
   },
   loginErrorText: ''

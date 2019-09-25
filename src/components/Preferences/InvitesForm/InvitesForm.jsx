@@ -71,12 +71,12 @@ class InvitesForm extends Component {
                 name='inviteType'
                 className={ 'radio-group' }
                 value={ inviteType }
-                defaultValue='1'
+                defaultValue='0'
                 onChange={ this.radioButtonChange }
               >
-                <FormControlLabel classes={ {label: classes.label} } value='1' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option1') } />
-                <FormControlLabel classes={ {label: classes.label} } value='2' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option2') } />
-                {inviteType === '2' ?
+                <FormControlLabel classes={ {label: classes.label} } value='0' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option1') } />
+                <FormControlLabel classes={ {label: classes.label} } value='1' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option2') } />
+                {inviteType === '1' ?
                   <FormControlLabel
                     className='search-column'
                     name='user'
@@ -95,8 +95,8 @@ class InvitesForm extends Component {
                   /> :
                   null
                 }
-                <FormControlLabel classes={ {label: classes.label} } value='3' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option3') } />
-                {inviteType === '3' ?
+                <FormControlLabel classes={ {label: classes.label} } value='2' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option3') } />
+                {inviteType === '2' ?
                   <FormControlLabel
                     className='search-column'
                     name='game'
@@ -115,9 +115,9 @@ class InvitesForm extends Component {
                   /> :
                   null
                 }
-                <FormControlLabel classes={ {label: classes.label} } value='4' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option4') } />
+                <FormControlLabel classes={ {label: classes.label} } value='3' control={ <CustomRadioButton /> } label={ translate('preferences.invites.option4') } />
               </RadioGroup>
-              {inviteType !== '4' && (
+              {inviteType !== '3' && (
                 <div className='bounty'>
                   <p className='bounty__text'>{ translate('preferences.invites.bounty') }</p>
                   <TextField
