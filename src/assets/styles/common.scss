@@ -23,6 +23,15 @@ html, body {
   min-width: 100%;
   // height: $height__body;
   // min-height: 100vh;
+
+  &-content {
+    width: 100%;
+
+    &__open {
+      width: calc(100% - 405px);
+      margin-left: 405px;
+    }
+  }
 }
 
 #content {

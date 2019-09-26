@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {ConnectedRouter} from 'connected-react-router/immutable';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -9,6 +10,7 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import {createGenerateClassName, jssPreset} from '@material-ui/core/styles';
 import Header from './components/Header';
 import RootModal from './components/RootModal';
+import LeftMenu from './components/LeftMenu';
 import routes from './routes';
 import {RouteConstants} from './constants';
 import {NavigateActions} from './actions';
@@ -29,6 +31,14 @@ const jss = create({
 });
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false
+    };
+  }
+
   componentDidMount() {
     /**
      * Check that the current route matches the component.
@@ -55,6 +65,12 @@ class App extends Component {
     }
   }
 
+  toggleOpen = () => {
+    this.setState((state) => ({
+      open: !state.open
+    }));
+  }
+
   render() {
     return (
       <JssProvider jss={ jss } generateClassName={ generateClassName }>
@@ -63,7 +79,12 @@ class App extends Component {
           <ErrorBoxValidation />
           <RootModal/>
           <div className='body'>
-            {routes}
+            {this.props.isLoggedIn &&
+              <LeftMenu open={ this.state.open } toggleOpen={ this.toggleOpen } />
+            }
+            <div className={ classNames('body-content', {'body-content__open': this.state.open}) }>
+              {routes}
+            </div>
           </div>
         </ConnectedRouter>
       </JssProvider>
@@ -77,7 +98,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    path: state.getIn(['router', 'location', 'pathname'])
+    path: state.getIn(['router', 'location', 'pathname']),
+    isLoggedIn: state.getIn(['profiles', 'isLoggedIn'])
   };
 };
 
