@@ -1,23 +1,32 @@
 import React, {Component} from 'react';
 import ProfilePictureUpload from '../../ProfilePictureUpload';
-import {Card, CardContent, InputLabel} from '@material-ui/core';
+import {Card, CardContent} from '@material-ui/core';
 import Dropdown from '../../Dropdown';
 import CustomInput from '../../CustomInput';
-import {GenUtil} from '../../../utility';
+import {
+  EmailIcon,
+  EmailIconActive,
+  InvalidIcon
+} from '../../../assets/images/signup';
+import {GenUtil, ValidationUtil} from '../../../utility';
 const translate = GenUtil.translate;
 
 class UserInfo extends Component {
+
+  state = {
+    isEmailInputClicked: false
+  }
 
   handleUserTypeChange = (value) => {
     this.props.handleUserTypeChange(value);
   }
 
   handleEmailChange = (email) => {
+    this.setState({isEmailInputClicked: true});
     this.props.handleEmailChange(email);
   }
 
   render() {
-
     return(
       <Card className='user-info__card'>
         <span className='user-info__header'>
@@ -27,16 +36,31 @@ class UserInfo extends Component {
           <div className='user-info__inputs'>
             <div className='user-info__account-type'>
               <span className='user-info__account-type__label'>{translate('updateProfile.userInfo.userType')}</span>
-              <Dropdown defaultValue={ 'test1' } dropdownList={ ['test1', 'test2'] } handleChange={ this.handleUserTypeChange }/>
+              <Dropdown value={ this.props.userType } dropdownList={ translate('createProfile.accountTypes').split(',') } handleChange={ this.handleUserTypeChange }/>
             </div>
             <div className='user-info__email'>
               <span className='user-info__email__label'>{translate('updateProfile.userInfo.email')}</span>
               <div className='user-info__email__input test1234'>
-                <CustomInput name='email' hasActiveGlow={ true } theme='update-profile' handleChange={ this.handleEmailChange }
-                  onBlur={ () => this.props.validation('email') }/>
-                <InputLabel className='register-error' shrink error={ true }>
-                  {this.props.errors.email}
-                </InputLabel>
+                <CustomInput
+                  name='email'
+                  hasActiveGlow={ true }
+                  theme='update-profile'
+                  value={ this.props.email }
+                  handleChange={ this.handleEmailChange }
+                  placeholder={ translate('register.enterEmail') }
+                  iconLeft={ EmailIcon }
+                  iconLeftActive={ EmailIconActive }
+                  iconRightActive={ InvalidIcon }
+                  handleRightIconClick={ () => {
+                    return  ValidationUtil.seEmail(this.props.email).errors;
+                  } }
+                  isValid={ () => {
+                    if (this.state.isEmailInputClicked) {
+                      return ValidationUtil.seEmail(this.props.email).success;
+                    } else {
+                      return true;
+                    }
+                  }  }/>
               </div>
             </div>
           </div>

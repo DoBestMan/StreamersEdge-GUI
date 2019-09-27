@@ -57,6 +57,7 @@ class PrivateProfileService {
       };
 
       const body = {
+        email: account.email,
         twitchUserName: account.twitchUserName,
         googleName: account.googleName,
         facebook: account.facebook,
@@ -67,7 +68,6 @@ class PrivateProfileService {
 
       try {
         response = await ApiHandler.patch(query, querystring.stringify(body), headers);
-        console.log(response);
         return resolve(response.data.result);
       } catch (err) {
         return reject(err.response);

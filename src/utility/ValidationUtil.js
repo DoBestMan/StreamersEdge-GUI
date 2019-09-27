@@ -135,7 +135,6 @@ const PrivateValidationUtils = {
     }
 
     if(unallowedCharsRegex.test(password)){
-      console.log('Inside');
       unallowedSpecialCharacter = true;
     }
 

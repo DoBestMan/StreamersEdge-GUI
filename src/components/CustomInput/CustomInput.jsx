@@ -57,6 +57,7 @@ class CustomInput extends Component {
 
     const dummyHandler = () => {};
 
+    const value = this.props.value;
     const theme = this.props.theme || 'basic';
     const glow = this.props.hasActiveGlow || false;
     const activeClass = glow ? '--active' : '--active-glowless';
@@ -94,7 +95,7 @@ class CustomInput extends Component {
         validationConditions: []
       },
       iconRightWrapperClassName,
-      value: '',
+      value: value || '',
       isInputActive: false,
       theme,
       onBlur
@@ -271,6 +272,7 @@ class CustomInput extends Component {
                 inputProps={ {className: muiInputClass} }
                 multiline={ multiline }
                 name={ name }
+                value = { this.state.value }
                 onChange={ (e) => this.onChange(e) }
                 onFocus={ (e) => this.onFocus(e) }
                 onBlur={ (e) => this.onBlur(e) }

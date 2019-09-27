@@ -190,7 +190,9 @@ export const translationObject = {
     },
 
     createProfile: {
-      header: 'Create Profile'
+      header: 'Create Profile',
+      accountTypes: 'gamer,viewer,sponsor',
+      defaultAccountType: 'viewer'
     },
 
     updateProfile: {

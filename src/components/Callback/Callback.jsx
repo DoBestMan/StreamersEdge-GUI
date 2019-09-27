@@ -4,7 +4,8 @@
 
 import React, {Component} from 'react';
 import {AuthService} from '../../services';
-import {NavigateActions} from '../../actions';
+import {NavigateActions, AccountActions} from '../../actions';
+import {ProfileService} from '../../services';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {StorageUtil} from '../../utility';
@@ -37,11 +38,29 @@ class Callback extends Component {
             });
           });
         break;
+      case 'change-email':
+        AuthService.confirmEmail(pathAry[3])
+          .then(() => {
+            this.props.navigateToCreateProfile('1');
+          })
+          .catch((err) => {
+            this.setState({
+              error: err
+            });
+          });
+        break;
       case 'reset-password':
         this.props.navigateToPasswordReset(pathAry[3]);
         break;
       case 'profile':
-        this.props.navigateToCreateProfile('2');
+        ProfileService.getProfile().then((account) => {
+          this.props.setAccount(account);
+          this.props.navigateToCreateProfile('2');
+        }).catch((err) => {
+          this.setState({
+            error: err
+          });
+        });
         break;
       default:
         // an error occurred.
@@ -67,7 +86,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     navigateToDashboard: NavigateActions.navigateToDashboard,
     navigateToPasswordReset: NavigateActions.navigateToPasswordReset,
-    navigateToCreateProfile: NavigateActions.navigateToCreateProfile
+    navigateToCreateProfile: NavigateActions.navigateToCreateProfile,
+    setAccount: AccountActions.setAccountAction
   },
   dispatch
 );

@@ -19,7 +19,7 @@ class UnlinkAccountModal extends Component {
       case 'pubg':
         account = account + 'Username';
         break;
-      case 'youtube':
+      case 'google':
         account = 'googleName';
         break;
       case 'twitch':

@@ -5,7 +5,8 @@ import styles from './MUI.css';
 import {withStyles} from '@material-ui/core/styles';
 import UserInfo from './UserInfo';
 import AccountConnections from './AccountConnections';
-import {ModalActions} from '../../actions';
+import {ProfileService} from '../../services';
+import {ModalActions, NavigateActions, AccountActions} from '../../actions';
 import {ModalTypes} from '../../constants';
 import ProfileFooter from './ProfileFooter';
 import {
@@ -22,10 +23,8 @@ import {
   pubgIcon,
   leagueIcon
 } from '../../assets/images/profile';
-import {GenUtil} from '../../utility';
+import {GenUtil, ValidationUtil} from '../../utility';
 const translate = GenUtil.translate;
-// import AccountActions from '../../actions/AccountActions';
-// import {bindActionCreators} from 'redux';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -51,11 +50,10 @@ class CreateProfile extends Component {
   constructState = (twitchUsername, youtubeUsername, facebookUsername, pathAry) => {
     return {
       currentStep: pathAry || '1',
-      email: this.props.email || this.props.twitch || this.props.youtube || this.props.facebook || '',
-      userType: '',
-      errors: {
-        email: ''
-      },
+      email: this.props.email || this.props.twitch || this.props.youtube || this.props.facebookUsername || '',
+      emailValid: true,
+      userType: this.props.userType || translate('createProfile.defaultAccountType'),
+
       connections: {
         social: {//twitch, facebook, youtube
           header: translate('updateProfile.accountConnections.socialHeader'),
@@ -76,7 +74,7 @@ class CreateProfile extends Component {
               bodyUsername: facebookUsername
             },
             {//youtube
-              name: 'youtube',
+              name: 'google',
               headerIcon: youtubeBox,
               bodyIcon: youtubeIcon,
               bodyUsername: youtubeUsername
@@ -114,7 +112,8 @@ class CreateProfile extends Component {
   }
 
   handleEmailChange = (email) => {
-    this.setState({email: email});
+    const validation = ValidationUtil.seEmail(email).success;
+    this.setState({email: email, emailValid: validation});
   }
 
   handleUserTypeChange = (userType) => {
@@ -124,20 +123,6 @@ class CreateProfile extends Component {
   setStep = (currentStep) => {
     this.props.history.push('/profile/'+currentStep);
     this.setState({currentStep});
-  }
-
-  validation = (type) => {
-    switch (type) {
-      case 'email':
-        this.setState({
-          errors: {
-            ...this.state.errors
-          }
-        });
-        break;
-      default:
-        return;
-    }
   }
 
   openLinkAccountModal = (authRoute) => {
@@ -156,8 +141,24 @@ class CreateProfile extends Component {
     this.props.toggleModal();
   }
 
+  submitStep1 = () => {
+    const {email, userType} = this.state;
+    let account = {userType: userType, email: email};
+
+    if(email === this.props.email) { //email has not been changed, we can go to step 2
+      ProfileService.updateProfile(account).then((res) => {
+        this.props.setAccount(res);
+        this.setState({currentStep: '2'});
+      });
+    } else { //changed email means we cannot go to step 2 until email has been confirmed
+      ProfileService.updateProfile(account).then((res) => {
+        this.props.setAccount(res);
+      });
+    }
+  }
+
   render() {
-    const {errors, connections, currentStep} = this.state;
+    const {connections, currentStep, userType, emailValid} = this.state;
     return (
       <div className='update-profile__wrapper'>
         <form className='update-profile' onSubmit={ this.handleSubmit }>
@@ -165,13 +166,14 @@ class CreateProfile extends Component {
             { translate('createProfile.header') }
           </div>
           {currentStep === '1' ?
-            <UserInfo handleEmailChange={ this.handleEmailChange } handleUserTypeChange={ this.handleUserTypeChange } validation={ this.validation } errors={ errors }/>
+            <UserInfo handleEmailChange={ this.handleEmailChange } email={ this.state.email } handleUserTypeChange={ this.handleUserTypeChange } userType={ userType } />
             :
             <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } openUnlinkAccountModal={ this.openUnlinkAccountModal }
               closeLinkAccountModal={ this.closeLinkAccountModal }/>
           }
         </form>
-        <ProfileFooter currentStep={ currentStep } setStep={ this.setStep }/>
+        <ProfileFooter currentStep={ currentStep } setStep={ this.setStep } submitStep1={ this.submitStep1 }
+          navigateToDashboard={ this.props.navigateToDashboard } disabled={ !emailValid }/>
       </div>
     );
   }
@@ -181,18 +183,22 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal,
     setModalType: ModalActions.setModalType,
-    setModalData: ModalActions.setModalData
+    setModalData: ModalActions.setModalData,
+    setAccount: AccountActions.setAccountAction,
+    navigateToDashboard: NavigateActions.navigateToDashboard
   },
   dispatch
 );
 
 const mapStateToProps = (state) => ({
   account: state.getIn(['profiles', 'currentAccount']),
-  emailUsername: state.getIn(['profiles', 'currentAccount', 'email']),
+  email: state.getIn(['profiles', 'currentAccount', 'email']),
   userType: state.getIn(['profiles', 'currentAccount', 'userType']),
   twitchUsername: state.getIn(['profiles', 'currentAccount', 'twitchUserName']),
   youtubeUsername: state.getIn(['profiles', 'currentAccount', 'googleName']),
-  facebookUsername: state.getIn(['profiles', 'currentAccount', 'facebook'])
+  facebookUsername: state.getIn(['profiles', 'currentAccount', 'facebook']),
+  twitch: state.getIn(['profiles', 'currentAccount', 'twitch']),
+  youtube: state.getIn(['profiles', 'currentAccount', 'youtube'])
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateProfile));

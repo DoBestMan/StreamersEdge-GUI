@@ -12,11 +12,14 @@ import dropdownTouched from '../../assets/images/dropdown-active.svg';
 import styles from './MUI.css';
 
 class Dropdown extends Component {
-  state = {
-    image: dropdown,
-    dropdownOpen: false,
-    selectedValue: this.props.defaultValue ? this.props.defaultValue : ''
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      image: dropdown,
+      dropdownOpen: false
+    };
+  }
 
   mouseOver = () => {
     this.setState({image: dropdownTouched});
@@ -24,7 +27,7 @@ class Dropdown extends Component {
 
   //if there is no value switch back to default untouched image
   mouseOut = () => {
-    if (this.state.selectedValue === '') {
+    if (this.props.value === '') {
       this.setState({image: dropdown});
     } else {
       this.setState({image: dropdownTouched});
@@ -39,29 +42,25 @@ class Dropdown extends Component {
     this.setState({dropdownOpen: false});
 
     //switch back to default untouched image if no value is selected
-    if (this.state.selectedValue === '') {
+    if (this.props.value === '') {
       this.setState({image: dropdown});
     }
   };
 
   handleChange = (e) => {
-    const selectedValue = e.target.value;
-
-    this.setState({selectedValue: selectedValue});
-    this.props.handleChange(selectedValue);
+    const value = e.target.value;
+    this.props.handleChange(value);
   }
 
   render() {
-    const {classes, dropdownList} = this.props;
-    const {selectedValue} = this.state;
-
+    const {classes, dropdownList, value} = this.props;
     return (
       <div className='dropdown'>
         <FormControl className='dropdown__form'>
           <img className='dropdown__row' src={ this.state.image } alt='' />
           <Select
             className='dropdown__input'
-            value={ selectedValue }
+            value={ value }
             open={ this.state.dropdownOpen }
             onOpen={ this.onOpen }
             onClose={ this.onClose }
