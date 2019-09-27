@@ -21,7 +21,7 @@ class InformationBox extends Component {
           </div>
           <div className='infobox-body'>
             {translate('peerplays.information.content')}
-            <u>{translate('peerplays.information.register')}</u>
+            <u className='infobox-link' onClick={ this.props.redirectToSignup }>{translate('peerplays.information.register')}</u>
           </div>
         </div>
       </>

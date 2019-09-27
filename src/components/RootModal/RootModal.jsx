@@ -10,7 +10,7 @@ import ForgotPassword from '../ForgotPassword';
 import ReportUser from '../ReportUser';
 import Donate from '../Donate';
 import Register from '../Register';
-import {AppActions, ModalActions, NavigateActions} from '../../actions/';
+import {AppActions, ModalActions} from '../../actions/';
 import {ModalTypes} from '../../constants';
 import styles from './MUI.css';
 import BanModal from '../Modals/BanModal';
@@ -128,8 +128,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
     setModalType: ModalActions.setModalType,
     setModalData: ModalActions.setModalData,
     login: AppActions.login,
-    setErrorText: AppActions.setLoginError,
-    navigateToSignUp: NavigateActions.navigateToSignUp
+    setErrorText: AppActions.setLoginError
   },
   dispatch
 );

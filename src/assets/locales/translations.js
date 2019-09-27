@@ -156,7 +156,7 @@ export const translationObject = {
       information: {
         title: 'Information',
         content: 'The username you enter is powered by the Peerplays blockchain. If you already have a username at Peerplays, ' +
-        'please enter it here to link your Streamers Edge profile too it. If you don\'t have one, simply proceed to ',
+        'please enter it here to link your Streamers Edge profile to it. If you don\'t have one, simply proceed to ',
         register: 'register your account'
       }
     },

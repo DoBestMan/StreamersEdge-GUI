@@ -5,12 +5,14 @@ import {connect} from 'react-redux';
 import {FormControl, InputLabel, Button} from '@material-ui/core';
 import {GenUtil, ValidationUtil, PeerplaysAuthUtil} from '../../../utility';
 import {AuthService, PeerplaysService} from '../../../services';
+import {ModalTypes} from '../../../constants';
 
 import CustomInput from '../../CustomInput';
 import InfoBox from '../InformationBox';
 import {InvalidIcon} from '../../../assets/images/signup';
 import {UserIcon, UserIconActive, IconPassword, IconPasswordActive} from '../../../assets/images/login';
 import LoginButton from '../../../assets/images/peerplays/login.svg';
+import {ModalActions} from '../../../actions';
 
 const translate = GenUtil.translate;
 
@@ -110,7 +112,7 @@ class PeerplaysLoginForm extends Component {
       this.setState({
         openInfoBox: false
       });
-    }, 3500);
+    }, 8000);
   };
 
   isUsernameValid = () => {
@@ -136,6 +138,10 @@ class PeerplaysLoginForm extends Component {
   getPasswordErrors = () => {
     return  ValidationUtil.seUsername(this.state.username).errors;
   };
+
+  redirectToSignup = () => {
+    this.props.setModalType(ModalTypes.SIGN_UP);
+  }
 
   render() {
     const isDisabled = () => {
@@ -164,7 +170,7 @@ class PeerplaysLoginForm extends Component {
             <div className='peerplayslogin-help' onClick={ (e) => this.handleOpenInfoBox(e) }>
               ?
             </div>
-            {this.state.openInfoBox ? <InfoBox position={ this.state.position } /> : null}
+            {this.state.openInfoBox ? <InfoBox position={ this.state.position } redirectToSignup={ this.redirectToSignup }/> : null}
           </div>
           <InputLabel className='peerplayslogin-error' shrink error={ true }>
             {this.state.errors.username}
@@ -211,7 +217,8 @@ PeerplaysLoginForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-    peerplaysLogin: PeerplaysAuthUtil.peerplaysLogin
+    peerplaysLogin: PeerplaysAuthUtil.peerplaysLogin,
+    setModalType: ModalActions.setModalType
   },
   dispatch
 );
