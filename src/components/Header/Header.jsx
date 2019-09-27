@@ -62,8 +62,14 @@ class Header extends Component {
           <div className='header--right'>
             {signUpButton}
             {logButton}
-            <img className={ this.props.isLoggedIn ? 'header__logo' : 'header__logo--display-none' } src={ loginIcon }
-              onMouseOver={ (e) => e.currentTarget.src = loginIconActive } onMouseOut={ (e) => e.currentTarget.src =  loginIcon } alt='avatar' />
+            <img
+              src={ loginIcon }
+              alt='avatar'
+              className={ this.props.isLoggedIn ? 'header__logo' : 'header__logo--display-none' }
+              onClick={ this.props.toggleMenu }
+              onMouseOver={ (e) => e.currentTarget.src = loginIconActive }
+              onMouseOut={ (e) => e.currentTarget.src =  loginIcon }
+            />
           </div>
         </div>
         <div className='divider-radial' />

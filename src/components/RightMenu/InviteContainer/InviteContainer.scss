@@ -1,0 +1,16 @@
+.invite {
+  &-title {
+    margin-top: 24px;
+    font-style: italic;
+    font-size: 19px;
+    color: #3fa9f5;
+    letter-spacing: 0;
+  }
+
+  &-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 16px;
+  }
+}

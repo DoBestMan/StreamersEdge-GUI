@@ -241,6 +241,27 @@ export const translationObject = {
       terms: 'Terms & Conditions'
     },
 
+    leftMenu: {
+      links: {
+        challenges: 'Challenges',
+        categories: 'Categories',
+        popular: 'Popular Challenge'
+      }
+    },
+
+    rightMenu: {
+      links: {
+        update: 'Update Profile',
+        preferences: 'Preferences',
+        link: 'Link Accounts',
+        create: 'Create Challenge'
+      },
+      invite: {
+        accept: 'Accepted Challenge Invites',
+        new: 'New Invites'
+      }
+    },
+
     copyright: 'Peerplays Global©',
     lorem: 'Spicy jalapeno bacon ipsum dolor amet corned beef reprehenderit chicken duis tail sirloin spare ribs salami burgdoggen tongue drumstick ut. Quis laboris pig drumstick fatback prosciutto' +
     ' in cupim aliqua jowl bacon. Irure ullamco buffalo picanha est jerky shoulder beef sint mollit ut boudin ground round proident. Id lorem turducken et eiusmod. Buffalo tri-tip tenderloin ' +

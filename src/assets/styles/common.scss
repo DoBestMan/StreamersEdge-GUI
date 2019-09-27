@@ -17,18 +17,33 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: $lato;
+  overflow: hidden;
 }
 
 .body {
+  display: flex;
+  position: relative;
   min-width: 100%;
-  // height: $height__body;
-  // min-height: 100vh;
 
   &-content {
     width: 100%;
+    height: calc(100vh - 110px);
+    transition: all .5s;
+    overflow: scroll;
 
-    &__open {
+    &__open-left {
       width: calc(100% - 405px);
+      margin-left: 405px;
+    }
+
+    &__open-right {
+      width: calc(100% - 398px);
+      margin-right: 398px;
+    }
+
+    &__open-both {
+      width: calc(100% - 803px);
+      margin-right: 398px;
       margin-left: 405px;
     }
   }

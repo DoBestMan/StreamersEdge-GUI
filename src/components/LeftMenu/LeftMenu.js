@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
 import classNames from 'classnames';
-import {NavLink} from 'react-router-dom';
-import {List, ListItem} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import NavLink from '../NavLink';
+import {GenUtil} from '../../utility';
 
-const LINKS = [
-  {title: 'Challenges', href: '/challenges'},
-  {title: 'Categories', href: '/categories'},
-  {title: 'Popular Challege', href: '/popular'}
-];
+const trans = GenUtil.translate;
 
 class LeftMenu extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchString: ''
+      searchString: '',
+      links: [
+        {title: trans('leftMenu.links.challenges'), href: '/challenges'},
+        {title: trans('leftMenu.links.categories'), href: '/categories'},
+        {title: trans('leftMenu.links.popular'), href: '/popular'}
+      ]
     };
   }
 
@@ -42,20 +43,7 @@ class LeftMenu extends Component {
               <SearchIcon className='left-menu-search__icon__color' fontSize='large' />
             </div>
           </div>
-          <List disablePadding>
-            {LINKS.map((link) => (
-              <ListItem key={ link.href } disableGutters>
-                <NavLink
-                  className='left-menu-item'
-                  activeClassName='left-menu-item__active'
-                  to={ link.href }
-                  exact
-                >
-                  { link.title }
-                </NavLink>
-              </ListItem>
-            ))}
-          </List>
+          <NavLink links={ this.state.links } className='left-menu-link' />
         </div>
         <div
           className={ classNames('left-menu-indicator', {'left-menu-indicator__open': open}) }

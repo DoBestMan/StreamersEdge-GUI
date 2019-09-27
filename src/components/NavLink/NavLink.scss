@@ -1,0 +1,16 @@
+@import '../../assets/styles/common.scss';
+
+.navlink {
+  &-item {
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 28px;
+    color: #3fa9f5;
+    text-decoration: none;
+    letter-spacing: 0;
+
+    &__active {
+      color: $white;
+    }
+  }
+}

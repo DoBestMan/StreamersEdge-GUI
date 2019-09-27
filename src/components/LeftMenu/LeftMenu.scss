@@ -16,7 +16,7 @@
 
   &-indicator {
     position: absolute;
-    top: 154px;
+    top: 44px;
     left: -11.1563720703125px;
     width: 45px;
     height: 81px;
@@ -32,17 +32,8 @@
     }
   }
 
-  &-item {
-    margin-top: 45px;
-    font-style: italic;
-    font-size: 28px;
-    color: #3fa9f5;
-    text-decoration: none;
-    letter-spacing: 0;
-
-    &__active {
-      color: #ffffff;
-    }
+  &-link {
+    margin-top: 50px;
   }
 
   &-search {

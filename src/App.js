@@ -11,6 +11,7 @@ import {createGenerateClassName, jssPreset} from '@material-ui/core/styles';
 import Header from './components/Header';
 import RootModal from './components/RootModal';
 import LeftMenu from './components/LeftMenu';
+import RightMenu from './components/RightMenu';
 import routes from './routes';
 import {RouteConstants} from './constants';
 import {NavigateActions} from './actions';
@@ -35,7 +36,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      open: false
+      openLeftMenu: false,
+      openRightMenu: false
     };
   }
 
@@ -65,9 +67,15 @@ class App extends Component {
     }
   }
 
-  toggleOpen = () => {
+  toggleOpenLeftMenu = () => {
     this.setState((state) => ({
-      open: !state.open
+      openLeftMenu: !state.openLeftMenu
+    }));
+  }
+
+  toggleOpenRightMenu = () => {
+    this.setState((state) => ({
+      openRightMenu: !state.openRightMenu
     }));
   }
 
@@ -75,16 +83,28 @@ class App extends Component {
     return (
       <JssProvider jss={ jss } generateClassName={ generateClassName }>
         <ConnectedRouter history={ this.props.history }>
-          <Header/>
+          <Header toggleMenu={ this.toggleOpenRightMenu } />
           <ErrorBoxValidation />
           <RootModal/>
           <div className='body'>
             {this.props.isLoggedIn &&
-              <LeftMenu open={ this.state.open } toggleOpen={ this.toggleOpen } />
+              <LeftMenu open={ this.state.openLeftMenu } toggleOpen={ this.toggleOpenLeftMenu } />
             }
-            <div className={ classNames('body-content', {'body-content__open': this.state.open}) }>
+            <div
+              className={ classNames(
+                'body-content',
+                {
+                  'body-content__open-both': this.state.openLeftMenu && this.state.openRightMenu,
+                  'body-content__open-left': this.state.openLeftMenu && !this.state.openRightMenu,
+                  'body-content__open-right': !this.state.openLeftMenu && this.state.openRightMenu
+                }
+              ) }
+            >
               {routes}
             </div>
+            {this.props.isLoggedIn &&
+              <RightMenu open={ this.state.openRightMenu }/>
+            }
           </div>
         </ConnectedRouter>
       </JssProvider>
