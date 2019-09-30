@@ -146,6 +146,12 @@ class LoginForm extends Component {
             />
           </FormControl>
           <span className='login-form__apiTxt--error'>{this.props.errorText}</span>
+          <span className='login__textlink'>
+            {translate('login.dontHaveAccount')}
+            <span onClick={ this.props.goRegister } className='login__textlink-register'>
+              {translate('login.register')}
+            </span>
+          </span>
           <span className='login-forgot'>
             <span onClick={ this.props.recoverPassword } className='login-forgot__text'>
               {translate('login.forgotPass')}
@@ -161,12 +167,6 @@ class LoginForm extends Component {
               />
             </Button>
           </div>
-          <span className='login__textlink'>
-            {translate('login.dontHaveAccount')}
-            <span onClick={ this.props.goRegister } className='login__textlink-register'>
-              {translate('login.register')}
-            </span>
-          </span>
           <LoginFooter/>
         </form>
       </>
