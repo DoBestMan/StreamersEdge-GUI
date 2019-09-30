@@ -26,7 +26,6 @@ export const translationObject = {
       password: {
         requirement: {
           length: 'Should be between 6 & 60 chars long',
-          capitalLetter: 'Contains at least 1 capital letter',
           number: 'Contains at least 1 number',
           specialChar: 'Contains a special character from (.@!#$%^*)',
           unallowedSpecialChar: 'No Unallowed special character',

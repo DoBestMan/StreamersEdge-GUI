@@ -104,22 +104,17 @@ const PrivateValidationUtils = {
    */
   sePassword(password) {
     const length = password.length;
-    const uppercaseRegex = /[A-Z]/g;
     const digitRegex = /[0-9]/g;
     const specialCharRegex = /[().@$!%^*#]/g;
     const spaceRegex = /[ ]/g;
     const unallowedCharsRegex = /[&/:;<=>+?_{},'"|~`]/g;
 
 
-    let minLength = false, uppercasePresent = false, numberPresent = false, specialCharacterPresent = false,
+    let minLength = false, numberPresent = false, specialCharacterPresent = false,
       spacePresent = false, unallowedSpecialCharacter = false;
 
     if (length >= 6 && length <=60) {
       minLength = true;
-    }
-
-    if(uppercaseRegex.test(password)){
-      uppercasePresent = true;
     }
 
     if(digitRegex.test(password)){
@@ -140,7 +135,6 @@ const PrivateValidationUtils = {
 
     const errorBoxPasswordValidation = [
       {errorString: translate('errors.password.requirement.length'), success: minLength},
-      {errorString: translate('errors.password.requirement.capitalLetter'), success: uppercasePresent},
       {errorString: translate('errors.password.requirement.number'), success: numberPresent},
       {errorString: translate('errors.password.requirement.specialChar'), success: specialCharacterPresent},
       {errorString: translate('errors.password.requirement.unallowedSpecialChar'), success: !unallowedSpecialCharacter},
