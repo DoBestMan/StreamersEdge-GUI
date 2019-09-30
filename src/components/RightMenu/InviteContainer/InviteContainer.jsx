@@ -15,6 +15,7 @@ class InviteContainer extends Component {
           </div>
           <div className='invite-list'>
             {[...Array(5)].map((e, i) => (
+              // eslint-disable-next-line
               <a key={ i } href='#'>
                 <img src={ Icon1 } alt='' width='45' height='52' />
               </a>
@@ -25,6 +26,7 @@ class InviteContainer extends Component {
           </div>
           <div className='invite-list'>
             {[...Array(5)].map((e, i) => (
+              // eslint-disable-next-line
               <a key={ i } href='#'>
                 <img src={ Icon2 } alt='' width='45' height='52' />
               </a>
