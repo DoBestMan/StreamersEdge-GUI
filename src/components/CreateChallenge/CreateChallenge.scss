@@ -1,0 +1,7 @@
+.create-challenge {
+  &__content {
+    width: 100%;
+    height: calc(100vh - 110px - 138px);
+    overflow: auto;
+  }
+}

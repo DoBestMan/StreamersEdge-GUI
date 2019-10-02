@@ -2,6 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Home from '../components/Home';
 import Dashboard from '../components/Dashboard';
+import CreateChallenge from '../components/CreateChallenge';
 import CreateProfile from '../components/CreateProfile';
 import Callback from '../components/Callback';
 import ResetForm from '../components/ForgotPassword/ResetForm';
@@ -18,8 +19,9 @@ const routes = (
       <Route path={ Routes.RESET_PASSWORD } component={ ResetForm }/>
       <Route path={ Routes.PROFILE } component={ requireAuthentication(CreateProfile) }/>
       <Route path={ Routes.DASHBOARD } component={ requireAuthentication(Dashboard) }/>
-      <Route path={ Routes.CALLBACK } component={ Callback }/>
       <Route path={ Routes.PREFERENCES } component={ requireAuthentication(Preferences) } />
+      <Route path={ Routes.CREATE_CHALLENGE } component={ requireAuthentication(CreateChallenge) } />
+      <Route path={ Routes.CALLBACK } component={ Callback }/>
     </Switch>
   </>
 );

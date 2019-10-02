@@ -27,9 +27,9 @@ html, body {
 
   &-content {
     width: 100%;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 105px);
     transition: all .5s;
-    overflow: scroll;
+    overflow: auto;
 
     &__open-left {
       width: calc(100% - 405px);
