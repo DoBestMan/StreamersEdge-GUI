@@ -30,6 +30,7 @@ class Callback extends Component {
       case 'confirm-email':
         AuthService.confirmEmail(pathAry[3])
           .then(() => {
+            this.props.setLoggedIn(true);
             this.props.navigateToDashboard();
           })
           .catch((err) => {
@@ -55,7 +56,18 @@ class Callback extends Component {
       case 'profile':
         ProfileService.getProfile().then((account) => {
           this.props.setAccount(account);
-          this.props.navigateToCreateProfile('2');
+          this.props.navigateToDashboard();
+        }).catch((err) => {
+          this.setState({
+            error: err
+          });
+        });
+        break;
+      case 'login':
+        ProfileService.getProfile().then((account) => {
+          this.props.setAccount(account);
+          this.props.setLoggedIn(true);
+          this.props.navigateToDashboard();
         }).catch((err) => {
           this.setState({
             error: err
@@ -84,6 +96,7 @@ const mapStateToProps = (state) => ({location: state.getIn(['router', 'location'
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
+    setLoggedIn: AccountActions.setIsLoggedInAction,
     navigateToDashboard: NavigateActions.navigateToDashboard,
     navigateToPasswordReset: NavigateActions.navigateToPasswordReset,
     navigateToCreateProfile: NavigateActions.navigateToCreateProfile,
