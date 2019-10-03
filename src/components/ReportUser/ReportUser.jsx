@@ -79,7 +79,8 @@ class ReportUser extends Component {
               </RadioGroup>
             </FormControl>
             <FormControl className='report-form__textArea'>
-              <CustomInput theme='white' muiInputClass='inputBlack' multiline fullwidth={ false } handleChange={ this.handleDescChange }placeholder={ translate('reportUser.giveDescription') }/>
+              <CustomInput theme='white' muiInputClass='inputBlack' rows={ 10 } multiline fullwidth={ false } handleChange={ this.handleDescChange }
+                placeholder={ translate('reportUser.giveDescription') }/>
             </FormControl>
           </div>
           <div className='report-form--center'>
