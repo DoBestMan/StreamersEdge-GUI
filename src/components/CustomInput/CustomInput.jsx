@@ -217,8 +217,9 @@ class CustomInput extends Component {
     const muiInputClass = classes[this.props.muiInputClass] || classes.input;
 
     const showErrorBox = (visibility, validationConditions, position) => {
+      clearTimeout(this.timeoutID);
       this.props.setErrorBox(visibility, validationConditions, position);
-      setTimeout(() => {
+      this.timeoutID = setTimeout(() => {
         this.props.hideErrorBox();
       }, 3500);
 

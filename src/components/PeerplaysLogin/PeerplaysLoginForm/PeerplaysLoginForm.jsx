@@ -108,11 +108,12 @@ class PeerplaysLoginForm extends Component {
       position: e.target.getBoundingClientRect()
     });
 
-    setTimeout(() => {
+    clearTimeout(this.timeoutID);
+    this.timeoutID = setTimeout(() => {
       this.setState({
         openInfoBox: false
       });
-    }, 8000);
+    }, 15000);
   };
 
   isUsernameValid = () => {

@@ -17,7 +17,7 @@ const PrivateValidationUtils = {
     const lowercaseRegex = /[a-z]/g;
     const uppercaseRegex = /[A-Z]/g;
     const digitOrLetterRegex = /[0-9a-z]/g;
-    const digitLetterHyphenRegex = /[^0-9a-z-]/g;
+    const digitLetterHyphenRegex = /[^0-9a-zA-Z-]/g;
 
     let beginsWithLetter = false, endsWithLetterOrDigit = false, containsOnlyNumberDigitHyphens = true, uppercasePresent = true, validLength=false;
 
@@ -30,7 +30,7 @@ const PrivateValidationUtils = {
     }
 
     if (uppercaseRegex.test(username[0])) {
-      uppercasePresent = true;
+      uppercasePresent = false;
     }
 
     if(digitOrLetterRegex.test(username[length-1])){
