@@ -1,0 +1,28 @@
+.game-avatar {
+  &__wrapper {
+    position: relative;
+    width: 169px;
+    height: 156px;
+    margin-right: 20px;
+    border: 1px solid #3fa9f5;
+    border-radius: 10px;
+    text-align: center;
+    background: #000733 0% 0% no-repeat padding-box;
+    cursor: pointer;
+  }
+
+  &__selected {
+    background: #3399ff 0% 0% no-repeat padding-box;
+  }
+
+  &__logo {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
+  &__title {
+    margin-top: 105px;
+  }
+}

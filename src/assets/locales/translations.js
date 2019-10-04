@@ -53,6 +53,12 @@ export const translationObject = {
       general: {
         beNumber: 'must be a number',
         beDecimalOrInt: 'must be either a decimal or integer'
+      },
+      challengeName: {
+        requirement: {
+          length: 'Maximum 50 characters long',
+          required: 'This field is required'
+        }
       }
     },
     preferences: {
@@ -258,6 +264,18 @@ export const translationObject = {
       invite: {
         accept: 'Accepted Challenge Invites',
         new: 'New Invites'
+      }
+    },
+
+    createChallenge: {
+      header: 'Create Challenge',
+      name: {
+        label: 'Challenge Name',
+        placeholder: 'Enter A Name For This Challenge'
+      },
+      game: {
+        label: 'Challenge Game',
+        placeholder: 'Search'
       }
     },
 

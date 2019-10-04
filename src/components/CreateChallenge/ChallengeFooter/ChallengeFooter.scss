@@ -34,7 +34,7 @@
   &__step-steppers {
     position: absolute;
     left: 50%;
-    margin-left: -234px;
+    transform: translate(-50%, 0%);
   }
 
   &__item {

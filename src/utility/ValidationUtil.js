@@ -288,6 +288,36 @@ const PrivateValidationUtils = {
           : null;
       // no default
     }
+  },
+
+  /**
+   * Validate a challenge name.
+   *
+   * @param {string} name - Value to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  challengeName(name) {
+    const length = name.length;
+    let validLength = false, validRequired = false;
+
+    if (length <=50) {
+      validLength = true;
+    }
+
+    if (length > 0) {
+      validRequired = true;
+    }
+
+    const errorBoxUsernameValidation = [
+      {errorString: translate('errors.challengeName.requirement.required'), success: validRequired},
+      {errorString: translate('errors.challengeName.requirement.length'), success: validLength}
+    ];
+
+    return {
+      errors: errorBoxUsernameValidation,
+      success: errorBoxUsernameValidation.filter((err) => !err.success).length <= 0
+    };
   }
 };
 
@@ -410,6 +440,17 @@ const ValidationUtil = {
    */
   seUsername(string) {
     return PrivateValidationUtils.seUsername(string);
+  },
+
+  /**
+   * Validate challenge name.
+   *
+   * @param {string} string - Value to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  challengeName(string) {
+    return PrivateValidationUtils.challengeName(string);
   }
 };
 

@@ -225,7 +225,7 @@ class CustomInput extends Component {
 
     };
 
-    const wrapperStyle = {
+    let wrapperStyle = {
       height: height
     };
 
@@ -240,6 +240,10 @@ class CustomInput extends Component {
           wrapperClassName += '-red';
         }
       }
+    }
+
+    if (this.props.fullWidth) {
+      wrapperStyle = Object.assign({}, wrapperStyle, {width: 'initial'});
     }
 
     return (
