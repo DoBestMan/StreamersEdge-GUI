@@ -7,9 +7,10 @@ import InvitesForm from './InvitesForm';
 import NotificationsForm from './NotificationsForm';
 import preferences from '../../assets/images/preferences/Settings.png';
 
+import {ModalTypes} from '../../constants';
 import {GenUtil} from '../../../src/utility';
 import {AuthService, UserService, ProfileService} from '../../services';
-import AccountActions from '../../actions/AccountActions';
+import {AccountActions, ModalActions} from '../../actions';
 
 const translate = GenUtil.translate;
 
@@ -86,6 +87,9 @@ class Preferences extends Component {
               .getProfile()
               .then((profile) => {
                 this.props.setAccount(profile);
+                this.props.setModalType(ModalTypes.SUCCESS);
+                this.props.toggleModal();
+                this.props.setModalData({header: translate('preferences.modal.header')});
               })
               .catch((err) => {
                 console.log('Get profile failed', err);
@@ -181,7 +185,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-    setAccount: AccountActions.setAccountAction
+    setAccount: AccountActions.setAccountAction,
+    toggleModal: ModalActions.toggleModal,
+    setModalType: ModalActions.setModalType,
+    setModalData: ModalActions.setModalData
   },
   dispatch
 );

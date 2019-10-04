@@ -89,6 +89,9 @@ export const translationObject = {
         header: 'Notifications',
         option1: 'Get notifications for all challenges',
         option2: 'Don\'t receive any notifications'
+      },
+      modal: {
+        header: 'Your preferences have been succesfully updated'
       }
     },
     login: {
@@ -197,7 +200,11 @@ export const translationObject = {
     createProfile: {
       header: 'Create Profile',
       accountTypes: 'gamer,viewer,sponsor',
-      defaultAccountType: 'viewer'
+      defaultAccountType: 'viewer',
+      modal: {
+        header: 'Confirmation email sent please check your email',
+        subText: 'After confirming email you may proceed to step 2'
+      }
     },
 
     updateProfile: {

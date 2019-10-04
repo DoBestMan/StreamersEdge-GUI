@@ -76,6 +76,35 @@ class PrivateProfileService {
   }
 
   /**
+   * Changes the user's email.
+   *
+   * @static
+   * @param {string} token - Token generated from the backend api.
+   * @returns {Promise} - A promise that indicates success or failure.
+   * @memberof PrivateAuthService
+   */
+  static changeEmail(token) {
+    let response;
+    const query = `${apiRoot}api/v1/profile/change-email/${token}`;
+
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      try {
+        response = await ApiHandler.get(query, headers);
+
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.toString());
+      }
+    });
+  }
+
+  /**
    * Reconnect to blockchain in case of disconnect.
    *
    * @param {Blob} image - Image as Blob.
@@ -141,6 +170,10 @@ class ProfileService {
    */
   static uploadProfilePicture(image) {
     return GenUtil.dummyDataWrapper(PrivateProfileService.uploadProfilePicture(image));
+  }
+
+  static changeEmail(token) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.changeEmail(token));
   }
 
 }

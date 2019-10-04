@@ -61,9 +61,16 @@
 
 .peerplays {
   width: 600px;
-  background: transparent linear-gradient(180deg, #001668 0%, #01115B 15%, #030A45 43%, #06002A 100%) 0% 0% no-repeat padding-box;
-  box-shadow: 2px 6px 11px #000000BF;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   border-radius: 25px;
+  background: transparent linear-gradient(180deg, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
   opacity: 1;
+}
+
+.success {
+  width: 700px;
+  border: 2px solid rgb(190, 195, 210);
+  background: transparent linear-gradient(#001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0 0 no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
 }

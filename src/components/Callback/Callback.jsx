@@ -40,7 +40,7 @@ class Callback extends Component {
           });
         break;
       case 'change-email':
-        AuthService.confirmEmail(pathAry[3])
+        ProfileService.changeEmail(pathAry[3])
           .then(() => {
             this.props.navigateToCreateProfile('1');
           })

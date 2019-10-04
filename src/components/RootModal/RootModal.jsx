@@ -16,6 +16,7 @@ import styles from './MUI.css';
 import BanModal from '../Modals/BanModal';
 import LinkAccountModal from '../Modals/LinkAccountModal';
 import UnlinkAccountModal from '../Modals/UnlinkAccountModal';
+import SuccessModal from '../Modals/SuccessModal';
 
 class RootModal extends Component {
 
@@ -96,6 +97,12 @@ class RootModal extends Component {
       case ModalTypes.PEERPLAYS_LOGIN: {
         modalContent = <PeerplaysLogin goRegister={ this.toggleModalAndRegister }/>;
         modalClass = classes.peerplays;
+        break;
+      }
+
+      case ModalTypes.SUCCESS: {
+        modalContent = <SuccessModal />;
+        modalClass = classes.success;
         break;
       }
 
