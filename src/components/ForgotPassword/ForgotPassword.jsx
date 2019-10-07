@@ -30,7 +30,8 @@ class ForgotPassword extends Component {
       btnDisable: true,
       isEmailClicked: false,
       validation: false,
-      showText: false
+      showText: false,
+      resetToDefault: false
     };
   }
 
@@ -59,12 +60,18 @@ class ForgotPassword extends Component {
     });
   };
 
+  resetHandler = () => {
+    this.setState({resetToDefault: false});
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
 
     this.setState({
       btnDisable: true,
-      showText: true
+      showText: true,
+      resetToDefault: true,
+      isEmailClicked: false
     });
 
     AuthService.forgotPassword(this.state.email)
@@ -95,9 +102,12 @@ class ForgotPassword extends Component {
               hasActiveGlow={ true }
               placeholder={ translate('forgotPassword.enterEmail') }
               handleChange={ this.handleChange }
+              value={ this.state.email }
               iconLeft={ EmailIcon }
               iconLeftActive={ EmailIconActive }
               iconRightActive={ InvalidIcon }
+              resetToDefault={ this.state.resetToDefault }
+              resetHandler={ this.resetHandler }
               isValid={ () => {
                 if (this.state.isEmailClicked) {
                   return ValidationUtil.seEmail(this.state.email).success;

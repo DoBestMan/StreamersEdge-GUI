@@ -101,6 +101,32 @@ class CustomInput extends Component {
       onBlur
     };
   }
+  //check if we need to reset input
+  componentDidUpdate(prevProps) {
+    if (prevProps.resetToDefault !== this.props.resetToDefault) {
+      this.resetToDefault();
+    }
+  }
+  //resets input to default untouched state
+  resetToDefault = () => {
+    const value = '';
+    const theme = this.props.theme || 'basic';
+    const wrapperClassName = `custom-input-${theme}__wrapper`;
+    const iconLeft = this.props.iconLeft;
+    const iconRight = this.props.iconRight;
+    const iconRightWrapperClassName = `custom-input-${theme}__icon-right-wrapper`;
+
+    this.setState({
+      value,
+      theme,
+      wrapperClassName,
+      iconLeft,
+      iconRight,
+      iconRightWrapperClassName
+    });
+
+    this.props.resetHandler();
+  }
 
   toggleActiveImage = (value, type) => {
     const useActiveImages = () => {
