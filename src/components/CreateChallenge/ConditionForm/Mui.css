@@ -1,0 +1,19 @@
+.addButton {
+  padding: 6px 17px;
+  box-sizing: border-box;
+  font-style: italic;
+  font-size: 30px;
+  border-radius: 11px;
+  border: 1px solid green;
+}
+
+.deleteButton {
+  padding: 6px 17px;
+  box-sizing: border-box;  
+  border-radius: 11px;
+  border: 1px solid red;
+}
+
+.deleteIcon path {
+  color: gray;
+}

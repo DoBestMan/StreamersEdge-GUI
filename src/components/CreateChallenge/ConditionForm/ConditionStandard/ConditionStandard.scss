@@ -1,0 +1,80 @@
+@import '../../../../assets/styles/common.scss';
+
+.condition-standard__wrapper {
+  display: flex;
+  box-sizing: border-box;
+  width: 170px;
+  height: 64px;
+  border: 2px solid $blue-light;
+  border-radius: 11px;
+  font-style: italic;
+  font-size: 30px;
+  background: $input-blue;
+  box-shadow: 0 0 20px 2px $input-blue-glow;
+
+  &-large {
+    @extend .condition-standard__wrapper;
+
+    width: 280px;
+
+    & .condition-standard__input {
+      width: 200px;
+      height: 100%;
+      padding-left: 10px;
+    }
+  }
+
+  &-small {
+    @extend .condition-standard__wrapper;
+
+    width: 170px;
+
+    & .condition-standard__input {
+      width: 90px;
+      height: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.condition-standard__decrease {
+  min-width: 40px;
+  height: 100%;
+  border-radius: 11px 0 0 11px;
+  color: $white;
+  text-align: center;
+  background-color: rgba(12, 71, 135, 0.6);
+  cursor: pointer;
+}
+
+.condition-standard__input {
+  box-sizing: border-box;
+  border: none;
+  font-weight: 300;
+  font-size: 30px;
+  color: $blue-light;
+  background-color: transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.condition-standard__increase {
+  min-width: 40px;
+  height: 100%;
+  border-radius: 0 11px 11px 0;
+  color: $white;
+  text-align: center;
+  background-color: rgba(12, 71, 135, 0.6);
+  cursor: pointer;
+}
+
+.condition-standard__justify {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

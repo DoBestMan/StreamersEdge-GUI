@@ -8,16 +8,27 @@ import {GenUtil} from '../../utility';
 
 const trans = GenUtil.translate;
 
+const DEFAULT_CONDITION = {
+  param: 'kill',
+  join: 'and',
+  operator: '>',
+  value: 100
+};
+
 class CreateChallenge extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       currentStep: 1,
-      challenge: {
-        name: '',
-        game: ''
-      }
+      isUpdatedConditions: false,
+      // Challenge Info
+      name: '',
+      game: '',
+      conditions: [Object.assign({}, DEFAULT_CONDITION, {join: 'must'})],
+      ppyAmount: 100000,
+      // Errors
+      errors: []
     };
   }
 
@@ -28,6 +39,16 @@ class CreateChallenge extends Component {
   }
 
   handleNextClick = () => {
+    // If current page is for conditions, then validate the conditions
+    if (this.state.currentStep === 3 && !this.state.isUpdatedConditions) {
+      this.setState({
+        errors: [
+          'Add at least one condition'
+        ]
+      });
+      return;
+    }
+
     this.setState((state) => ({
       currentStep: state.currentStep + 1
     }));
@@ -39,19 +60,58 @@ class CreateChallenge extends Component {
 
   handleChangeName = (newValue) => {
     this.setState({
-      challenge: {
-        ...this.state.challenge,
-        name: newValue
-      }
+      name: newValue
     });
   }
 
   handleChangeGame = (newValue) => {
     this.setState({
-      challenge: {
-        ...this.state.challenge,
-        game: newValue
-      }
+      game: newValue
+    });
+  }
+
+  handleChangeConditions = (action, index = 0, newCondition = DEFAULT_CONDITION) => {
+    switch (action) {
+      case 'add':
+        this.setState((state) => {
+          return {
+            isUpdatedConditions: true,
+            errors: [],
+            conditions: [
+              ...state.conditions,
+              Object.assign({}, newCondition)
+            ]
+          };
+        });
+        break;
+      case 'delete':
+        let conditions = this.state.conditions;
+
+        conditions.splice(index, 1);
+        this.setState({
+          conditions,
+          isUpdatedConditions: true,
+          errors: []
+        });
+        break;
+      case 'update':
+        let newConditions = this.state.conditions;
+
+        newConditions[index] = newCondition;
+        this.setState({
+          isUpdatedConditions: true,
+          errors: [],
+          conditions: newConditions
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleChangePPY = (newPPY) => {
+    this.setState({
+      ppyAmount: newPPY
     });
   }
 
@@ -68,8 +128,8 @@ class CreateChallenge extends Component {
       case 1:
         return (
           <ChallengeForm
-            challengeName={ this.state.challenge.name }
-            challengeGame={ this.state.challenge.game }
+            challengeName={ this.state.name }
+            challengeGame={ this.state.game }
             onChangeName={ this.handleChangeName }
             onChangeGame={ this.handleChangeGame }
           />
@@ -77,7 +137,15 @@ class CreateChallenge extends Component {
       case 2:
         return <DateForm />;
       case 3:
-        return <ConditionForm />;
+        return (
+          <ConditionForm
+            conditions={ this.state.conditions }
+            ppyAmount={ this.state.ppyAmount }
+            errors={ this.state.errors }
+            onChangeConditions={ this.handleChangeConditions }
+            onChangePPY={ this.handleChangePPY }
+          />
+        );
       case 4:
         return <InviteForm />;
       default:

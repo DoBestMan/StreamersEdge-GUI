@@ -1,0 +1,23 @@
+.dropdown {
+  color: #3399ff;
+  font-size: 30px;
+  font-style: italic;
+  padding-top: 18px;
+}
+
+.dropdownAnchor {
+  position: absolute;
+  right: 0;
+  top: calc(50% - 15px);
+  font-size: 30px;
+}
+
+.dropdownAnchor path {
+  color: #3399ff;
+}
+
+.dropdownStyle {
+  margin-top: 50px;
+  border-bottom: none;
+  background-color: rgb(0, 0, 0);
+}

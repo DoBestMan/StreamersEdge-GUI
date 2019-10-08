@@ -1,0 +1,40 @@
+@import '../../../../assets/styles/common.scss';
+
+.condition-dropdown {
+  display: flex;
+  box-sizing: border-box;
+  width: 650px;
+  height: 64px;
+  border: 2px solid $blue-light;
+  border-radius: 11px;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 30px;
+  background: $input-blue;
+  box-shadow: 0 0 20px 2px $input-blue-glow;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 100%;
+    padding-left: 30px;
+    border-radius: 11px 0 0 11px;
+    color: $blue-light;
+    background-color: rgba(12, 71, 135, 0.6);
+  }
+
+  &__right {
+    flex-grow: 1;
+    padding: 0 20px;
+
+    &-dropdown {
+      width: 100%;
+      height: 100%;
+
+      &::before, &::after {
+        border-bottom: none;
+      }
+    }
+  }
+}

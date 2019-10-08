@@ -9,6 +9,7 @@ import step4 from './Step4.png';
 import Fortnite from './fortnite.png';
 import PUBG from './PUBG.png';
 import Legends from './legends.png';
+import sUSD from './sUSD.png';
 
 export {
   nextButton,
@@ -20,5 +21,6 @@ export {
   step4,
   Fortnite,
   PUBG,
-  Legends
+  Legends,
+  sUSD
 };
