@@ -21,7 +21,7 @@ class ChallengeFooter extends Component {
 
     if (currentStep === 1) {
       return (
-        <Button className='challenge-footer__step-back'>
+        <Button className='challenge-footer__step-back challenge-footer__item--hide'>
           <img className='challenge-footer__item--hide' src={ backButton } alt='' />
         </Button>
       );
