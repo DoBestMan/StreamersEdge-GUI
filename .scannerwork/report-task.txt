@@ -1,7 +1,7 @@
 organization=pbsa
 projectKey=PBSA_StreamersEdge-GUI
 serverUrl=https://sonarcloud.io
-serverVersion=7.8.0.24676
+serverVersion=8.0.0.1404
 dashboardUrl=https://sonarcloud.io/dashboard?id=PBSA_StreamersEdge-GUI
-ceTaskId=AWqh-M3IcMoWyatDOm8s
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWqh-M3IcMoWyatDOm8s
+ceTaskId=AW2wnfNZMHtF_nXnVRRX
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AW2wnfNZMHtF_nXnVRRX
