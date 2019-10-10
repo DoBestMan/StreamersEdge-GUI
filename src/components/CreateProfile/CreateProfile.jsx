@@ -153,9 +153,9 @@ class CreateProfile extends Component {
     } else { //changed email means we cannot go to step 2 until email has been confirmed
       ProfileService.updateProfile(account).then((res) => {
         this.props.setAccount(res);
-        this.props.setModalType(ModalTypes.SUCCESS);
+        this.props.setModalType(ModalTypes.SUBMIT);
         this.props.toggleModal();
-        this.props.setModalData({header: translate('createProfile.modal.header'), subText: translate('createProfile.modal.subText')});
+        this.props.setModalData({headerText: translate('createProfile.modal.header'), subText: translate('createProfile.modal.subText')});
       });
     }
   }

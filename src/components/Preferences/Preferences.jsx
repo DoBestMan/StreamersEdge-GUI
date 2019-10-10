@@ -87,9 +87,9 @@ class Preferences extends Component {
               .getProfile()
               .then((profile) => {
                 this.props.setAccount(profile);
-                this.props.setModalType(ModalTypes.SUCCESS);
+                this.props.setModalType(ModalTypes.SUBMIT);
                 this.props.toggleModal();
-                this.props.setModalData({header: translate('preferences.modal.header')});
+                this.props.setModalData({headerText: translate('preferences.modal.successHeader'), type: 'success'});
               })
               .catch((err) => {
                 console.log('Get profile failed', err);
@@ -100,6 +100,9 @@ class Preferences extends Component {
           });
       })
       .catch((err) => {
+        this.props.toggleModal();
+        this.props.setModalType(ModalTypes.SUBMIT);
+        this.props.setModalData({headerText: translate('preferences.modal.errorHeader'), subText: translate('preferences.modal.errorSubText'), type: 'error'});
         console.log('Update invitation failed', err);
       });
   }

@@ -16,7 +16,7 @@ import styles from './MUI.css';
 import BanModal from '../Modals/BanModal';
 import LinkAccountModal from '../Modals/LinkAccountModal';
 import UnlinkAccountModal from '../Modals/UnlinkAccountModal';
-import SuccessModal from '../Modals/SuccessModal';
+import SubmitModal from '../Modals/SubmitModal';
 
 class RootModal extends Component {
 
@@ -100,8 +100,8 @@ class RootModal extends Component {
         break;
       }
 
-      case ModalTypes.SUCCESS: {
-        modalContent = <SuccessModal />;
+      case ModalTypes.SUBMIT: {
+        modalContent = <SubmitModal />;
         modalClass = classes.success;
         break;
       }

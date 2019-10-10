@@ -91,7 +91,9 @@ export const translationObject = {
         option2: 'Don\'t receive any notifications'
       },
       modal: {
-        header: 'Your preferences have been succesfully updated'
+        errorHeader: 'Unexpected Error',
+        errorSubText: 'Failed to update preferences',
+        successHeader: 'Your preferences have been succesfully updated'
       }
     },
     login: {

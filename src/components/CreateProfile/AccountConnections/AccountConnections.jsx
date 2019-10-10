@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardContent, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails} from '@material-ui/core';
+import {Card, CardContent, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styles from '../MUI.css';
 import {withStyles} from '@material-ui/core/styles';
@@ -73,7 +73,9 @@ class AccountConnections extends Component {
   renderIcons = (imgArray) => {
     if(imgArray) {
       return imgArray.map((connection) => (
-        <img onClick={ () => this.props.openLinkAccountModal(connection.name) } src={ connection.headerIcon } key={ connection.headerIcon } className='link-accounts__content-icon' alt=''/>
+        <Button className='link-accounts__content-icon' disabled={ !(connection.bodyUsername === null || connection.bodyUsername === '') } key={ connection.headerIcon }>
+          <img onClick={ () => this.props.openLinkAccountModal(connection.name) } src={ connection.headerIcon } alt=''/>
+        </Button>
       ));
     }
   }
