@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {addDays} from 'date-fns';
 import ChallengeFooter from './ChallengeFooter';
 import ChallengeForm from './ChallengeForm';
 import DateForm from './DateForm';
@@ -27,6 +28,9 @@ class CreateChallenge extends Component {
       game: '',
       conditions: [Object.assign({}, DEFAULT_CONDITION, {join: 'must'})],
       ppyAmount: 100000,
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      isUndefinedEndDate: true,
       accessRule: 'invite',
       invitedAccounts: [],
       // Errors
@@ -35,8 +39,11 @@ class CreateChallenge extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // Remove errors if the invited accounts are updated
-    if (prevState.invitedAccounts.length !== this.state.invitedAccounts.length) {
+    // Remove errors
+    if ((prevState.name !== this.state.name)
+      || (prevState.invitedAccounts.length !== this.state.invitedAccounts.length)
+      || (prevState.endDate.getTime() !== this.state.endDate.getTime() && this.state.endDate.getTime() >= this.state.startDate.getTime())
+    ) {
       this.setState({
         errors: []
       });
@@ -50,14 +57,34 @@ class CreateChallenge extends Component {
   }
 
   handleNextClick = () => {
-    // If current page is for conditions, then validate the conditions
-    if (this.state.currentStep === 3 && !this.state.isUpdatedConditions) {
-      this.setState({
-        errors: [
-          'Add at least 1 condition'
-        ]
-      });
-      return;
+    // Handle validation for each step
+    if (this.state.currentStep === 1) {
+      if (!this.state.name) {
+        this.setState({
+          errors: [
+            trans('createChallenge.errors.name.required')
+          ]
+        });
+        return;
+      }
+    } else if (this.state.currentStep === 2) {
+      if (!this.state.isUndefinedEndDate && this.state.startDate.getTime() > this.state.endDate.getTime()) {
+        this.setState({
+          errors: [
+            trans('createChallenge.errors.date.invalid')
+          ]
+        });
+        return;
+      }
+    } else if (this.state.currentStep === 3) {
+      if (!this.state.isUpdatedConditions) {
+        this.setState({
+          errors: [
+            trans('createChallenge.errors.condition.required')
+          ]
+        });
+        return;
+      }
     }
 
     this.setState((state) => ({
@@ -160,7 +187,14 @@ class CreateChallenge extends Component {
           />
         );
       case 2:
-        return <DateForm />;
+        return (
+          <DateForm
+            startDate={ this.state.startDate }
+            endDate={ this.state.endDate }
+            isUndefinedEndDate={ this.state.isUndefinedEndDate }
+            onChange={ this.handleChange }
+          />
+        );
       case 3:
         return (
           <ConditionForm

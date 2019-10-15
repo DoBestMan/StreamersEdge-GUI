@@ -1,6 +1,6 @@
 .dropdown {
   color: #3399ff;
-  font-size: 30px;
+  font-size: 25px;
   font-style: italic;
   padding-top: 18px;
 }
@@ -9,7 +9,7 @@
   position: absolute;
   right: 0;
   top: calc(50% - 15px);
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .dropdownAnchor path {

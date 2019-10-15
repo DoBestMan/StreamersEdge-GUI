@@ -296,6 +296,17 @@ export const translationObject = {
           }
         },
         challenge: 'Username'
+      },
+      errors: {
+        name: {
+          required: 'A challenge name is required'
+        },
+        date: {
+          invalid: 'End Date should be greater than Start Date'
+        },
+        condition: {
+          required: 'Add at least one condition'
+        }
       }
     },
 

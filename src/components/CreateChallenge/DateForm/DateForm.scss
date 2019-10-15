@@ -1,0 +1,24 @@
+@import '../../../assets/styles/common.scss';
+
+.date-form {
+  padding: 50px 70px 0;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__group {
+    display: flex;
+    align-items: center;
+  }
+
+  &__label {
+    margin-right: 28px;
+    font-style: italic;
+    font-size: 25px;
+    color: $white;
+    letter-spacing: 0;
+  }
+}

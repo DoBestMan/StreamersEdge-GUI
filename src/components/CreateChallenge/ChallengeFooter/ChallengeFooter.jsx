@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Button} from '@material-ui/core';
 import {
   nextButton,
   backButton,
@@ -21,15 +20,15 @@ class ChallengeFooter extends Component {
 
     if (currentStep === 1) {
       return (
-        <Button className='challenge-footer__step-back challenge-footer__item--hide'>
+        <div className='challenge-footer__step-back challenge-footer__item--hide'>
           <img className='challenge-footer__item--hide' src={ backButton } alt='' />
-        </Button>
+        </div>
       );
     } else {
       return (
-        <Button className='challenge-footer__step-back'>
+        <div className='challenge-footer__step-back'>
           <img className='challenge-footer__item' onClick={ onBack } src={ backButton } alt='' />
-        </Button>
+        </div>
       );
     }
   }
@@ -56,15 +55,15 @@ class ChallengeFooter extends Component {
 
     if (currentStep === lastStep) {
       return (
-        <Button className='challenge-footer__step-next'>
+        <div className='challenge-footer__step-next'>
           <img className='challenge-footer__item' onClick={ onComplete } src={ createButton } alt='' />
-        </Button>
+        </div>
       );
     } else {
       return (
-        <Button className='challenge-footer__step-next'>
+        <div className='challenge-footer__step-next'>
           <img className='challenge-footer__item' onClick={ onNext } src={ nextButton } alt='' />
-        </Button>
+        </div>
       );
     }
   }

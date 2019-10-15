@@ -1,0 +1,28 @@
+@import '../../../../assets/styles/common.scss';
+
+.date-input {
+  &__wrapper {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 285px;
+    height: 64px;
+    padding-left: 10px;
+    border: 2px solid $blue-light;
+    border-radius: 11px;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 25px;
+    color: $blue-light;
+    background: $input-blue;
+    cursor: pointer;
+  }
+
+  &__icon {
+    margin: 0 10px;
+
+    & path {
+      color: $blue-light;
+    }
+  }
+}
