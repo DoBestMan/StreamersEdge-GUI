@@ -1,0 +1,13 @@
+.radio svg {
+  font-size: 30px;
+}
+
+.radio svg path {
+  color: #3FA9F5;
+}
+
+.formLabel {
+  font-size: 23px;
+  letter-spacing: 0;
+  color: #ffffff;
+}

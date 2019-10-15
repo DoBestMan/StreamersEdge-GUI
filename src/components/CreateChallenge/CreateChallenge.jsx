@@ -27,9 +27,20 @@ class CreateChallenge extends Component {
       game: '',
       conditions: [Object.assign({}, DEFAULT_CONDITION, {join: 'must'})],
       ppyAmount: 100000,
+      accessRule: 'invite',
+      invitedAccounts: [],
       // Errors
       errors: []
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Remove errors if the invited accounts are updated
+    if (prevState.invitedAccounts.length !== this.state.invitedAccounts.length) {
+      this.setState({
+        errors: []
+      });
+    }
   }
 
   handleBackClick = () => {
@@ -43,7 +54,7 @@ class CreateChallenge extends Component {
     if (this.state.currentStep === 3 && !this.state.isUpdatedConditions) {
       this.setState({
         errors: [
-          'Add at least one condition'
+          'Add at least 1 condition'
         ]
       });
       return;
@@ -55,7 +66,15 @@ class CreateChallenge extends Component {
   }
 
   handleCompleteClick = () => {
-
+    // validte the invite accounts before completing
+    if (this.state.accessRule !== 'both' && !this.state.invitedAccounts.length) {
+      this.setState({
+        errors: [
+          'Add at least 1 invited accounts'
+        ]
+      });
+      return;
+    }
   }
 
   handleChangeName = (newValue) => {
@@ -115,6 +134,12 @@ class CreateChallenge extends Component {
     });
   }
 
+  handleChange = (name, value) => {
+    this.setState({
+      [name]: value
+    });
+  }
+
   /*
    * Render component by the current step
    * step 1: ChallengeForm
@@ -147,19 +172,32 @@ class CreateChallenge extends Component {
           />
         );
       case 4:
-        return <InviteForm />;
+        return (
+          <InviteForm
+            accessRule={ this.state.accessRule }
+            invitedAccounts={ this.state.invitedAccounts }
+            onChange={ this.handleChange }
+          />
+        );
       default:
         return <ChallengeForm />;
     }
   }
 
   render() {
+    const {errors} = this.state;
+
     return (
       <>
         <div className='create-challenge__content'>
           <div className='create-challenge__wrapper'>
             <div className='create-challenge__title'>{ trans('createChallenge.header') }</div>
             { this.renderForm() }
+            {!!errors.length && (
+              <div className='create-challenge__error'>
+                {errors.map((error, index) => <p key={ index }>{error}</p>)}
+              </div>
+            )}
           </div>
         </div>
         <ChallengeFooter

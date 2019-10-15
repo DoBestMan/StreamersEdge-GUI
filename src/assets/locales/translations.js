@@ -285,6 +285,17 @@ export const translationObject = {
       game: {
         label: 'Challenge Game',
         placeholder: 'Search'
+      },
+      invite: {
+        condition: {
+          label: 'Invite Conditions',
+          conditions: {
+            invite: 'Join by invite',
+            any: 'Anyone can join',
+            both: 'Both'
+          }
+        },
+        challenge: 'Username'
       }
     },
 

@@ -29,7 +29,7 @@ class ConditionForm extends Component {
   }
 
   render() {
-    const {classes, conditions, errors} = this.props;
+    const {classes, conditions} = this.props;
 
     return (
       <>
@@ -76,12 +76,6 @@ class ConditionForm extends Component {
             <ConditionStandard value={ this.props.ppyAmount } size='large' onChange={ this.props.onChangePPY } />
             <img className='condition-form__bounty-currency' src={ sUSD } alt='' />
           </div>
-
-          {!!errors.length && (
-            <div className='create-challenge__error'>
-              {errors.map((error, index) => <p key={ index }>{error}</p>)}
-            </div>
-          )}
         </div>
       </>
     );
