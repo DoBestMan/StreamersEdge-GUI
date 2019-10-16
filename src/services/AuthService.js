@@ -222,25 +222,42 @@ class PrivateAuthService {
    *
    *
    * @static
-   * @param {object} account - User object:
-   * {
-      "id": 7,
-      "username": "test",
-      "email": "test@email.com",
-      "twitchUserName": "",
-      "googleName": "",
-      "youtube": "",
-      "facebook": "",
-      "twitch": "",
-      "peerplaysAccountName": "",
-      "bitcoinAddress": "",
-      "userType": "viewer",
-      "avatar": ""
-   * }.
+   * @param {string} peerplaysAccountName - PeerplaysAccountName.
    * @returns {Promise} - A promise that indicates success or failure.
    * @memberof PrivateAuthService
    */
-  static linkPeerplaysAccount(account) {
+  static linkPeerplaysAccount(peerplaysAccountName) {
+    let response;
+    const query = `${apiRoot}api/v1/profile`;
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const body = {
+        peerplaysAccountName: peerplaysAccountName ? peerplaysAccountName : 'peerplaysRis'
+      };
+
+      try {
+        response = await ApiHandler.patch(query, querystring.stringify(body), headers);
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.toString());
+      }
+    });
+  };
+
+
+  /**
+   *
+   *
+   * @static
+   * @returns {Promise} - A promise that indicates success or failure.
+   * @memberof PrivateAuthService
+   */
+  static unlinkPeerplaysAccount() {
     let response;
     const query = `${apiRoot}api/v1/profile`;
 
@@ -252,7 +269,7 @@ class PrivateAuthService {
       };
 
       const body = {
-        peerplaysAccountName: account.peerplaysAccountName
+        peerplaysAccountName: ''
       };
 
       try {
@@ -383,12 +400,23 @@ class AuthService {
    *
    *
    * @static
-   * @param {object} account - User object.
+   * @param {string} peerplaysAccountName - String.
    * @returns {Promise} - Returns linkPeerplaysAccount promise wrapped in dummy data wrapper function.
    * @memberof AuthService
    */
-  static linkPeerplaysAccount(account) {
-    return GenUtil.dummyDataWrapper(PrivateAuthService.linkPeerplaysAccount(account));
+  static linkPeerplaysAccount(peerplaysAccountName) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.linkPeerplaysAccount(peerplaysAccountName));
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @returns {Promise} - Returns unlinkPeerplaysAccount promise wrapped in dummy data wrapper function.
+   * @memberof AuthService
+   */
+  static unlinkPeerplaysAccount() {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.unlinkPeerplaysAccount());
   }
 
   /**

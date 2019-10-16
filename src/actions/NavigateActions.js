@@ -102,6 +102,20 @@ class NavigateActions {
       dispatch(push('/profile/' + step));
     };
   }
+
+
+  /**
+   * Navigate to the update-profile page.
+   *
+   * @static
+   * @returns {Dispatch}
+   * @memberof NavigateActions
+   */
+  static navigateToUpdateProfile() {
+    return (dispatch) => {
+      dispatch(push(Routes.UPDATE_PROFILE));
+    };
+  }
 }
 
 export default NavigateActions;

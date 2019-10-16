@@ -1,0 +1,169 @@
+@import '../../../assets/styles/common';
+
+.update-link-accounts {
+  &__header {
+    display: flex;
+    margin-bottom: 40px;
+    padding: 0;
+    border-bottom: 1px solid #424268;
+    font-family: $lato;
+    font-style: Italic;
+    font-size: 35px;
+    text-align: left;
+  }
+
+  &__card {
+    width: 50%;
+    max-width: 960px;
+    min-height: 500px;
+    margin-top: 67px;
+    margin-bottom: 50px;
+    padding: 76px;
+    border: 2px solid $white;
+    border-radius: 25px;
+    background-image: $profile-gradient;
+  }
+
+  &__wrapper {
+    margin: 80px 0;
+  }
+
+  &__content {
+    width: 100%;
+    border-radius: 10px;
+    opacity: 1;
+
+    &-header {
+      margin: 0;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 22px;
+      color: $white;
+      text-align: left;
+      letter-spacing: 0;
+    }
+
+    &-body {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px auto;
+
+      &-parent {
+        width: 230px;
+        height: 290px;
+        padding-bottom: 40px;
+        border: 3px solid;
+        border-radius: 10px;
+        text-align: center;
+        background: transparent $update-profile__gradient 0 0 no-repeat padding-box;
+        box-shadow: 2px 6px 11px #000000bf;
+        border-image-source: radial-gradient(#ffffff, #3fa9f5);
+        border-image-slice: 1;
+      }
+
+      &-parent-dark {
+        border-image-source: $update-profile__gradient-dark;
+      }
+
+      &-icon {
+        width: 75px;
+        height: auto;
+
+        &-fb {
+          width: 40px;
+          height: 60px;
+        }
+
+        &-league {
+          width: 150px;
+          height: 70px;
+        }
+
+        &__wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 110px;
+          margin: 40px 0 20px;
+        }
+      }
+
+      &-text {
+        height: 65px;
+      }
+
+      &-name {
+        margin: 5px 0;
+        text-transform: capitalize;
+      }
+
+      &-username {
+        margin: 5px 0;
+      }
+
+      &-btn {
+        margin: 30px  0 0;
+        cursor: pointer;
+
+        &-notAllowed {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  &__connection {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: 30px 0;
+    padding: 30px;
+    border: 4px solid black;
+    border-radius: 10px;
+    opacity: 1;
+
+    &-wrapper {
+      width: 100%;
+    }
+
+    &-user {
+      @extend .update-link-accounts__content-header;
+
+      width: 95%;
+      font-size: 26px;
+      opacity: 1;
+      overflow-wrap: break-word;
+    }
+
+    &-label {
+      @extend .update-link-accounts__content-header;
+
+      font-size: 17px;
+    }
+
+    &-icon {
+      width: 39px;
+      height: 39px;
+      margin-right: 20px;
+    }
+
+    &-close {
+      width: 18px;
+      height: 18px;
+      margin: -15px;
+      background-image: url('../../../assets/images/profile/close_white.png');
+      background-repeat: no-repeat;
+      background-size: 18px;
+      cursor: pointer;
+
+      &:hover {
+        background-image: url('../../../assets/images/profile/close_grey.png');
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
+
+.update-connections__wrapper {
+  width:100%;
+}

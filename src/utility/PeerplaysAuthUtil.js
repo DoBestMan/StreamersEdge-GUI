@@ -1,5 +1,5 @@
 import PeerplaysService from '../services/PeerplaysService';
-
+import {AuthService} from '../services/';
 class PeerplaysAuthPrivateUtil {
   /**
    * Attempts to retrieve the account from the blockchain as per the provided form username.
@@ -58,6 +58,7 @@ class PeerplaysAuthActions {
 
       try {
         const success = await dispatch(PeerplaysAuthPrivateUtil.processLogin(accountName, password));
+        await AuthService.linkPeerplaysAccount(accountName);
         return onSuccess(success);
       } catch (error) {
         return onError(error);

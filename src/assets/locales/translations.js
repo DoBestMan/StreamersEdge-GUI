@@ -214,7 +214,12 @@ export const translationObject = {
         header: 'User Info',
         userType: 'Select account type',
         email: 'Enter your email',
-        avatar: 'Customize Avatar'
+        avatar: 'Customize Avatar',
+        updateHeader: 'Update Your Profile',
+        editUserType: 'Edit Account Type',
+        editEmail: 'Edit Streamers Edge account email',
+        updatedSuccessfully: 'You have successfully updated your profile',
+        updateFailed: 'Profile update failed.'
       },
       accountConnections: {
         cryptoHeader: 'Peerplays Wallet',
@@ -252,6 +257,7 @@ export const translationObject = {
     link: {
       header: 'Confirm you want to link your account',
       unlinkHeader: 'Confirm you want to unlink your account',
+      unlinkWarning: 'Warning: You won’t be able to win any challenge in which you have participated if your Peerplays account is not linked.',
       terms: 'Terms & Conditions'
     },
 

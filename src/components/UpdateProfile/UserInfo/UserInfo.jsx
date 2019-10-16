@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import ProfilePictureUpload from '../../ProfilePictureUpload';
-import {Card, CardContent} from '@material-ui/core';
-import Dropdown from '../../Dropdown';
 import CustomInput from '../../CustomInput';
+import Dropdown from '../../Dropdown';
 import {
   EmailIcon,
   EmailIconActive,
   InvalidIcon
 } from '../../../assets/images/signup';
+import {Avatar} from '../../../assets/images/updateProfile';
 import {GenUtil, ValidationUtil} from '../../../utility';
+
 const translate = GenUtil.translate;
 
 class UserInfo extends Component {
@@ -17,37 +18,41 @@ class UserInfo extends Component {
     isEmailInputClicked: false
   }
 
-  handleUserTypeChange = (value) => {
-    this.props.handleUserTypeChange(value);
-  }
-
   handleEmailChange = (email) => {
     this.setState({isEmailInputClicked: true});
     this.props.handleEmailChange(email);
   }
 
+  handleUserTypeChange = (value) => {
+    this.props.handleUserTypeChange(value);
+  }
+
   render() {
+    const classes = {
+      profilePicture: 'profile-picture__prop',
+      profileFrame: 'profile-frame__prop'
+    };
     return(
-      <Card className='user-info__card'>
-        <span className='user-info__header'>
-          {translate('updateProfile.userInfo.header')}
+      <div>
+        <span className='update-user-info__header'>
+          {translate('updateProfile.userInfo.updateHeader')}
         </span>
-        <CardContent className='user-info__content'>
-          <div className='user-info__inputs'>
-            <div className='user-info__account-type'>
-              <span className='user-info__account-type__label'>{translate('updateProfile.userInfo.userType')}</span>
+        <div className='update-user-info__content'>
+          <div className='update-user-info__inputs'>
+            <div className='update-user-info__account-type'>
+              <span className='update-user-info__account-type__label'>{translate('updateProfile.userInfo.editUserType')}</span>
               <Dropdown value={ this.props.userType } dropdownList={ translate('createProfile.accountTypes').split(',') } handleChange={ this.handleUserTypeChange }/>
             </div>
-            <div className='user-info__email'>
-              <span className='user-info__email__label'>{translate('updateProfile.userInfo.email')}</span>
-              <div className='user-info__email__input test1234'>
+            <div className='update-user-info__email'>
+              <span className='update-user-info__email__label'>{translate('updateProfile.userInfo.editEmail')}</span>
+              <div className='update-user-info__email__input test1234'>
                 <CustomInput
                   name='email'
                   hasActiveGlow={ true }
-                  theme='update-profile'
                   value={ this.props.email }
-                  handleChange={ this.handleEmailChange }
+                  theme='update-profile'
                   placeholder={ translate('register.enterEmail') }
+                  handleChange={ this.handleEmailChange }
                   iconLeft={ EmailIcon }
                   iconLeftActive={ EmailIconActive }
                   iconRightActive={ InvalidIcon }
@@ -64,12 +69,12 @@ class UserInfo extends Component {
               </div>
             </div>
           </div>
-          <div className='user-info__avatar'>
-            <ProfilePictureUpload />
-            <span className='user-info__avatar-label'>{translate('updateProfile.userInfo.avatar')}</span>
+          <div className='update-user-info__avatar'>
+            <ProfilePictureUpload customAvatar={ Avatar } classes = { classes } />
+            <span className='update-user-info__avatar-label'>{translate('updateProfile.userInfo.avatar')}</span>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 }

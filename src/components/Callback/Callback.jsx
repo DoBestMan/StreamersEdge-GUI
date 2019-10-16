@@ -29,9 +29,10 @@ class Callback extends Component {
     switch (cb) {
       case 'confirm-email':
         AuthService.confirmEmail(pathAry[3])
-          .then(() => {
+          .then((account) => {
+            this.props.setAccount(account);
             this.props.setLoggedIn(true);
-            this.props.navigateToDashboard();
+            this.props.navigateToCreateProfile('1');
           })
           .catch((err) => {
             this.setState({
@@ -74,6 +75,17 @@ class Callback extends Component {
           });
         });
         break;
+      case 'update-profile':
+        ProfileService.getProfile().then((account) => {
+          this.props.setAccount(account);
+          this.props.navigateToUpdateProfile();
+        }).catch((err) => {
+          this.setState({
+            error: err
+          });
+        });
+        break;
+
       default:
         // an error occurred.
         console.warn('Error - unidentified callback');
@@ -98,6 +110,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     setLoggedIn: AccountActions.setIsLoggedInAction,
     navigateToDashboard: NavigateActions.navigateToDashboard,
+    navigateToUpdateProfile: NavigateActions.navigateToUpdateProfile,
     navigateToPasswordReset: NavigateActions.navigateToPasswordReset,
     navigateToCreateProfile: NavigateActions.navigateToCreateProfile,
     setAccount: AccountActions.setAccountAction

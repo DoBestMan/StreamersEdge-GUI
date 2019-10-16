@@ -3,3 +3,4 @@ node_modules/
 .sonarlint/**
 sonar-scanner/
 .idea/
+.DS_Store

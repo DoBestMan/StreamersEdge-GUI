@@ -15,11 +15,11 @@ const mergeDummyAccountState = {
       'id': 10,
       'username': 'jotprabh',
       'email': 'pbsa_dev@gmail.com',
-      'twitchUserName': 'pbsa_dev',
-      'googleName': 'pbsa_dev',
-      'youtube': 'test@youtube.com',
-      'facebook': 'pbsa_dev',
-      'peerplaysAccountName': 'pbsa_dev',
+      'twitchUserName': null,
+      'googleName': null,
+      'youtube': null,
+      'facebook': null,
+      'peerplaysAccountName': null,
       'bitcoinAddress': '1NbhnkGbiaRxNUvKnTNfEomH1Nk1dVUxAR',
       'userType': 'gamer'
     }

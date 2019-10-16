@@ -9,6 +9,7 @@ import ResetForm from '../components/ForgotPassword/ResetForm';
 import Preferences from '../components/Preferences';
 import {requireAuthentication} from '../components/Auth/AuthComponent';
 import {RouteConstants as Routes} from '../constants';
+import UpdateProfile from '../components/UpdateProfile';
 
 // https://github.com/supasate/connected-react-router/blob/master/examples/immutable/src/routes/index.js
 
@@ -21,6 +22,7 @@ const routes = (
       <Route path={ Routes.DASHBOARD } component={ requireAuthentication(Dashboard) }/>
       <Route path={ Routes.PREFERENCES } component={ requireAuthentication(Preferences) } />
       <Route path={ Routes.CREATE_CHALLENGE } component={ requireAuthentication(CreateChallenge) } />
+      <Route path={ Routes.UPDATE_PROFILE } component={ requireAuthentication(UpdateProfile) } />
       <Route path={ Routes.CALLBACK } component={ Callback }/>
     </Switch>
   </>

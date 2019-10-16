@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AccountActions} from '../../actions';
 import {UploadFileTypes} from '../../constants';
+import classNames from 'classnames';
 
 class ProfilePictureUpload extends Component {
   constructor(props) {
@@ -72,8 +73,17 @@ class ProfilePictureUpload extends Component {
       <>
         <div className='profile__wrapper'>
           <label htmlFor='file-input'>
-            <img className='profile__picture' src={ avatar } alt='' />
-            <img className='profile__frame' src={ frame } onMouseOver={ this.mouseOver } onMouseOut={ this.mouseOut } alt='' />
+            {this.props.customAvatar ?
+              <div>
+                <img className={ classNames('profile__picture', {'profile-picture__prop' : !this.props.avatar}) } src={ this.props.avatar || this.props.customAvatar } alt='' />
+                <img className={ classNames('profile__frame', {'profile-frame__prop' : !this.props.avatar}) } src={ frame } alt='' />
+              </div>
+              :
+              <div>
+                <img className='profile__picture' src={ avatar } alt='' />
+                <img className='profile__frame' src={ frame } onMouseOver={ this.mouseOver } onMouseOut={ this.mouseOut } alt='' />
+              </div>
+            }
           </label>
         </div>
 

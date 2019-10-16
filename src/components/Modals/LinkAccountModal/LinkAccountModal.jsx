@@ -1,18 +1,28 @@
 import React, {Component} from 'react';
 import {linkAccountRobot, closeButton, linkAccountButton} from '../../../assets/images/modals';
-import {ModalActions} from '../../../actions';
+import {AccountActions, ModalActions, NavigateActions} from '../../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {GenUtil} from '../../../utility';
 import {AuthUtil} from '../../../utility';
 import {withRouter} from 'react-router';
+import {AuthService} from '../../../services';
 
 const translate = GenUtil.translate;
 
 class LinkAccountModal extends Component {
 
   handleSubmit = () => {
-    AuthUtil.authVia(this.props.modalData, this.props.location.pathname);
+    if(this.props.modalData === 'peerplays') {
+      AuthService.linkPeerplaysAccount(this.props.peerplaysAccountName).then((account) => {
+        this.props.setAccount(account);
+      });
+    } else {
+      AuthUtil.authVia(this.props.modalData, this.props.location.pathname);
+    }
+
+    this.handleClose();
+    this.props.navigateToUpdateProfile();
   }
 
   handleClose = () => {
@@ -46,13 +56,16 @@ class LinkAccountModal extends Component {
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal,
-    setModalData: ModalActions.setModalData
+    setModalData: ModalActions.setModalData,
+    setAccount: AccountActions.setAccountAction,
+    navigateToUpdateProfile: NavigateActions.navigateToUpdateProfile
   },
   dispatch
 );
 
 const mapStateToProps = (state) => ({
-  modalData: state.getIn(['modal', 'data'])
+  modalData: state.getIn(['modal', 'data']),
+  peerplaysAccountName: state.getIn(['profiles','currentAccount','peerplaysAccountName'])
 });
 
 export default connect(

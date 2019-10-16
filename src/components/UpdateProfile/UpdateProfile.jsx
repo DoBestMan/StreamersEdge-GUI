@@ -8,46 +8,34 @@ import AccountConnections from './AccountConnections';
 import {ProfileService} from '../../services';
 import {ModalActions, NavigateActions, AccountActions} from '../../actions';
 import {ModalTypes} from '../../constants';
-import ProfileFooter from './ProfileFooter';
-import {
-  facebookBox,
-  twitchBox,
-  youtubeBox,
-  facebookIcon,
-  twitchIcon,
-  youtubeIcon,
-  fortniteBox,
-  pubgBox,
-  leagueBox,
-  fortniteIcon,
-  pubgIcon,
-  leagueIcon
-} from '../../assets/images/profile';
 import {GenUtil, ValidationUtil} from '../../utility';
+import {PeerplaysIcon, YoutubeIcon, TwitchIcon, FacebookIcon, FortniteIcon, PubgIcon, LOL} from '../../assets/images/updateProfile';
+import SaveButton from '../../assets/images/preferences/Save.png';
+import CancelButton from '../../assets/images/preferences/Cancel.png';
 const translate = GenUtil.translate;
 
-class CreateProfile extends Component {
+class UpdateProfile extends Component {
   constructor(props) {
     super(props);
 
-    const {twitchUsername, youtubeUsername, facebookUsername} = props;
+    const {twitchUsername, youtubeUsername, facebookUsername,peerplaysAccountName} = props;
     const path = this.props.location.pathname;
     const pathAry = path.split('/')[2];
 
-    this.state = this.constructState(twitchUsername, youtubeUsername, facebookUsername, pathAry);
+    this.state = this.constructState(twitchUsername, youtubeUsername, facebookUsername, peerplaysAccountName,pathAry);
   }
 
   componentDidUpdate(prevProps) {
 
     if (this.props.account !== prevProps.account) {
-      const {twitchUsername, youtubeUsername, facebookUsername} = this.props;
+      const {twitchUsername, youtubeUsername, facebookUsername, peerplaysAccountName} = this.props;
       const path = this.props.location.pathname;
       const pathAry = path.split('/')[2];
-      this.setState(this.constructState(twitchUsername, youtubeUsername, facebookUsername, pathAry));
+      this.setState(this.constructState(twitchUsername, youtubeUsername, facebookUsername, peerplaysAccountName,pathAry));
     }
   }
 
-  constructState = (twitchUsername, youtubeUsername, facebookUsername, pathAry) => {
+  constructState = (twitchUsername, youtubeUsername, facebookUsername, peerplaysAccountName,pathAry) => {
     return {
       currentStep: pathAry || '1',
       email: this.props.email || this.props.twitch || this.props.youtube || this.props.facebookUsername || '',
@@ -55,29 +43,34 @@ class CreateProfile extends Component {
       userType: this.props.userType || translate('createProfile.defaultAccountType'),
 
       connections: {
+
+        peerplays: {
+          header: translate('updateProfile.accountConnections.cryptoHeader'),
+          connections: [
+            {
+              name: 'peerplays',
+              username: peerplaysAccountName,
+              headerIcon: PeerplaysIcon
+            }
+          ]
+        },
         social: {//twitch, facebook, youtube
           header: translate('updateProfile.accountConnections.socialHeader'),
-          headerLabel: translate('updateProfile.accountConnections.connectionSelect'),
-          headerDescription: translate('updateProfile.accountConnections.connectionDescription'),
-
           connections: [
             {//twitch
               name: 'twitch',
-              headerIcon: twitchBox,
-              bodyIcon: twitchIcon,
-              bodyUsername: twitchUsername
+              headerIcon: TwitchIcon,
+              username: twitchUsername
             },
             {//facebook
               name: 'facebook',
-              headerIcon: facebookBox,
-              bodyIcon: facebookIcon,
-              bodyUsername: facebookUsername
+              headerIcon: FacebookIcon,
+              username: facebookUsername
             },
             {//youtube
-              name: 'google',
-              headerIcon: youtubeBox,
-              bodyIcon: youtubeIcon,
-              bodyUsername: youtubeUsername
+              name: 'youtube',
+              username: youtubeUsername,
+              headerIcon: YoutubeIcon
             }
           ]
         },
@@ -89,20 +82,19 @@ class CreateProfile extends Component {
           connections: [
             {//fortnite
               name: 'fortnite',
-              headerIcon: fortniteBox,
-              bodyIcon: fortniteIcon,
-              bodyUsername: ''
+              headerIcon: FortniteIcon,
+              bodyIcon: null
             },
             {//pubg
               name: 'pubg',
-              headerIcon: pubgBox,
-              bodyIcon: leagueIcon,
+              headerIcon: PubgIcon,
+              bodyIcon: null,
               bodyUsername: ''
             },
             {//league of legends
               name: 'league',
-              headerIcon: leagueBox,
-              bodyIcon: pubgIcon,
+              headerIcon: LOL,
+              bodyIcon: null,
               bodyUsername: ''
             }
           ]
@@ -118,11 +110,6 @@ class CreateProfile extends Component {
 
   handleUserTypeChange = (userType) => {
     this.setState({userType: userType});
-  }
-
-  setStep = (currentStep) => {
-    this.props.history.push('/profile/'+currentStep);
-    this.setState({currentStep});
   }
 
   openLinkAccountModal = (authRoute) => {
@@ -141,42 +128,33 @@ class CreateProfile extends Component {
     this.props.toggleModal();
   }
 
-  submitStep1 = () => {
+  submitHandler = () => {
     const {email, userType} = this.state;
     let account = {userType: userType, email: email};
 
-    if(email === this.props.email) { //email has not been changed, we can go to step 2
-      ProfileService.updateProfile(account).then((res) => {
-        this.props.setAccount(res);
-        this.setState({currentStep: '2'});
-      });
-    } else { //changed email means we cannot go to step 2 until email has been confirmed
-      ProfileService.updateProfile(account).then((res) => {
-        this.props.setAccount(res);
-        this.props.setModalType(ModalTypes.SUBMIT);
-        this.props.toggleModal();
-        this.props.setModalData({headerText: translate('createProfile.modal.header'), subText: translate('createProfile.modal.subText')});
-      });
-    }
+    ProfileService.updateProfile(account).then((res) => {
+      this.props.setAccount(res);
+      this.props.setModalType(ModalTypes.SUBMIT);
+      this.props.setModalData({headerText: translate('updateProfile.userInfo.updatedSuccessfully'), type: 'success'});
+      this.props.toggleModal();
+    }).catch(() => {
+      this.props.setModalType(ModalTypes.SUBMIT);
+      this.props.setModalData({headerText: translate('updateProfile.userInfo.updateFailed'), type: 'error'});
+      this.props.toggleModal();
+    });
   }
 
   render() {
-    const {connections, currentStep, userType, emailValid} = this.state;
+    const {connections, userType} = this.state;
     return (
-      <div className='create-profile__wrapper'>
-        <form className='create-profile' onSubmit={ this.handleSubmit }>
-          <div className='create-profile__header'>
-            { translate('createProfile.header') }
-          </div>
-          {currentStep === '1' ?
-            <UserInfo handleEmailChange={ this.handleEmailChange } email={ this.state.email } handleUserTypeChange={ this.handleUserTypeChange } userType={ userType } />
-            :
-            <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } openUnlinkAccountModal={ this.openUnlinkAccountModal }
-              closeLinkAccountModal={ this.closeLinkAccountModal }/>
-          }
+      <div className='update-profile__wrapper'>
+        <form className='update-profile-form' onSubmit={ this.handleSubmit }>
+          <UserInfo handleEmailChange={ this.handleEmailChange } email={ this.state.email } handleUserTypeChange={ this.handleUserTypeChange } userType={ userType } />
+          <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } openUnlinkAccountModal={ this.openUnlinkAccountModal }
+            closeLinkAccountModal={ this.closeLinkAccountModal } peerplaysAccountName = { this.props.peerplaysAccountName } />
+          <img src={ CancelButton } alt='close button' className='update-profile__close-btn' onClick={ this.props.navigateToDashboard }/>
+          <img src={ SaveButton } alt='save button' className='update-profile__save-btn' onClick={ this.submitHandler }/>
         </form>
-        <ProfileFooter currentStep={ currentStep } setStep={ this.setStep } submitStep1={ this.submitStep1 }
-          navigateToDashboard={ this.props.navigateToDashboard } disabled={ !emailValid }/>
       </div>
     );
   }
@@ -195,13 +173,15 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
 
 const mapStateToProps = (state) => ({
   account: state.getIn(['profiles', 'currentAccount']),
+  username: state.getIn(['profiles', 'currentAccount','username']),
   email: state.getIn(['profiles', 'currentAccount', 'email']),
   userType: state.getIn(['profiles', 'currentAccount', 'userType']),
   twitchUsername: state.getIn(['profiles', 'currentAccount', 'twitchUserName']),
   youtubeUsername: state.getIn(['profiles', 'currentAccount', 'googleName']),
   facebookUsername: state.getIn(['profiles', 'currentAccount', 'facebook']),
+  peerplaysAccountName: state.getIn(['profiles','currentAccount','peerplaysAccountName']),
   twitch: state.getIn(['profiles', 'currentAccount', 'twitch']),
   youtube: state.getIn(['profiles', 'currentAccount', 'youtube'])
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateProfile));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(UpdateProfile));

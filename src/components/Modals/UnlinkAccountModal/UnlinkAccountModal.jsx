@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {unlinkAccountRobot, closeButton, unlinkAccountButton} from '../../../assets/images/modals';
-import {ModalActions, AccountActions} from '../../../actions';
+import {ModalActions, AccountActions, NavigateActions} from '../../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {GenUtil} from '../../../utility';
 import {withRouter} from 'react-router';
 import {ProfileService} from '../../../services';
+import {AuthService} from '../../../services/';
 
 const translate = GenUtil.translate;
 
@@ -33,10 +34,20 @@ class UnlinkAccountModal extends Component {
   }
 
   handleSubmit = () => {
-    const account = this.getUnlinkData();
-    ProfileService.updateProfile(account).then((res) => {
-      this.props.setAccount(res);
-    });
+    const authService = this.props.modalData;
+
+    if(authService === 'peerplays'){
+      AuthService.unlinkPeerplaysAccount().then((account) => {
+        this.props.setAccount(account);
+        this.props.navigateToUpdateProfile();
+      });
+    } else {
+      const account = this.getUnlinkData();
+      ProfileService.updateProfile(account).then((res) => {
+        this.props.setAccount(res);
+      });
+    }
+
     this.handleClose();
   }
 
@@ -46,6 +57,13 @@ class UnlinkAccountModal extends Component {
   }
 
   render() {
+    const authService = this.props.modalData;
+
+    const peerplaysUnlinkWarning = () => {
+      return authService==='peerplays'?<p className='unlink-account-text__header-warning'>{translate('link.unlinkWarning')}</p>
+        : null;
+    };
+
     return (
       <div className='unlink-account__wrapper'>
         <div className='unlink-account'>
@@ -57,6 +75,7 @@ class UnlinkAccountModal extends Component {
           </div>
           <div className='unlink-account-text'>
             <p className='unlink-account-text__header'>{translate('link.unlinkHeader')}</p>
+            {peerplaysUnlinkWarning()}
           </div>
           <img onClick={ this.handleSubmit }className='unlink-account-button' src={ unlinkAccountButton } alt=''/>
           <span onClick={ ()=> console.log('placeholder terms & conditions') } className='unlink-account-text__terms' href=''><p >{translate('link.terms')}</p></span>
@@ -71,7 +90,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal,
     setModalData: ModalActions.setModalData,
-    setAccount: AccountActions.setAccountAction
+    setAccount: AccountActions.setAccountAction,
+    navigateToUpdateProfile: NavigateActions.navigateToUpdateProfile
   },
   dispatch
 );

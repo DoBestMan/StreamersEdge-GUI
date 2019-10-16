@@ -52,7 +52,7 @@ const Config = {
    * @type {string[]}
    * @memberof Config
    */
-  supportedPlatforms: ['twitch', 'google', 'facebook'],
+  supportedPlatforms: ['twitch', 'google', 'facebook', 'peerplays'],
   /**
    * Image upload file limitations.
    *

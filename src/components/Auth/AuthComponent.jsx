@@ -17,12 +17,14 @@ export function requireAuthentication(Component) {
 
     checkAuth() {
       if (!this.props.isLoggedIn && !!Config.requireAuthentication) {
+        console.log('inside if');
         let redirectAfterLogin = this.props.location.pathname;
         this.props.navigateToSignIn(redirectAfterLogin);
       }
     }
 
     render() {
+
       if (Config.requireAuthentication) {
         return this.props.isLoggedIn ? <Component { ...this.props } /> : null;
       } else {

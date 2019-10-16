@@ -34,6 +34,13 @@
       font-family: $lato;
       font-style: italic;
       font-size: 28px;
+
+      &-warning {
+        font-family: $lato;
+        font-style: italic;
+        font-size: 24px;
+        color: $dark-yellow;
+      }
     }
 
     &__terms {

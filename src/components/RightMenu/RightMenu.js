@@ -13,7 +13,7 @@ class RightMenu extends Component {
 
     this.state = {
       links: [
-        {title: trans('rightMenu.links.update'), href: '/update'},
+        {title: trans('rightMenu.links.update'), href: '/update-profile'},
         {title: trans('rightMenu.links.preferences'), href: '/preferences'},
         {title: trans('rightMenu.links.create'), href: '/create-challenge'}
       ]
