@@ -267,7 +267,6 @@ export const translationObject = {
       links: {
         update: 'Update Profile',
         preferences: 'Preferences',
-        link: 'Link Accounts',
         create: 'Create Challenge'
       },
       invite: {

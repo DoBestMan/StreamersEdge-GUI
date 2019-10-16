@@ -15,7 +15,6 @@ class RightMenu extends Component {
       links: [
         {title: trans('rightMenu.links.update'), href: '/update'},
         {title: trans('rightMenu.links.preferences'), href: '/preferences'},
-        {title: trans('rightMenu.links.link'), href: '/link'},
         {title: trans('rightMenu.links.create'), href: '/create-challenge'}
       ]
     };
