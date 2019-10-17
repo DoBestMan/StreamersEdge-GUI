@@ -132,7 +132,7 @@ class AppActions {
   static logout() {
     return (dispatch) => {
       dispatch(AppPrivateActions.logoutAction());
-      dispatch(NavigateActions.navigateToSignIn());
+      dispatch(NavigateActions.navigateToStreamersEdgeWebsite());
     };
   }
 

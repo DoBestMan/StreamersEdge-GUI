@@ -116,6 +116,16 @@ class NavigateActions {
       dispatch(push(Routes.UPDATE_PROFILE));
     };
   }
+
+  /**
+   * Navigate the streamersedge.com.
+   *
+   * @static
+   * @memberof NavigateActions
+   */
+  static navigateToStreamersEdgeWebsite() {
+    window.location.assign('https://streamersedge.com');
+  }
 }
 
 export default NavigateActions;
