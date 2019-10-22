@@ -6,6 +6,12 @@
     cursor: pointer;
   }
 
+  &__loader {
+    position: absolute;
+    top: 77px;
+    left: 95px;
+  }
+
   &__picture {
     position: absolute;
     top: 18px;
