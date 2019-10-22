@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux';
 import {AccountActions} from '../../actions';
 import {UploadFileTypes} from '../../constants';
 import classNames from 'classnames';
+import imageCompression from 'browser-image-compression';
 
 class ProfilePictureUpload extends Component {
   constructor(props) {
@@ -19,11 +20,27 @@ class ProfilePictureUpload extends Component {
     const file = event.target.files[0];
 
     if (!!file && this.isValidImage(file)) {
-      this.onUpload(file);
+      this.compressFile(file);
+    }
+  };
+
+  compressFile = async (file) => {
+    let options = {
+      maxSizeMB: 1, // (default: Number.POSITIVE_INFINITY)
+      maxWidthOrHeight: 800, // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+      useWebWorker: true // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+    };
+
+    try {
+      const compressedFile = await imageCompression(file, options);
+      this.onUpload(compressedFile);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   onUpload = (file) => {
+
     const data = new FormData();
     data.append('file', file);
 
