@@ -9,9 +9,8 @@ import {ProfileService} from '../../services';
 import {ModalActions, NavigateActions, AccountActions} from '../../actions';
 import {ModalTypes} from '../../constants';
 import {GenUtil, ValidationUtil} from '../../utility';
-import {PeerplaysIcon, YoutubeIcon, TwitchIcon, FacebookIcon, FortniteIcon, PubgIcon, LOL} from '../../assets/images/updateProfile';
+import {PeerplaysIcon, YoutubeIcon, TwitchIcon, FacebookIcon, FortniteIcon, PubgIcon, LOL, CancelButton} from '../../assets/images/updateProfile';
 import SaveButton from '../../assets/images/preferences/Save.png';
-import CancelButton from '../../assets/images/preferences/Cancel.png';
 const translate = GenUtil.translate;
 
 class UpdateProfile extends Component {

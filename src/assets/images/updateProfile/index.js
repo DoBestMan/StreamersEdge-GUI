@@ -8,7 +8,7 @@ import FacebookIcon from './Facebook.svg';
 import FortniteIcon from './Fortnite 5@2x.png';
 import PubgIcon from './Pubg.svg';
 import LOL from './Lol 5@2x.png';
-
+import CancelButton from './CancelButton.svg';
 export {
   PeerplaysIcon,
   TwitchIcon,
@@ -19,5 +19,6 @@ export {
   PubgIcon,
   FortniteIcon,
   FacebookIcon,
-  YoutubeIcon
+  YoutubeIcon,
+  CancelButton
 };
