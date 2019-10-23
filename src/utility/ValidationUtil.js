@@ -55,6 +55,32 @@ const PrivateValidationUtils = {
   },
 
   /**
+   * Validate string to see if it is empty.
+   *
+   * @param {string} string - Email to validate.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
+   * @memberof PrivateValidationUtil
+   */
+  emptyString(string) {
+
+    const emptyStringRegex = /^$|\s+/g;
+    let noEmptyString = true;
+
+    if(emptyStringRegex.test(string)) {
+      noEmptyString = false;
+    }
+
+    const errorBoxUsernameValidation = [
+      {errorString: translate('errors.username.requirement.noBlankUsername'), success: noEmptyString}
+    ];
+
+    return {
+      errors: errorBoxUsernameValidation,
+      success: errorBoxUsernameValidation.filter((err) => !err.success).length <= 0
+    };
+  },
+
+  /**
    * Validate an email.
    *
    * @param {string} email - Email to validate.
@@ -451,6 +477,17 @@ const ValidationUtil = {
    */
   challengeName(string) {
     return PrivateValidationUtils.challengeName(string);
+  },
+
+  /**
+   * Validate string to see if it is empty.
+   *
+   * @param {string} string - Email to validate.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
+   * @memberof PrivateValidationUtil
+   */
+  emptyString(string) {
+    return PrivateValidationUtils.emptyString(string);
   }
 };
 

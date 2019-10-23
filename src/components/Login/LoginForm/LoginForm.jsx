@@ -110,13 +110,13 @@ class LoginForm extends Component {
               iconRightActive={ InvalidIcon }
               isValid={ () => {
                 if (this.state.isUsernameClicked) {
-                  return ValidationUtil.seUsername(this.state.username).success;
+                  return ValidationUtil.emptyString(this.state.username).success;
                 } else {
                   return true;
                 }
               }  }
               handleRightIconClick={ () => {
-                return  ValidationUtil.seUsername(this.state.username).errors;
+                return  ValidationUtil.emptyString(this.state.username).errors;
               } }
             />
           </FormControl>
@@ -132,17 +132,6 @@ class LoginForm extends Component {
               handleChange={ this.handlePasswordChange }
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
-              iconRightActive={ InvalidIcon }
-              isValid={ () => {
-                if (this.state.isPasswordClicked) {
-                  return ValidationUtil.sePassword(this.state.password).success;
-                } else {
-                  return true;
-                }
-              }  }
-              handleRightIconClick={ () => {
-                return  ValidationUtil.sePassword(this.state.password).errors;
-              } }
             />
           </FormControl>
           <span className='login-form__apiTxt--error'>{this.props.errorText}</span>
