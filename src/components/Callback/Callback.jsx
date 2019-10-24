@@ -55,14 +55,6 @@ class Callback extends Component {
         this.props.navigateToPasswordReset(pathAry[3]);
         break;
       case 'profile':
-        ProfileService.getProfile().then((account) => {
-          this.props.setAccount(account);
-          this.props.navigateToDashboard();
-        }).catch((err) => {
-          this.setState({
-            error: err
-          });
-        });
         break;
       case 'login':
         ProfileService.getProfile().then((account) => {
@@ -76,19 +68,16 @@ class Callback extends Component {
         });
         break;
       case 'update-profile':
+        break;
+      default:
         ProfileService.getProfile().then((account) => {
           this.props.setAccount(account);
-          this.props.navigateToUpdateProfile();
+          this.props.navigateToDashboard();
         }).catch((err) => {
           this.setState({
             error: err
           });
         });
-        break;
-
-      default:
-        // an error occurred.
-        console.warn('Error - unidentified callback');
         break;
     }
   };
