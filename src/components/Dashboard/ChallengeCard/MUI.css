@@ -1,0 +1,18 @@
+
+.card {
+  max-width: 588px;
+  filter: brightness(66%);
+}
+
+.cardCarousel {
+  max-width: 1286px;
+  height: 723px;
+  filter: brightness(100%);
+}
+
+.cardCarouselMain {
+  width: 1498px;
+  max-width: 1498px;
+  height: 764.74px;
+  filter: brightness(100%);
+}

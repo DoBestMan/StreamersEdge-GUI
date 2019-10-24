@@ -90,7 +90,7 @@ const PrivateValidationUtils = {
   email(email) {
     let regex = /(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/;
 
-    const validEmailDomain = email.length > 0 ? this.emailDomain(email) : false;
+    const validEmailDomain = email.length > 0 ? this.emailDomain(email) : false;;
     let validEmail = true;
 
     if (!regex.test(email)) {

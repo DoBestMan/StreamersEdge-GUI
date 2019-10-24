@@ -176,10 +176,24 @@ export const translationObject = {
         desc: 'Streamers Edge Rivals brings streamers and esports together! Competitors in the Streamers Edge Rivals Fortnite Showdown will compete against each other numerous game modes: FFA, ' +
         'Skirmish and Horde mode.'
       },
+      genres: {
+        shooter: 'SHOOTER',
+        strategy: 'STRATEGY'
+      },
+      games: {
+        fortnite: 'Fortnite',
+        pubg: 'Pubg',
+        lol: 'Lol'
+      },
       recommended: 'Recommended',
       streams: 'Live Streams',
+      category: 'Category: ',
       categories: 'Categories',
-      challenges: 'Challenges'
+      challenges: 'Challenges',
+      streaming: 'STREAMING',
+      accepted: 'ACCEPTED',
+      join: 'JOIN',
+      susd: 'sUSD'
     },
     previewCard: {
       status: {

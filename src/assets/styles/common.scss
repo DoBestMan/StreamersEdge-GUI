@@ -27,9 +27,10 @@ html, body {
 
   &-content {
     width: 100%;
+    max-width: 100vw;
     height: calc(100vh - 105px);
     transition: all .5s;
-    overflow: auto;
+    overflow: overlay;
 
     &__open-left {
       width: calc(100% - 405px);
@@ -77,6 +78,23 @@ html, body {
       background-image: linear-gradient($gray, $white);
     }
   }
+
+  &-empty {
+    &--top, &--bottom {
+      height: 20px;
+      background: $app-bg-secondary;
+    }
+
+    &--top {
+      margin-top: 20px;
+      border-radius: 15px 15px 0 0;
+    }
+
+    &--bottom {
+      margin-bottom: 20px;
+      border-radius: 0 0 15px 15px;
+    }
+  }
 }
 
 /* Change Autocomplete styles in Chrome*/
@@ -116,6 +134,13 @@ select:-webkit-autofill:focus {
 
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+::-webkit-scrollbar, ::-webkit-scrollbar-corner {
+  background: #151924;
+  -webkit-box-shadow: inset 2px 0 2px 0 rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 2px 0 2px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: inset 2px 0 2px 0 rgba(0, 0, 0, 0.75);
 }
 
 //remove number dial for number textfield inputs

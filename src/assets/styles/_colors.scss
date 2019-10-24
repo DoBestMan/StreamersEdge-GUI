@@ -1,5 +1,8 @@
 
 // Declare color constants with rgb() and comment at end of line with their hex equivalent.
+$app-bg-primary: rgb(7, 9, 12); // 07090c
+$app-bg-secondary: #151924; // 151924
+
 $black: rgb(0, 0, 0); // 000000
 $black-blue: rgb(1, 0, 42); // 01002a
 $brighter-gray: rgb(136, 136, 136); // 888888
@@ -49,7 +52,13 @@ $update-profile__gradient-dark: radial-gradient(#f2f0ff, #020433);
 
 $dashboard__header-main: rgb(61, 168, 244); // 3da8f4
 $dashboard__header-streams: $red;
-$dashboard__header-challenges: rgb(0, 255, 0); // 00ff00
+$dashboard__header-challenges: rgb(0, 255, 0);
+$dashboard__header-bar-bg-clr: rgb(30, 34, 45); // 1e222d
+$dashboard-red: rgb(194, 39, 45); // c2272d
+$dashboard-blue: rgb(51, 153, 254); // 3399fe
+$dashboard-green: rgb(7, 224, 183); // 07e0b7
+$dashboard-card-border: rgba(5, 6, 9, 1);
+$dashboard-paginate-dark: rgba(29, 34, 46, 1);
 
 $report__submit-gradient: linear-gradient(rgb(163, 0, 0), rgb(179, 5, 0), rgb(222, 21, 0), rgb(255, 33, 0));
 

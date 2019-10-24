@@ -4,3 +4,7 @@
   background-image: linear-gradient($blue, $blue-dark, $blue-darkest);
   background-attachment: fixed;
 }
+
+@mixin dashboard-txt-shadow {
+  text-shadow: -0.5px -0.5px 0 #000000, 0.5px -0.5px 0 #000000, -0.5px 0.5px 0 #000000, 0.5px 0.5px 0 #000000;
+}

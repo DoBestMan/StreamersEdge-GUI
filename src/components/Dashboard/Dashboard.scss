@@ -1,23 +1,70 @@
 @import '../../assets/styles/common';
 
 .dashboard {
-  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 1920px;
+  background: $app-bg-primary;
+
+  &__card {
+    width: 285px;
+    height: 380px;
+    margin-right: 20px;
+
+    &-genre {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      padding: 2px;
+      border: 3px solid #10131c;
+      border-radius: 4px;
+      font-family: $lato;
+      font-size: 10px;
+      color: white;
+      background: #1d222e 0% 0% no-repeat padding-box;
+    }
+
+    &-overlay {
+      position: absolute;
+      bottom: 35px;
+      left: 20px;
+      font-family: $lato;
+      font-weight: 700;
+      font-size: 25px;
+      color: white;
+      text-shadow: -0.5px -0.5px 0 #000000, 0.5px -0.5px 0 #000000, -0.5px 0.5px 0 #000000, 0.5px 0.5px 0 #000000;
+
+      &--dark {
+        @extend .dashboard__card-overlay;
+
+        color: black;
+      }
+    }
+
+    &-container {
+      display: flex;
+      flex-direction: row;
+      margin: 40px 0 40px 90px;
+    }
+  }
 
   &__carousel {
-    height: 620px;
-    background: $dashboard__carousel-gradient;
+    display: flex;
+    max-width: 1920px;
+    margin: auto;
+    background: $app-bg-primary;
   }
 
   &__header {
-    display: flow-root;
     width: 100%;
+    border-radius: 15px 15px 0 0;
     line-height: $dashboard__header-height;
-    background: linear-gradient($blue, $blue-darkest);
+    background: $app-bg-secondary;
 
     &-txt {
       margin-left: 87px;
       font-family: $lato;
-      font-size: $dashboard__header;
+      font-size: $dashboard__header-category;
 
       .streams, .categories, .challenges {
         font-family: $lato;
@@ -25,28 +72,60 @@
       }
 
       .streams {
-        color: $dashboard__header-streams;
+        color: $dashboard-red;
       }
 
       .categories {
-        color: $dashboard__header-main;
+        color: $dashboard-blue;
       }
 
       .challenges {
-        color: $dashboard__header-challenges;
+        color: $dashboard-green;
+      }
+    }
+
+    &-bar {
+      width: 90%;
+      height: 5px;
+      margin: auto;
+      border-radius: 20px;
+      background: $dashboard__header-bar-bg-clr;
+
+      &--red, &--blue, &--green {
+        width: 250px;
+        height: 5px;
+        border-radius: 20px;
+      }
+
+      &--red {
+        background: $dashboard-red;
+      }
+
+      &--blue {
+        background: $dashboard-blue;
+      }
+
+      &--green {
+        background: $dashboard-green;
       }
     }
   }
 
   &__streams, &__categories, &__challenges {
-    height: 431px;
-    background: $dashboard__recommend-gradient;
+    display: flex;
+    margin-bottom: 40px;
+    border: 1px solid #707070;
+    border-radius: 10px;
+    background: $app-bg-secondary;
+    box-shadow: 0 3px 60px rgba(0, 0, 0, 0.345);
   }
 
   &__view-more {
     display: block;
     float: right;
     margin-right: 87px;
+    margin-bottom: 5px;
+    cursor: pointer;
 
     &-img {
       vertical-align: middle;

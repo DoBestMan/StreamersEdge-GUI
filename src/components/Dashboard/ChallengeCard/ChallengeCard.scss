@@ -1,0 +1,230 @@
+@import '../../../assets/styles/common';
+
+[class^=challenge-card] {
+  font-family: $lato;
+}
+
+.challenge-bold {
+  font-weight: 700;
+}
+
+.challenge-card {
+  display: flex;
+  flex-direction: column;
+
+  &__main, &__date, &__reward {
+    @include dashboard-txt-shadow;
+  }
+
+  &__main {
+    @extend .challenge-bold;
+
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+    font-size: 15px;
+    color: $white;
+
+    &-carousel {
+      @extend .challenge-card__main;
+
+      font-size: 36px;
+    }
+  }
+
+  &__tag-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 79px;
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    margin: 0 0 0 13px;
+    padding: 0 8px;
+    border: 3px solid #10131c;
+    border-radius: 4px;
+    font-size: 12px;
+    background: $dashboard-paginate-dark;
+
+    &.streaming {
+      margin-left: 2.85%;
+    }
+
+    &-main, &-type {
+      @extend .challenge-card__tag;
+    }
+
+    &-main {
+      height: 45px;
+      font-size: 19px;
+    }
+
+    &-type {
+      margin: 0;
+      padding: 3px;
+      border: none;
+      color: rgba(255, 255, 255, 0.5);
+      background: none;
+
+      &-main {
+        @extend .challenge-card__tag-type;
+
+        margin-left: 4px;
+        font-size: 19px;
+      }
+    }
+
+    &-join {
+      margin: 8px 15px;
+
+      &-minor {
+        margin: 8px 25px;
+        font-size: 19px;
+      }
+    }
+
+    &-category {
+      @extend .challenge-bold;
+
+      margin: 0 2.3% 0 auto;
+      line-height: 59px;
+      font-size: 14px;
+      color: rgb(134, 135, 135);
+
+      &-main {
+        @extend .challenge-card__tag-category;
+
+        line-height: 79px;
+        font-size: 22px;
+      }
+
+      &--green {
+        color: rgb(7, 240, 195);
+      }
+    }
+  }
+
+  &__panel {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    background-color: $red;
+  }
+
+  &__date {
+    @extend .challenge-bold;
+
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    font-size: 12px;
+    color: silver;
+
+    &-carousel {
+      @extend .challenge-card__date;
+
+      margin-bottom: -10px;
+      padding: 6px 10px;
+      border-radius: 111px;
+      font-size: 16px;
+      color: black;
+      background: rgb(251, 176, 59);
+      text-shadow: none;
+    }
+  }
+
+  &__reward {
+    @extend .challenge-bold;
+
+    display: inline-flex;
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    line-height: 35px;
+    font-size: 15px;
+    color: $white;
+
+    &-carousel {
+      @extend .challenge-card__reward;
+
+      left: 1145px;
+    }
+  }
+
+  &__icon {
+    height: 15px;
+    margin-right: 5px;
+  }
+
+  &__join {
+    @extend .challenge-bold;
+
+    display: inline-flex;
+    position: absolute;
+    top: 25px;
+    left: 1px;
+    line-height: 35px;
+    font-size: 30px;
+    color: $white;
+    background-color: #00bf9a;
+
+    &-minor {
+      @extend .challenge-card__join;
+
+      position: inherit;
+      width: 97px;
+      height: 51px;
+      border: 3px solid #008269;
+      border-radius: 15px 15px 0 0;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 40px 0 40px 90px;
+  }
+
+  &__media {
+    width: 1286px;
+    height: 723px;
+    margin: 0 20px 20px 0;
+    border: 3px solid $dashboard-card-border;
+    border-radius: 0 0 5px 5px;
+    background-color: $dashboard-paginate-dark;
+
+    &-main {
+      width: 1498px;
+      height: 844px;
+      margin: 0 20px 20px 0;
+      border: 3px solid $dashboard-card-border;
+      border-radius: 6px;
+      background-color: $dashboard-paginate-dark;
+    }
+  }
+
+  &__card {
+    width: 587px;
+    height: 398px;
+    margin: 0 13px 63px 0;
+    border: 3px solid $dashboard-card-border;
+    border-radius: 6px;
+    background-color: $dashboard-paginate-dark;
+
+    &-genre {
+      position: absolute;
+      bottom: 5px;
+      left: 20px;
+      border: 3px solid #10131c;
+      border-radius: 4px;
+      font-size: 10px;
+      color: $white;
+      background: $dashboard-paginate-dark;
+    }
+  }
+}

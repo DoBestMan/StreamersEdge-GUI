@@ -5,6 +5,7 @@ import PeerplaysAuthUtil from './PeerplaysAuthUtil';
 import StorageUtil from './StorageUtil';
 import ValidationUtil from './ValidationUtil';
 import TokenUtil from './TokenUtil';
+import ChallengeUtil from './ChallengeUtil';
 
 export {
   AuthUtil,
@@ -13,5 +14,6 @@ export {
   PeerplaysAuthUtil,
   StorageUtil,
   ValidationUtil,
-  TokenUtil
+  TokenUtil,
+  ChallengeUtil
 };
