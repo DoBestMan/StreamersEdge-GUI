@@ -75,7 +75,7 @@ export const translationObject = {
         sUSD: 'sUSD',
         searchUsersPlaceholder: 'Search users - Begin typing username',
         searchGamesPlaceholder: 'Search games - Begin typing game',
-        bountyPlaceholder: '10,000',
+        bountyPlaceholder: '0',
         errors: {
           user: {
             alreadyAdded: 'User already added',
