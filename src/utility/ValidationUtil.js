@@ -29,7 +29,7 @@ const PrivateValidationUtils = {
       beginsWithLetter = true;
     }
 
-    if (uppercaseRegex.test(username[0])) {
+    if (uppercaseRegex.test(username)) {
       uppercasePresent = false;
     }
 
