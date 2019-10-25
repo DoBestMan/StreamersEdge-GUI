@@ -66,7 +66,6 @@ class UserInfo extends Component {
           </div>
           <div className='user-info__avatar'>
             <ProfilePictureUpload />
-            <span className='user-info__avatar-label'>{translate('updateProfile.userInfo.avatar')}</span>
           </div>
         </CardContent>
       </Card>

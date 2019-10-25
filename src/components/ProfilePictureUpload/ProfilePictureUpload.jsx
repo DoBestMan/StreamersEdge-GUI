@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {profileDefault, profileDefaultActive, avatarFrame} from '../../assets/images/avatar';
-import {ValidationUtil, StorageUtil} from '../../utility';
+import {ValidationUtil, StorageUtil, GenUtil} from '../../utility';
 import {ProfileService} from '../../services';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -9,20 +9,25 @@ import {UploadFileTypes} from '../../constants';
 import classNames from 'classnames';
 import imageCompression from 'browser-image-compression';
 import CircularProgress from '@material-ui/core/CircularProgress';
+const translate = GenUtil.translate;
 
 class ProfilePictureUpload extends Component {
   state = {
     avatar: this.props.avatar ? this.props.avatar : profileDefault,
     frame: avatarFrame,
-    loading: false
+    loading: false,
+    errorMessage: ''
   };
 
   onChooseFile = (event) => {
-    this.setState({loading: true});
     const file = event.target.files[0];
 
-    if (!!file && this.isValidImage(file)) {
-      this.compressFile(file);
+    if (!!file) {
+      this.setState({loading: true});
+
+      if (this.isValidImage(file)) {
+        this.compressFile(file);
+      }
     }
   };
 
@@ -37,7 +42,10 @@ class ProfilePictureUpload extends Component {
       const compressedFile = await imageCompression(file, options);
       this.onUpload(compressedFile);
     } catch (error) {
-      console.log(error);
+      this.setState({
+        loading: false,
+        errorMessage: error
+      });
     }
   };
 
@@ -49,13 +57,17 @@ class ProfilePictureUpload extends Component {
       .then((profile) => {
         this.props.setAccount(profile);
         this.setState({
-          avatar: profile.avatar
+          avatar: profile.avatar,
+          errorMessage: ''
         });
         StorageUtil.set('se-user', JSON.stringify(profile));
-        this.setState({loading: false});
+        this.setState({loading: false, showErrorText: false});
       })
       .catch((err) => {
-        console.error(err);
+        this.setState({
+          loading: false,
+          errorMessage: err
+        });
       });
   };
 
@@ -63,12 +75,17 @@ class ProfilePictureUpload extends Component {
     const err = ValidationUtil.imageUpload(file, UploadFileTypes.IMAGE.PROFILE);
 
     if (err) {
-      !!this.props.error ? this.props.error(err) : console.error(err);
+      this.setState({
+        loading: false,
+        errorMessage: err
+      });
+      this.render();
       return false;
     } else {
+      this.setState({errorMessage: ''});
       return true;
     }
-  }
+  };
 
   mouseOver = () => {
     if (this.props.avatar) {
@@ -111,8 +128,14 @@ class ProfilePictureUpload extends Component {
             }
           </label>
         </div>
-
         <input className='image__upload ' id='file-input' type='file' onChange={ this.onChooseFile } />
+
+        <div className='profile__upload-avatar'>
+          <span className='profile__upload-avatar-label'>{translate('updateProfile.userInfo.avatar')}</span>
+          <span className='profile__upload-img-text'>{this.state.errorMessage}</span>
+        </div>
+
+
       </>
     );
   }

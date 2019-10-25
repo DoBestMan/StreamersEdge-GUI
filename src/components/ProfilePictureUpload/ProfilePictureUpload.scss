@@ -1,3 +1,5 @@
+@import '../../assets/styles/common';
+
 .profile {
   &__frame {
     position: relative;
@@ -28,6 +30,37 @@
     width: 230px;
     height: 190px;
     margin: 0 auto;
+  }
+
+  &__upload {
+    &-img-text {
+      top: 100%;
+      left: 0;
+      width: 298px;
+      height: 16px;
+      margin: auto;
+      font-size: 16px;
+      color: $red;
+    }
+
+    &-avatar {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+      text-align: center;
+
+      &-label {
+        display: block;
+        font-family: $lato;
+        font-style: Italic;
+        font-size: 23px;
+        color: $white;
+        text-align: center;
+        opacity: 1;
+        letter-spacing: 0;
+      }
+    }
   }
 }
 

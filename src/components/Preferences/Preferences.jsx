@@ -40,6 +40,7 @@ class Preferences extends Component {
   }
 
   componentDidMount = () => {
+
     AuthService.getUserList().then((res) => {
       this.setState({userList: res});
     });
