@@ -131,7 +131,7 @@ class InvitesForm extends Component {
                       }
                     } }
                   />
-                  <p className='bounty__text'> { translate('preferences.invites.ppy') } </p>
+                  <p className='bounty__text'> { translate('preferences.invites.sUSD') } </p>
                 </div>
               )}
             </FormControl>

@@ -72,6 +72,7 @@ export const translationObject = {
         option4: 'Don\'t receive invites from anyone',
         bounty: 'Minimum bounty for invite',
         ppy: 'PPY',
+        sUSD: 'sUSD',
         searchUsersPlaceholder: 'Search users - Begin typing username',
         searchGamesPlaceholder: 'Search games - Begin typing game',
         bountyPlaceholder: '10,000',
