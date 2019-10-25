@@ -77,12 +77,12 @@ export const translationObject = {
         bountyPlaceholder: '10,000',
         errors: {
           user: {
-            alreadyAdded: 'user already added',
-            notFound: 'user not found'
+            alreadyAdded: 'User already added',
+            notFound: 'User not found'
           },
           game: {
-            alreadyAdded: 'game already added',
-            notFound: 'game not found'
+            alreadyAdded: 'Game already added',
+            notFound: 'Game not found'
           }
         }
       },
