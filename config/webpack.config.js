@@ -7,6 +7,9 @@ const chalk = require('chalk');
 const path = require('path');
 const getClientEnvironment = require('./env');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -49,6 +52,17 @@ var plugins = [
         "**/*.js",
         "**/*.jsx"
       ]
+  }),
+  new MiniCssExtractPlugin({
+    filename: devMode ? ' [name].css' : '[name].[hash].css',
+    chunkFilename:devMode ? '[id].css' : '[id].[hash].css'
+  }),
+  new OptimizeCssAssetsPlugin({
+    cssProcessor: require('cssnano'),
+    cssProcessorPluginOptions: {
+      preset: ['default', { discardComments: { removeAll: true } }],
+    },
+    canPrint: true
   })
 ];
 
@@ -68,13 +82,24 @@ module.exports = {
         test: /\.scss$/,
         use: [
           'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              publicPath: '../',
+              hmr: process.env.NODE_ENV === 'development',
+            }
+          },
           'css-loader',
           {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
               plugins: [
-                require('postcss-import')()
+                require('postcss-import')(),
+                // Polyfills to support multiple browsers based on hbrowserslist in package.json
+                require('postcss-preset-env')()
               ]
             }
           }, 'sass-loader'
@@ -122,6 +147,19 @@ module.exports = {
     filename: 'static/js/bundle.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+      chunks: 'all'
+    }
   },
   plugins: plugins
 };
