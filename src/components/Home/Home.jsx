@@ -12,7 +12,6 @@ class Home extends Component {
     ProfileService.getProfile().then((profile) => {
       this.props.setAccount(profile);
       this.props.setLoggedIn(true);
-      this.props.history.push('/dashboard');
     });
   }
 
