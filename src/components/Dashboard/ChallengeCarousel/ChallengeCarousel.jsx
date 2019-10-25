@@ -64,7 +64,7 @@ class ChallengeCarousel extends Component {
 
   render() {
 
-    if (this.props.challenges) {
+    if (this.props.challenges.length > 0) {
       return (
         <div className='dashboard__carousel'>
           <button className='carousel__button-left' onClick={ this.handlePrev }>
@@ -77,6 +77,8 @@ class ChallengeCarousel extends Component {
         </div>
       );
     }
+
+    return null;
   }
 }
 

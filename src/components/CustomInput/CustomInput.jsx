@@ -122,7 +122,8 @@ class CustomInput extends Component {
       wrapperClassName,
       iconLeft,
       iconRight,
-      iconRightWrapperClassName
+      iconRightWrapperClassName,
+      isInputActive: false
     });
 
     this.props.resetHandler();

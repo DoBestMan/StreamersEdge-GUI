@@ -35,6 +35,7 @@ class RegisterForm extends Component {
       isConfirmPasswordConfirmed: false,
       isUsernameInputClicked: false,
       isEmailInputClicked: false,
+      resetToDefault: false,
       errors: {
         email: '',
         username: '',
@@ -79,7 +80,18 @@ class RegisterForm extends Component {
         this.setState({
           errText: '',
           resultText: translate('register.responses.confirmSent'),
-          registerDisabled: false
+          registerDisabled: false,
+          resetToDefault: true,
+
+          // Clear Form Data
+          email: '',
+          username: '',
+          password: '',
+          confirmPassword: '',
+          isPasswordInputClicked: false,
+          isConfirmPasswordConfirmed: false,
+          isUsernameInputClicked: false,
+          isEmailInputClicked: false
         });
       })
       .catch((e) => {
@@ -122,6 +134,10 @@ class RegisterForm extends Component {
       confirmPassword: password,
       isConfirmPasswordConfirmed: true
     }, () => this.validate('confirmPassword'));
+  }
+
+  resetHandler = () => {
+    this.setState({resetToDefault: false});
   }
 
   validate = (type) => {
@@ -178,6 +194,8 @@ class RegisterForm extends Component {
               iconLeft={ EmailIcon }
               iconLeftActive={ EmailIconActive }
               iconRightActive={ InvalidIcon }
+              resetToDefault={ this.state.resetToDefault }
+              resetHandler={ this.resetHandler }
               handleRightIconClick={ () => {
                 return  ValidationUtil.seEmail(this.state.email).errors;
               } }
@@ -201,6 +219,8 @@ class RegisterForm extends Component {
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
               iconRightActive={ InvalidIcon }
+              resetToDefault={ this.state.resetToDefault }
+              resetHandler={ this.resetHandler }
               handleRightIconClick={ () => {
                 return  ValidationUtil.sePassword(this.state.password).errors;
               } }
@@ -225,6 +245,8 @@ class RegisterForm extends Component {
               iconLeft={ IconPassword }
               iconLeftActive={ IconPasswordActive }
               iconRightActive={ InvalidIcon }
+              resetToDefault={ this.state.resetToDefault }
+              resetHandler={ this.resetHandler }
               handleRightIconClick={ () => {
                 return  ValidationUtil.seConfirmPassword(this.state.password, this.state.confirmPassword).errors;
               } }
@@ -250,6 +272,8 @@ class RegisterForm extends Component {
               handleRightIconClick={ () => {
                 return  ValidationUtil.seUsername(this.state.username).errors;
               } }
+              resetToDefault={ this.state.resetToDefault }
+              resetHandler={ this.resetHandler }
               isValid={ () => {
                 if (this.state.isUsernameInputClicked) {
                   return ValidationUtil.seUsername(this.state.username).success;
