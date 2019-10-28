@@ -57,21 +57,13 @@ class Callback extends Component {
       case 'profile':
         break;
       case 'login':
-        ProfileService.getProfile().then((account) => {
-          this.props.setAccount(account);
-          this.props.setLoggedIn(true);
-          this.props.navigateToDashboard();
-        }).catch((err) => {
-          this.setState({
-            error: err
-          });
-        });
         break;
       case 'update-profile':
         break;
       default:
         ProfileService.getProfile().then((account) => {
           this.props.setAccount(account);
+          this.props.setLoggedIn(true);
           this.props.navigateToDashboard();
         }).catch((err) => {
           this.setState({
