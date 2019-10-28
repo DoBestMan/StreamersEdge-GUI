@@ -66,9 +66,11 @@ class ReportUser extends Component {
             <FormControl className='report-form__radioGroup' margin='normal' required fullWidth>
               <span className='report-form__subTitle'>{translate('reportUser.selectableReasons')}</span>
               <RadioGroup
+                m={ 0 }
+                p={ 0 }
                 aria-label='report type'
                 name='reportType'
-                className={ 'radio-group' }
+                className={ classes.reportOptions }
                 value={ this.state.reportType }
                 defaultValue='1'
                 onChange={ this.handleChange }
