@@ -43,7 +43,7 @@ class Callback extends Component {
       case 'change-email':
         ProfileService.changeEmail(pathAry[3])
           .then(() => {
-            this.props.navigateToCreateProfile('1');
+            this.props.navigateToDashboard();
           })
           .catch((err) => {
             this.setState({
