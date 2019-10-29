@@ -8,13 +8,15 @@ import {translate} from '../../../../src/utility/GeneralUtils';
 import Add from '../../../assets/images/preferences/Add.png';
 import Close from '../../../assets/images/preferences/X.png';
 import Close_Over from '../../../assets/images/preferences/X_Over.png';
+import {AuthService} from '../../../services';
 
 class SearchForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchQuery: ''
+      searchQuery: '',
+      list : []
     };
   }
 
@@ -23,14 +25,28 @@ class SearchForm extends Component {
   }
 
   handleChangeQuery = (e) => {
+    let username = e.target.value;
+
+    if(username.length >=3 ){
+      AuthService.getUserList(username).then((res) => {
+        let userList = [];
+
+        for(let key in res){
+          userList.push(res[key].username);
+        }
+
+        this.setState({list: userList});
+      });
+    }
+
     this.setState({
-      searchQuery: e.target.value
+      searchQuery: username
     });
   }
 
   addUser = () => {
-    const {searchQuery} = this.state;
-    const {list, whiteList, addToList, setError, type} = this.props;
+    const {searchQuery, list} = this.state;
+    const {whiteList, addToList, setError, type} = this.props;
 
     let exists= list.includes(searchQuery);
 

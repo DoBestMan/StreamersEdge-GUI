@@ -287,9 +287,10 @@ class PrivateAuthService {
    *
    * @static
    * @returns {number} A promise indicating success by listing user objects.
+   * @param {string} search - String.
    * @memberof PrivateAuthService
    */
-  static getUserList() {
+  static getUserList(search = '') {
     let response;
     const query = `${apiRoot}api/v1/users`;
     return new Promise(async (resolve, reject) => {
@@ -301,7 +302,7 @@ class PrivateAuthService {
 
       const parameters = {params:
         {
-          search: '',
+          search: search,
           limit: Config.userSearchLimit
         }
       };
@@ -423,11 +424,12 @@ class AuthService {
    * Calls the users API to obtain a full list of every user in the app, up to the limit parameter provided.
    *
    * @static
-   * @returns {number} Returns getUserList promise wrapped in dummy data wrapper function.
+   * @returns {Promise} Returns getUserList promise wrapped in dummy data wrapper function.
+   * @param {string} search - String.
    * @memberof AuthService
    */
-  static getUserList() {
-    return GenUtil.dummyDataWrapper(PrivateAuthService.getUserList());
+  static getUserList(search) {
+    return GenUtil.dummyDataWrapper(PrivateAuthService.getUserList(search));
   }
 
   /**

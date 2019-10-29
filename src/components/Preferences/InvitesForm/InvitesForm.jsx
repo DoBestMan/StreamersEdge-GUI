@@ -85,7 +85,6 @@ class InvitesForm extends Component {
                         type='user'
                         classes={ classes }
                         errors={ errors }
-                        list={ this.getUsernameList() }
                         whiteList={ userWhiteList }
                         addToList={ addUser }
                         removeFromList={ removeUser }
