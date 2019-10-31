@@ -44,7 +44,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="TokenUtil.html">TokenUtil</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ChallengeActions.html">ChallengeActions</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="PrivateAuthService.html">PrivateAuthService</a></li><li><a href="PrivateProfileService.html">PrivateProfileService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li><li><a href="StreamService.StreamService.html">StreamService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dummyDataWrapper">dummyDataWrapper</a></li><li><a href="global.html#translate">translate</a></li></ul></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="TokenUtil.html">TokenUtil</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ChallengeActions.html">ChallengeActions</a></li><li><a href="ChallengeUtil.html">ChallengeUtil</a></li><li><a href="ErrorBoxActions.html">ErrorBoxActions</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysActions.html">PeerplaysActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="PrivateAuthService.html">PrivateAuthService</a></li><li><a href="PrivateProfileService.html">PrivateProfileService</a></li><li><a href="PrivateUserService.html">PrivateUserService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li><li><a href="StreamService.StreamService.html">StreamService</a></li><li><a href="UserSerivce.html">UserSerivce</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dummyDataWrapper">dummyDataWrapper</a></li><li><a href="global.html#listenChainStore">listenChainStore</a></li><li><a href="global.html#translate">translate</a></li><li><a href="global.html#updateChainStore">updateChainStore</a></li></ul></div>
                     </nav>
                 </div>
             </div>
@@ -66,89 +66,109 @@
 import Config from '../utility/Config';
 import {UploadFileTypes} from '../constants';
 import supportedEmailDomains from '../assets/locales/SupportedEmailDomains.txt';
+import {EOL} from 'os';
 
 const PrivateValidationUtils = {
   /**
    * Validate a Streamers Edge username.
    *
-   * @param {string} value - Value to validate.
+   * @param {string} username - Username to validate.
    * @returns {string} Error if one is found.
    * @memberof PrivateValidationUtil
    */
-  seUsername(value) {
-    var label = void 0;
-    var ref = void 0;
-    var prefix = void 0;
+  seUsername(username) {
+    const length = username.length;
+    const lowercaseRegex = /[a-z]/g;
+    const uppercaseRegex = /[A-Z]/g;
+    const digitOrLetterRegex = /[0-9a-z]/g;
+    const digitLetterHyphenRegex = /[^0-9a-zA-Z-]/g;
 
-    prefix = translate('errors.username.prefix1');
+    let beginsWithLetter = false, endsWithLetterOrDigit = false, containsOnlyNumberDigitHyphens = true, uppercasePresent = true, validLength=false;
 
-    var length = value.length;
-    let error = null;
-
-    if (length === 0) {
-      error = prefix + translate('errors.username.notEmpty');
+    if (length >= 3 &amp;&amp; length &lt;=60) {
+      validLength = true;
     }
 
-    if (length &lt; 3) {
-      error = prefix + translate('errors.username.longer');
+    if (lowercaseRegex.test(username[0])) {
+      beginsWithLetter = true;
     }
 
-    if (length > 63) {
-      error = prefix + translate('errors.username.shorter');
+    if (uppercaseRegex.test(username)) {
+      uppercasePresent = false;
     }
 
-    if (/\./.test(value)) {
-      prefix = translate('errors.username.prefix2');
+    if(digitOrLetterRegex.test(username[length-1])){
+      endsWithLetterOrDigit = true;
     }
 
-    ref = value.split('.');
-
-    for (var i = 0, len = ref.length; i &lt; len; i++) {
-      label = ref[i];
-
-      if (!/^[~a-z]/.test(label)) {
-        error = prefix + translate('errors.username.startLetter');
-      }
-
-      if (!/^[~a-z0-9-]*$/.test(label)) {
-        error = prefix + translate('errors.username.lettersDigitsDashes');
-      }
-
-      if (/--/.test(label)) {
-        error = prefix + translate('errors.username.oneDash');
-      }
-
-      if (!/[a-z0-9]$/.test(label)) {
-        error = prefix + translate('errors.username.endAlphanumeric');
-      }
-
-      if (!(label.length >= 3)) {
-        error = prefix + translate('errors.username.longer');
-      }
+    if(digitLetterHyphenRegex.test(username)){
+      containsOnlyNumberDigitHyphens = false;
     }
 
-    return error;
+    const errorBoxUsernameValidation = [
+      {errorString: translate('errors.username.requirement.length'), success: validLength},
+      {errorString: translate('errors.username.requirement.beginsWithLetter'), success: beginsWithLetter},
+      {errorString: translate('errors.username.requirement.endsWithLowercaseOrDigit'), success: endsWithLetterOrDigit},
+      {errorString: translate('errors.username.requirement.onlyContainsLettersDigitHyphens'), success: containsOnlyNumberDigitHyphens},
+      {errorString: translate('errors.username.requirement.noUppercase'), success: uppercasePresent}
+    ];
+    return {
+      errors: errorBoxUsernameValidation,
+      success: errorBoxUsernameValidation.filter((err) => !err.success).length &lt;= 0
+    };
+  },
+
+  /**
+   * Validate string to see if it is empty.
+   *
+   * @param {string} string - Email to validate.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
+   * @memberof PrivateValidationUtil
+   */
+  emptyString(string) {
+
+    const emptyStringRegex = /^$|\s+/g;
+    let noEmptyString = true;
+
+    if(emptyStringRegex.test(string)) {
+      noEmptyString = false;
+    }
+
+    const errorBoxUsernameValidation = [
+      {errorString: translate('errors.username.requirement.noBlankUsername'), success: noEmptyString}
+    ];
+
+    return {
+      errors: errorBoxUsernameValidation,
+      success: errorBoxUsernameValidation.filter((err) => !err.success).length &lt;= 0
+    };
   },
 
   /**
    * Validate an email.
    *
    * @param {string} email - Email to validate.
-   * @returns {string} Error if one is found.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
    * @memberof PrivateValidationUtil
    */
   email(email) {
-    let regex = /^(([^&lt;>()[\]\\.,;:\s@\"]+(\.[^&lt;>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let regex = /(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/;
 
     const validEmailDomain = email.length > 0 ? this.emailDomain(email) : false;
+    let validEmail = true;
 
     if (!regex.test(email)) {
-      return translate('errors.email.invalid');
-    } else if(!validEmailDomain) {
-      return translate('errors.email.invalidDomain');
-    } else {
-      return null;
+      validEmail = false;
     }
+
+    const errorBoxEmailValidation = [
+      {errorString: translate('errors.email.invalid'), success: validEmail},
+      {errorString: translate('errors.email.invalidDomain'), success: validEmailDomain}
+    ];
+    return {
+      errors: errorBoxEmailValidation,
+      success: errorBoxEmailValidation.filter((err) => !err.success).length &lt;= 0
+    };
   },
   /**
    *
@@ -159,9 +179,9 @@ const PrivateValidationUtils = {
    */
   emailDomain(email) {
     const regex=/\.([^\.]+?)$/;
-    const acceptedDomains = supportedEmailDomains.split('\n');
+    const lineBreak = EOL;
+    const acceptedDomains = supportedEmailDomains.split(lineBreak);
     const extractedDomain = regex.exec(email);
-
     return extractedDomain === null ? false : acceptedDomains.includes(extractedDomain[1].toUpperCase());
   },
 
@@ -169,41 +189,69 @@ const PrivateValidationUtils = {
    * Validate a Streamers Edge password.
    *
    * @param {string} password - String to validate.
-   * @returns {string} Error if one is found.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
    * @memberof PrivateValidationUtil
    */
   sePassword(password) {
-    let length = password.length;
-    let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[.@$!%^*#])[A-Za-z\d.@$!%^*#]{4,}$/; //(.@!#$%^*)
-    let error = null;
+    const length = password.length;
+    const digitRegex = /[0-9]/g;
+    const specialCharRegex = /[().@$!%^*#]/g;
+    const spaceRegex = /[ ]/g;
+    const unallowedCharsRegex = /[&amp;/:;&lt;=>+?_{},'"|~`]/g;
 
-    if (length &lt; 3 || length > 63) {
-      error = translate('errors.password.lengthRequirement');
+
+    let minLength = false, numberPresent = false, specialCharacterPresent = false,
+      spacePresent = false, unallowedSpecialCharacter = false;
+
+    if (length >= 6 &amp;&amp; length &lt;=60) {
+      minLength = true;
     }
 
-    if (!regex.test(password)) {
-      error = translate('errors.password.requires');
+    if(digitRegex.test(password)){
+      numberPresent = true;
     }
 
-    return error;
+    if(specialCharRegex.test(password)){
+      specialCharacterPresent = true;
+    }
+
+    if(spaceRegex.test(password)){
+      spacePresent = true;
+    }
+
+    if(unallowedCharsRegex.test(password)){
+      unallowedSpecialCharacter = true;
+    }
+
+    const errorBoxPasswordValidation = [
+      {errorString: translate('errors.password.requirement.length'), success: minLength},
+      {errorString: translate('errors.password.requirement.number'), success: numberPresent},
+      {errorString: translate('errors.password.requirement.specialChar'), success: specialCharacterPresent},
+      {errorString: translate('errors.password.requirement.unallowedSpecialChar'), success: !unallowedSpecialCharacter},
+      {errorString: translate('errors.password.requirement.noSpaces'), success: !spacePresent}
+    ];
+    return {
+      errors: errorBoxPasswordValidation,
+      success: errorBoxPasswordValidation.filter((err) => !err.success).length &lt;= 0
+    };
   },
-  
+
   /**
    * Confirm a Streamers Edge password.
    *
    * @param {string} password - Password from form to validate.
    * @param {string} confirmPassword - Password from form to validate.
-   * @returns {string} - Error if one is found.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
    * @memberof ValidationUtil
    */
   seConfirmPassword(password, confirmPassword) {
-    let error = null;
-
-    if (password !== confirmPassword) {
-      error = translate('errors.password.confirmPassword');
-    }
-
-    return error;
+    const errorBoxPasswordValidation = [
+      {errorString: translate('errors.password.confirmPassword'), success: password === confirmPassword}
+    ];
+    return {
+      errors: errorBoxPasswordValidation,
+      success: password === confirmPassword
+    };
   },
 
 
@@ -330,6 +378,36 @@ const PrivateValidationUtils = {
           : null;
       // no default
     }
+  },
+
+  /**
+   * Validate a challenge name.
+   *
+   * @param {string} name - Value to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  challengeName(name) {
+    const length = name.length;
+    let validLength = false, validRequired = false;
+
+    if (length &lt;=50) {
+      validLength = true;
+    }
+
+    if (length > 0) {
+      validRequired = true;
+    }
+
+    const errorBoxUsernameValidation = [
+      {errorString: translate('errors.challengeName.requirement.required'), success: validRequired},
+      {errorString: translate('errors.challengeName.requirement.length'), success: validLength}
+    ];
+
+    return {
+      errors: errorBoxUsernameValidation,
+      success: errorBoxUsernameValidation.filter((err) => !err.success).length &lt;= 0
+    };
   }
 };
 
@@ -439,7 +517,7 @@ const ValidationUtil = {
    * @returns {string} Error if one is found.
    * @memberof ValidationUtil
    */
-  email(email) {
+  seEmail(email) {
     return PrivateValidationUtils.email(email);
   },
 
@@ -452,10 +530,33 @@ const ValidationUtil = {
    */
   seUsername(string) {
     return PrivateValidationUtils.seUsername(string);
+  },
+
+  /**
+   * Validate challenge name.
+   *
+   * @param {string} string - Value to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  challengeName(string) {
+    return PrivateValidationUtils.challengeName(string);
+  },
+
+  /**
+   * Validate string to see if it is empty.
+   *
+   * @param {string} string - Email to validate.
+   * @returns {{success: boolean, errors: *[]}} Error if one is found.
+   * @memberof PrivateValidationUtil
+   */
+  emptyString(string) {
+    return PrivateValidationUtils.emptyString(string);
   }
 };
 
-export default ValidationUtil;</code></pre>
+export default ValidationUtil;
+</code></pre>
         </article>
     </section>
 
@@ -469,7 +570,7 @@ export default ValidationUtil;</code></pre>
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Aug 12 2019 12:28:26 GMT-0300 (Atlantic Daylight Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Oct 31 2019 14:01:07 GMT-0300 (Atlantic Daylight Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>

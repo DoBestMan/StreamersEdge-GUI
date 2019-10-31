@@ -68,7 +68,27 @@ const Config = {
    * @type {number}
    * @memberof Config
    */
-  userSearchLimit: 100
+  userSearchLimit: 100,
+
+  /**
+   * Endpoints for elizabeth testnet. Used for Peerplays Global Login.
+   *
+   * @type {string[]}
+   * @memberof Config
+   */
+  elizabethEndpoints: [
+    'ws://ec2-99-79-98-229.ca-central-1.compute.amazonaws.com:8090',
+    'ws://ec2-18-184-253-255.eu-central-1.compute.amazonaws.com:8090',
+    'ws://ec2-54-252-182-8.ap-southeast-2.compute.amazonaws.com:8090'
+  ],
+
+  /**
+   * Represents token used by end user.
+   *
+   * @type {string}
+   * @memberof Config
+   */
+  sUSD: '1.3.1'
 };
 
 export default Config;

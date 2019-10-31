@@ -7,6 +7,7 @@ import AccountReducer from './AccountReducer';
 import StreamReducer from './StreamReducer';
 import ChallengeReducer from './ChallengeReducer';
 import ErrorBoxReducer from './ErrorBoxReducer';
+import PeerplaysReducer from './PeerplaysReducer';
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -16,5 +17,6 @@ export default (history) => combineReducers({
   profiles: AccountReducer,
   streams: StreamReducer,
   challenges: ChallengeReducer,
-  errorBox: ErrorBoxReducer
+  errorBox: ErrorBoxReducer,
+  peerplays: PeerplaysReducer
 });

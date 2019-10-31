@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: utility/StorageUtil.js</title>
+    <title>JSDoc: utility/PeerplaysUtil/PeerplaysAuthUtil.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>utility/StorageUtil.js</h1>
+                        <h1>utility/PeerplaysUtil/PeerplaysAuthUtil.js</h1>
                     </header>
                     
                     
@@ -62,52 +62,76 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let ls = window.localStorage;
-/**
- * Base Storage service.
- *
- * Used to interact with the browser's local storage.
- */
-class StorageUtil {
+            <pre class="prettyprint source linenums"><code>import {PeerplaysService} from '../../services';
+import {AuthService} from '../../services';
+class PeerplaysAuthPrivateUtil {
   /**
-   * Get an item from local storage by its key.
+   * Attempts to retrieve the account from the blockchain as per the provided form username.
+   * Authenticated via @PeerplaysService authAcount function.
    *
    * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {object}
-   * @memberof StorageUtil
+   * @param {string} accountName - The Peerplays account name.
+   * @param {string} password - The Peerplays accounts login/signing password/key.
+   * @returns {object} - Success object if auth passes, error string if fails (tweak along with TODO: error handling in html markup).
+   * @memberof PeerplaysAuthPrivateActions
    */
-  static get(key) {
-    return ls.getItem(key);
-  }
+  static processLogin(accountName, password) {
+    // TODO: proper dispatching as required on use-case where this component is used.
+    return () => PeerplaysService.getFullAccount(accountName).then((fullAccount) => {
+      const account = fullAccount &amp;&amp; fullAccount.get('account');
+      const isAuth = PeerplaysService.authAccount(account, password);
 
-  /**
-   * Set the value of something in local storage by key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @param {object} value - Value being stored.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static set(key, value) {
-    return ls.setItem(key, value);
-  }
-
-  /**
-   * Remove something from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static remove(key) {
-    return ls.removeItem(key);
+      if (isAuth) {
+        return {
+          message: `${accountName} is authenticated.`,
+          isAuth
+        };
+      } else {
+        throw new Error(`${accountName} 'is not authenticated.`);
+      }
+    });
   }
 }
 
-export default StorageUtil;
+/**
+ * Use for implementing Peerplays blockchain authentication.
+ *
+ * @class PeerplaysAuthActions
+ */
+class PeerplaysAuthActions {
+  /**
+   * Receive @PeerplaysLogin form submitted parameters.
+   *
+   * @static
+   * @param {string} accountName - From @PeerplaysLogin submitted form.
+   * @param {string} password - From @PeerplaysLogin submitted form.
+   * @returns {Promise} - Async promise for use in form submission.
+   * @memberof PeerplaysAuthActions
+   */
+  static peerplaysLogin(accountName, password) {
+    return async (dispatch) => {
+      // eslint-disable-next-line jsdoc/require-jsdoc
+      function onSuccess(success) {
+        return success;
+      }
+
+      // eslint-disable-next-line jsdoc/require-jsdoc
+      function onError(error) {
+        return error;
+      }
+
+      try {
+        const success = await dispatch(PeerplaysAuthPrivateUtil.processLogin(accountName, password));
+        await AuthService.linkPeerplaysAccount(accountName);
+        return onSuccess(success);
+      } catch (error) {
+        return onError(error);
+      }
+    };
+  }
+}
+
+export default PeerplaysAuthActions;
 </code></pre>
         </article>
     </section>

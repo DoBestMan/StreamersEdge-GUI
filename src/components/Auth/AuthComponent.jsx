@@ -17,7 +17,6 @@ export function requireAuthentication(Component) {
 
     checkAuth() {
       if (!this.props.isLoggedIn && !!Config.requireAuthentication) {
-        console.log('inside if');
         let redirectAfterLogin = this.props.location.pathname;
         this.props.navigateToSignIn(redirectAfterLogin);
       }

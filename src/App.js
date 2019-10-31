@@ -119,7 +119,8 @@ App.propTypes = {
 const mapStateToProps = (state) => {
   return {
     path: state.getIn(['router', 'location', 'pathname']),
-    isLoggedIn: state.getIn(['profiles', 'isLoggedIn'])
+    isLoggedIn: state.getIn(['profiles', 'isLoggedIn']),
+    peerplaysAccountName: state.getIn(['profiles','currentAccount','peerplaysAccountName'])
   };
 };
 

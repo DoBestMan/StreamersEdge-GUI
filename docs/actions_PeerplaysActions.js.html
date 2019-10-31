@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: utility/StorageUtil.js</title>
+    <title>JSDoc: actions/PeerplaysActions.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>utility/StorageUtil.js</h1>
+                        <h1>actions/PeerplaysActions.js</h1>
                     </header>
                     
                     
@@ -62,53 +62,54 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let ls = window.localStorage;
+            <pre class="prettyprint source linenums"><code>import ActionTypes from './ActionTypes';
+import {Action} from 'redux';
+
 /**
- * Base Storage service.
+ * Public actions related to Peerplays actions.
  *
- * Used to interact with the browser's local storage.
+ * @class PeerplaysActions
  */
-class StorageUtil {
+class PeerplaysActions {
   /**
-   * Get an item from local storage by its key.
+   * Public Redux action creator.
+   * Call to update redux with a boolean to define the user as logged in or not.
    *
    * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {object}
-   * @memberof StorageUtil
+   * @param {boolean} isLoggedIn - True/false.
+   * @memberof AccountActions
+   * @returns {Action}
    */
-  static get(key) {
-    return ls.getItem(key);
+
+  static setPeerplaysConnected(connected) {
+    return {
+      type: ActionTypes.PEERPLAYS_SET_IS_CONNECTED,
+      payload: {
+        connected: connected
+      }
+    };
   }
 
-  /**
-   * Set the value of something in local storage by key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @param {object} value - Value being stored.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static set(key, value) {
-    return ls.setItem(key, value);
+  static setPeerplaysAccount(account) {
+    return {
+      type: ActionTypes.PEERPLAYS_SET_ACCOUNT,
+      payload: {
+        account: account
+      }
+    };
   }
 
-  /**
-   * Remove something from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static remove(key) {
-    return ls.removeItem(key);
+  static setPeerplaysPrecision(balancePrecision) {
+    return {
+      type: ActionTypes.PEERPLAYS_SET_PRECISION,
+      payload: {
+        balancePrecision: balancePrecision
+      }
+    };
   }
 }
 
-export default StorageUtil;
-</code></pre>
+export default PeerplaysActions;</code></pre>
         </article>
     </section>
 

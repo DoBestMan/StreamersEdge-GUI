@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: AppActions</title>
+    <title>JSDoc: ErrorBoxActions</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -50,7 +50,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Class</p>
-                        <h1>AppActions</h1>
+                        <h1>ErrorBoxActions</h1>
                     </header>
                     
                     
@@ -62,7 +62,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>AppActions<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ErrorBoxActions<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -77,10 +77,10 @@
                     <div class="member">
 
     
-    <h4 class="name" id="AppActions">
+    <h4 class="name" id="ErrorBoxActions">
         
         <span class="code-name">
-            new AppActions<span class="signature">()</span><span class="type-signature"></span>
+            new ErrorBoxActions<span class="signature">()</span><span class="type-signature"></span>
         </span>
     </h4>
     
@@ -88,7 +88,7 @@
     
     
     <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public actions related to Application wide actions.</p>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public actions related to ErrorBox actions.</p>
     </div>
     
 
@@ -137,9 +137,9 @@
 
     
         <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
+            <a href="actions_ErrorBoxActions.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line94">line 94</a>
+                <a href="actions_ErrorBoxActions.js.html">actions/ErrorBoxActions.js</a>, <a href="actions_ErrorBoxActions.js.html#line5">line 5</a>
             </span>
         </p>
     
@@ -194,14 +194,14 @@
                 <div class="member">
 
     
-    <h4 class="name" id=".login">
+    <h4 class="name" id=".hideErrorBox">
         
             
                 <span class='tag'>static</span>
             
         
         <span class="code-name">
-            login<span class="signature">(account)</span><span class="type-signature"> &rarr; {Dispatch}</span>
+            hideErrorBox<span class="signature">()</span><span class="type-signature"> &rarr; {Action}</span>
         </span>
     </h4>
     
@@ -209,7 +209,127 @@
     
     
     <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux Action Creator.</p>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Call to update redux to hide ErrorBox.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="actions_ErrorBoxActions.js.html" class="button">View Source</a>
+            <span>
+                <a href="actions_ErrorBoxActions.js.html">actions/ErrorBoxActions.js</a>, <a href="actions_ErrorBoxActions.js.html#line38">line 38</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Action</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    
+    <h4 class="name" id=".setErrorBox">
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            setErrorBox<span class="signature">(visibility, validationConditions, position)</span><span class="type-signature"> &rarr; {Action}</span>
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Call to update redux to show ErrorBox.</p>
     </div>
     
 
@@ -247,7 +367,57 @@
         
 <tr class="deep-level-0">
   
-      <td class="name"><code>account</code></td>
+      <td class="name"><code>visibility</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">boolean</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Boolean to show the errorbox.</p></td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>validationConditions</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Array</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>An array of object of type [{errorString and success}].</p></td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>position</code></td>
   
 
   <td class="type">
@@ -263,7 +433,7 @@
 
   
 
-  <td class="description last"><p>{name: String, id: String}.</p></td>
+  <td class="description last"><p>An object having position of the parent element.</p></td>
 </tr>
 
 
@@ -308,300 +478,9 @@
 
     
         <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
+            <a href="actions_ErrorBoxActions.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line107">line 107</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Dispatch</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".logout">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            logout<span class="signature">()</span><span class="type-signature"> &rarr; {Dispatch}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux Action Creator.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
-            <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line132">line 132</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Dispatch</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".setLoginError">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            setLoginError<span class="signature">(text)</span><span class="type-signature"> &rarr; {Action}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux Action Creator.
-Set error text in Login modal.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>text</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">string</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>The error string.</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
-            <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line148">line 148</a>
+                <a href="actions_ErrorBoxActions.js.html">actions/ErrorBoxActions.js</a>, <a href="actions_ErrorBoxActions.js.html#line21">line 21</a>
             </span>
         </p>
     

@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: utility/StorageUtil.js</title>
+    <title>JSDoc: utility/ChallengeUtil.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>utility/StorageUtil.js</h1>
+                        <h1>utility/ChallengeUtil.js</h1>
                     </header>
                     
                     
@@ -62,52 +62,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let ls = window.localStorage;
-/**
- * Base Storage service.
+            <pre class="prettyprint source linenums"><code>/**
+ * Challenge Utilities.
  *
- * Used to interact with the browser's local storage.
  */
-class StorageUtil {
+class ChallengeUtil {
   /**
-   * Get an item from local storage by its key.
+   * Takes an array of challenges and filters out the empty ones.
    *
    * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {object}
+   * @param {Array} challenges - Array of challenges.
+   * @returns {Array}
    * @memberof StorageUtil
    */
-  static get(key) {
-    return ls.getItem(key);
+  static getJoinedChallenges(challenges) {
+    return challenges;
   }
 
   /**
-   * Set the value of something in local storage by key.
+   * Takes a raw challenge date and formats it to be used in a card.
    *
    * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @param {object} value - Value being stored.
-   * @returns {Function}
+   * @param {string} challengeDate - Raw challenge date.
+   * @returns {string}
    * @memberof StorageUtil
    */
-  static set(key, value) {
-    return ls.setItem(key, value);
-  }
-
-  /**
-   * Remove something from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static remove(key) {
-    return ls.removeItem(key);
+  static formatDate(challengeDate) {
+    const formattedDate = new Date(challengeDate);
+    return `Ending ${formattedDate.toDateString()}`;
   }
 }
 
-export default StorageUtil;
+export default ChallengeUtil;
 </code></pre>
         </article>
     </section>

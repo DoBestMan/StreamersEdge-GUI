@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: AppActions</title>
+    <title>JSDoc: UserSerivce</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -50,7 +50,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Class</p>
-                        <h1>AppActions</h1>
+                        <h1>UserSerivce</h1>
                     </header>
                     
                     
@@ -62,7 +62,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>AppActions<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>UserSerivce<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -77,10 +77,10 @@
                     <div class="member">
 
     
-    <h4 class="name" id="AppActions">
+    <h4 class="name" id="UserSerivce">
         
         <span class="code-name">
-            new AppActions<span class="signature">()</span><span class="type-signature"></span>
+            new UserSerivce<span class="signature">()</span><span class="type-signature"></span>
         </span>
     </h4>
     
@@ -88,7 +88,7 @@
     
     
     <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public actions related to Application wide actions.</p>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Handles all server calls related to User.</p>
     </div>
     
 
@@ -137,9 +137,9 @@
 
     
         <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
+            <a href="services_UserService.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line94">line 94</a>
+                <a href="services_UserService.js.html">services/UserService.js</a>, <a href="services_UserService.js.html#line75">line 75</a>
             </span>
         </p>
     
@@ -194,14 +194,14 @@
                 <div class="member">
 
     
-    <h4 class="name" id=".login">
+    <h4 class="name" id=".updateInvitation">
         
             
                 <span class='tag'>static</span>
             
         
         <span class="code-name">
-            login<span class="signature">(account)</span><span class="type-signature"> &rarr; {Dispatch}</span>
+            updateInvitation<span class="signature">(invitation)</span><span class="type-signature"> &rarr; {Promise}</span>
         </span>
     </h4>
     
@@ -209,7 +209,7 @@
     
     
     <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux Action Creator.</p>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Update invitation settings for current user's preference and stores it in LS if the promise resolves without issue.</p>
     </div>
     
 
@@ -247,13 +247,13 @@
         
 <tr class="deep-level-0">
   
-      <td class="name"><code>account</code></td>
+      <td class="name"><code>invitation</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">object</span>
+<span class="param-type">*</span>
 
 
   
@@ -263,7 +263,7 @@
 
   
 
-  <td class="description last"><p>{name: String, id: String}.</p></td>
+  <td class="description last"><p>Invitation settings for current logged user.</p></td>
 </tr>
 
 
@@ -308,9 +308,9 @@
 
     
         <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
+            <a href="services_UserService.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line107">line 107</a>
+                <a href="services_UserService.js.html">services/UserService.js</a>, <a href="services_UserService.js.html#line97">line 97</a>
             </span>
         </p>
     
@@ -341,11 +341,13 @@
 
 <div class="columns">
     
+    <div class='param-desc column is-7'><p>A promise that resolves to a update status.</p></div>
+    
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Dispatch</span>
+<span class="param-type">Promise</span>
 
 
     </div>
@@ -364,14 +366,14 @@
                 <div class="member">
 
     
-    <h4 class="name" id=".logout">
+    <h4 class="name" id=".updateNotification">
         
             
                 <span class='tag'>static</span>
             
         
         <span class="code-name">
-            logout<span class="signature">()</span><span class="type-signature"> &rarr; {Dispatch}</span>
+            updateNotification<span class="signature">(notifications)</span><span class="type-signature"> &rarr; {Promise}</span>
         </span>
     </h4>
     
@@ -379,128 +381,7 @@
     
     
     <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux Action Creator.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
-            <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line132">line 132</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Dispatch</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".setLoginError">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            setLoginError<span class="signature">(text)</span><span class="type-signature"> &rarr; {Action}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Public Redux Action Creator.
-Set error text in Login modal.</p>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Update noification settings for current user's preference and stores it in LS if the promise resolves without issue.</p>
     </div>
     
 
@@ -538,13 +419,13 @@ Set error text in Login modal.</p>
         
 <tr class="deep-level-0">
   
-      <td class="name"><code>text</code></td>
+      <td class="name"><code>notifications</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">string</span>
+<span class="param-type">boolean</span>
 
 
   
@@ -554,7 +435,7 @@ Set error text in Login modal.</p>
 
   
 
-  <td class="description last"><p>The error string.</p></td>
+  <td class="description last"><p>Notification for current logged user.</p></td>
 </tr>
 
 
@@ -599,9 +480,9 @@ Set error text in Login modal.</p>
 
     
         <p class="tag-source">
-            <a href="actions_AppActions.js.html" class="button">View Source</a>
+            <a href="services_UserService.js.html" class="button">View Source</a>
             <span>
-                <a href="actions_AppActions.js.html">actions/AppActions.js</a>, <a href="actions_AppActions.js.html#line148">line 148</a>
+                <a href="services_UserService.js.html">services/UserService.js</a>, <a href="services_UserService.js.html#line87">line 87</a>
             </span>
         </p>
     
@@ -632,11 +513,13 @@ Set error text in Login modal.</p>
 
 <div class="columns">
     
+    <div class='param-desc column is-7'><p>A promise that resolves to a update status.</p></div>
+    
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Action</span>
+<span class="param-type">Promise</span>
 
 
     </div>

@@ -75,15 +75,12 @@ class Preferences extends Component {
         }),
         games: this.state.gameWhiteList
       })
-      .then((res) => {
-        console.log('Update invitation successfully', res);
+      .then(() => {
 
         // Update notification
         UserService
           .updateNotification((this.state.notificationType || '1') === '1')
-          .then((res) => {
-            console.log('Update notification successfully', res);
-
+          .then(() => {
             ProfileService
               .getProfile()
               .then((profile) => {
@@ -93,18 +90,18 @@ class Preferences extends Component {
                 this.props.setModalData({headerText: translate('preferences.modal.successHeader'), type: 'success'});
               })
               .catch((err) => {
-                console.log('Get profile failed', err);
+                console.error('Get profile failed', err);
               });
           })
           .catch((err) => {
-            console.log('Update notification failed', err);
+            console.error('Update notification failed', err);
           });
       })
       .catch((err) => {
         this.props.toggleModal();
         this.props.setModalType(ModalTypes.SUBMIT);
         this.props.setModalData({headerText: translate('preferences.modal.errorHeader'), subText: translate('preferences.modal.errorSubText'), type: 'error'});
-        console.log('Update invitation failed', err);
+        console.error('Update invitation failed', err);
       });
   }
 

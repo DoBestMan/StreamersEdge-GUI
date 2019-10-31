@@ -36,7 +36,6 @@ class SubmitModal extends Component {
 
   render() {
     const {icon, headerText, subText} = this.state;
-    console.log(this.state);
     return (
       <div className='submit-modal__wrapper'>
         <div className='submit-modal'>

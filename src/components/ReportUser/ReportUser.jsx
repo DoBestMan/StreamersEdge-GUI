@@ -46,7 +46,6 @@ class ReportUser extends Component {
       this.setState({
         error: ''
       });
-      console.log(this.state);
       //TODO: Connect to API once it exists
     }
 

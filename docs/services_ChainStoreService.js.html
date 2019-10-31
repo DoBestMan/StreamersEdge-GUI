@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: utility/StorageUtil.js</title>
+    <title>JSDoc: services/ChainStoreService.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>utility/StorageUtil.js</h1>
+                        <h1>services/ChainStoreService.js</h1>
                     </header>
                     
                     
@@ -62,52 +62,46 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let ls = window.localStorage;
+            <pre class="prettyprint source linenums"><code>import {PeerplaysService} from '../services';
+
+let ChainStore;
+let ReduxStore;
+
 /**
- * Base Storage service.
+ * This service is used for page updates on constants from LocationConstants.js.
  *
- * Used to interact with the browser's local storage.
+ * It's listen to ChainStore and call a updateChainStore fnc.
+ *
  */
-class StorageUtil {
-  /**
-   * Get an item from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {object}
-   * @memberof StorageUtil
-   */
-  static get(key) {
-    return ls.getItem(key);
-  }
 
-  /**
-   * Set the value of something in local storage by key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @param {object} value - Value being stored.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static set(key, value) {
-    return ls.setItem(key, value);
-  }
+/**
+ * Gets called every heartbeat by listenChainStore once subscribed.
+ * Currently calls get profile if the user is logged in.
+ */
+function updateChainStore() {
+  let currentState = ReduxStore.getState();
 
-  /**
-   * Remove something from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static remove(key) {
-    return ls.removeItem(key);
+  if(currentState.getIn(['profiles','isLoggedIn'])) {
+    const account = currentState.getIn(['profiles','currentAccount','peerplaysAccountName']);
+    PeerplaysService.getBalance(account);
   }
 }
 
-export default StorageUtil;
+/**
+ * @param {object} chainStore - Instance of chain store.
+ * @param {object} reduxStore - Instance of redux store.
+ */
+export function listenChainStore(chainStore, reduxStore) {
+  ChainStore = chainStore;
+  ReduxStore = reduxStore;
+
+  if(chainStore.subscribers.has(updateChainStore) === false) {
+    ChainStore.subscribe(updateChainStore);
+  } else {
+    ChainStore.unsubscribe(updateChainStore);
+    ChainStore.subscribe(updateChainStore);
+  }
+}
 </code></pre>
         </article>
     </section>

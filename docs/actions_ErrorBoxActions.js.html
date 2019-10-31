@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: utility/StorageUtil.js</title>
+    <title>JSDoc: actions/ErrorBoxActions.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>utility/StorageUtil.js</h1>
+                        <h1>actions/ErrorBoxActions.js</h1>
                     </header>
                     
                     
@@ -62,52 +62,51 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let ls = window.localStorage;
+            <pre class="prettyprint source linenums"><code>import ActionTypes from './ActionTypes';
+import {Action} from 'redux';
+
+
 /**
- * Base Storage service.
+ * Public actions related to ErrorBox actions.
  *
- * Used to interact with the browser's local storage.
+ * @class ErrorBoxActions
  */
-class StorageUtil {
+class ErrorBoxActions {
   /**
-   * Get an item from local storage by its key.
+   * Call to update redux to show ErrorBox.
    *
    * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {object}
-   * @memberof StorageUtil
+   * @param {boolean} visibility - Boolean to show the errorbox.
+   * @param {Array} validationConditions - An array of object of type [{errorString and success}].
+   * @param {object} position - An object having position of the parent element.
+   * @returns {Action}
+   * @memberof ErrorBoxActions
    */
-  static get(key) {
-    return ls.getItem(key);
+  static setErrorBox(visibility, validationConditions, position){
+    return {
+      type: ActionTypes.ERRORBOX_SET_ERRORBOX,
+      payload : {
+        visibility: visibility,
+        validationConditions: validationConditions,
+        position: position
+      }
+    };
   }
-
   /**
-   * Set the value of something in local storage by key.
+   * Call to update redux to hide ErrorBox.
    *
    * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @param {object} value - Value being stored.
-   * @returns {Function}
-   * @memberof StorageUtil
+   * @returns {Action}
+   * @memberof ErrorBoxActions
    */
-  static set(key, value) {
-    return ls.setItem(key, value);
-  }
-
-  /**
-   * Remove something from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static remove(key) {
-    return ls.removeItem(key);
+  static hideErrorBox(){
+    return{
+      type: ActionTypes.ERRORBOX_HIDE_ERRORBOX
+    };
   }
 }
 
-export default StorageUtil;
+export default ErrorBoxActions;
 </code></pre>
         </article>
     </section>

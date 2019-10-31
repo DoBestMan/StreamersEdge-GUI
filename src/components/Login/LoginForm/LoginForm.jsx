@@ -75,10 +75,8 @@ class LoginForm extends Component {
   allowLogin = () => {
 
     if ((this.state.errors.username === null && this.state.errors.password === null) && (this.state.username.length&& this.state.password.length)) {
-      console.log('true');
       return true;
     } else {
-      console.log('false');
       return false;
     }
   };

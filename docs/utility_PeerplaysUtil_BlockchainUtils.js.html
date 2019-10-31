@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: utility/StorageUtil.js</title>
+    <title>JSDoc: utility/PeerplaysUtil/BlockchainUtils.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -52,7 +52,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>utility/StorageUtil.js</h1>
+                        <h1>utility/PeerplaysUtil/BlockchainUtils.js</h1>
                     </header>
                     
                     
@@ -62,53 +62,31 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let ls = window.localStorage;
-/**
- * Base Storage service.
- *
- * Used to interact with the browser's local storage.
- */
-class StorageUtil {
+            <pre class="prettyprint source linenums"><code>class BlockchainUtils {
   /**
-   * Get an item from local storage by its key.
+   * Gets the current time on the blockchain.
    *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {object}
-   * @memberof StorageUtil
+   * @param {Date} timeString - Instance of chain store.
+   * @returns {Date} Date on the blockchain.
    */
-  static get(key) {
-    return ls.getItem(key);
-  }
+  static blockchainTimeStringToDate(timeString) {
+    let time = timeString;
 
-  /**
-   * Set the value of something in local storage by key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @param {object} value - Value being stored.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static set(key, value) {
-    return ls.setItem(key, value);
-  }
+    if (!timeString) {
+      return new Date('1970-01-01T00:00:00.000Z');
+    }
 
-  /**
-   * Remove something from local storage by its key.
-   *
-   * @static
-   * @param {string} key - Key of the item to retrieve.
-   * @returns {Function}
-   * @memberof StorageUtil
-   */
-  static remove(key) {
-    return ls.removeItem(key);
+    // does not end in Z
+    // https://github.com/cryptonomex/graphene/issues/368
+    if (!/Z$/.test(timeString)) {
+      time += 'Z';
+    }
+
+    return new Date(time);
   }
 }
 
-export default StorageUtil;
-</code></pre>
+export default BlockchainUtils;</code></pre>
         </article>
     </section>
 

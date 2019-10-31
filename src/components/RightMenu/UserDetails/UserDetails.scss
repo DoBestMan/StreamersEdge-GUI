@@ -21,8 +21,12 @@
     }
 
     &__wallet {
+      max-width: 200px;
       font-size: 17px;
       color: #3fa9f5;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
 
       &__white {
         margin-left: 6px;

@@ -44,7 +44,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="TokenUtil.html">TokenUtil</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ChallengeActions.html">ChallengeActions</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="PrivateAuthService.html">PrivateAuthService</a></li><li><a href="PrivateProfileService.html">PrivateProfileService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li><li><a href="StreamService.StreamService.html">StreamService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dummyDataWrapper">dummyDataWrapper</a></li><li><a href="global.html#translate">translate</a></li></ul></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="TokenUtil.html">TokenUtil</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ChallengeActions.html">ChallengeActions</a></li><li><a href="ChallengeUtil.html">ChallengeUtil</a></li><li><a href="ErrorBoxActions.html">ErrorBoxActions</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysActions.html">PeerplaysActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="PrivateAuthService.html">PrivateAuthService</a></li><li><a href="PrivateProfileService.html">PrivateProfileService</a></li><li><a href="PrivateUserService.html">PrivateUserService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li><li><a href="StreamService.StreamService.html">StreamService</a></li><li><a href="UserSerivce.html">UserSerivce</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dummyDataWrapper">dummyDataWrapper</a></li><li><a href="global.html#listenChainStore">listenChainStore</a></li><li><a href="global.html#translate">translate</a></li><li><a href="global.html#updateChainStore">updateChainStore</a></li></ul></div>
                     </nav>
                 </div>
             </div>
@@ -64,6 +64,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>import axios from 'axios';
 import {Config, StorageUtil, GenUtil} from '../utility';
+import querystring from 'query-string';
 
 const ApiHandler = axios.create({withCredentials: true});
 
@@ -97,6 +98,73 @@ class PrivateProfileService {
 
       StorageUtil.set('se-user', JSON.stringify(response.data.result));
       return resolve(response.data.result);
+    });
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {object} account - Contains object with updated account fields.
+   * @returns {Promise} - A promise that resolves to an updated user profile object wrapped by dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static updateProfile(account) {
+    let response;
+    const query = `${apiRoot}api/v1/profile`;
+
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const body = {
+        email: account.email,
+        twitchUserName: account.twitchUserName,
+        googleName: account.googleName,
+        facebook: account.facebook,
+        pubgUsername: account.pubgUsername,
+        peerplaysAccountName: account.peerplaysAccountName,
+        userType: account.userType
+      };
+
+      try {
+        response = await ApiHandler.patch(query, querystring.stringify(body), headers);
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.response);
+      }
+    });
+  }
+
+  /**
+   * Changes the user's email.
+   *
+   * @static
+   * @param {string} token - Token generated from the backend api.
+   * @returns {Promise} - A promise that indicates success or failure.
+   * @memberof PrivateAuthService
+   */
+  static changeEmail(token) {
+    let response;
+    const query = `${apiRoot}api/v1/profile/change-email/${token}`;
+
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      try {
+        response = await ApiHandler.get(query, headers);
+
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.toString());
+      }
     });
   }
 
@@ -147,6 +215,17 @@ class ProfileService {
   }
 
   /**
+   *
+   * @param {object} account - Contains object with updated account fields.
+   * @static
+   * @returns {Promise} A promise that resolves to an updated user profile object wrapped by dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static updateProfile(account) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.updateProfile(account));
+  }
+
+  /**
    * Reconnect to blockchain in case of disconnect.
    *
    * @param {Blob} image - Image as Blob.
@@ -155,6 +234,10 @@ class ProfileService {
    */
   static uploadProfilePicture(image) {
     return GenUtil.dummyDataWrapper(PrivateProfileService.uploadProfilePicture(image));
+  }
+
+  static changeEmail(token) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.changeEmail(token));
   }
 
 }
@@ -174,7 +257,7 @@ export default ProfileService;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Aug 12 2019 12:28:26 GMT-0300 (Atlantic Daylight Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Oct 31 2019 14:01:07 GMT-0300 (Atlantic Daylight Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>

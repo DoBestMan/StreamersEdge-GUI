@@ -1,5 +1,5 @@
-import PeerplaysService from '../services/PeerplaysService';
-import {AuthService} from '../services/';
+import {PeerplaysService} from '../../services';
+import {AuthService} from '../../services';
 class PeerplaysAuthPrivateUtil {
   /**
    * Attempts to retrieve the account from the blockchain as per the provided form username.
@@ -13,7 +13,7 @@ class PeerplaysAuthPrivateUtil {
    */
   static processLogin(accountName, password) {
     // TODO: proper dispatching as required on use-case where this component is used.
-    return (dispatch) => PeerplaysService.getFullAccount(accountName).then((fullAccount) => { // eslint-disable-line
+    return () => PeerplaysService.getFullAccount(accountName).then((fullAccount) => {
       const account = fullAccount && fullAccount.get('account');
       const isAuth = PeerplaysService.authAccount(account, password);
 
