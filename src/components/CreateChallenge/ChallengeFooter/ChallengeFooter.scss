@@ -7,39 +7,42 @@
   height: 138px;
   text-align: center;
 
-  &__step-wrapper {
-    width: 1398px;
-    height: 100%;
-    margin: auto;
-  }
+  &__step {
+    &-wrapper {
+      width: 1398px;
+      height: 100%;
+      margin: auto;
+    }
 
-  &__step-content {
-    display: flex;
-    position: relative;
-    height: 100%;
-  }
+    &-content {
+      display: flex;
+      position: relative;
+      height: 100%;
+    }
 
-  &__step-back {
-    align-self: center;
-    position: absolute;
-    left: 0;
-  }
+    &-back, &-next {
+      align-self: center;
+      position: absolute;
+      cursor: pointer;
+    }
 
-  &__step-next {
-    align-self: center;
-    position: absolute;
-    right: 0;
-  }
+    &-back {
+      left: 0;
+    }
 
-  &__step-steppers {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    &-next {
+      right: 0;
+    }
+
+    &-steppers {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
   }
 
   &__item {
     align-self: center;
-    cursor: pointer;
 
     &--hide {
       visibility: hidden;
