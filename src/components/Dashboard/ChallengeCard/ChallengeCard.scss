@@ -151,7 +151,7 @@
     &-carousel {
       @extend .challenge-card__reward;
 
-      left: 1145px;
+      left: 80%;
     }
   }
 
@@ -191,16 +191,16 @@
   }
 
   &__media {
-    width: 1286px;
-    height: 723px;
+    width: 71%;
+    height: 77.5%;
     margin: 0 20px 20px 0;
     border: 3px solid $dashboard-card-border;
     border-radius: 0 0 5px 5px;
     background-color: $dashboard-paginate-dark;
 
     &-main {
-      width: 1498px;
-      height: 844px;
+      width: 98.3%;
+      height: 97%;
       margin: 0 20px 20px 0;
       border: 3px solid $dashboard-card-border;
       border-radius: 6px;
@@ -209,8 +209,7 @@
   }
 
   &__card {
-    width: 587px;
-    height: 398px;
+    width: 30vw;
     margin: 0 13px 63px 0;
     border: 3px solid $dashboard-card-border;
     border-radius: 6px;

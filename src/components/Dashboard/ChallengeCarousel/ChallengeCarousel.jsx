@@ -30,29 +30,6 @@ class ChallengeCarousel extends Component {
     return arr;
   }
 
-  renderNav = () => {
-    let {challenges} = this.props;
-    challenges = challenges.filter((challenge) => {
-      return challenge.joinedUsers.length > 0 ? true : false;
-    });
-
-    const carouselNav = (
-      <>
-      <button className='carousel__button-left' onClick={ this.handlePrev }>
-      ›
-      </button>
-      <button className='carousel__button-right' onClick={ this.handleNext }>
-      ‹
-      </button>
-      </>);
-
-    if (challenges.length > 2) {
-      return carouselNav;
-    }
-
-    return null;
-  }
-
   renderFeatured = () => {
     let {challenges} = this.props;
 
@@ -75,19 +52,28 @@ class ChallengeCarousel extends Component {
     challenges = challenges.slice(0,3);
 
     return (
-      challenges.map((challenge) => {
-        return (
-          <ChallengeCard
-            identifier= { `card-${index++}` }
-            image={ carousel_placeholder }
-            key={ challenge.name }
-            name={ challenge.name }
-            users={ challenge.joinedUsers }
-            reward={ challenge.ppyAmount }
-            game={ challenge.game }
-            date={ ChallengeUtil.formatDate(challenge.endDate) }
-          />);
-      }));
+      <div className='carousel__wrapper'>
+        <button className='carousel__button-left' onClick={ this.handlePrev }>
+      ›
+        </button>
+        {challenges.map((challenge) => {
+          return (
+            <ChallengeCard
+              identifier= { `card-${index++}` }
+              image={ carousel_placeholder }
+              key={ challenge.name }
+              name={ challenge.name }
+              users={ challenge.joinedUsers }
+              reward={ challenge.ppyAmount }
+              game={ challenge.game }
+              date={ ChallengeUtil.formatDate(challenge.endDate) }
+            />);
+        })}
+        <button className='carousel__button-right' onClick={ this.handleNext }>
+      ‹
+        </button>
+      </div>
+    );
   }
 
   render() {
@@ -95,7 +81,6 @@ class ChallengeCarousel extends Component {
     if (this.props.challenges.length) {
       return (
         <div className='dashboard__carousel'>
-          {this.renderNav()}
           {this.renderFeatured()}
         </div>
       );

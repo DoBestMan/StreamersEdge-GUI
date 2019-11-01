@@ -1,46 +1,60 @@
 @import '../../../assets/styles/common';
 
-.carousel__button {
-  position: relative;
-  z-index: 69;
-  transform: matrix(-1, 0, 0, -1, 0, 0);
-  width: 41px;
-  height: 311px;
-  margin-top: 241px;
-  border: 3px solid rgb(14, 16, 25);
-  font-size: 50px;
-  background: rgb(29, 34, 46);
-  cursor: pointer;
+.carousel {
+  &__button {
+    position: absolute;
+    z-index: 6969;
+    transform: matrix(-1, 0, 0, -1, 0, 0);
+    width: 2vw;
+    height: 40%;
+    border: 3px solid rgb(14, 16, 25);
+    font-size: 50px;
+    background: rgb(29, 34, 46);
+    cursor: pointer;
 
-  &-left {
-    @extend .carousel__button;
+    &-left {
+      @extend .carousel__button;
 
-    left: 256px;
+      top: 27%;
+      left: -1.9vw;
+    }
+
+    &-right {
+      @extend .carousel__button;
+
+      top: 27%;
+      left: 98.5%;
+    }
   }
 
-  &-right {
-    @extend .carousel__button;
-
-    left: 1754px;
+  &__wrapper {
+    position: sticky;
+    margin: auto;
   }
 }
 
 .challenge-card {
   &-0, &-2 {
-    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-0, &-2 {
+    z-index: -1;
+    width: 118%;
     opacity: 0.6;
   }
 
   &-0 {
-    transform: translateY(54px);
+    transform: translate(-6vw, 54px);
   }
 
   &-1 {
-    z-index: 9;
-    transform: translateX(-1100px);
+    z-index: 69;
   }
 
   &-2 {
-    transform: translate(-2280px, 54px);
+    transform: translate(20%, 54px);
   }
 }
