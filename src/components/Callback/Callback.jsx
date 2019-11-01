@@ -20,57 +20,48 @@ class Callback extends Component {
   };
 
   // Handle callback based on type passed
-  handleCallback = () => {
+  handleCallback = async () => {
     const path = this.props.location;
     const pathAry = path.split('/');
     const lastAccessedPage = StorageUtil.get('se-page');
     let cb = pathAry[2] ? pathAry[2] : lastAccessedPage.split('/')[1];
 
-    switch (cb) {
-      case 'confirm-email':
-        AuthService.confirmEmail(pathAry[3])
-          .then((account) => {
-            this.props.setAccount(account);
-            this.props.setLoggedIn(true);
-            this.props.navigateToCreateProfile('1');
-          })
-          .catch((err) => {
-            this.setState({
-              error: err
-            });
-          });
-        break;
-      case 'change-email':
-        ProfileService.changeEmail(pathAry[3])
-          .then(() => {
-            this.props.navigateToDashboard();
-          })
-          .catch((err) => {
-            this.setState({
-              error: err
-            });
-          });
-        break;
-      case 'reset-password':
-        this.props.navigateToPasswordReset(pathAry[3]);
-        break;
-      case 'profile':
-        break;
-      case 'login':
-        break;
-      case 'update-profile':
-        break;
-      default:
-        ProfileService.getProfile().then((account) => {
+    try {
+      switch (cb) {
+        case 'confirm-email':
+          const account = await AuthService.confirmEmail(pathAry[3]);
           this.props.setAccount(account);
           this.props.setLoggedIn(true);
+          this.props.navigateToCreateProfile('1');
+          break;
+        case 'change-email':
+          await ProfileService.changeEmail(pathAry[3]);
           this.props.navigateToDashboard();
-        }).catch((err) => {
-          this.setState({
-            error: err
-          });
-        });
-        break;
+          break;
+        case 'reset-password':
+          this.props.navigateToPasswordReset(pathAry[3]);
+          break;
+        case 'profile':
+          break;
+        case 'login':
+          break;
+        case 'update-profile':
+          const res = await ProfileService.getProfile();
+          this.props.setAccount(res);
+          this.props.setLoggedIn(true);
+          this.props.navigateToUpdateProfile();
+          break;
+        default:
+          const response = await ProfileService.getProfile();
+          this.props.setAccount(response);
+          this.props.setLoggedIn(true);
+          this.props.navigateToDashboard();
+          break;
+      }
+    }catch (e) {
+      this.setState({
+        error: e
+      });
     }
   };
 
