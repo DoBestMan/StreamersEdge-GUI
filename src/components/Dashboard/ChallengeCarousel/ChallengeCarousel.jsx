@@ -2,34 +2,15 @@ import React, {Component} from 'react';
 import {DashboardConstants} from '../../../constants';
 import ChallengeCard from '../ChallengeCard';
 import ChallengeUtil from '../../../utility/ChallengeUtil';
-import carousel_placeholder from '../../../assets/images/dashboard/placeholder/carousel_placeholder.png';
+import pubg_placeholder from '../../../assets/images/dashboard/placeholder/pubg.jpg';
+import fortnite_placeholder from '../../../assets/images/dashboard/placeholder/fortnite.jpg';
+import Slider from 'react-slick';
+import {GenUtil} from '../../../utility';
+import './slick.scss';
+
+const translate = GenUtil.translate;
 
 class ChallengeCarousel extends Component {
-  state = {
-    start: 0,
-    challenges: []
-  };
-
-  handleNext = () => {
-    this.setState({
-      start : (this.state.start >= DashboardConstants.DASHBOARD_CHALLENGES_MAX-1) ? 0 : (this.state.start+1)
-    });
-  }
-
-  handlePrev = () => {
-    this.setState({
-      start : (this.state.start <= 0) ? DashboardConstants.DASHBOARD_CHALLENGES_MAX-1 : (this.state.start-1)
-    });
-  }
-
-  shiftChallenges = (arr, num) => {
-    for (let i = 0; i < num; i++) {
-      arr.push(arr.shift());
-    }
-
-    return arr;
-  }
-
   renderFeatured = () => {
     let {challenges} = this.props;
 
@@ -41,43 +22,47 @@ class ChallengeCarousel extends Component {
       return null;
     }
 
-    let index = 0;
-
-    let tempArray = challenges;
-
-    if (this.state.start > 0) {
-      challenges = this.shiftChallenges(tempArray, this.state.start);
-    }
-
     challenges = challenges.slice(0,3);
 
+    const settings = {
+      className: 'center',
+      centerMode: true,
+      infinite: true,
+      centerPadding: '60px',
+      slidesToShow: 1,
+      speed: 500
+    };
+
+    let challengeImg = pubg_placeholder;
+
     return (
-      <div className='carousel__wrapper'>
-        <button className='carousel__button-left' onClick={ this.handlePrev }>
-      ›
-        </button>
-        {challenges.map((challenge) => {
-          return (
-            <ChallengeCard
-              identifier= { `card-${index++}` }
-              image={ carousel_placeholder }
-              key={ challenge.name }
-              name={ challenge.name }
-              users={ challenge.joinedUsers }
-              reward={ challenge.ppyAmount }
-              game={ challenge.game }
-              date={ ChallengeUtil.formatDate(challenge.endDate) }
-            />);
-        })}
-        <button className='carousel__button-right' onClick={ this.handleNext }>
-      ‹
-        </button>
+      <div>
+        <h2>{translate('dashboard.featured.header')}</h2>
+        <Slider { ...settings }>
+          {challenges.map((challenge) => {
+            if (challenge.game === 'fortnite') {
+              challengeImg = fortnite_placeholder;
+            }
+
+            return (
+              <ChallengeCard
+                identifier='card-1'
+                image={ challengeImg }
+                key={ challenge.name }
+                name={ challenge.name }
+                users={ challenge.joinedUsers }
+                reward={ challenge.ppyAmount }
+                game={ challenge.game }
+                date={ ChallengeUtil.formatDate(challenge.endDate) }
+              />
+            );
+          })}
+        </Slider>
       </div>
     );
   }
 
   render() {
-
     if (this.props.challenges.length) {
       return (
         <div className='dashboard__carousel'>

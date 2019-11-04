@@ -33,28 +33,12 @@
   }
 }
 
-.challenge-card {
-  &-0, &-2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+.slick-prev {
+  left: 24%;
+  z-index: 69;
+}
 
-  &-0, &-2 {
-    z-index: -1;
-    width: 118%;
-    opacity: 0.6;
-  }
-
-  &-0 {
-    transform: translate(-6vw, 54px);
-  }
-
-  &-1 {
-    z-index: 69;
-  }
-
-  &-2 {
-    transform: translate(20%, 54px);
-  }
+.slick-next {
+  right: 25.6%;
+  z-index: 69;
 }

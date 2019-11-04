@@ -52,9 +52,6 @@ class ChallengeCard extends Component {
     return (
       <>
         <div className={ cardClass }>
-          {!identifier ? <div className='challenge-card__join-minor'>
-            <span className='challenge-card__tag-join-minor'>{translate('dashboard.join')}</span>
-          </div> : null}
           <Card className={ cardMediaClass }>
             <CardActionArea>
               <CardMedia
@@ -75,12 +72,9 @@ class ChallengeCard extends Component {
                 {date}
               </div>
               <div className={ cardRewardClass }>
-                <img src={ susdImg } alt='sUSD'/>
+                <img className = 'challenge-card__coin' src={ susdImg } alt='sUSD'/>
                 {translate('dashboard.susd')} {reward}
               </div>
-              {identifier ? <div className='challenge-card__join'>
-                <span className='challenge-card__tag-join'>{translate('dashboard.join')}</span>
-              </div> : null}
             </CardActionArea>
             <div className='challenge-card__tag-container'>
               <div className={ cardTagClass + ' streaming' }>

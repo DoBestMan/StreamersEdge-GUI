@@ -174,6 +174,7 @@ export const translationObject = {
     },
     dashboard: {
       featured: {
+        header: 'Featured Challenges',
         desc: 'Streamers Edge Rivals brings streamers and esports together! Competitors in the Streamers Edge Rivals Fortnite Showdown will compete against each other numerous game modes: FFA, ' +
         'Skirmish and Horde mode.'
       },

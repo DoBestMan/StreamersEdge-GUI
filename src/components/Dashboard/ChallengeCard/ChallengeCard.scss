@@ -28,13 +28,14 @@
     &-carousel {
       @extend .challenge-card__main;
 
-      font-size: 36px;
+      font-size: 2em;
     }
   }
 
   &__tag-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     line-height: 79px;
   }
@@ -61,6 +62,7 @@
     &-main {
       height: 45px;
       font-size: 19px;
+      overflow: hidden;
     }
 
     &-type {
@@ -130,7 +132,7 @@
       margin-bottom: -10px;
       padding: 6px 10px;
       border-radius: 111px;
-      font-size: 16px;
+      font-size: 14px;
       color: black;
       background: rgb(251, 176, 59);
       text-shadow: none;
@@ -145,19 +147,24 @@
     top: 25px;
     left: 20px;
     line-height: 35px;
-    font-size: 15px;
+    font-size: 13px;
     color: $white;
 
     &-carousel {
       @extend .challenge-card__reward;
 
-      left: 80%;
+      left: 75%;
     }
   }
 
   &__icon {
+    display: inline;
     height: 15px;
     margin-right: 5px;
+  }
+
+  &__coin {
+    height: 50%;
   }
 
   &__join {
@@ -191,7 +198,7 @@
   }
 
   &__media {
-    width: 71%;
+    width: 50%;
     height: 77.5%;
     margin: 0 20px 20px 0;
     border: 3px solid $dashboard-card-border;
@@ -199,7 +206,7 @@
     background-color: $dashboard-paginate-dark;
 
     &-main {
-      width: 98.3%;
+      width: 45%;
       height: 97%;
       margin: 0 20px 20px 0;
       border: 3px solid $dashboard-card-border;

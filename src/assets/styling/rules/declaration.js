@@ -28,7 +28,7 @@ module.exports = {
     'background-image': ['px', 'x', '%'],
     'border': ['px'],
     'border-width': ['px'],
-    'font-size': ['px'],
+    'font-size': ['px', 'em'],
     'font': ['px'],
     'height': ['px', '%', 'vw', 'vh'],
     'line-height': ['px'],

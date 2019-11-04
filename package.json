@@ -119,6 +119,7 @@
     "react-paginate": "^6.3.0",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
+    "react-slick": "^0.25.2",
     "react-tag-autocomplete": "^5.11.1",
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
