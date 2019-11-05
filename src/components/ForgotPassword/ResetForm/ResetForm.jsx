@@ -9,7 +9,7 @@ import {Button, FormControl, Card} from '@material-ui/core';
 import querystring from 'query-string';
 
 import {AuthService} from '../../../services';
-import {NavigateActions} from '../../../actions';
+import {NavigateActions, AccountActions} from '../../../actions';
 import {ValidationUtil, GenUtil} from '../../../utility';
 
 import CustomInput from '../../CustomInput';
@@ -70,6 +70,7 @@ class ResetForm extends Component {
 
     AuthService.resetPassword(this.state.token, this.state.password)
       .then(() => {
+        this.props.setLogin(true);
         this.props.navigateToDashboard();
       })
       .catch((err) => {
@@ -168,7 +169,8 @@ class ResetForm extends Component {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-    navigateToDashboard: NavigateActions.navigateToDashboard
+    navigateToDashboard: NavigateActions.navigateToDashboard,
+    setLogin: AccountActions.setIsLoggedInAction
   },
   dispatch
 );
