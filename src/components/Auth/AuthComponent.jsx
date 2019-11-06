@@ -17,8 +17,7 @@ export function requireAuthentication(Component) {
 
     checkAuth() {
       if (!this.props.isLoggedIn && !!Config.requireAuthentication) {
-        let redirectAfterLogin = this.props.location.pathname;
-        this.props.navigateToSignIn(redirectAfterLogin);
+        this.props.navigate('/');
       }
     }
 
@@ -36,7 +35,7 @@ export function requireAuthentication(Component) {
 
   const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
-      navigateToSignIn: NavigateActions.navigateToSignIn
+      navigate: NavigateActions.navigate
     },
     dispatch
   );

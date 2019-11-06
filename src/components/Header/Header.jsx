@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {NavLink} from 'react-router-dom';
 import {AppActions, ModalActions} from '../../actions';
 import {GenUtil} from '../../utility';
 import {ModalTypes} from '../../constants';
@@ -49,12 +48,6 @@ class Header extends Component {
         <div className='header'>
           <div className='header--left'>
             <img src={ menuIcon } alt='menuIcon' />
-            <NavLink exact className='header__link' activeClassName='' to=''>
-              {translate('header.menu')}
-            </NavLink>
-            <NavLink exact className='header__link' activeClassName='' to=''>
-              {translate('header.popular')}
-            </NavLink>
           </div>
           <div className='header--center'>
             <img className='header__image' src={ HeaderLogo } alt='Header' />

@@ -45,7 +45,7 @@ const Config = {
    * @type {boolean}
    * @memberof Config
    */
-  requireAuthentication: false,
+  requireAuthentication: true,
   /**
    * List of platforms supported for OAuth.
    *
