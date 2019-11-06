@@ -9,6 +9,7 @@
   background: #06002a 0% 0% no-repeat padding-box;
   box-shadow: 0 7px 9px #000000bf;
   transition: right .5s;
+  overflow: auto;
 
   &__open {
     right: 0;
