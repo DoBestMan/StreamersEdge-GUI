@@ -17,6 +17,7 @@ import BanModal from '../Modals/BanModal';
 import LinkAccountModal from '../Modals/LinkAccountModal';
 import UnlinkAccountModal from '../Modals/UnlinkAccountModal';
 import SubmitModal from '../Modals/SubmitModal';
+import CategoryModal from '../Modals/CategoryModal';
 
 class RootModal extends Component {
 
@@ -43,7 +44,6 @@ class RootModal extends Component {
     // Default modal content - a user should NEVER see this in production.
     let modalContent = null;
     let modalClass = classes.root;
-
 
     // Specify your modals here
     switch (this.props.modalType) {
@@ -103,6 +103,12 @@ class RootModal extends Component {
       case ModalTypes.SUBMIT: {
         modalContent = <SubmitModal />;
         modalClass = classes.success;
+        break;
+      }
+
+      case ModalTypes.SELECT_CATEGORY: {
+        modalContent = <CategoryModal />;
+        modalClass = classes.category;
         break;
       }
 

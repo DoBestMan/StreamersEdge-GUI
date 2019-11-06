@@ -278,12 +278,34 @@ export const translationObject = {
       terms: 'Terms & Conditions'
     },
 
+    search: {
+      resultFor: 'Result For ',
+      viewall: 'View all',
+      challenge: {
+        label: 'Challenges',
+        noChallenge: 'There are no challenges...'
+      }
+    },
+
+    category: {
+      title: 'Category',
+      select: 'Select category'
+    },
+
     leftMenu: {
       links: {
-        challenges: 'Challenges',
+        challenges: 'All Challenges',
         categories: 'Categories',
-        popular: 'Popular Challenge'
-      }
+        popular: 'Popular Challenge',
+        filters: 'Filters'
+      },
+      search: {
+        placeholder: 'Search'
+      },
+      reset: 'Reset',
+      defaultStatus: 'Open',
+      categoryText: 'Category: ',
+      challenger: 'Challenger: '
     },
 
     rightMenu: {

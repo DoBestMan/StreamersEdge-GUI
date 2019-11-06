@@ -1,0 +1,136 @@
+@import '../../../assets/styles/common.scss';
+
+.result-form {
+  position: absolute;
+  left: 405px;
+  z-index: 71;
+  width: 937px;
+  height: 100%;
+  background: #06002a 0% 0% no-repeat padding-box;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    margin: 37px 0 30px 45px;
+    font-style: italic;
+    font-size: 60px;
+    letter-spacing: 0;
+    text-shadow: 3px 3px 4px #003366;
+
+    & svg {
+      margin-right: 40px;
+      cursor: pointer;
+    }
+  }
+
+  &-content {
+    height: 100%;
+    overflow: auto;
+  }
+
+  &-block {
+    padding: 0 67px 38px 7px;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 85px;
+      margin-left: 65px;
+    }
+
+    &__title {
+      font-size: 28px;
+      color: $white;
+      letter-spacing: 0;
+    }
+
+    &__all {
+      display: flex;
+      align-items: center;
+      font-size: 23px;
+      cursor: pointer;
+      letter-spacing: 0;
+
+      & span {
+        color: $blue-light-one;
+      }
+
+      & svg {
+        margin-right: 5px;
+
+        & path {
+          color: $blue-light-one;
+        }
+      }
+    }
+
+    &__noresult {
+      font-size: 28px;
+      color: $white;
+      text-align: right;
+      opacity: .5;
+      letter-spacing: 0;
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > {
+      li {
+        display: inline;
+
+        > {
+          a, span {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 28px;
+            color: $blue-light-one;
+            cursor: pointer;
+            letter-spacing: 0;
+          }
+
+          a:hover, span:hover, a:focus, span:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .active > {
+        a, span, a:hover, span:hover, a:focus, span:focus {
+          color: $white;
+        }
+      }
+
+      .previous {
+        svg {
+          font-size: 35px;
+          fill: $blue-light-one;
+        }
+      }
+
+      .previous.disabled {
+        svg {
+          fill: $gray;
+        }
+      }
+
+      .next {
+        svg {
+          font-size: 35px;
+          fill: $blue-light-one;
+        }
+      }
+
+      .next.disabled {
+        svg {
+          fill: $gray;
+        }
+      }
+    }
+  }
+}
