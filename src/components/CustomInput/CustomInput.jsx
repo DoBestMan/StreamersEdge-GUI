@@ -95,12 +95,18 @@ class CustomInput extends Component {
         validationConditions: []
       },
       iconRightWrapperClassName,
+      initialValue: '',
       value: value || '',
       isInputActive: false,
       theme,
       onBlur
     };
   }
+
+  componentDidMount() {
+    this.setState({initialValue: this.props.value});
+  }
+
   //check if we need to reset input
   componentDidUpdate(prevProps) {
     if (prevProps.resetToDefault !== this.props.resetToDefault) {
@@ -180,19 +186,17 @@ class CustomInput extends Component {
         break;
       case 'mouseOut':
       case 'divMouseOut':
-        if (!this.state.isInputActive && this.state.value === '') {
+        if (!this.state.isInputActive) {
           useDefaultImages();
         }
 
         break;
       case 'blur':
-        if (this.state.value === '') {
-          this.setState({
-            isInputActive: false
-          });
+        this.setState({
+          isInputActive: false
+        });
 
-          useDefaultImages();
-        }
+        useDefaultImages();
 
         break;
 
@@ -225,7 +229,11 @@ class CustomInput extends Component {
   onChange = (e) => {
     this.setState({value: e.target.value});
     // Use the props onChange handler.
-    this.state.handleChange(e.target.value);
+
+    // Only update if there is a different value.
+    if (this.props.value !== e.target.value) {
+      this.state.handleChange(e.target.value);
+    }
   }
 
   render() {

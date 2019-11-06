@@ -12,26 +12,18 @@ import dropdownTouched from '../../assets/images/dropdown-active.svg';
 import styles from './MUI.css';
 
 class Dropdown extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      image: dropdown,
-      dropdownOpen: false
-    };
-  }
+  state = {
+    image: dropdown,
+    dropdownOpen: false,
+    initialSelection: ''
+  };
 
   mouseOver = () => {
     this.setState({image: dropdownTouched});
   };
 
-  //if there is no value switch back to default untouched image
   mouseOut = () => {
-    if (this.props.value === '') {
-      this.setState({image: dropdown});
-    } else {
-      this.setState({image: dropdownTouched});
-    }
+    this.setState({image: dropdown});
   };
 
   onOpen = () => {
@@ -39,17 +31,14 @@ class Dropdown extends Component {
   };
 
   onClose = () => {
-    this.setState({dropdownOpen: false});
-
-    //switch back to default untouched image if no value is selected
-    if (this.props.value === '') {
-      this.setState({image: dropdown});
-    }
+    this.setState({dropdownOpen: false, image: dropdown});
   };
 
   handleChange = (e) => {
-    const value = e.target.value;
-    this.props.handleChange(value);
+    // Only update if there is a different value.
+    if (this.props.value !== e.target.value) {
+      this.props.handleChange(e.target.value);
+    }
   }
 
   render() {
@@ -67,10 +56,10 @@ class Dropdown extends Component {
             onChange={ this.handleChange }
             onMouseOver={ this.mouseOver }
             onMouseOut={ this.mouseOut }
-            IconComponent={ () => <> </> } //this removes the default material ui dropdown icon
-            inputProps={ {classes: {selectMenu: classes.textBoxStyle}} } //overrides input/textbox styles
+            IconComponent={ () => <> </> } // this removes the default material ui dropdown icon
+            inputProps={ {classes: {selectMenu: classes.textBoxStyle}} } // overrides input/textbox styles
             MenuProps={ {
-              classes: {paper: classes.dropdownStyle}, //overrides dropdown styles
+              classes: {paper: classes.dropdownStyle}, // overrides dropdown styles
               getContentAnchorEl: null
             } }
           >

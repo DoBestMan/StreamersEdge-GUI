@@ -12,7 +12,6 @@ import {GenUtil, ValidationUtil} from '../../../utility';
 const translate = GenUtil.translate;
 
 class UserInfo extends Component {
-
   state = {
     isEmailInputClicked: false
   }
@@ -24,6 +23,12 @@ class UserInfo extends Component {
   handleEmailChange = (email) => {
     this.setState({isEmailInputClicked: true});
     this.props.handleEmailChange(email);
+  }
+
+  validateEmail = () => {
+    if (this.state.isEmailInputClicked) {
+      return ValidationUtil.seEmail(this.props.email).success;
+    }
   }
 
   render() {
@@ -54,13 +59,7 @@ class UserInfo extends Component {
                   handleRightIconClick={ () => {
                     return  ValidationUtil.seEmail(this.props.email).errors;
                   } }
-                  isValid={ () => {
-                    if (this.state.isEmailInputClicked) {
-                      return ValidationUtil.seEmail(this.props.email).success;
-                    } else {
-                      return true;
-                    }
-                  }  }/>
+                  isValid={ this.validateEmail }/>
               </div>
             </div>
           </div>
