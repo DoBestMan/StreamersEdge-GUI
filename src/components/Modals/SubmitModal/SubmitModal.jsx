@@ -1,53 +1,81 @@
 import React, {Component} from 'react';
-import {successRobot, errorRobot, closeButton} from '../../../assets/images/modals';
-import {ModalActions} from '../../../actions';
+import {successRobot, errorRobot} from '../../../assets/images/modals';
+import CloseIcon from '@material-ui/icons/Close';
+import {ModalActions, NavigateActions} from '../../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {GenUtil} from '../../../utility';
+
+const translate = GenUtil.translate;
 
 class SubmitModal extends Component {
 
-  constructor(props) {
-    super(props);
-    const type = this.props.modalType || '';
-    const icon = type === 'success' ? successRobot : errorRobot;
-
-    this.state = {
-      type,
-      icon,
-      headerText: '',
-      subText: ''
-    };
-  }
+  state = {timerActive: false}
 
   componentDidUpdate(prevProps) {
-    if(this.props !== prevProps && this.props.modalData) {
-      this.setState({
-        icon: this.props.modalType === 'success' ? successRobot : errorRobot,
-        headerText: this.props.modalData.headerText || '',
-        subText: this.props.modalData.subText || ''
-      });
+    //once component loads props from redux && modaltype === sucess, set the closing timer
+    if(this.props.modalType === 'success' && prevProps.modalType !== 'success') {
+      this.setState({timerActive: true});
+
+      setTimeout(()=> {
+        this.setState({timerActive: false});
+        this.handleClose();
+      }, 10000);
+    }
+
+    //if the user closes the modal by clicking  outside of the modal
+    if(!this.props.isModalOpen && prevProps.isModalOpen && prevProps.modalType === 'success') {
+      this.handleRedirect(prevProps.redirect);
+      this.props.setModalData('');
     }
   }
 
   handleClose = () => {
-    this.props.setModalData('');
-    this.props.toggleModal();
+    //user closes the modal
+    if(this.props.isModalOpen) {
+      if(this.props.modalType === 'success') {
+        this.handleRedirect();
+      }
+
+      this.props.setModalData('');
+      this.props.toggleModal();
+    }
+
+    //timer expired
+    if(!this.state.timerActive && this.props.isModalOpen) {
+      this.handleRedirect();
+      this.props.toggleModal();
+    }
+  }
+
+  handleRedirect(url) {
+    const redirect = this.props.redirect ? this.props.redirect : url;
+
+    switch(redirect) {
+      case '/dashboard':
+        return this.props.navigateToDashboard();
+      default:
+        break;
+    }
   }
 
   render() {
-    const {icon, headerText, subText} = this.state;
+    const {headerText, subText, modalType} = this.props;
+    const icon = modalType === 'error' ? errorRobot: successRobot;
+
     return (
       <div className='submit-modal__wrapper'>
         <div className='submit-modal'>
           <div className='submit-modal__cross' onClick={ this.handleClose }>
-            <img className='submit-modal__cross-img' src={ closeButton } alt=''/>
+            <CloseIcon />
           </div>
           <div className='submit-modal__icon'>
             <img className='submit-modal__icon-img' src={ icon } alt=''/>
           </div>
           <div className='submit-modal-text'>
             <p className='submit-modal-text__header'>{headerText}</p>
-            <p className='submit-modal-text__subText'>{subText}</p>
+            <p className='submit-modal-text__subText'>{subText} {this.props.modalType === 'success' ? <span className='submit-modal-text__redirect'
+              onClick={ () => this.handleClose() }> {translate('preferences.modal.clickHere')}</span> : null}</p>
           </div>
         </div>
       </div>
@@ -59,14 +87,18 @@ class SubmitModal extends Component {
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal,
-    setModalData: ModalActions.setModalData
+    setModalData: ModalActions.setModalData,
+    navigateToDashboard: NavigateActions.navigateToDashboard
   },
   dispatch
 );
 
 const mapStateToProps = (state) => ({
-  modalData: state.getIn(['modal', 'data']),
-  modalType: state.getIn(['modal', 'data', 'type'])
+  headerText: state.getIn(['modal', 'data', 'headerText']),
+  subText: state.getIn(['modal', 'data', 'subText']),
+  modalType: state.getIn(['modal', 'data', 'type']),
+  redirect: state.getIn(['modal', 'data', 'redirect']),
+  isModalOpen: state.getIn(['modal', 'isOpen'])
 });
 
 export default connect(

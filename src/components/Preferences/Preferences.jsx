@@ -87,7 +87,9 @@ class Preferences extends Component {
                 this.props.setAccount(profile);
                 this.props.setModalType(ModalTypes.SUBMIT);
                 this.props.toggleModal();
-                this.props.setModalData({headerText: translate('preferences.modal.successHeader'), type: 'success'});
+                this.props.setModalData({headerText: translate('preferences.modal.successHeader'),
+                  subText: translate('preferences.modal.successSubText'), redirect: '/dashboard',
+                  type: 'success'});
               })
               .catch((err) => {
                 console.error('Get profile failed', err);

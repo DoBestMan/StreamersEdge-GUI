@@ -95,7 +95,10 @@ export const translationObject = {
       modal: {
         errorHeader: 'Unexpected Error',
         errorSubText: 'Failed to update preferences',
-        successHeader: 'Your preferences have been succesfully updated'
+        successHeader: 'Your preferences have been succesfully updated',
+        successSubText: 'You will be automatically redirected in 10 seconds, otherwise,',
+        successSubTextClickHere: 'click here',
+        clickHere: 'click here'
       }
     },
     login: {
