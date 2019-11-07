@@ -19,7 +19,7 @@ const routes = (
       <Route exact path={ Routes.ROOT } component={ Home }/>
       <Route path={ Routes.RESET_PASSWORD } component={ ResetForm }/>
       <Route path={ Routes.PROFILE } component={ requireAuthentication(CreateProfile) }/>
-      <Route path={ Routes.DASHBOARD } component={ requireAuthentication(Dashboard) }/>
+      <Route path={ Routes.DASHBOARD } component={ Dashboard }/>
       <Route path={ Routes.PREFERENCES } component={ requireAuthentication(Preferences) } />
       <Route path={ Routes.CREATE_CHALLENGE } component={ requireAuthentication(CreateChallenge) } />
       <Route path={ Routes.UPDATE_PROFILE } component={ requireAuthentication(UpdateProfile) } />

@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {NavigateActions} from '../../actions';
 import {Config} from '../../utility';
+import {RouteConstants} from '../../constants';
 
 export function requireAuthentication(Component) {
   class AuthenticatedComponent extends React.Component {
@@ -17,7 +18,7 @@ export function requireAuthentication(Component) {
 
     checkAuth() {
       if (!this.props.isLoggedIn && !!Config.requireAuthentication) {
-        this.props.navigate('/');
+        this.props.navigate(RouteConstants.DASHBOARD);
       }
     }
 
@@ -35,7 +36,7 @@ export function requireAuthentication(Component) {
 
   const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
-      navigate: NavigateActions.navigate
+      navigate: NavigateActions.navigateToDashboard
     },
     dispatch
   );

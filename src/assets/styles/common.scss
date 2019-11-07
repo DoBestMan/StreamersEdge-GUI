@@ -51,6 +51,12 @@ html, body {
   }
 }
 
+.cursor {
+  &--pointer {
+    cursor: pointer;
+  }
+}
+
 #content {
   display: inline-flex;
   flex-direction: column;

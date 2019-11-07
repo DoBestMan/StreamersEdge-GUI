@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {AppActions, ModalActions} from '../../actions';
+import {AppActions, ModalActions, NavigateActions} from '../../actions';
 import {GenUtil} from '../../utility';
 import {ModalTypes} from '../../constants';
 import HeaderLogo from '../../assets/images/se-logo.png';
@@ -47,10 +47,10 @@ class Header extends Component {
       <>
         <div className='header'>
           <div className='header--left'>
-            <img src={ menuIcon } alt='menuIcon' />
+            <img className='cursor--pointer' src={ menuIcon } onClick={ this.props.navigateToDash } alt='menuIcon' />
           </div>
           <div className='header--center'>
-            <img className='header__image' src={ HeaderLogo } alt='Header' />
+            <img className='header__image cursor--pointer' src={ HeaderLogo } onClick={ this.props.navigateToDash } alt='Header' />
           </div>
           <div className='header--right'>
             {signUpButton}
@@ -81,7 +81,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal,
     setModalType: ModalActions.setModalType,
-    logout: AppActions.logout
+    logout: AppActions.logout,
+    navigateToDash: NavigateActions.navigateToDashboard
   },
   dispatch
 );
