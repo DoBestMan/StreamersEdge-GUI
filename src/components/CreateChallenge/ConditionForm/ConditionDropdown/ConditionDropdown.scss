@@ -10,18 +10,25 @@
   font-weight: 300;
   font-style: italic;
   font-size: 25px;
+  text-transform: capitalize;
   background: $input-blue;
   box-shadow: 0 0 20px 2px $input-blue-glow;
 
   &__left {
     display: flex;
     align-items: center;
+    box-sizing: border-box;
     width: 200px;
     height: 100%;
-    padding-left: 30px;
     border-radius: 11px 0 0 11px;
     color: $blue-light;
     background-color: $challenge-condition__background;
+
+    &--select {
+      @extend .condition-dropdown__left;
+
+      padding-left: 30px;
+    }
   }
 
   &__right {

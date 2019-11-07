@@ -3,18 +3,19 @@ import {format} from 'date-fns';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid, FormControlLabel, Checkbox} from '@material-ui/core';
 import DatePicker from 'react-datepicker';
+
+import {GenUtil} from '../../../utility';
 import DateInput from './DateInput';
 import styles from './Mui.css';
 
-class DateForm extends Component {
-  constructor(props) {
-    super(props);
+const trans = GenUtil.translate;
 
-    this.state = {
-      showStartDate: false,
-      showEndDate: false
-    };
-  }
+class DateForm extends Component {
+  state = {
+    showStartDate: false,
+    showEndDate: false,
+    today: new Date()
+  };
 
   toggleStartDate = () => {
     this.setState({
@@ -53,18 +54,23 @@ class DateForm extends Component {
               <div className='date-form__wrapper'>
                 <div className='date-form__group'>
                   <label className='date-form__label'>
-                    Start Date
+                    {trans('createChallenge.date.startDate')}
                   </label>
                   <DateInput
-                    value={ format(this.props.startDate, 'MMMM d, y') }
+                    value={ format(this.props.startDate, 'MMMM d, y h:mm aa') }
                     onFocus={ this.toggleStartDate }
                   />
                 </div>
                 {this.state.showStartDate && (
                   <DatePicker
                     inline
+                    showTimeSelect
                     selected={ this.props.startDate }
-                    minDate={ this.props.startDate }
+                    minDate={ this.state.today }
+                    timeFormat='HH:mm'
+                    timeIntervals={ 10 }
+                    timeCaption='Time'
+                    dateFormat='MMM d, y h:mm aa'
                     onChange={ this.handleChangeStartDate }
                   />
                 )}
@@ -76,10 +82,10 @@ class DateForm extends Component {
                   <>
                     <div className='date-form__group'>
                       <label className='date-form__label'>
-                        End Date
+                        {trans('createChallenge.date.endDate')}
                       </label>
                       <DateInput
-                        value={ format(this.props.endDate, 'MMMM d, y') }
+                        value={ format(this.props.endDate, 'MMMM d, y h:mm aa') }
                         onFocus={ this.toggleEndDate }
                       />
                     </div>
@@ -87,8 +93,13 @@ class DateForm extends Component {
                     {this.state.showEndDate && (
                       <DatePicker
                         inline
+                        showTimeSelect
                         selected={ this.props.endDate }
                         minDate={ this.props.startDate }
+                        timeFormat='HH:mm'
+                        timeIntervals={ 10 }
+                        timeCaption='time'
+                        dateFormat='MMM d, y h:mm aa'
                         onChange={ this.handleChangeEndDate }
                       />
                     )}
@@ -106,7 +117,7 @@ class DateForm extends Component {
                       color='primary'
                     />
                   }
-                  label='Undefined date'
+                  label={ trans('createChallenge.date.undefined') }
                 />
               </div>
             </Grid>

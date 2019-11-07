@@ -4,6 +4,7 @@ import ModalActions from './ModalActions';
 import NavigateActions from './NavigateActions';
 import StreamActions from './StreamActions';
 import ErrorBoxActions from './ErrorBoxActions';
+import ChallengeActions from './ChallengeActions';
 
 export {
   AccountActions,
@@ -11,5 +12,6 @@ export {
   ModalActions,
   NavigateActions,
   StreamActions,
-  ErrorBoxActions
+  ErrorBoxActions,
+  ChallengeActions
 };

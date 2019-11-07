@@ -1,15 +1,33 @@
 import React, {Component} from 'react';
 import {
-  nextButton,
-  backButton,
-  createButton,
-  step1,
-  step2,
-  step3,
-  step4
+  NextButton,
+  BackButton,
+  CreateButton,
+  Step1,
+  Step2,
+  Step3,
+  Step4
 } from '../../../assets/images/challenge';
 
 class ChallengeFooter extends Component {
+  handleKeyUpForNext = (e) => {
+    if (e.keyCode === 13) {
+      const {currentStep, lastStep, onNext, onComplete} = this.props;
+
+      if (currentStep === lastStep) {
+        onComplete();
+      } else {
+        onNext();
+      }
+    }
+  }
+
+  handleKeyUpForPrev = (e) => {
+    if (e.keyCode === 13) {
+      this.props.onBack();
+    }
+  }
+
   /*
    * Render back button
    * If current step is 1, not show the back button
@@ -21,13 +39,13 @@ class ChallengeFooter extends Component {
     if (currentStep === 1) {
       return (
         <div className='challenge-footer__step-back challenge-footer__item--hide'>
-          <img className='challenge-footer__item--hide' src={ backButton } alt='' />
+          <img className='challenge-footer__item--hide' src={ BackButton } alt='' />
         </div>
       );
     } else {
       return (
-        <div className='challenge-footer__step-back'>
-          <img className='challenge-footer__item' onClick={ onBack } src={ backButton } alt='' />
+        <div className='challenge-footer__step-back' tabIndex={ 0 } onKeyUp={ this.handleKeyUpForPrev } onClick={ onBack }>
+          <img className='challenge-footer__item' src={ BackButton } alt='' />
         </div>
       );
     }
@@ -38,10 +56,10 @@ class ChallengeFooter extends Component {
   */
   renderSteps = () => {
     const {currentStep} = this.props;
-    let steps = [step1, step2, step3, step4];
+    const Steps = [Step1, Step2, Step3, Step4];
 
     return (
-      <img className='challenge-footer__step-steppers challenge-footer__item' src={ steps[currentStep - 1] } alt='' />
+      <img className='challenge-footer__step-steppers challenge-footer__item' src={ Steps[currentStep - 1] } alt='' />
     );
   }
 
@@ -55,14 +73,14 @@ class ChallengeFooter extends Component {
 
     if (currentStep === lastStep) {
       return (
-        <div className='challenge-footer__step-next'>
-          <img className='challenge-footer__item' onClick={ onComplete } src={ createButton } alt='' />
+        <div className='challenge-footer__step-next' tabIndex={ 0 } onKeyUp={ this.handleKeyUpForNext } onClick={ onComplete }>
+          <img className='challenge-footer__item' src={ CreateButton } alt='' />
         </div>
       );
     } else {
       return (
-        <div className='challenge-footer__step-next'>
-          <img className='challenge-footer__item' onClick={ onNext } src={ nextButton } alt='' />
+        <div className='challenge-footer__step-next' tabIndex={ 0 } onKeyUp={ this.handleKeyUpForNext } onClick={ onNext }>
+          <img className='challenge-footer__item' src={ NextButton } alt='' />
         </div>
       );
     }

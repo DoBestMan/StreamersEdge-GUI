@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {Select, MenuItem} from '@material-ui/core';
 import DropdownIcon from '@material-ui/icons/UnfoldMore';
+import {GenUtil} from '../../../../utility';
 import styles from './Mui.css';
+
+const trans = GenUtil.translate;
 
 class ConditionDropdown extends Component {
   handleChangeValue = (e) => {
@@ -17,7 +20,7 @@ class ConditionDropdown extends Component {
 
   renderAnchor = () => {
     return (
-      <DropdownIcon classes={ {root: this.props.classes.dropdownAnchor} }color='primary' />
+      <DropdownIcon classes={ {root: this.props.classes.dropdownAnchor} } color='primary' />
     );
   }
 
@@ -28,15 +31,16 @@ class ConditionDropdown extends Component {
       <>
         <div className='condition-dropdown'>
           {this.props.join === 'must' ? (
-            <div className='condition-dropdown__left'>
-              The User Must
+            <div className='condition-dropdown__left--select'>
+              {trans('createChallenge.condition.conditions.must')}
             </div>
           ) : (
             <div className='condition-dropdown__left'>
               <Select
                 className='condition-dropdown__right-dropdown'
                 classes={ {
-                  root: classes.dropdown
+                  root: classes.dropdown,
+                  select: classes.dropdownSelect
                 } }
                 value={ this.props.join }
                 IconComponent={ () => <> </> }
@@ -46,30 +50,32 @@ class ConditionDropdown extends Component {
                 } }
                 onChange={ this.handleChangeJoin }
               >
-                <MenuItem className='dropdown__menuItem' value='and'>And</MenuItem>
-                <MenuItem className='dropdown__menuItem' value='or'>Or</MenuItem>
+                <MenuItem className='dropdown__menuItem' value='AND'>{trans('createChallenge.condition.conditions.and')}</MenuItem>
+                <MenuItem className='dropdown__menuItem' value='OR'>{trans('createChallenge.condition.conditions.or')}</MenuItem>
               </Select>
             </div>
           )}
-          <div className='condition-dropdown__right'>
-            <Select
-              className='condition-dropdown__right-dropdown'
-              classes={ {
-                root: classes.dropdown
-              } }
-              value={ this.props.value }
-              IconComponent={ this.renderAnchor }
-              MenuProps={ {
-                classes: {paper: classes.dropdownStyle}, //overrides dropdown styles
-                getContentAnchorEl: null
-              } }
-              onChange={ this.handleChangeValue }
-            >
-              <MenuItem className='dropdown__menuItem' value='kill'>Kill</MenuItem>
-              <MenuItem className='dropdown__menuItem' value='score'>Score</MenuItem>
-              <MenuItem className='dropdown__menuItem' value='time'>Tmrating</MenuItem>
-            </Select>
-          </div>
+          {this.props.gameStats && (
+            <div className='condition-dropdown__right'>
+              <Select
+                className='condition-dropdown__right-dropdown'
+                classes={ {
+                  root: classes.dropdown
+                } }
+                value={ this.props.value }
+                IconComponent={ this.renderAnchor }
+                MenuProps={ {
+                  classes: {paper: classes.dropdownStyle}, //overrides dropdown styles
+                  getContentAnchorEl: null
+                } }
+                onChange={ this.handleChangeValue }
+              >
+                {Object.entries(this.props.gameStats).map((stat) => (
+                  <MenuItem key={ stat[1] } className='dropdown__menuItem' value={ stat[0] }>{stat[1]}</MenuItem>
+                ))}
+              </Select>
+            </div>
+          )}
         </div>
       </>
     );

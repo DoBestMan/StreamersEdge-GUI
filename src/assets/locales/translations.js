@@ -333,6 +333,21 @@ export const translationObject = {
         label: 'Challenge Game',
         placeholder: 'Search'
       },
+      date: {
+        startDate: 'Start Date',
+        endDate: 'End Date',
+        undefined: 'Undefined date'
+      },
+      condition: {
+        label: 'Challenge Conditions',
+        add: 'Add',
+        bounty: 'Bounty',
+        conditions: {
+          must: 'The User Must',
+          and: 'And',
+          or: 'Or'
+        }
+      },
       invite: {
         condition: {
           label: 'Invite Conditions',
@@ -342,17 +357,49 @@ export const translationObject = {
             both: 'Both'
           }
         },
-        challenge: 'Username'
+        challenge: 'Gamers to Invite'
+      },
+      confirm: {
+        bounty: 'Bounty',
+        fee: 'Creation fee',
+        total: 'Total',
+        ppyPassword: {
+          required: 'Peerplays password is required',
+          placeholder: 'Enter Peerplays password'
+        }
       },
       errors: {
         name: {
-          required: 'A challenge name is required'
+          required: 'A challenge name is required',
+          maximum: 'A challenge name is no longer than 50'
+        },
+        game: {
+          required: 'A challenge game is required'
         },
         date: {
           invalid: 'End Date should be greater than Start Date'
         },
         condition: {
           required: 'Add at least one condition'
+        },
+        invite: {
+          required: 'Add at least one invited account'
+        }
+      },
+      modal: {
+        failedHeader: 'Unexpected error',
+        failedTransaction: 'Create transaction failed'
+      },
+      success: {
+        header: 'Congratulations, challenge created',
+        subHeader: 'Share it with your friends, and scrap to participate!',
+        link: {
+          label: 'Challenge Link'
+        },
+        redirect: {
+          text1: 'You will be automatically redirected to the challenge pages in',
+          text2: 'seconds, otherwise,',
+          here: 'click here'
         }
       }
     },

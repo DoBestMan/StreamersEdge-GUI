@@ -2,6 +2,7 @@ import {version} from '../../package.json';
 
 const isDev = true;
 const [devApiRoute, prodApiRoute] = ['http://localhost:3000/', ''];
+const [devBaseRoute, prodBaseRoute] = ['http://localhost:8082', ''];
 
 /**
  * @namespace Config
@@ -88,7 +89,23 @@ const Config = {
    * @type {string}
    * @memberof Config
    */
-  sUSD: '1.3.1'
+  sUSD: '1.3.1',
+
+  /**
+   * Represents escrow id.
+   *
+   * @type {string}
+   * @memberof Config
+   */
+  escrow: '1.2.40',
+
+  /**
+   * Represents the base uri.
+   *
+   * @type {string}
+   * @memberof Config
+   */
+  baseRoute: isDev ? devBaseRoute : prodBaseRoute
 };
 
 export default Config;

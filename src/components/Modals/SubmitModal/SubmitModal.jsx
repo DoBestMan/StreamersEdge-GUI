@@ -74,8 +74,16 @@ class SubmitModal extends Component {
           </div>
           <div className='submit-modal-text'>
             <p className='submit-modal-text__header'>{headerText}</p>
-            <p className='submit-modal-text__subText'>{subText} {this.props.modalType === 'success' ? <span className='submit-modal-text__redirect'
-              onClick={ () => this.handleClose() }> {translate('preferences.modal.clickHere')}</span> : null}</p>
+            {Array.isArray(subText) ? (
+              <>
+                {subText.map((text) => (
+                  <p className='submit-modal-text__header'>{text}</p>
+                ))}
+              </>
+            ): (
+              <p className='submit-modal-text__subText'>{subText} {this.props.modalType === 'success' ? <span className='submit-modal-text__redirect'
+                onClick={ () => this.handleClose() }> {translate('preferences.modal.clickHere')}</span> : null}</p>
+            )}
           </div>
         </div>
       </div>

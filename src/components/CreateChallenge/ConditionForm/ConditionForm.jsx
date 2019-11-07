@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
+import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+
+import {GenUtil} from '../../../utility';
+
 import styles from './Mui.css';
 import ConditionDropdown from './ConditionDropdown';
 import ConditionStandard from './ConditionStandard';
 import {sUSD} from '../../../assets/images/challenge';
+
+const trans = GenUtil.translate;
 
 class ConditionForm extends Component {
   handleClickAdd = (index) => {
@@ -35,36 +41,35 @@ class ConditionForm extends Component {
       <>
         <div className='condition-form__wrapper'>
           <div className='condition-form__conditions'>
-            <p>Challenge Conditions</p>
+            <p>{trans('createChallenge.condition.label')}</p>
 
-            <div className='condition-form__condition'>
-              <ConditionDropdown
-                join={ conditions[0].join }
-                value={ conditions[0].param }
-                onChangeJoin = { (newJoin) => this.handleChangeJoin(0, newJoin) }
-                onChangeParam={ (newParam) => this.handleChangeParam(0, newParam) }
-              />
-              <ConditionStandard value={ conditions[0].value } size='small' onChange={ (newValue) => this.handleChangeValue(0, newValue) } />
-              <Button classes={ {root: classes.addButton} } onClick={ () => this.handleClickAdd(0) }>
-                + Add
-              </Button>
-              <Button className='condition-form__invisible' classes={ {root: classes.deleteButton} }>
-                <DeleteIcon fontSize='large' classes={ {root: classes.deleteIcon} } />
-              </Button>
-            </div>
-            {conditions.length > 1 && conditions.slice(1).map((condition, index) => (
+            {conditions.map((condition, index) => (
               <div key={ index } className='condition-form__condition'>
                 <ConditionDropdown
                   join={ condition.join }
                   value={ condition.param }
-                  onChangeJoin = { (newJoin) => this.handleChangeJoin(index + 1, newJoin) }
-                  onChangeParam={ (newParam) => this.handleChangeParam(index + 1, newParam) }
+                  gameStats={ this.props.gameStats }
+                  onChangeJoin = { (newJoin) => this.handleChangeJoin(index, newJoin) }
+                  onChangeParam={ (newParam) => this.handleChangeParam(index, newParam) }
                 />
-                <ConditionStandard value={ condition.value } size='small' onChange={ (newValue) => this.handleChangeValue(index + 1, newValue) } />
-                <Button classes={ {root: classes.addButton} } onClick={ () => this.handleClickAdd(index + 1) }>
-                  + Add
+                <ConditionStandard
+                  type='param'
+                  size='small'
+                  value={ condition.value }
+                  onChange={ (newValue) => this.handleChangeValue(index, newValue) }
+                />
+                <Button
+                  className={ classNames({'condition-form__invisible': index !== conditions.length - 1}) }
+                  classes={ {root: classes.addButton} }
+                  onClick={ () => this.handleClickAdd(index) }
+                >
+                  {`+ ${trans('createChallenge.condition.add')}`}
                 </Button>
-                <Button classes={ {root: classes.deleteButton} } onClick={ () => this.handleClickDelete(index + 1) }>
+                <Button
+                  className={ classNames({'condition-form__invisible': index === 0}) }
+                  classes={ {root: classes.deleteButton} }
+                  onClick={ () => this.handleClickDelete(index) }
+                >
                   <DeleteIcon fontSize='large' classes={ {root: classes.deleteIcon} } />
                 </Button>
               </div>
@@ -72,8 +77,13 @@ class ConditionForm extends Component {
           </div>
 
           <div className='condition-form__bounty'>
-            <span className='condition-form__bounty-label'>Bounty</span>
-            <ConditionStandard value={ this.props.ppyAmount } size='large' onChange={ this.props.onChangePPY } />
+            <span className='condition-form__bounty-label'>{trans('createChallenge.condition.bounty')}</span>
+            <ConditionStandard
+              type='bounty'
+              size='large'
+              value={ this.props.ppyAmount }
+              onChange={ (value) => this.props.onChange('ppyAmount', value) }
+            />
             <img className='condition-form__bounty-currency' src={ sUSD } alt='' />
           </div>
         </div>

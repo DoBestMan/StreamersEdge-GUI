@@ -1,0 +1,81 @@
+@import '../../../assets/styles/common.scss';
+
+.challenge-success {
+  padding: 74px 134px;
+  text-align: center;
+  letter-spacing: 0;
+
+  &__header {
+    margin: 0;
+    font-style: italic;
+    font-size: 50px;
+    color: $white;
+  }
+
+  &__subHeader {
+    margin: 12px 0 0;
+    font-style: italic;
+    font-size: 23px;
+    color: $white;
+    opacity: 0.7;
+  }
+
+  &__share {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 45px;
+    padding: 0 100px;
+
+    & .SocialMediaShareButton {
+      cursor: pointer;
+    }
+
+    & .SocialMediaShareButton:focus {
+      outline: none;
+    }
+  }
+
+  &__link {
+    margin-top: 60px;
+    padding: 0 32px;
+    text-align: left;
+
+    &-label {
+      font-style: italic;
+      font-size: 22px;
+      color: $white;
+    }
+
+    &-box {
+      position: relative;
+      padding: 20px 32px;
+      border: 1px solid $white;
+      border-radius: 2px;
+      font-style: italic;
+      font-size: 25px;
+      color: $blue-light-one;
+    }
+
+    &-copy {
+      position: absolute;
+      top: -32px;
+      right: -52px;
+      cursor: pointer;
+    }
+  }
+
+  &__redirect {
+    margin-top: 80px;
+    padding: 0 50px;
+    font-size: 23px;
+    color: $white;
+    opacity: 0.7;
+
+    &-link {
+      margin-left: 5px;
+      color: #c1272d;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

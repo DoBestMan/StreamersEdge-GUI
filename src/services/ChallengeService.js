@@ -46,24 +46,12 @@ class PrivateChallengeService {
     return new Promise(async(resolve, reject) => {
       const headers = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         }
-      };
-      // TODO: change ppyAmount inside of reqest body to sUSD once backend has updated API parameters
-      const {name, startDate, endDate, game, accessRule, sUSD, conditionsText, conditions} = challenge;
-      const body = {
-        name: name,
-        startDate: startDate,
-        endDate: endDate,
-        game: game,
-        accessRule: accessRule,
-        ppyAmount: sUSD,
-        conditionsText: conditionsText,
-        conditions: conditions
       };
 
       try {
-        response = await ApiHandler.post(query, querystring.stringify(body), headers);
+        response = await ApiHandler.post(query, JSON.stringify(challenge), headers);
 
         return resolve(response.data.result);
       } catch (err) {

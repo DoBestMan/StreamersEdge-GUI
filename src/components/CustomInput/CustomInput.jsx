@@ -47,6 +47,7 @@ const margin = {
  * @param {margin} margin - Default `normal`. If dense or normal, will adjust vertical spacing of this and contained components.
  * @param {string} type - Default `string`. Type of the input element. It should be a valid HTML5 input type.
  * @param {string} inputClass - Name of class to pass into MUI's InputProps.
+ * @param {number} maxLength - Maximum length of inputable string.
  *
  * @class CSSInput
  * @augments {Component}
@@ -227,6 +228,13 @@ class CustomInput extends Component {
   }
 
   onChange = (e) => {
+    const {value} = e.target;
+
+    if (!this.props.maxLength || (this.props.maxLength > 0 && value.length <= this.props.maxLength)) {
+      this.setState({value: e.target.value});
+    }
+
+    // Use the props onChange handler.
     this.setState({value: e.target.value});
     // Use the props onChange handler.
 
@@ -356,7 +364,8 @@ CustomInput.propTypes = {
   autoFocus: PropTypes.bool,
   fullWidth: PropTypes.bool,
   margin: PropTypes.oneOf(['none', 'dense', 'normal']),
-  type: PropTypes.string
+  type: PropTypes.string,
+  maxLength: PropTypes.number
 };
 
 

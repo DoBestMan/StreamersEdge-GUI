@@ -1,13 +1,21 @@
-import {ChainStore} from 'peerplaysjs-lib';
+import {
+  Apis,
+  Login,
+  ChainStore,
+  ConnectionManager,
+  TransactionBuilder
+} from 'peerplaysjs-lib';
+import BigNumber from 'bignumber.js';
 import {listenChainStore} from './ChainStoreService';
 import PeerplaysActions from '../actions/PeerplaysActions';
 import ChainStoreHeartbeater from '../utility/PeerplaysUtil/ChainStoreHeartbeater';
-import {Apis, Login, ConnectionManager} from 'peerplaysjs-lib';
 import Config from '../utility/Config';
 import Immutable from 'immutable';
 import log from 'loglevel';
 import BlockchainUtils from '../utility/PeerplaysUtil/BlockchainUtils';
+
 const MAX_RECURSION_ATTEMPTS = 10;
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const endpointsGist = 'https://api.github.com/gists/024a306a5dc41fd56bd8656c96d73fd0';
 
 /**
@@ -26,6 +34,7 @@ class PeerplaysService {
     this.peerplaysURLs = [];
     this.balancePrecision = 0;
     this.blockInterval = 0;
+    this.asset = {};
   }
 
   /**
@@ -83,8 +92,8 @@ class PeerplaysService {
           return;
         }
 
-        PeerplaysActions.setPeerplaysConnected(true);
-        PeerplaysActions.setPeerplaysPrecision(this.balancePrecision);
+        store.dispatch(PeerplaysActions.setPeerplaysConnected(true));
+        store.dispatch(PeerplaysActions.setPeerplaysPrecision(this.balancePrecision));
       }).catch(() => {
         //disconnect since we are not synced
         this.closeConnectionToBlockchain();
@@ -312,6 +321,7 @@ class PeerplaysService {
       }
 
       setTimeout(() => {
+        num = num + 1;
         this
           .getObject(id, force, ++num)
           .then((res) => resolve(res))
@@ -365,12 +375,54 @@ class PeerplaysService {
   }
 
   /**
-   * Sets callback for websocket connection.
+   * Create transaction with logged user's ppyAccountName and password.
    *
-   * @param {*} callback - Callback function.
-   * @returns {Apis} - Callback containing websocket connection status.
+   * @param {string} peerplaysAccountUsername - Username for peerplays account.
+   * @param {string} peerplaysAccountPassword - Password for peerplays account.
+   * @param {number} ppyAmount - Total transaction fee.
+   * @returns {string} Stringify of transaction.
    * @memberof PeerplaysService
    */
+  async createTransaction(peerplaysAccountUsername, peerplaysAccountPassword, ppyAmount) {
+    const x = new BigNumber(ppyAmount);
+    const amount = x.shiftedBy(this.balancePrecision || 8);
+    const peerplaysAccount = await this.getFullAccount(peerplaysAccountUsername);
+    const peerplaysAccountId = peerplaysAccount.getIn(['account', 'id']);
+    const tr = new TransactionBuilder();
+    const keys = Login.generateKeys(
+      peerplaysAccountUsername,
+      peerplaysAccountPassword,
+      ['owner', 'active'],
+      IS_PRODUCTION ? 'PPY' : this.asset.symbol
+    );
+
+    try {
+      tr.add_type_operation('transfer', {
+        fee: {
+          amount: 0,
+          asset_id: Config.sUSd
+        },
+        from: peerplaysAccountId,
+        to: Config.escrow,
+        amount: {
+          amount: amount.toNumber(),
+          asset_id: Config.sUSD
+        }
+      });
+
+      await tr.set_required_fees();
+      tr.add_signer(keys.privKeys.active, keys.pubKeys.active);
+    } catch (err) {
+      throw err;
+    }
+
+    await tr.serialize();
+    await tr.finalize();
+    await tr.sign();
+
+    return JSON.stringify(tr.toObject());
+  }
+
   setDefaultRpcConnectionStatusCallback(callback) {
     return Apis
       .instance()
@@ -400,8 +452,8 @@ class PeerplaysService {
         const blockchainDynamicGlobalProperty = result.get(0);
         const heartBeatInterval = result.get(1);
         this.blockInterval = heartBeatInterval.getIn(['parameters','block_interval']) * 1000;
-        const asset = result.get(2);
-        this.balancePrecision = asset.get('precision');
+        this.asset = result.get(2);
+        this.balancePrecision = this.asset.get('precision');
         const now = new Date().getTime();
         const headTime = BlockchainUtils.blockchainTimeStringToDate(
           blockchainDynamicGlobalProperty.get('time')

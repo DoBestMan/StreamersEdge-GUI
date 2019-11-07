@@ -75,6 +75,23 @@
   box-shadow: 2px 6px 11px #000000bf;
 }
 
+.challengeConfirm {
+  max-width: 1300px;
+  border: 2px solid #ffffff;
+  border-radius: 30px;
+  background: transparent linear-gradient(180deg, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
+.challengeSuccess {
+  width: 1030px;
+  max-width: 1030px;
+  border: 2px solid #ffffff;
+  border-radius: 30px;
+  background: transparent linear-gradient(180deg, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
 .category {
   width: 700px;
   border: 2px solid #ffffff;

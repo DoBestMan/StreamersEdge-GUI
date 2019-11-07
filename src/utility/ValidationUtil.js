@@ -327,7 +327,7 @@ const PrivateValidationUtils = {
     const length = name.length;
     let validLength = false, validRequired = false;
 
-    if (length <=50) {
+    if (length <= 50) {
       validLength = true;
     }
 
@@ -338,6 +338,42 @@ const PrivateValidationUtils = {
     const errorBoxUsernameValidation = [
       {errorString: translate('errors.challengeName.requirement.required'), success: validRequired},
       {errorString: translate('errors.challengeName.requirement.length'), success: validLength}
+    ];
+
+    return {
+      errors: errorBoxUsernameValidation,
+      success: errorBoxUsernameValidation.filter((err) => !err.success).length <= 0
+    };
+  },
+
+  /**
+   *
+   * @param {string} string - Challenge name to validate.
+   * @param {string} string - Challenge game to validate.
+   * @returns {string} Error if one is found.
+   * @memberof PrivateValidationUtil
+   */
+
+  challengeNameAndGame(name, game) {
+    const length = name.length;
+    let validNameRequired = false, validNameLength = false, validGameRequired = false;
+
+    if (length > 0) {
+      validNameRequired = true;
+    }
+
+    if (length <= 50) {
+      validNameLength = true;
+    }
+
+    if (game.length > 0) {
+      validGameRequired = true;
+    }
+
+    const errorBoxUsernameValidation = [
+      {errorString: translate('createChallenge.errors.name.required'), success: validNameRequired},
+      {errorString: translate('createChallenge.errors.name.maximum'), success: validNameLength},
+      {errorString: translate('createChallenge.errors.game.required'), success: validGameRequired}
     ];
 
     return {
@@ -477,6 +513,17 @@ const ValidationUtil = {
    */
   challengeName(string) {
     return PrivateValidationUtils.challengeName(string);
+  },
+
+  /**
+   *
+   * @param {string} name - Challenge name to validate.
+   * @param {string} game - Challenge game to validate.
+   * @returns {string} Error if one is found.
+   * @memberof ValidationUtil
+   */
+  challengeNameAndGame(name, game) {
+    return PrivateValidationUtils.challengeNameAndGame(name, game);
   },
 
   /**

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid, RadioGroup, Radio, FormControlLabel} from '@material-ui/core';
 import ReactTags from 'react-tag-autocomplete';
@@ -22,6 +23,14 @@ class InviteForm extends Component {
     AuthService.getUserList().then((res) => {
       this.setState({
         suggestions: res.map((user) => ({id: user.id, name: user.username}))
+      }, () => {
+        const tags = this.props.invitedAccounts.map((invitedId) => {
+          const finded = this.state.suggestions.find((suggestion) => suggestion.id === invitedId);
+
+          return finded;
+        });
+
+        this.setState({tags});
       });
     });
   }
@@ -71,18 +80,13 @@ class InviteForm extends Component {
 
   render() {
     const {classes} = this.props;
-    let rootClassName = 'react-tags';
-
-    if (this.props.accessRule === 'any') {
-      rootClassName += ' react-tags__invisible';
-    }
 
     return (
       <>
         <div className='invite-form'>
           <Grid container>
             <Grid item xs={ 4 }>
-              <p className='invite-form__label'>{ trans('createChallenge.invite.condition.label') }</p>
+              <p className='invite-form--label'>{ trans('createChallenge.invite.condition.label') }</p>
               <RadioGroup
                 aria-label='invite-conditions'
                 name='invite'
@@ -97,22 +101,15 @@ class InviteForm extends Component {
                 />
                 <FormControlLabel
                   classes={ {label: classes.formLabel} }
-                  value='any'
+                  value='anyone'
                   control={ <Radio classes={ {root: classes.radio} } /> }
                   label={ trans('createChallenge.invite.condition.conditions.any') }
                 />
-                <FormControlLabel
-                  classes={ {label: classes.formLabel} }
-                  value='both'
-                  control={ <Radio classes={ {root: classes.radio} } /> }
-                  label={ trans('createChallenge.invite.condition.conditions.both') }
-                />
               </RadioGroup>
             </Grid>
-            <Grid item xs={ 8 }>
-              <p className='invite-form__label'>{ trans('createChallenge.invite.challenge') }</p>
+            <Grid item xs={ 8 } className={ classNames({'invite-form__invisible': this.props.accessRule === 'anyone'}) }>
+              <p className='invite-form--label'>{ trans('createChallenge.invite.challenge') }</p>
               <ReactTags
-                classNames={ {root: rootClassName} }
                 tags={ this.state.tags }
                 suggestions={ this.state.suggestions }
                 placeholder=''

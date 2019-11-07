@@ -17,6 +17,8 @@ import BanModal from '../Modals/BanModal';
 import LinkAccountModal from '../Modals/LinkAccountModal';
 import UnlinkAccountModal from '../Modals/UnlinkAccountModal';
 import SubmitModal from '../Modals/SubmitModal';
+import ChallengeConfirm from '../CreateChallenge/ChallengeConfirm';
+import ChallengeSuccess from '../CreateChallenge/ChallengeSuccess';
 import CategoryModal from '../Modals/CategoryModal';
 
 class RootModal extends Component {
@@ -103,6 +105,18 @@ class RootModal extends Component {
       case ModalTypes.SUBMIT: {
         modalContent = <SubmitModal />;
         modalClass = classes.success;
+        break;
+      }
+
+      case ModalTypes.CHALLENGE_CONFIRM: {
+        modalContent = <ChallengeConfirm />;
+        modalClass = classes.challengeConfirm;
+        break;
+      }
+
+      case ModalTypes.CREATE_CHALLENGE_SUCCESS: {
+        modalContent = <ChallengeSuccess />;
+        modalClass = classes.challengeSuccess;
         break;
       }
 

@@ -1,5 +1,5 @@
-import {PeerplaysService} from '../../services';
-import {AuthService} from '../../services';
+import {PeerplaysService, AuthService} from '../../services';
+
 class PeerplaysAuthPrivateUtil {
   /**
    * Attempts to retrieve the account from the blockchain as per the provided form username.
@@ -34,7 +34,7 @@ class PeerplaysAuthPrivateUtil {
  *
  * @class PeerplaysAuthActions
  */
-class PeerplaysAuthActions {
+class PeerplaysAuthUtil {
   /**
    * Receive @PeerplaysLogin form submitted parameters.
    *
@@ -67,4 +67,4 @@ class PeerplaysAuthActions {
   }
 }
 
-export default PeerplaysAuthActions;
+export default PeerplaysAuthUtil;

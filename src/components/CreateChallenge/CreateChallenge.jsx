@@ -1,48 +1,73 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {addDays} from 'date-fns';
+
 import ChallengeFooter from './ChallengeFooter';
 import ChallengeForm from './ChallengeForm';
 import DateForm from './DateForm';
 import ConditionForm from './ConditionForm';
 import InviteForm from './InviteForm';
-import {GenUtil} from '../../utility';
+
+import {ModalTypes} from '../../constants';
+import {ModalActions} from '../../actions';
+import {GenUtil, ValidationUtil} from '../../utility';
+import {GameService} from '../../services';
 
 const trans = GenUtil.translate;
 
 const DEFAULT_CONDITION = {
-  param: 'kill',
-  join: 'and',
+  param: '',
+  join: 'AND',
   operator: '>',
   value: 100
 };
 
 class CreateChallenge extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    currentStep: 1,
+    isUpdatedConditions: false,
+    gameStats: {},
+    // Challenge Info
+    name: '',
+    game: '',
+    conditions: [],
+    ppyAmount: 100000,
+    startDate: new Date(),
+    endDate: addDays(new Date(), 7),
+    isUndefinedEndDate: true,
+    accessRule: 'invite',
+    invitedAccounts: [],
+    // Errors
+    errors: []
+  };
 
-    this.state = {
-      currentStep: 1,
-      isUpdatedConditions: false,
-      // Challenge Info
-      name: '',
-      game: '',
-      conditions: [Object.assign({}, DEFAULT_CONDITION, {join: 'must'})],
-      ppyAmount: 100000,
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      isUndefinedEndDate: true,
-      accessRule: 'invite',
-      invitedAccounts: [],
-      // Errors
-      errors: []
-    };
+  componentDidMount() {
+    GameService.getGameStats().then((res) => {
+      const entries = Object.entries(res);
+
+      if (entries.length > 0) {
+        Object.assign(DEFAULT_CONDITION, {param: entries[0][1]});
+        this.setState({
+          gameStats: res,
+          conditions: [Object.assign({}, DEFAULT_CONDITION, {join: 'must'})]
+        });
+      }
+    }).catch((err) => {
+      this.setState({
+        conditions: [Object.assign({}, DEFAULT_CONDITION, {join: 'must'})]
+      });
+      console.log('Retrieve game stats failed: ', err);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
     // Remove errors
     if ((prevState.name !== this.state.name)
+      || (prevState.game !== this.state.game)
       || (prevState.invitedAccounts.length !== this.state.invitedAccounts.length)
       || (prevState.endDate.getTime() !== this.state.endDate.getTime() && this.state.endDate.getTime() >= this.state.startDate.getTime())
+      || (prevState.currentStep !== this.state.currentStep)
     ) {
       this.setState({
         errors: []
@@ -59,29 +84,25 @@ class CreateChallenge extends Component {
   handleNextClick = () => {
     // Handle validation for each step
     if (this.state.currentStep === 1) {
-      if (!this.state.name) {
+      const valid = ValidationUtil.challengeNameAndGame(this.state.name, this.state.game);
+
+      if (!valid.success) {
         this.setState({
-          errors: [
-            trans('createChallenge.errors.name.required')
-          ]
+          errors: valid.errors.filter((error) => !error.success).map((error) => error.errorString)
         });
         return;
       }
     } else if (this.state.currentStep === 2) {
       if (!this.state.isUndefinedEndDate && this.state.startDate.getTime() > this.state.endDate.getTime()) {
         this.setState({
-          errors: [
-            trans('createChallenge.errors.date.invalid')
-          ]
+          errors: [trans('createChallenge.errors.date.invalid')]
         });
         return;
       }
     } else if (this.state.currentStep === 3) {
       if (!this.state.isUpdatedConditions) {
         this.setState({
-          errors: [
-            trans('createChallenge.errors.condition.required')
-          ]
+          errors: [trans('createChallenge.errors.condition.required')]
         });
         return;
       }
@@ -94,26 +115,28 @@ class CreateChallenge extends Component {
 
   handleCompleteClick = () => {
     // validte the invite accounts before completing
-    if (this.state.accessRule !== 'both' && !this.state.invitedAccounts.length) {
+    if (this.state.accessRule !== 'anyone' && !this.state.invitedAccounts.length) {
       this.setState({
-        errors: [
-          'Add at least 1 invited accounts'
-        ]
+        errors: [trans('createChallenge.errors.invite.required')]
       });
       return;
     }
-  }
 
-  handleChangeName = (newValue) => {
-    this.setState({
-      name: newValue
+    this.props.setModalData({
+      challenge: {
+        name: this.state.name,
+        game: this.state.game,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+        isUndefinedEndDate: this.state.isUndefinedEndDate,
+        accessRule: this.state.accessRule,
+        ppyAmount: this.state.ppyAmount,
+        invitedAccounts: this.state.invitedAccounts,
+        conditions: this.state.conditions
+      }
     });
-  }
-
-  handleChangeGame = (newValue) => {
-    this.setState({
-      game: newValue
-    });
+    this.props.setModalType(ModalTypes.CHALLENGE_CONFIRM);
+    this.props.toggleModal();
   }
 
   handleChangeConditions = (action, index = 0, newCondition = DEFAULT_CONDITION) => {
@@ -155,13 +178,15 @@ class CreateChallenge extends Component {
     }
   }
 
-  handleChangePPY = (newPPY) => {
-    this.setState({
-      ppyAmount: newPPY
-    });
-  }
-
   handleChange = (name, value) => {
+    if (name === 'startDate' && value > this.state.endDate) {
+      this.setState({
+        [name]: value,
+        endDate: value
+      });
+      return;
+    }
+
     this.setState({
       [name]: value
     });
@@ -182,8 +207,7 @@ class CreateChallenge extends Component {
           <ChallengeForm
             challengeName={ this.state.name }
             challengeGame={ this.state.game }
-            onChangeName={ this.handleChangeName }
-            onChangeGame={ this.handleChangeGame }
+            onChange={ this.handleChange }
           />
         );
       case 2:
@@ -200,9 +224,10 @@ class CreateChallenge extends Component {
           <ConditionForm
             conditions={ this.state.conditions }
             ppyAmount={ this.state.ppyAmount }
+            gameStats={ this.state.gameStats }
             errors={ this.state.errors }
+            onChange={ this.handleChange }
             onChangeConditions={ this.handleChangeConditions }
-            onChangePPY={ this.handleChangePPY }
           />
         );
       case 4:
@@ -213,8 +238,7 @@ class CreateChallenge extends Component {
             onChange={ this.handleChange }
           />
         );
-      default:
-        return <ChallengeForm />;
+      // no default
     }
   }
 
@@ -246,4 +270,16 @@ class CreateChallenge extends Component {
   }
 }
 
-export default CreateChallenge;
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    toggleModal: ModalActions.toggleModal,
+    setModalType: ModalActions.setModalType,
+    setModalData: ModalActions.setModalData
+  },
+  dispatch
+);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateChallenge);

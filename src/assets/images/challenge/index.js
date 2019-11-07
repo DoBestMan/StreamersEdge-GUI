@@ -1,26 +1,32 @@
-import nextButton from './Next.png';
-import backButton from './Back.png';
-import createButton from './Finish.png';
-import step1 from './Step1.png';
-import step2 from './Step2.png';
-import step3 from './Step3.png';
-import step4 from './Step4.png';
+import NextButton from './Next.png';
+import BackButton from './Back.png';
+import CreateButton from './Finish.png';
+import CancelButton from './Cancel.svg';
+import ContinueButton from './Continue.svg';
+import Step1 from './Step1.png';
+import Step2 from './Step2.png';
+import Step3 from './Step3.png';
+import Step4 from './Step4.png';
 
 import Fortnite from './fortnite.png';
 import PUBG from './PUBG.png';
 import Legends from './legends.png';
 import sUSD from './sUSD.png';
+import Copylink from './Copylink.png';
 
 export {
-  nextButton,
-  backButton,
-  createButton,
-  step1,
-  step2,
-  step3,
-  step4,
+  NextButton,
+  BackButton,
+  CreateButton,
+  CancelButton,
+  ContinueButton,
+  Step1,
+  Step2,
+  Step3,
+  Step4,
   Fortnite,
   PUBG,
   Legends,
-  sUSD
+  sUSD,
+  Copylink
 };

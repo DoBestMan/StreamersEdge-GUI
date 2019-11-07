@@ -5,11 +5,16 @@
   padding-top: 18px;
 }
 
+.dropdownSelect {
+  padding-left: 30px;
+}
+
 .dropdownAnchor {
   position: absolute;
   right: 0;
   top: calc(50% - 15px);
   font-size: 25px;
+  pointer-events: none;
 }
 
 .dropdownAnchor path {
