@@ -57,13 +57,13 @@ class LeftMenu extends Component {
     }
 
     // Up to date with category modal
-    if (this.props.modalData && this.props.modalData !== prevProps.modalData) {
+    if (this.props.category && this.props.category !== prevProps.category) {
       const newOptions = this.state.options;
       newOptions[0].selected = true;
-      newOptions[0].label = `${trans(categoriesLabel)} - ${this.props.modalData}`;
+      newOptions[0].label = `${trans(categoriesLabel)} - ${this.props.category}`;
       this.setState({
         options: newOptions,
-        category: this.props.modalData,
+        category: this.props.category,
         hasUpdated: true
       }, () => {
         this.handleSearch();
@@ -171,7 +171,7 @@ class LeftMenu extends Component {
     switch (option) {
       case 'categories': {
         this.props.setModalType(ModalTypes.SELECT_CATEGORY);
-        this.props.setModalData(this.state.category);
+        this.props.setModalData({category: this.state.category});
         this.props.toggleModal();
         break;
       }
@@ -260,7 +260,7 @@ class LeftMenu extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  modalData: state.getIn(['modal', 'data'])
+  category: state.getIn(['app', 'leftMenuCategory'])
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(

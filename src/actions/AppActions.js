@@ -88,6 +88,15 @@ class AppPrivateActions {
       }
     };
   }
+
+  static setLeftMenuCategory(category) {
+    return {
+      type: ActionTypes.APP_SET_LEFT_MENU_CATEGORY,
+      payload: {
+        category
+      }
+    };
+  }
 }
 
 
@@ -169,6 +178,12 @@ class AppActions {
   static resetLoadingStatus() {
     return (dispatch) => {
       dispatch(AppPrivateActions.resetAppLoadingStatus());
+    };
+  }
+
+  static setLeftMenuCategory(category) {
+    return (dispatch) => {
+      dispatch(AppPrivateActions.setLeftMenuCategory(category));
     };
   }
 }

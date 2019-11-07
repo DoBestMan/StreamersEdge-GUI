@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Button from '@material-ui/core/Button';
 import Dropdown from '../../Dropdown';
-import {ModalActions} from '../../../actions';
+import {ModalActions, AppActions} from '../../../actions';
 import {GenUtil} from '../../../utility';
 
 const trans = GenUtil.translate;
@@ -15,12 +15,17 @@ const CATEGORIES = [
 ];
 
 class CategoryModal extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    category: ''
+  }
 
-    this.state = {
-      category: this.props.modalData || 'Fortnite'
-    };
+  componentDidMount() {
+    let cat = this.props.category;
+    this.setState({category: cat});
+  }
+
+  componentWillUnmount() {
+    this.props.setLeftMenuCategory(this.state.category);
   }
 
   handleChangeCategory = (value) => {
@@ -30,7 +35,7 @@ class CategoryModal extends Component {
   }
 
   handleSave = () => {
-    this.props.setModalData(this.state.category);
+    this.props.setLeftMenuCategory(this.state.category);
     this.props.toggleModal();
   }
 
@@ -54,14 +59,20 @@ class CategoryModal extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  modalData: state.getIn(['modal', 'data'])
-});
+const mapStateToProps = (state) => {
+  return {
+    category: state.getIn(['app', 'leftMenuCategory'])
+  };
+};
+
+// const mapStateToProps = (state) => ({
+// category: state.getIn(['modal', 'data', 'category'])
+// });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal,
-    setModalData: ModalActions.setModalData
+    setLeftMenuCategory: AppActions.setLeftMenuCategory
   },
   dispatch
 );

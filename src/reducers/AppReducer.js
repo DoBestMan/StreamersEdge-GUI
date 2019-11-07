@@ -29,7 +29,8 @@ const mergeDummyAccountState = {
 
 const initialState = Config.useDummy ? dummyState : fromJS({
   accountId: null,
-  loading: Immutable.List([])
+  loading: Immutable.List([]),
+  leftMenuCategory: 'Fortnite'
 });
 
 export default (state = initialState, action) => {
@@ -79,6 +80,8 @@ export default (state = initialState, action) => {
 
     case ActionTypes.APP_RESET_LOADING_STATUS:
       return state.merge({loading: initialState.get('loading')});
+    case ActionTypes.APP_SET_LEFT_MENU_CATEGORY:
+      return state.merge({leftMenuCategory: action.payload.category});
     default:
       return state;
   }
