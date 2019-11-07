@@ -32,7 +32,7 @@ class NavigateActions {
    */
   static noValidPathRedirect() {
     return (dispatch) => {
-      dispatch(replace(Routes.ROOT));
+      dispatch(replace(Routes.DASHBOARD));
     };
   }
 

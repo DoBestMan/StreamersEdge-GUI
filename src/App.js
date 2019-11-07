@@ -32,14 +32,10 @@ const jss = create({
 });
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      openLeftMenu: false,
-      openRightMenu: false
-    };
-  }
+  state = {
+    openLeftMenu: false,
+    openRightMenu: false
+  };
 
   componentDidMount() {
     /**
@@ -61,9 +57,9 @@ class App extends Component {
       }
     };
 
-    if (!isKnownPath()) {
+    if (!isKnownPath() || this.props.path === RouteConstants.ROOT) {
       // Change the browser navigation to root.
-      this.props.navigateToRoot();
+      this.props.noValidPathRedirect();
     }
   }
 
@@ -126,7 +122,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-    navigateToRoot: NavigateActions.noValidPathRedirect
+    noValidPathRedirect: NavigateActions.noValidPathRedirect
   },
   dispatch
 );

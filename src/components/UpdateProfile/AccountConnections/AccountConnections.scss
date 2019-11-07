@@ -49,6 +49,7 @@
       margin: 20px auto;
 
       &-parent {
+        position: relative;
         width: 230px;
         height: 290px;
         padding-bottom: 40px;
@@ -89,7 +90,7 @@
       }
 
       &-text {
-        height: 65px;
+        min-height: 65px;
       }
 
       &-name {
@@ -99,6 +100,7 @@
 
       &-username {
         margin: 5px 0;
+        word-break: break-word;
       }
 
       &-btn {
@@ -107,6 +109,13 @@
 
         &-notAllowed {
           cursor: not-allowed;
+        }
+
+        &__wrapper {
+          display: block;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
         }
       }
     }
