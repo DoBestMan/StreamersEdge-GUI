@@ -24,6 +24,12 @@ class UpdateProfile extends Component {
     this.state = this.constructState(twitchUsername, youtubeUsername, facebookUsername, peerplaysAccountName,pathAry);
   }
 
+  componentDidMount() {
+    ProfileService.getProfile().then((res) => {
+      this.props.setAccount(res);
+    });
+  }
+
   componentDidUpdate(prevProps) {
 
     if (this.props.account !== prevProps.account) {
