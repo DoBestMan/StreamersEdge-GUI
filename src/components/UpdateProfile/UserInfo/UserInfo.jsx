@@ -7,7 +7,6 @@ import {
   EmailIconActive,
   InvalidIcon
 } from '../../../assets/images/signup';
-import {Avatar} from '../../../assets/images/updateProfile';
 import {GenUtil, ValidationUtil} from '../../../utility';
 
 const translate = GenUtil.translate;
@@ -28,10 +27,6 @@ class UserInfo extends Component {
   }
 
   render() {
-    const classes = {
-      profilePicture: 'profile-picture__prop',
-      profileFrame: 'profile-frame__prop'
-    };
     return(
       <div>
         <span className='update-user-info__header'>
@@ -70,7 +65,8 @@ class UserInfo extends Component {
             </div>
           </div>
           <div className='update-user-info__avatar'>
-            <ProfilePictureUpload customAvatar={ Avatar } classes = { classes } />
+            <ProfilePictureUpload />
+            <span className='update-user-info__avatar-label'>{translate('updateProfile.userInfo.avatar')}</span>
           </div>
         </div>
       </div>

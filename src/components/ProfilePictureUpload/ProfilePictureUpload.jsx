@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {profileDefault, profileDefaultActive, avatarFrame} from '../../assets/images/avatar';
-import {ValidationUtil, StorageUtil, GenUtil} from '../../utility';
+import {ValidationUtil, StorageUtil} from '../../utility';
 import {ProfileService} from '../../services';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -9,7 +9,6 @@ import {UploadFileTypes} from '../../constants';
 import classNames from 'classnames';
 import imageCompression from 'browser-image-compression';
 import CircularProgress from '@material-ui/core/CircularProgress';
-const translate = GenUtil.translate;
 
 class ProfilePictureUpload extends Component {
   state = {
@@ -131,11 +130,8 @@ class ProfilePictureUpload extends Component {
         <input className='image__upload ' id='file-input' type='file' onChange={ this.onChooseFile } />
 
         <div className='profile__upload-avatar'>
-          <span className='profile__upload-avatar-label'>{translate('updateProfile.userInfo.avatar')}</span>
           <span className='profile__upload-img-text'>{this.state.errorMessage}</span>
         </div>
-
-
       </>
     );
   }
