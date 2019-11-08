@@ -119,7 +119,13 @@ class UpdateProfile extends Component {
 
   openLinkAccountModal = (authRoute) => {
     this.props.setModalType(ModalTypes.LINK_ACCOUNT);
-    this.props.setModalData(authRoute);
+
+    if(authRoute === 'youtube'){
+      this.props.setModalData('google');
+    } else {
+      this.props.setModalData(authRoute);
+    }
+
     this.props.toggleModal();
   }
 
