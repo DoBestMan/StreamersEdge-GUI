@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Button} from '@material-ui/core';
 
-import InvitesForm from './InvitesForm';
 import NotificationsForm from './NotificationsForm';
 import preferences from '../../assets/images/preferences/Settings.png';
 
@@ -135,13 +134,7 @@ class Preferences extends Component {
 
   render() {
     const {
-      inviteType,
-      userWhiteList,
-      userList,
-      gameList,
-      gameWhiteList,
-      notificationType,
-      errors
+      notificationType
     } = this.state;
 
     return (
@@ -150,27 +143,10 @@ class Preferences extends Component {
           <img className='preferences__image' src={ preferences } alt=''/>
           <p> {translate('preferences.header')}</p>
         </div>
-
-        <InvitesForm
-          inviteType={ inviteType }
-          userWhiteList={ userWhiteList }
-          userList={ userList }
-          errors={ errors }
-          addUser={ this.addUser }
-          removeUser={ this.removeUser }
-          gameList={ gameList }
-          gameWhiteList={ gameWhiteList }
-          addGame={ this.addGame }
-          removeGame={ this.removeGame }
-          handleChange={ this.handleChange }
-          setError={ this.setError }
-        />
-
         <NotificationsForm
           notificationType={ notificationType }
           handleChange={ this.handleChange }
         />
-
         <div className='form-buttons'>
           <Button className='button-cancel'> </Button>
           <Button className='button-save' onClick={ this.handleSave }> </Button>
