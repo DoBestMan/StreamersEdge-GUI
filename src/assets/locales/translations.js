@@ -8,7 +8,8 @@ export const translationObject = {
           endsWithLowercaseOrDigit: 'Ends with lowercase letter or digit',
           onlyContainsLettersDigitHyphens: 'Only contains letters, digits, hyphens',
           noUppercase: 'No Uppercase',
-          noBlankUsername: 'Username cannot be blank'
+          noBlankUsername: 'Username cannot be blank',
+          noSpaceInUsername: 'No space allowed'
         },
         prefix1: 'Account name should ',
         prefix2: 'Each account segment should ',

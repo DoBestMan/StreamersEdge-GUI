@@ -63,15 +63,21 @@ const PrivateValidationUtils = {
    */
   emptyString(string) {
 
-    const emptyStringRegex = /^$|\s+/g;
+    const spacePresentRegex =  /\s/;
     let noEmptyString = true;
+    let noSpaceString = true;
 
-    if(emptyStringRegex.test(string)) {
+    if(!string) {
       noEmptyString = false;
     }
 
+    if(spacePresentRegex.test(string)) {
+      noSpaceString = false;
+    }
+
     const errorBoxUsernameValidation = [
-      {errorString: translate('errors.username.requirement.noBlankUsername'), success: noEmptyString}
+      {errorString: translate('errors.username.requirement.noBlankUsername'), success: noEmptyString},
+      {errorString: translate('errors.username.requirement.noSpaceInUsername'), success: noSpaceString}
     ];
 
     return {
