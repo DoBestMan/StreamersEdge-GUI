@@ -51,14 +51,14 @@ class ResetForm extends Component {
     this.setState({
       password: password,
       isPasswordInputClicked: true
-    });
+    }, () => this.validate());
   }
 
   handleConfirmPasswordChange = (password) => {
     this.setState({
       confirmPassword: password,
       isConfirmPasswordConfirmed: true
-    });
+    }, () => this.validate());
   }
 
   handleSubmit = (event) => {
@@ -106,7 +106,6 @@ class ResetForm extends Component {
                   muiInputClass='inputRegister'
                   hasActiveGlow={ true }
                   placeholder={ translate('register.enterPassword') }
-                  onBlur={ this.validate }
                   handleChange={ this.handlePasswordChange }
                   iconLeft={ IconPassword }
                   iconLeftActive={ IconPasswordActive }
@@ -131,7 +130,6 @@ class ResetForm extends Component {
                   muiInputClass='inputRegister'
                   hasActiveGlow={ true }
                   placeholder={ translate('forgotPassword.resetForm.confirmPassword') }
-                  onBlur={ this.validate }
                   handleChange={ this.handleConfirmPasswordChange }
                   iconLeft={ IconPassword }
                   iconLeftActive={ IconPasswordActive }
