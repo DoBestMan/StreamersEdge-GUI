@@ -11,6 +11,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import {GenUtil} from '../../utility';
 import {withStyles} from '@material-ui/core/styles';
 import ReportButton from '../../assets/images/report/report_button.png';
+import {ReportService} from '../../services';
 import styles from './MUI.css';
 
 const translate = GenUtil.translate;
@@ -47,12 +48,15 @@ class ReportUser extends Component {
         error: ''
       });
       //TODO: Connect to API once it exists
+      ReportService.reportUser(this.props.user.id, this.state.reportType, this.state.desc);
     }
 
   }
 
   render() {
     const {classes} = this.props;
+    const user = this.props.user ? this.props.user.username : '';
+
 
     return (
       <div className='report'>
@@ -60,7 +64,7 @@ class ReportUser extends Component {
           <IconButton className='report-form__close' aria-label='Close' onClick={ this.props.toggleModal }>
             <CloseIcon />
           </IconButton>
-          <span className='report-form__title'>REPORT USER: John Doe</span>
+          <span className='report-form__title'>REPORT USER: {user || ''}</span>
           <div className='report-form__controls'>
             <FormControl className='report-form__radioGroup' margin='normal' required fullWidth>
               <span className='report-form__subTitle'>{translate('reportUser.selectableReasons')}</span>
@@ -101,6 +105,9 @@ class ReportUser extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({user: state.getIn(['modal', 'selectedUser'])});
+
+
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     toggleModal: ModalActions.toggleModal
@@ -109,6 +116,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
 );
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(ReportUser));

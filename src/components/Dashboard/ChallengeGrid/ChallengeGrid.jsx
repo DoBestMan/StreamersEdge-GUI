@@ -32,7 +32,7 @@ class ChallengeGrid extends Component {
               return challenge.joinedUsers.length > 0 ? true : false;
             }).map((challenge) => {
               challengeCount++;
-              return (<ChallengeCard key={ challenge.name } name={ challenge.name } users={ challenge.joinedUsers }
+              return (<ChallengeCard key={ challenge.id } name={ challenge.name } users={ challenge.joinedUsers }
                 reward={ challenge.ppyAmount } game={ challenge.game } image={ pubg_placeholder }date={ ChallengeUtil.formatDate(challenge.endDate) }/>);
             }).slice(this.state.offset, this.state.offset + this.state.perPage)}
           </div>

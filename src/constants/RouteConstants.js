@@ -9,5 +9,6 @@ export default {
   UPDATE_PROFILE: '/update-profile',
   CREATE_CHALLENGE: '/create-challenge',
   STREAMS: '/streams',
-  CATEGORIES: '/categories'
+  CATEGORIES: '/categories',
+  USER_PROFILE: '/user-profile/:user'
 };

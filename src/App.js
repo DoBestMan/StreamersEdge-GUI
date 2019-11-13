@@ -50,6 +50,7 @@ class App extends Component {
       if (
         (routeValues.indexOf(this.props.path) !== -1 &&
         routeValues.indexOf('login?next=/') === -1) ||
+        (routeValues.indexOf('user-profile/') === -1) ||
         (this.props.path.indexOf(RouteConstants.RESET_PASSWORD) !== -1 && TokenUtil.checkUrlLength(this.props.path)) ||
         (this.props.path.indexOf(RouteConstants.PROFILE) !== -1 && validPage(this.props.path))
       ) {

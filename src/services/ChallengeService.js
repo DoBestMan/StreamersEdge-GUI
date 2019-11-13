@@ -169,6 +169,26 @@ class ChallengeService {
   static getChallengeById(challengeId) {
     return GenUtil.dummyDataWrapper(PrivateChallengeService.getChallengeById(challengeId));
   }
+
+  /**
+   * Returns won challenges by user.
+   *
+   * @static
+   * @param {number} id - Id of the user.
+   * @returns {Promise}
+   * @memberof ChallengeService
+   */
+  static getWonChallengesByUser(id) {
+    const query = `${apiRoot}api/v1/challenges/wins/${id}`;
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await ApiHandler.get(query);
+        return resolve(response.data.result);
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
 }
 
 export default ChallengeService;

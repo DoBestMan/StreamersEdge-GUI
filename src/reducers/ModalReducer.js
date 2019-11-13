@@ -5,7 +5,8 @@ let initialState = fromJS({
   isOpen: false,
   previous: '',
   type: '',
-  data: ''
+  data: '',
+  selectedUser: ''
 });
 
 export default (state = initialState, action) => {
@@ -27,6 +28,12 @@ export default (state = initialState, action) => {
     case ActionTypes.MODAL_SET_DATA: {
       return state.merge({
         data: action.modalData
+      });
+    }
+
+    case ActionTypes.MODAL_SELECT_USER: {
+      return state.merge({
+        selectedUser: action.selectedUser
       });
     }
 

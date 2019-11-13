@@ -98,6 +98,24 @@ class UserSerivce {
     return GenUtil.dummyDataWrapper(PrivateUserService.updateInvitation(invitation));
   }
 
+  /**
+   * Get user info by ID.
+   *
+   * @param {string} id - User id.
+   * @returns {Promise} Promise that resolves to user object.
+   */
+  static getUserById(id) {
+    const query = `${apiRoot}api/v1/users/${id}`;
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await ApiHandler.get(query);
+        return resolve(response.data.result);
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
 }
 
 export default UserSerivce;

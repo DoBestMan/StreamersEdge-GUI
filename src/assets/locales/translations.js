@@ -63,6 +63,10 @@ export const translationObject = {
         }
       }
     },
+    userProfile: {
+      challenges: 'Challenges',
+      won: 'Won'
+    },
     preferences: {
       header: 'PREFERENCES',
       invites: {

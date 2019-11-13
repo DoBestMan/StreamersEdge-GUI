@@ -42,6 +42,18 @@ class ModalActions {
   static setModalData(data) {
     return {type: ActionTypes.MODAL_SET_DATA, modalData: data};
   }
+
+  /**
+   * Target user for user-specific modal (Donate, Report).
+   *
+   * @static
+   * @param {string} user - Selected user obj.
+   * @returns {Action}
+   * @memberof ModalActions
+   */
+  static selectModalUser(user) {
+    return {type: ActionTypes.MODAL_SELECT_USER, selectedUser: user};
+  }
 }
 
 export default ModalActions;
