@@ -78,9 +78,7 @@ const Config = {
    * @memberof Config
    */
   elizabethEndpoints: [
-    'ws://ec2-99-79-98-229.ca-central-1.compute.amazonaws.com:8090',
-    'ws://ec2-18-184-253-255.eu-central-1.compute.amazonaws.com:8090',
-    'ws://ec2-54-252-182-8.ap-southeast-2.compute.amazonaws.com:8090'
+    'ws://ec2-99-79-98-229.ca-central-1.compute.amazonaws.com:8091'
   ],
 
   /**

@@ -88,7 +88,7 @@ class PeerplaysService {
         if(synced === false) {
           console.warn('Sync failed: clock desync.');
           this.closeConnectionToBlockchain();
-          this.init(this.store);
+          this.delayedInit();
           return;
         }
 
@@ -97,15 +97,21 @@ class PeerplaysService {
       }).catch(() => {
         //disconnect since we are not synced
         this.closeConnectionToBlockchain();
-        this.init(this.store);
+        this.delayedInit();
       });
     }).catch((error) => {
       // Fail to connect/ sync/ listen to software update, close connection to the blockchain
       console.error('Failed to connect to blockchain', error, (new Error()).stack);
       store.dispatch(PeerplaysActions.setPeerplaysConnected(false));
       this.closeConnectionToBlockchain();
-      this.init(store);
+      this.delayedInit();
     });
+  }
+
+  delayedInit() {
+    setTimeout(() => {
+      this.init(this.store);
+    },10000);
   }
 
   /**
@@ -225,10 +231,11 @@ class PeerplaysService {
             : 'Undefined Blockchain');
         })
           .catch((err) => {
+            this.connectionStatusCallback(false);
             console.error('closing blockchain: ', err);
             // Close residue connection to blockchain
             this.closeConnectionToBlockchain();
-            this.init(this.store);
+            return Promise.reject();
           });
       });
     }
