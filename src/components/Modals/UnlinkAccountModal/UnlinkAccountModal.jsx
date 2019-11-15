@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {unlinkAccountRobot, closeButton, unlinkAccountButton} from '../../../assets/images/modals';
+import {unlinkAccountRobot, unlinkAccountButton} from '../../../assets/images/modals';
+import CloseIcon from '@material-ui/icons/Close';
+import {IconButton} from '@material-ui/core';
 import {ModalActions, AccountActions, NavigateActions} from '../../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -67,9 +69,9 @@ class UnlinkAccountModal extends Component {
     return (
       <div className='unlink-account__wrapper'>
         <div className='unlink-account'>
-          <div className='unlink-account__cross' onClick={ this.handleClose }>
-            <img className='unlink-account__cross-img' src={ closeButton } alt=''/>
-          </div>
+          <IconButton className='link-account__cross' aria-label='Close' onClick={ this.handleClose }>
+            <CloseIcon />
+          </IconButton>
           <div className='unlink-account__icon'>
             <img className='unlink-account__icon-img' src={ unlinkAccountRobot } alt=''/>
           </div>

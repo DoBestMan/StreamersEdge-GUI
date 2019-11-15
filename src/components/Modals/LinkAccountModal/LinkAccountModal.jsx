@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {linkAccountRobot, closeButton, linkAccountButton} from '../../../assets/images/modals';
+import {linkAccountRobot, linkAccountButton} from '../../../assets/images/modals';
+import CloseIcon from '@material-ui/icons/Close';
+import {IconButton} from '@material-ui/core';
 import {AccountActions, ModalActions, NavigateActions} from '../../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -34,9 +36,9 @@ class LinkAccountModal extends Component {
     return (
       <div className='link-account__wrapper'>
         <div className='link-account'>
-          <div className='link-account__cross' onClick={ this.handleClose }>
-            <img className='link-account__cross-img' src={ closeButton } alt=''/>
-          </div>
+          <IconButton className='link-account__cross' aria-label='Close' onClick={ this.handleClose }>
+            <CloseIcon />
+          </IconButton>
           <div className='link-account__icon'>
             <img className='link-account__icon-img' src={ linkAccountRobot } alt=''/>
           </div>
