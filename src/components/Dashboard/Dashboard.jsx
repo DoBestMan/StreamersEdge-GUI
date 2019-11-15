@@ -94,7 +94,6 @@ class Dashboard extends Component {
                 {translate('dashboard.recommended')}
                 <span className='categories'> {translate('dashboard.categories')}</span>
               </span>
-              {this.viewMore('categories')}
               <div className='dashboard__header-bar'>
                 <div className='dashboard__header-bar--blue'/>
               </div>

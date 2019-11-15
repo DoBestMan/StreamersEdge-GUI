@@ -8,7 +8,7 @@ import {bindActionCreators} from 'redux';
 import {Button, FormControl, Card} from '@material-ui/core';
 import querystring from 'query-string';
 
-import {AuthService} from '../../../services';
+import {AuthService, ProfileService} from '../../../services';
 import {NavigateActions, AccountActions} from '../../../actions';
 import {ValidationUtil, GenUtil} from '../../../utility';
 
@@ -47,6 +47,14 @@ class ResetForm extends Component {
     }
   }
 
+  loginAndRedirect = () => {
+    ProfileService.getProfile().then((profile) => {
+      this.props.setAccount(profile);
+      this.props.setLoggedIn(true);
+      this.props.navigateToDashboard();
+    });
+  }
+
   handlePasswordChange = (password) => {
     this.setState({
       password: password,
@@ -70,8 +78,7 @@ class ResetForm extends Component {
 
     AuthService.resetPassword(this.state.token, this.state.password)
       .then(() => {
-        this.props.setLogin(true);
-        this.props.navigateToDashboard();
+        this.loginAndRedirect();
       })
       .catch((err) => {
         console.warn(err);
@@ -168,7 +175,8 @@ class ResetForm extends Component {
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     navigateToDashboard: NavigateActions.navigateToDashboard,
-    setLogin: AccountActions.setIsLoggedInAction
+    setAccount: AccountActions.setAccountAction,
+    setLoggedIn: AccountActions.setIsLoggedInAction
   },
   dispatch
 );
