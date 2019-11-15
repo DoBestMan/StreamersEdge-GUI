@@ -83,10 +83,8 @@ class AccountConnections extends Component {
             <p className='update-link-accounts__content-body-username'>{ connection.username }</p>
           </div>
           <div className='update-link-accounts__content-body-btn__wrapper'>
-            {connection.name === 'peerplays' && this.props.peerplaysAccountName && this.props.peerplaysAccountName.startsWith('se-')?
-              <img src={ DisconnectButton }
-                alt = 'disconnect button'
-                className='update-link-accounts__content-body-btn-notAllowed'/> :
+            {connection.name === 'peerplays' && this.props.peerplaysAccountName && this.props.peerplaysAccountName.startsWith('se-') ?
+              null :
               connection.username ?
                 <img src={ DisconnectButton }
                   onClick={ () => this.props.openUnlinkAccountModal(connection.name) }
