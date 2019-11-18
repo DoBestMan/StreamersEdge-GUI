@@ -87,7 +87,7 @@ class Preferences extends Component {
                 this.props.setModalType(ModalTypes.SUBMIT);
                 this.props.toggleModal();
                 this.props.setModalData({headerText: translate('preferences.modal.successHeader'),
-                  subText: translate('preferences.modal.successSubText'), redirect: '/dashboard',
+                  subText: translate('preferences.modal.redirectToDashboard'), redirect: '/dashboard',
                   type: 'success'});
               })
               .catch((err) => {

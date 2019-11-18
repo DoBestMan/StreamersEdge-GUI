@@ -101,8 +101,8 @@ export const translationObject = {
         errorHeader: 'Unexpected Error',
         errorSubText: 'Failed to update preferences',
         successHeader: 'Your preferences have been succesfully updated',
-        successSubText: 'You will be automatically redirected in 10 seconds, otherwise,',
-        successSubTextClickHere: 'click here',
+        redirectToDashboard: 'You will be redirected to dashboard in 10 seconds, otherwise,',
+        redirectClickHere: 'click here',
         clickHere: 'click here'
       }
     },
