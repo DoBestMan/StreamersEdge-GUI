@@ -42,6 +42,10 @@ class Callback extends Component {
           this.props.navigateToPasswordReset(pathAry[3]);
           break;
         case 'profile':
+          const profile = await ProfileService.getProfile();
+          this.props.setAccount(profile);
+          this.props.setLoggedIn(true);
+          this.props.navigateToCreateProfile('1');
           break;
         case 'login':
           break;
