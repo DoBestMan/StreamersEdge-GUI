@@ -53,7 +53,6 @@ class Profile extends Component {
   fetchUser = async (id) => {
     try {
       const user = await UserService.getUserById(id);
-      console.log('DEBUG USER', user);
       this.props.setUser(user);
       this.setState((prevState) => ({
         user,
@@ -70,7 +69,6 @@ class Profile extends Component {
   fetchChallenges = async (id) => {
     try {
       const challenges = await ChallengeService.getWonChallengesByUser(id);
-      console.warn(challenges);
       this.setState({
         challenges
       });
@@ -86,6 +84,23 @@ class Profile extends Component {
       profileContent = <CircularProgress/>;
     } else {
       let user = this.state.user;
+      let profileButtons = (user.id !== this.props.currentUser.get('id')) ? (
+      <>
+        <img
+          className='profile__button'
+          src={ DonateButton }
+          alt={ 'Donate' }
+          onClick={ this.openDonateModal }
+        />
+        <img
+          className='profile__button'
+          src={ ReportButton }
+          alt={ 'Report User' }
+          onClick={ this.openReportModal }
+        />
+        </>
+      ) : null;
+
       profileContent = (
       <>
         <div className='profile__avatar'>
@@ -111,18 +126,7 @@ class Profile extends Component {
           /> : null }
         </div>
         <div className='profile__buttons' >
-          <img
-            className='profile__button'
-            src={ DonateButton }
-            alt={ 'Donate' }
-            onClick={ this.openDonateModal }
-          />
-          <img
-            className='profile__button'
-            src={ ReportButton }
-            alt={ 'Report User' }
-            onClick={ this.openReportModal }
-          />
+          {profileButtons}
         </div>
     </>
       );
@@ -154,6 +158,13 @@ Profile.propTypes = {
   challenges: PropTypes.array
 };
 
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.getIn(['profiles', 'currentAccount'])
+  };
+};
+
+
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     setModalType: ModalActions.setModalType,
@@ -165,6 +176,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
 
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Profile);
