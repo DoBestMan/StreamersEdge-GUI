@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Avatar from '../../Avatar';
 import Config from '../../../utility/Config';
+import Tooltip from '@material-ui/core/Tooltip';
+import {withStyles} from '@material-ui/core/styles';
+import styles from './MUI.css';
 
 class UserDetails extends Component {
 
   state = {
-    balance: 0
+    balance: 0,
+    isTooltipOpen: false,
+    isEllipsisActive: false
   }
 
   componentDidUpdate(prevProps) {
@@ -38,15 +43,37 @@ class UserDetails extends Component {
     return balance;
   }
 
+  componentDidMount() {
+    const domUsername = this.refs.detailsUsername;
+    const isEllipsisActive = this.isEllipsisActive(domUsername);
+
+    this.setState({isEllipsisActive: isEllipsisActive});
+  }
+
+  isEllipsisActive(e) {
+    return (e.offsetWidth < e.scrollWidth);
+  }
+
+  handleTooltipClose = () => {
+    this.setState({isTooltipOpen: false});
+  };
+
+  handleTooltipOpen = () => {
+    if(this.state.isEllipsisActive) {
+      this.setState({isTooltipOpen: true});
+    }
+  }
+
   render() {
     const {avatar, username} = this.props;
-
     return (
       <>
         <div className='user-details'>
           <Avatar avatar={ avatar } user={ username }/>
           <div className='user-details-content'>
-            <div className='user-details-content__name'>{ username }</div>
+            <Tooltip open={ this.state.isTooltipOpen } onOpen={ this.handleTooltipOpen } onClose={ this.handleTooltipClose } title={ username } placement='top-start'>
+              <div className='user-details-content__name' ref='detailsUsername' >{ username }</div>
+            </Tooltip>
             <div className='user-details-content__wallet'>
               <span>Wallet: {this.state.balance} sUSD</span>
               <span className='user-details-content__wallet__white'></span>
@@ -68,4 +95,4 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   null
-)(UserDetails);
+)(withStyles(styles)(UserDetails));
