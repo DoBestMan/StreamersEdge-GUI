@@ -8,10 +8,14 @@
     flex-direction: column;
     justify-content: space-around;
     margin-left: 16px;
+    overflow: hidden;
 
     &__name {
       font-size: 25px;
       color: $white;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &__following {

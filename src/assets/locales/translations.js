@@ -101,8 +101,8 @@ export const translationObject = {
         errorHeader: 'Unexpected Error',
         errorSubText: 'Failed to update preferences',
         successHeader: 'Your preferences have been succesfully updated',
-        successSubText: 'You will be automatically redirected in 10 seconds, otherwise,',
-        successSubTextClickHere: 'click here',
+        redirectToDashboard: 'You will be redirected to dashboard in 10 seconds, otherwise,',
+        redirectClickHere: 'click here',
         clickHere: 'click here'
       }
     },
@@ -216,7 +216,11 @@ export const translationObject = {
       selectableReasons: 'Selectable reasons for reports:',
       giveDescription: 'Please give a brief description..',
       attachLink: 'Attach a link to reported video:',
-      error: 'Please ensure all fields are filled.',
+      sent: 'Report Sent.',
+      error: {
+        emptyField: 'Please ensure all fields are filled.',
+        length: 'The description must be at least 24 characters long.'
+      },
       reasons: {
         one: 'Offends my religious sentiments',
         two: 'Offensive profile pic',

@@ -146,7 +146,7 @@ class UpdateProfile extends Component {
     ProfileService.updateProfile(account).then((res) => {
       this.props.setAccount(res);
       this.props.setModalType(ModalTypes.SUBMIT);
-      this.props.setModalData({headerText: translate('updateProfile.userInfo.updatedSuccessfully'), subText: translate('preferences.modal.successSubText'),
+      this.props.setModalData({headerText: translate('updateProfile.userInfo.updatedSuccessfully'), subText: translate('preferences.modal.redirectClickHere'),
         redirect: '/dashboard', type: 'success'});
       this.props.toggleModal();
     }).catch(() => {

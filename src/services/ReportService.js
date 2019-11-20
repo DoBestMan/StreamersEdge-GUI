@@ -34,7 +34,6 @@ class ReportService {
       }
     };
 
-
     const body = {
       reportedUserId,
       reason,

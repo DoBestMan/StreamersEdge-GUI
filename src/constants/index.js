@@ -5,6 +5,7 @@ import RouteConstants from './RouteConstants';
 import UploadFileTypes from './UploadFileTypes';
 import DonateConstants from './DonateConstants';
 import DashboardConstants from './DashboardConstants';
+import ReportConstants from './ReportConstants';
 
 export {
   DashboardConstants,
@@ -13,5 +14,6 @@ export {
   PreviewTypes,
   RouteConstants,
   UploadFileTypes,
-  DonateConstants
+  DonateConstants,
+  ReportConstants
 };

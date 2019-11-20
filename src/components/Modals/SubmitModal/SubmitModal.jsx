@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {successRobot, errorRobot} from '../../../assets/images/modals';
 import CloseIcon from '@material-ui/icons/Close';
+import {IconButton} from '@material-ui/core';
 import {ModalActions, NavigateActions} from '../../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -66,9 +67,9 @@ class SubmitModal extends Component {
     return (
       <div className='submit-modal__wrapper'>
         <div className='submit-modal'>
-          <div className='submit-modal__cross' onClick={ this.handleClose }>
+          <IconButton className='link-account__cross' aria-label='Close' onClick={ this.handleClose }>
             <CloseIcon />
-          </div>
+          </IconButton>
           <div className='submit-modal__icon'>
             <img className='submit-modal__icon-img' src={ icon } alt=''/>
           </div>
