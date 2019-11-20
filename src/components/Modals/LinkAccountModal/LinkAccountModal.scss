@@ -1,0 +1,56 @@
+@import '../../../assets/styles/common';
+
+.link-account {
+  &__wrapper {
+    position: relative;
+    text-align: center;
+  }
+
+  &__cross {
+    position: absolute;
+    right:0;
+    width: 45px;
+    cursor: pointer;
+
+    &-img {
+      width: 10px;
+      max-width: 10px;
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    padding: 20px 0;
+
+    &-img {
+      width:130px;
+      min-width:130px;
+    }
+  }
+
+  &-text {
+    padding-bottom: 20px;
+
+    &__header {
+      margin:0;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 28px;
+    }
+
+    &__terms {
+      margin: 0;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  &-button {
+    width: 300px;
+    max-width: 300px;
+    cursor: pointer;
+  }
+}

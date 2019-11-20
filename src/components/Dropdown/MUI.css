@@ -1,0 +1,13 @@
+.dropdownStyle {
+  margin-top: 55px;
+  margin-left: 2px;
+  border-bottom: none;
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+}
+
+.textBoxStyle {
+  padding-top: 12px;
+  padding-right: 0;
+  padding-bottom: 12px;
+}

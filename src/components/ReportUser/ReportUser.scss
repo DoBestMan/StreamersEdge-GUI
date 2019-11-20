@@ -1,0 +1,78 @@
+@import '../../assets/styles/common.scss';
+
+.report {
+  margin: 30px;
+}
+
+.report-form {
+  display: flex;
+  flex-direction: column;
+
+  &--center {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 32px;
+    width: 45px;
+  }
+
+  &__radioGroup {
+    align-items: center;
+  }
+
+  &__btn {
+    &-img {
+      position: absolute;
+    }
+  }
+
+  &__title {
+    font-family: $lato;
+    font-style: italic;
+    font-size: 50px;
+    text-align: center;
+  }
+
+  &__subTitle {
+    font-family: $lato-light;
+    font-style: normal;
+    font-size: 36px;
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__textArea {
+    width: 75%;
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-bottom: 30px;
+  }
+
+  &__submit {
+    width: 264px;
+    height: 68px;
+    border: 2px solid silver;
+  }
+
+  &__txt {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+
+    &--error {
+      @extend .report-form__txt;
+
+      height: 0;
+      color: white;
+    }
+  }
+}

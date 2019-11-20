@@ -16,9 +16,6 @@ var compiler = webpack(config);
 var fs = require('fs');
 var useYarn = fs.existsSync(paths.yarnLockFile);
 var cli = useYarn ? 'yarn' : 'npm';
-var openBrowser = require('react-dev-utils/openBrowser');
-var os = require('os');
-
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
@@ -56,11 +53,6 @@ function setupCompiler(host, port, protocol) {
     var messages = formatWebpackMessages(stats.toJson({}, true));
     var isSuccessful = !messages.errors.length && !messages.warnings.length;
     var showInstructions = isSuccessful && (isInteractive || isFirstCompile);
-
-    if (isSuccessful && os.platform() !== 'win32') {
-      console.log(chalk.green('Compiled successfully!'));
-      openBrowser(protocol + '://' + host + ':' + port + '/');
-    }
 
     if (showInstructions) {
       isFirstCompile = false;
@@ -144,7 +136,7 @@ detect(DEFAULT_PORT).then((port) => {
 
   if (isInteractive) {
     clearConsole();
-    
+
     function changePort(answer) {
       if (answer.newPort) {
         console.log(chalk.green('Using port: ' + port + ' instead.'));

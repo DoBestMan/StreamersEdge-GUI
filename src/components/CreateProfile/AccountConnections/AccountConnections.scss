@@ -1,0 +1,117 @@
+@import '../../../assets/styles/common';
+
+.link-accounts {
+  &__header {
+    display: flex;
+    margin-bottom: 40px;
+    padding: 0;
+    border-bottom: 1px solid #424268;
+    font-family: $lato;
+    font-style: Italic;
+    font-size: 35px;
+    text-align: left;
+  }
+
+  &__card {
+    width: 50%;
+    max-width: 960px;
+    min-height: 500px;
+    margin-top: 67px;
+    margin-bottom: 50px;
+    padding: 76px;
+    border: 2px solid $white;
+    border-radius: 25px;
+    background-image: $profile-gradient;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 100%;
+  }
+
+  &__content {
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    background: $profile-connection-background 0% 0% no-repeat padding-box;
+    opacity: 1;
+
+    &-header {
+      margin: 0;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 14px;
+      color: $white;
+      text-align: left;
+      opacity: 0.5;
+      letter-spacing: 0;
+    }
+
+    &-body {
+      @extend .link-accounts__content-header;
+
+      font-size: 23px;
+      opacity: 1;
+    }
+
+    &-icon {
+      margin: 20px 20px 0 0;
+      cursor: pointer;
+    }
+  }
+
+  &__connection {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: 30px 0;
+    padding: 30px;
+    border: 4px solid $profile-border;
+    border-radius: 10px;
+    background: $profile-connection-background 0% 0% no-repeat padding-box;
+    opacity: 1;
+
+    &-wrapper {
+      width: 100%;
+    }
+
+    &-user {
+      @extend .link-accounts__content-header;
+
+      width: 95%;
+      font-size: 26px;
+      opacity: 1;
+      overflow-wrap: break-word;
+    }
+
+    &-label {
+      @extend .link-accounts__content-header;
+
+      font-size: 17px;
+    }
+
+    &-icon {
+      width: 39px;
+      height: 39px;
+      margin-right: 20px;
+    }
+
+    &-close {
+      width: 18px;
+      height: 18px;
+      margin: -15px;
+      background-image: url('../../../assets/images/profile/close_white.png');
+      background-repeat: no-repeat;
+      background-size: 18px;
+      cursor: pointer;
+
+      &:hover {
+        background-image: url('../../../assets/images/profile/close_grey.png');
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}

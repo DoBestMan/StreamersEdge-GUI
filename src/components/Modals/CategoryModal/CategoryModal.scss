@@ -1,0 +1,39 @@
+.category {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  &-header {
+    font-style: italic;
+    font-size: 50px;
+    text-transform: capitalize;
+    letter-spacing: 0;
+  }
+
+  &-form {
+    &__group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 23px;
+    }
+
+    &__label {
+      margin-right: 38px;
+      font-style: italic;
+    }
+
+    &__submit {
+      margin-top: 30px;
+      text-align: right;
+
+      &-button {
+        height: 65px;
+      }
+    }
+  }
+}

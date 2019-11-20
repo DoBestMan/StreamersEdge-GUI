@@ -1,0 +1,56 @@
+@import '../../../assets/styles/common';
+
+.ban-card {
+  &__wrapper {
+    position: relative;
+    text-align: center;
+  }
+
+  &__cross {
+    position: absolute;
+    right:0;
+
+    &-img {
+      width: 10px;
+      max-width: 10px;
+    }
+  }
+
+  &__icon {
+    padding: 20px 0;
+
+    &-img {
+      width:130px;
+      min-width:130px;
+    }
+  }
+
+  &-text {
+    padding-bottom: 20px;
+
+    &__primary {
+      margin:0;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 28px;
+    }
+
+    &__secondary {
+      margin:0;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 16px;
+      color: $gray-light;
+    }
+
+    &__underlined {
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    &__blue {
+      color: $blue-light;
+      text-decoration: underline;
+    }
+  }
+}

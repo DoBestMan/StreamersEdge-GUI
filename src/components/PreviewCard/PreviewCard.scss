@@ -1,0 +1,127 @@
+@import '../../assets/styles/common';
+
+.preview-card {
+  width: $pc-w;
+  height: $pc-h;
+  margin: auto;
+  border: 1px solid $white;
+  background-color: $blue-lighter;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  &--loading {
+    display: block;
+    margin: 20% auto; /* stylelint-disable-line */
+  }
+
+  &__status {
+    &-live, &-join {
+      width: $pc-status-w;
+      margin-top: $pc-status-top;
+      padding-right: 14px;
+      line-height: $pc-status-h;
+      font-family: $myriad-pro--bold;
+      font-size: $pc-status;
+      -webkit-box-shadow: 10px 3px 13px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: 10px 3px 13px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    &-blt::before {
+      content: '\2B24  ';
+      padding-left: 14px;
+      font-size: $pc-status-blt;
+    }
+
+    &-live {
+      background-color: $red;
+    }
+
+    &-join {
+      color: $black;
+      background-color: $green;
+    }
+  }
+
+  &__desc {
+    display: block;
+    float: right;
+    width: $pc-desc-w;
+    height: $pc-desc-h;
+    background: $pc-desc-bg-clr;
+
+    &-content {
+      width: $pc-desc-content-w;
+      height: $pc-desc-content-h;
+
+      .profile {
+        display: flex;
+        top: 31.61px;
+        height: $pc-desc-content-profile-h;
+        margin-top: $pc-desc-content-margin-top-left;
+        margin-left: $pc-desc-content-margin-top-left;
+
+        &__data {
+          height: $pc-desc-content-profile-data-h;
+        }
+
+        &-img {
+          padding-right: 12.813px;
+        }
+
+        &__username, &__game, &__views, &__description {
+          margin: 0 0 0 14.16px;
+          font-family: $lato;
+        }
+
+        &__game, &__description {
+          font-size: $pc-desc-content-game-and-description;
+        }
+
+        &__game, &__views {
+          margin-top: 5px;
+        }
+
+        &__username {
+          margin-top: 10px;
+          font-size: $pc-desc-content-username;
+          word-break: break-all;
+          overflow: hidden;
+        }
+
+        &__game {
+          color: $blue-light;
+        }
+
+        &__views {
+          font-size: $pc-desc-content-viewers;
+          color: $red;
+        }
+      }
+
+      .description {
+        width: $pc-desc-content-description-w;
+        height: $pc-desc-content-description-h;
+        margin-top: 35px;
+        margin-left: $pc-desc-content-margin-top-left;
+        font-size: $pc-desc-content-game-and-description;
+        overflow: auto;
+      }
+    }
+  }
+
+  &__header {
+    display: block;
+    height: $pc-header-h;
+    background: $pc-header-bg-clr;
+
+    &-viewers {
+      box-sizing: border-box;
+      width: $pc-header-viewers-w;
+      height: $pc-header-viewers-h;
+      margin-top: 3.35px;
+      margin-left: 2px;
+      border: 1px solid $pc-header-viewers-border-clr;
+      background-color: $pc-header-viewers-bg-clr;
+    }
+  }
+}

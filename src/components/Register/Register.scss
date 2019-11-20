@@ -1,0 +1,30 @@
+@import '../../assets/styles/common';
+
+.register {
+  &-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 545px;
+    margin: auto;
+    background-size: cover;
+  }
+
+  &__title {
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 30px;
+  }
+
+  &__subHeader {
+    font-style: italic;
+    font-size: 20px;
+    color: $blue-light;
+  }
+
+  &-links {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}

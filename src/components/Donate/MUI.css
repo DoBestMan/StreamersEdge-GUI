@@ -1,0 +1,23 @@
+/* stylelint-disable */
+
+.label {
+  font-weight: 300;
+  font-style: italic;
+  font-size: 27.52px;
+  color: rgb(61, 165, 243);
+}
+
+.donateTextbox {
+  font-family: 'Myriad Pro', sans-serif;
+  height: 70px;
+  padding: 2px;
+  font-size: 32px;
+  font-style: bold;
+  color: white;
+  text-align: center;
+}
+
+.donateBorder {
+  border-radius: 0;
+  border-color: white !important;
+}

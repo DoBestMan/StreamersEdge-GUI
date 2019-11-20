@@ -1,0 +1,51 @@
+@import '../../../assets/styles/common.scss';
+
+.challenge-footer {
+  @include bg-gradient;
+
+  width: 100%;
+  height: 138px;
+  text-align: center;
+
+  &__step {
+    &-wrapper {
+      width: 1398px;
+      height: 100%;
+      margin: auto;
+    }
+
+    &-content {
+      display: flex;
+      position: relative;
+      height: 100%;
+    }
+
+    &-back, &-next {
+      align-self: center;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    &-back {
+      left: 0;
+    }
+
+    &-next {
+      right: 0;
+    }
+
+    &-steppers {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+  }
+
+  &__item {
+    align-self: center;
+
+    &--hide {
+      visibility: hidden;
+    }
+  }
+}

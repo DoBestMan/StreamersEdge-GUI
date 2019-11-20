@@ -1,0 +1,49 @@
+@import '../../assets/styles/common';
+
+.dropdown {
+  position: relative;
+  bottom: 32px;
+  width: fit-content;
+  height: 100px;
+  margin: 0 -38px;
+
+  &__input {
+    bottom: 120px;
+    left: 45px;
+    width: 360px;
+    height: 90px;
+    padding: 0;
+    font-size: 20px;
+    color: $white;
+    text-align: center;
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 0;
+    }
+  }
+
+  &__row {
+    width: 450px;
+    height: 147px;
+  }
+
+  &__menuItem {
+    justify-content: center;
+    border: solid 1px transparent;
+    border-radius: 5px;
+    font-size: 20px;
+    color: $white;
+    text-transform: capitalize;
+    background: radial-gradient($brown 5%, $brown 25%, $black 50%, $black 70%) left bottom no-repeat;
+    background-size: 100% 5px;
+
+    &:hover {
+      border: solid 1px $eggshell;
+      border-radius: 5px;
+    }
+  }
+}

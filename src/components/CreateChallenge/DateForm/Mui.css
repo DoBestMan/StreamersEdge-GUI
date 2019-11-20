@@ -1,0 +1,14 @@
+.checkbox svg {
+  font-size: 30px;
+}
+
+.checkbox svg path {
+  fill: #3FA9F5;
+}
+
+.formLabel {
+  color: #ffffff;
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 0;
+}

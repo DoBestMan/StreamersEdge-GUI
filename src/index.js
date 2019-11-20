@@ -3,8 +3,10 @@ import configureStore, {history} from './store/configureStore';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import {PeerplaysService} from './services';
 // Initialize store
 const store = configureStore();
+PeerplaysService.init(store);
 
 const render = () => {
   ReactDOM.render(
@@ -16,5 +18,3 @@ const render = () => {
 };
 
 render();
-
-// ReactDOM.render(<App />, document.getElementById('content'));

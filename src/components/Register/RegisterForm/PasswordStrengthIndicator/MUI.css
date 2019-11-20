@@ -1,0 +1,37 @@
+.rootBar {
+  width: 100%;
+  height: 6px;
+  margin-top: 5px;
+  margin-right: 3px;
+  border-radius: 1111px;
+  opacity: 0.2;
+}
+
+.rootBarFilled {
+  width: 100%;
+  height: 6px;
+  margin-top: 5px;
+  margin-right: 3px;
+  border-radius: 1111px;
+  opacity: 1;
+}
+
+.stage1 {
+  background-color: rgba(193, 39, 45, 1);
+  transition: none;
+}
+
+.stage2 {
+  background-color: rgba(230, 86, 33, 1);
+  transition: none;
+}
+
+.stage3 {
+  background-color: rgba(251, 176, 59, 1);
+  transition: none;
+}
+
+.stage4 {
+  background-color: rgba(11, 193, 95, 1);
+  transition: none;
+}

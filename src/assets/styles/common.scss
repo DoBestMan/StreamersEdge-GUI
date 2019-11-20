@@ -1,0 +1,158 @@
+@import './colors';
+@import './fonts';
+@import './fontSizes';
+@import './layout';
+@import './mixins-functions';
+
+* {
+  color: $white;
+  scrollbar-color: $darker-gray transparent;
+}
+
+html, body {
+  @include bg-gradient;
+
+  width: 100vw;
+  min-width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: $lato;
+  overflow: hidden;
+}
+
+.body {
+  display: flex;
+  position: relative;
+  min-width: 100%;
+  max-width: 100vw;
+
+  &-content {
+    width: 100%;
+    max-width: 100vw;
+    height: calc(100vh - 105px);
+    transition: all .5s;
+    overflow: scroll;
+
+    &__open-left {
+      width: calc(100% - 405px);
+      margin-left: 405px;
+    }
+
+    &__open-right {
+      width: calc(100% - 398px);
+      margin-right: 398px;
+    }
+
+    &__open-both {
+      width: calc(100% - 803px);
+      margin-right: 398px;
+      margin-left: 405px;
+    }
+  }
+}
+
+.cursor {
+  &--pointer {
+    cursor: pointer;
+  }
+}
+
+#content {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 100%;
+  min-height: $height__content;
+  white-space: pre-line;
+}
+
+.divider {
+  height: 5px;
+
+  &-radial {
+    @extend .divider;
+
+    background-image: radial-gradient($white, $black);
+  }
+
+  &-linear {
+    height: 7px;
+
+    &--top {
+      background-image: linear-gradient($white, $gray);
+    }
+
+    &--bottom {
+      background-image: linear-gradient($gray, $white);
+    }
+  }
+
+  &-empty {
+    &--top, &--bottom {
+      height: 20px;
+      background: $app-bg-secondary;
+    }
+
+    &--top {
+      margin-top: 20px;
+      border-radius: 15px 15px 0 0;
+    }
+
+    &--bottom {
+      margin-bottom: 20px;
+      border-radius: 0 0 15px 15px;
+    }
+  }
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: $white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $brighter-gray;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $darker-gray;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar, ::-webkit-scrollbar-corner {
+  background: #151924;
+  -webkit-box-shadow: inset 2px 0 2px 0 rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 2px 0 2px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: inset 2px 0 2px 0 rgba(0, 0, 0, 0.75);
+}
+
+//remove number dial for number textfield inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}

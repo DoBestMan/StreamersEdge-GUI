@@ -1,0 +1,44 @@
+@import '../../../assets/styles/common';
+
+.carousel {
+  &__button {
+    position: absolute;
+    z-index: 6969;
+    transform: matrix(-1, 0, 0, -1, 0, 0);
+    width: 2vw;
+    height: 40%;
+    border: 3px solid rgb(14, 16, 25);
+    font-size: 50px;
+    background: rgb(29, 34, 46);
+    cursor: pointer;
+
+    &-left {
+      @extend .carousel__button;
+
+      top: 27%;
+      left: -1.9vw;
+    }
+
+    &-right {
+      @extend .carousel__button;
+
+      top: 27%;
+      left: 98.5%;
+    }
+  }
+
+  &__wrapper {
+    position: sticky;
+    margin: auto;
+  }
+}
+
+.slick-prev {
+  left: 24%;
+  z-index: 69;
+}
+
+.slick-next {
+  right: 25.6%;
+  z-index: 69;
+}

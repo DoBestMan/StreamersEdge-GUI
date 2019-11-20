@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: services/PeerplaysService.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="TokenUtil.html">TokenUtil</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ChallengeActions.html">ChallengeActions</a></li><li><a href="ChallengeUtil.html">ChallengeUtil</a></li><li><a href="ErrorBoxActions.html">ErrorBoxActions</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysActions.html">PeerplaysActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="PrivateAuthService.html">PrivateAuthService</a></li><li><a href="PrivateProfileService.html">PrivateProfileService</a></li><li><a href="PrivateUserService.html">PrivateUserService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li><li><a href="StreamService.StreamService.html">StreamService</a></li><li><a href="UserSerivce.html">UserSerivce</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dummyDataWrapper">dummyDataWrapper</a></li><li><a href="global.html#listenChainStore">listenChainStore</a></li><li><a href="global.html#translate">translate</a></li><li><a href="global.html#updateChainStore">updateChainStore</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>services/PeerplaysService.js</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {ChainStore} from 'peerplaysjs-lib';
+import {listenChainStore} from './ChainStoreService';
+import PeerplaysActions from '../actions/PeerplaysActions';
+import ChainStoreHeartbeater from '../utility/PeerplaysUtil/ChainStoreHeartbeater';
+import {Apis, Login, ConnectionManager} from 'peerplaysjs-lib';
+import Config from '../utility/Config';
+import Immutable from 'immutable';
+import log from 'loglevel';
+import BlockchainUtils from '../utility/PeerplaysUtil/BlockchainUtils';
+const MAX_RECURSION_ATTEMPTS = 10;
+const endpointsGist = 'https://api.github.com/gists/024a306a5dc41fd56bd8656c96d73fd0';
+
+/**
+ * Contains functions required to init, connect, reconnect, and obtain data from the Peerplays blockchain.
+ *
+ * @class PeerplaysService
+ */
+class PeerplaysService {
+  constructor() {
+    this.store = null;
+
+    this.connectionStatusCallback = () => {};
+
+    this.blockchainUrlIndex = 0;
+    this.sortedList = [];
+    this.peerplaysURLs = [];
+    this.balancePrecision = 0;
+    this.blockInterval = 0;
+  }
+
+  /**
+   * Initializes the connection and sets up a heartbeater.
+   *
+   * @param {object} store - Redux store.
+   * @memberof PeerplaysService
+   */
+  init(store) {
+    const ConnectionCallback = () => {
+      this.setDefaultRpcConnectionStatusCallback((value) => {
+        switch (value) {
+          case 'error':
+          case 'open':
+            break;
+          case 'reconnected':
+          case 'closed':
+            ChainStore.resetCache();
+            this.init(store);
+            break;
+          // no default
+        }
+      });
+    };
+
+    this.store = store;
+    let beater = new ChainStoreHeartbeater();
+
+    beater.setHeartBeatChainStore(() => {
+      store.dispatch(PeerplaysActions.setPeerplaysConnected(false));
+    });
+
+    ChainStore.setDispatchFrequency(this.blockInterval);//set the frequency of pulling blockchain data
+    this.connectToBlockchain(ConnectionCallback, store).then(() => {
+
+      // Init the chainstore after we connect so that we can request object data from
+      // the blockchain.
+      ChainStore
+        .init()
+        .then(() => {
+          listenChainStore(ChainStore, store);
+        })
+        .catch((err) => {
+          console.error('error: ',err);//TODO: real error handling for production
+        });
+
+    }).then(() => {
+      // sync with blockchain
+      this.syncWithBlockchain().then((synced) => {
+
+        if(synced === false) {
+          console.warn('Sync failed: clock desync.');
+          this.closeConnectionToBlockchain();
+          this.init(this.store);
+          return;
+        }
+
+        PeerplaysActions.setPeerplaysConnected(true);
+        PeerplaysActions.setPeerplaysPrecision(this.balancePrecision);
+      }).catch(() => {
+        //disconnect since we are not synced
+        this.closeConnectionToBlockchain();
+        this.init(this.store);
+      });
+    }).catch((error) => {
+      // Fail to connect/ sync/ listen to software update, close connection to the blockchain
+      console.error('Failed to connect to blockchain', error, (new Error()).stack);
+      store.dispatch(PeerplaysActions.setPeerplaysConnected(false));
+      this.closeConnectionToBlockchain();
+      this.init(store);
+    });
+  }
+
+  /**
+   * Obtainis the full account of the user along with the balance.
+   *
+   * @param {string} accountName - Peerplays account name/id of the user.
+   * @memberof PeerplaysService
+   */
+  getBalance(accountName) {
+    this.getFullAccount(accountName).then((account) => {
+
+      if(account) {
+        this.store.dispatch(PeerplaysActions.setPeerplaysAccount(account));
+        this.store.dispatch(PeerplaysActions.setPeerplaysConnected(true));
+      }
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  /**
+   * Obtain list of active witnesses or testnet endpoints if in development mode.
+   *
+   * @returns {Promise} - Resolves promise if succesful, otherwise reject.
+   * @memberof PeerplaysService
+   */
+  async getActiveWitnessEndpoints() {
+    const clean = (values) => {
+      let cleanedValues = values;
+
+      for (let i = 0; i &lt; values.length; i++) {
+        cleanedValues[i] = cleanedValues[i].trim();
+      }
+
+      return cleanedValues;
+    };
+
+    return new Promise(async(resolve, reject) => {
+      try {
+        if (!Config.isDev) {
+          const res = await fetch(endpointsGist);
+          const data = await res.json();
+          let keys = Object.keys(data.files);
+
+          // Loop over the keys, extract the endpoints and convert to an array.
+          for (let i = 0; i &lt; keys.length; i++) {
+            let key = keys[i];
+            let content = data.files[key].content;
+            this.peerplaysURLs = clean(content.replace('const endpoints = [', '').replace('];', '').replace(/'/g, '').split(','));
+            resolve();
+          }
+
+        } else {
+          this.peerplaysURLs = Config.elizabethEndpoints;
+          resolve();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  /**
+   * Reconnect to blockchain in case of a disconnect.
+   *
+   * @returns {Apis.instance}
+   * @memberof PeerplaysService
+   */
+  reconnectToBlockchain() {
+    // Increment the index for the next connection attempt
+    if(this.sortedList.length > 1) {
+      this.blockchainUrlIndex++;
+    }
+
+    const connectionString = this.sortedList[this.blockchainUrlIndex];
+    return Apis
+      .instance(connectionString, true)
+      .init_promise
+      .then(() => {
+        console.info(`%cConnected to: ${connectionString}.`, 'background: #222 color: green; font-size: large');
+      })
+      .catch(() => {
+        console.info(`%cConnection to: ${connectionString} failed.`, 'background: #222; color: red; font-size: large');
+
+        return Promise.reject();
+      });
+  }
+
+  /**
+   * Connecting to Peerplays blockchain and initializing chainstore.
+   *
+   * @param {Function} connectionStatusCallback - Connection status callback function.
+   * @returns {Function} Returns connection status callback function.
+   * @memberof PeerplaysService
+   */
+  connectToBlockchain(connectionStatusCallback) {
+    // Set connection status callback
+    this.connectionStatusCallback = connectionStatusCallback;
+
+    if (this.sortedList.length > 1) {
+      return this.reconnectToBlockchain();
+    } else {
+      return this.getActiveWitnessEndpoints().then(() => {
+        const wsConnectionManager = new ConnectionManager({urls: this.peerplaysURLs});
+        return wsConnectionManager;
+      }).then((connectionManager) => {
+        return connectionManager.sortNodesByLatency();
+      }).then((list) => {
+        this.sortedList = list;
+        const connectionString = list[this.blockchainUrlIndex];
+        return Apis.instance(connectionString, true).init_promise.then((res) => {
+          this.connectionStatusCallback(true);
+
+          // Print out which blockchain we are connecting to
+          log.debug('Connected to:', res[0]
+            ? res[0].network_name
+            : 'Undefined Blockchain');
+        })
+          .catch((err) => {
+            console.error('closing blockchain: ', err);
+            // Close residue connection to blockchain
+            this.closeConnectionToBlockchain();
+            this.init(this.store);
+          });
+      });
+    }
+  }
+
+  /**
+   * Close connection to blockchain and remove any related callbacks.
+   *
+   * @memberof PeerplaysService
+   */
+  closeConnectionToBlockchain() {
+    // Close connection
+    Apis.close();
+
+    // Reset the index if we've gone past the end.
+    if (this.blockchainUrlIndex >= this.peerplaysURLs.length) {
+      this.blockchainUrlIndex = 0;
+    }
+  }
+
+  /**
+   * Request data from the Peerplays blockchain based on provided parameters required for the various calls.
+   *
+   * @param {string} apiPluginName - One of the apis that exist: `connect`, `close`, `db_api`, `network_api`, `history_api`, `crypto_api`, `bookie_api`, `setRpcConnectionStatusCallback`.
+   * @param {string} methodName - Public methods available on Peerplays blockchain.
+   * @param {Array} [params=[]] - Params required for different blockchain methods.
+   * @returns {Immutable.Map} Of data retrieved.
+   * @memberof PeerplaysService
+   */
+  callBlockchainApi(apiPluginName, methodName, params = []) {
+    let apiPlugin;
+
+    if (apiPluginName === 'db_api') {
+      apiPlugin = Apis
+        .instance()
+        .db_api();
+
+      return apiPlugin
+        .exec(methodName, params)
+        .then((result) => {
+          return Immutable.fromJS(result);
+        })
+        .catch((err) => {
+          // Intercept and log
+          log.error(`Error in calling ${apiPluginName}\nMethod: ${methodName}\nParams: ${JSON.stringify(params)}\nError: `, err);
+          // Return an empty response rather than throwing an error.
+          return Immutable.fromJS({});
+        });
+    }
+  }
+
+  /**
+   * Call the Peerplays blockchain `db_api` for information.
+   * Route every call to blockchain db api through this function, so we can see the logging.
+   *
+   * @param {*} methodName - Public methods available on Peerplays blockchain.
+   * @param {*} [params=[]] - Params required for different blockchain methods.
+   * @returns {Immutable.Map}
+   * @memberof PeerplaysService
+   */
+  callBlockchainDbApi(methodName, params = []) {
+    return this.callBlockchainApi('db_api', methodName, params);
+  }
+
+  /**
+   * Request information on the Peerplays blockchain by id.
+   *
+   * @param {string} id - ID of the peerplays blockchain to retrieve @example '1.3.1'.
+   * @param {boolean} [force=false] - Force a result. TODO: check blockchain for certainty on this.
+   * @param {number} [numRecursion=0] - Number of times to retry requesting.
+   * @returns {Immutable.Map}
+   * @memberof PeerplaysService
+   */
+  getObject(id, force = false, numRecursion = 0) {
+    let num = numRecursion;
+    return new Promise((resolve, reject) => {
+      if (num > MAX_RECURSION_ATTEMPTS) {
+        console.warn('[APP] MAX_RECURSION_ATTEMPTS Repository.getObject()');
+        return resolve(null);
+      }
+
+      let object = ChainStore.getObject(id, force);
+
+      if (object === null) {
+        return resolve(object);
+      }
+
+      if (object) {
+        return resolve(object);
+      }
+
+      setTimeout(() => {
+        this
+          .getObject(id, force, ++num)
+          .then((res) => resolve(res))
+          .catch((err) => reject(err));
+      }, 100);
+    });
+  }
+
+  /**
+   * Get the account data from the blockchain for the provided account name or account ID.
+   *
+   * @param {string} accountNameOrId - @example 'jibber232' or '1.2.334'.
+   * @returns {Immutable.Map} FullAccount: contains user data retrieved from blockchain if it exists.
+   * @memberof PeerplaysService
+   */
+  getFullAccount(accountNameOrId) {
+    return this.callBlockchainDbApi('get_full_accounts', [[accountNameOrId], true]).then((result) => {
+      const fullAccount = result.getIn([0, 1]);
+      // Return the full account
+      return fullAccount;
+    });
+  }
+
+  /**
+   * Using provided paramters, retrieves key auths from blockchain account data passed in and then checks for a match with form generated keys with aid from peerplaysjs-lib against blockchain keys.
+   *
+   * @param {*} fullAccount - Received from @AuthActions processLogin.
+   * @param {*} password - Received from @AuthActions processLogin.
+   * @returns {boolean}: Represents account as true: is authenticated or false: is not authenticated
+   * @memberof PeerplaysService
+   */
+  authAccount(fullAccount, password) {
+    let isAuth = false;
+
+    // If missing form data, skip processing and early return false authentication.
+    if (!fullAccount || !password) {
+      return isAuth;
+    }
+
+    const accountName = fullAccount.get('name');
+    // Auths comes from the account info retrieved from the blockchain.
+    const activeKeyAuths = fullAccount.getIn(['active', 'key_auths']);
+    const ownerKeyAuths = fullAccount.getIn(['owner', 'key_auths']);
+    const auths = {
+      active: activeKeyAuths.toJS(),
+      owner: ownerKeyAuths.toJS()
+    };
+    isAuth = Login.checkKeys({accountName, password, auths});
+
+    return isAuth;
+  }
+
+  /**
+   * Sets callback for websocket connection.
+   *
+   * @param {*} callback - Callback function.
+   * @returns {Apis} - Callback containing websocket connection status.
+   * @memberof PeerplaysService
+   */
+  setDefaultRpcConnectionStatusCallback(callback) {
+    return Apis
+      .instance()
+      .setRpcConnectionStatusCallback(callback);
+  }
+
+  /**
+   * Checks to see if the users system clocks matches the timestamp of the blockchain.
+   *
+   * @returns {boolean} - Boolean stating weather or not the users is synced.
+   * @memberof PeerplaysService
+   */
+  syncWithBlockchain() {
+    // Check if db api is ready
+    let db_api = Apis.instance().db_api();
+
+    if (!db_api) {
+      return Promise.reject(
+        new Error('Api not found, please ensure Apis from peerplaysjs-lib.ws is initialized first')
+      );
+    }
+
+    // Request object 2.1.0, 2.0.0, and the asset object.
+    return this.callBlockchainDbApi('get_objects', [['2.1.0', '2.0.0', Config.sUSD]])
+      .then((result) => {
+        let isBlockchainTimeDifferenceAcceptable = false;
+        const blockchainDynamicGlobalProperty = result.get(0);
+        const heartBeatInterval = result.get(1);
+        this.blockInterval = heartBeatInterval.getIn(['parameters','block_interval']) * 1000;
+        const asset = result.get(2);
+        this.balancePrecision = asset.get('precision');
+        const now = new Date().getTime();
+        const headTime = BlockchainUtils.blockchainTimeStringToDate(
+          blockchainDynamicGlobalProperty.get('time')
+        ).getTime();
+        const delta = (now - headTime) / 1000;
+        // Continue only if delta of computer current time and the blockchain time is less than a minute
+        isBlockchainTimeDifferenceAcceptable = Math.abs(delta) &lt; 60;
+
+        return isBlockchainTimeDifferenceAcceptable;
+      }).catch((err) => {
+        return Promise.reject(err);
+      });
+  }
+}
+
+export default new PeerplaysService();</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Oct 31 2019 14:01:07 GMT-0300 (Atlantic Daylight Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
+        </p>
+    </div>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

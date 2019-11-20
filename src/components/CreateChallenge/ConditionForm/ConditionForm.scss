@@ -1,0 +1,40 @@
+.condition-form {
+  &__wrapper {
+    display: block;
+    text-align: left;
+  }
+
+  &__conditions {
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 0;
+  }
+
+  &__condition {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__invisible {
+    visibility: hidden;
+  }
+
+  &__bounty {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+
+    &-label {
+      margin-right: 50px;
+      font-style: italic;
+      font-size: 25px;
+      letter-spacing: 0;
+    }
+
+    &-currency {
+      height: 68px;
+      margin-left: 18px;
+    }
+  }
+}

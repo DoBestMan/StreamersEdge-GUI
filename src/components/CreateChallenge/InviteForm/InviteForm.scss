@@ -1,0 +1,14 @@
+.invite-form {
+  padding: 64px 91px 0;
+  text-align: left;
+
+  &--label {
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 0;
+  }
+
+  &__invisible {
+    visibility: hidden;
+  }
+}

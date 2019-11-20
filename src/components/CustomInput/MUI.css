@@ -1,0 +1,22 @@
+.input {
+  margin-top: -27px;
+  color: white;
+}
+
+.inputBlack {
+  margin-top: -27px;
+  color: black;
+}
+
+.inputRegister {
+  margin-top: -27px;
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+  font-size: 18px;
+  color: white;
+}
+
+.inputRegister::placeholder {
+  color: rgb(51, 153, 255);
+  opacity: 1;
+}

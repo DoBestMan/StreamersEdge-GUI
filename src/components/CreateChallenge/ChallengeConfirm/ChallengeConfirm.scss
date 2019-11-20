@@ -1,0 +1,63 @@
+@import '../../../assets/styles/common.scss';
+
+.challenge-confirm {
+  padding: 0 100px;
+  text-align: center;
+  letter-spacing: 0;
+
+  &__txt {
+    font-family: $lato;
+    font-style: italic;
+    font-size: 50px;
+    color: $blue-light;
+    text-align: center;
+
+    &-name {
+      margin-left: 10px;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 50px;
+      color: white;
+      text-align: center;
+    }
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 30px;
+    padding: 0 90px;
+
+    &-label {
+      width: 200px;
+      font-family: $myriad-pro--bold;
+      font-weight: 700;
+      font-size: 25px;
+      color: white;
+      text-align: left;
+    }
+
+    &-value {
+      width: 300px;
+      max-height: 60px;
+      padding: 15px 0;
+      font-family: $myriad-pro--bold;
+      font-size: 25px;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+
+    &-button {
+      width: 180px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

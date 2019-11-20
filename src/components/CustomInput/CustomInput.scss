@@ -1,0 +1,391 @@
+// stylelint-disable
+@import '../../assets/styles/common.scss';
+
+.custom-input {
+  &__left {
+    width: 20px;
+    padding-right: 15px;
+  }
+
+  &__center {
+    width: 100%;
+  }
+
+  &-white {
+    &__icon {
+      &-left {
+        width: 100%;
+        margin-top: -24px;
+      }
+
+      &-right {
+        display: block;
+        height: 70%;
+        margin: auto;
+
+        &-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position: absolute;
+          top: 4px;
+          right: -20px;
+          z-index: 1;
+          width: 35px;
+          height: 35px;
+          border: 3px solid $blue-light;
+          border-radius: 50%;
+          background: white;
+
+          &--active {
+            @extend .custom-input-white__icon-right-wrapper;
+
+            background: $white;
+
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 18px;
+              z-index: -1;
+              width: 50%;
+              height: 100%;
+              border-radius: 50%;
+            }
+
+            &-glowless {
+              @extend .custom-input-white__icon-right-wrapper--active;
+
+              border: 3px solid $blue-light;
+              box-shadow: none;
+
+              &::after {
+                box-shadow: none;
+              }
+            }
+          }
+
+          &-callback {
+            @extend .custom-input-white__icon-right-wrapper;
+            // If this class exists, a callback handler exists and the hover state should be altered.
+            &:hover {
+              cursor: pointer;
+            }
+
+            &--active {
+              @extend .custom-input-white__icon-right-wrapper--active;
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &-glowless {
+                @extend .custom-input-white__icon-right-wrapper--active;
+
+                border: 3px solid $blue-light;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__mui {
+      width: 100%;
+
+      &-icon-left, &-icon-right, &-icon-both {
+        @extend .custom-input-white__mui;
+        // Font size is set within the MUI.css to override MUI style default of 16px.
+      }
+    }
+
+    &__wrapper {
+      display: flex;
+      position: relative;
+      width: 100%;
+      height: 10px;
+      padding: 20px;
+      -webkit-border-radius: 11px;
+      -moz-border-radius: 11px;
+      border-radius: 11px;
+      background-color: $white;
+
+      &--active {
+        @extend .custom-input-white__wrapper;
+
+        background: white;
+
+        &-glowless {
+          @extend .custom-input-white__wrapper--active;
+
+          box-shadow: none;
+
+          &::after {
+            box-shadow: none;
+          }
+        }
+
+        &-red {
+          @extend .custom-input-white__wrapper;
+
+          border: 3px solid red;
+          background: white;
+        }
+      }
+    }
+  }
+
+  &-basic {
+    &__icon {
+      &-left {
+        width: 100%;
+        margin-top: -24px;
+      }
+
+      &-right {
+        display: block;
+        height: 70%;
+        margin: auto;
+
+        &-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position: absolute;
+          top: 7px;
+          right: 7px;
+          z-index: 1;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          background: $input-blue;
+
+          &--active {
+            @extend .custom-input-basic__icon-right-wrapper;
+
+            background: $black;
+
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 18px;
+              z-index: -1;
+              width: 50%;
+              height: 100%;
+              border-radius: 50%;
+            }
+
+            &-glowless {
+              @extend .custom-input-basic__icon-right-wrapper--active;
+
+              border: 3px solid $blue-light;
+              box-shadow: none;
+
+              &::after {
+                box-shadow: none;
+              }
+            }
+          }
+
+          &-callback {
+            @extend .custom-input-basic__icon-right-wrapper;
+            // If this class exists, a callback handler exists and the hover state should be altered.
+            &:hover {
+              cursor: pointer;
+            }
+
+            &--active {
+              @extend .custom-input-basic__icon-right-wrapper--active;
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &-glowless {
+                @extend .custom-input-basic__icon-right-wrapper--active;
+
+                border: 3px solid $blue-light;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__mui {
+      width: 100%;
+
+      &-icon-left, &-icon-right, &-icon-both {
+        @extend .custom-input-basic__mui;
+        // Font size is set within the MUI.css to override MUI style default of 16px.
+      }
+    }
+
+    &__wrapper {
+      display: flex;
+      position: relative;
+      width: 375px;
+      height: 10px;
+      padding: 20px;
+      border: 2px solid $blue-light;
+      -webkit-border-radius: 11px;
+      -moz-border-radius: 11px;
+      border-radius: 11px;
+      color: $blue-light;
+      background: $input-blue;
+      box-shadow: 0 0 20px 2px $input-blue-glow;
+
+      &--active {
+        @extend .custom-input-basic__wrapper;
+
+        border: 2px solid $input-green;
+        background: $black;
+        box-shadow: 0 0 20px 10px $input-green-glow;
+
+        &-red {
+          @extend .custom-input-basic__wrapper;
+
+          border: 2px solid red;
+          background: $black;
+          box-shadow: 0 0 2px red;
+        }
+
+        &-glowless {
+          @extend .custom-input-basic__wrapper--active;
+
+          border: 2px solid $blue-light;
+          box-shadow: none;
+
+          &::after {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    &__errorBox {
+      position: absolute;
+      top:0;
+      right:-330px;
+      z-index: 2500;
+    }
+  }
+
+  &-update-profile {
+    &__icon {
+      &-left {
+        @extend .custom-input-basic__icon-left;
+
+        display: flex;
+        margin-top: 0;
+      }
+
+      &-right {
+        @extend .custom-input-basic__icon-right;
+
+        &-wrapper {
+          @extend .custom-input-basic__icon-right-wrapper;
+
+          &--active {
+            @extend .custom-input-basic__icon-right-wrapper;
+
+            background: $black;
+
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 18px;
+              z-index: -1;
+              width: 50%;
+              height: 100%;
+              border-radius: 50%;
+            }
+
+            &-glowless {
+              @extend .custom-input-basic__icon-right-wrapper--active;
+
+              border: 3px solid $blue-light;
+              box-shadow: none;
+
+              &::after {
+                box-shadow: none;
+              }
+            }
+          }
+
+          &-callback {
+            @extend .custom-input-basic__icon-right-wrapper;
+            // If this class exists, a callback handler exists and the hover state should be altered.
+            &:hover {
+              cursor: pointer;
+            }
+
+            &--active {
+              @extend .custom-input-basic__icon-right-wrapper--active;
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &-glowless {
+                @extend .custom-input-basic__icon-right-wrapper--active;
+
+                border: 3px solid $blue-light;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__mui {
+      width: 100%;
+
+      &-icon-left, &-icon-right, &-icon-both {
+        @extend .custom-input-basic__mui;
+        // Font size is set within the MUI.css to override MUI style default of 16px.
+      }
+    }
+
+    &__wrapper {
+      @extend .custom-input-basic__wrapper;
+
+      width: 330px;
+
+      &--active {
+        @extend .custom-input-basic__wrapper;
+
+        width: 330px;
+        border: 2px solid $input-green;
+        background: $black;
+        box-shadow: 0 0 20px 10px $input-green-glow;
+
+        &-glowless {
+          @extend .custom-input-basic__wrapper--active;
+
+          width: 330px;
+          border: 2px solid $blue-light;
+          box-shadow: none;
+
+          &::after {
+            box-shadow: none;
+          }
+        }
+
+        &-red {
+          @extend .custom-input-basic__wrapper;
+
+          width: 330px;
+          border: 2px solid red;
+          background: $black;
+          box-shadow: 0 0 2px red;
+        }
+      }
+    }
+  }
+}

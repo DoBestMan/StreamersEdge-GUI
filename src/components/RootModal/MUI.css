@@ -1,0 +1,102 @@
+.root {
+  border: 2px solid rgb(190, 195, 210);
+  border-radius: 35px;
+  background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));
+}
+
+.register {
+  width: 700px;
+  border: 2px solid rgb(190, 195, 210);
+  border-radius: 35px;
+  background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));
+}
+
+.report {
+  width: 700px;
+  max-width: 700px;
+  height: 700px;
+  border: 2px solid rgb(190, 195, 210);
+  border-radius: 35px;
+  background-image: linear-gradient(to right, rgb(163, 0, 0), rgb(173, 16, 11), rgb(187, 36, 25));
+}
+
+.donate {
+  width: 35%;
+  padding: 30px;
+  border: 2px solid rgb(190, 195, 210);
+  border-radius: 15px;
+  background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));
+}
+
+.forgot {
+  width: 700px;
+  border: 2px solid rgb(190, 195, 210);
+  border-radius: 35px;
+  background-image: linear-gradient(rgb(0, 22, 104), rgb(6, 0, 78), rgb(6, 0, 42));
+}
+
+.ban {
+  width: 500px;
+  max-width: 500px;
+  border: 2px solid rgb(190, 195, 210);
+  background: transparent linear-gradient(to right, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0 0 no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
+.link {
+  width: 600px;
+  max-width: 600px;
+  border: 2px solid rgb(190, 195, 210);
+  background: transparent linear-gradient(to right, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0 0 no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
+.reset {
+  width: 600px;
+  max-width: 600px;
+  border: 2px solid rgb(190, 195, 210);
+  background: transparent linear-gradient(to right, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0 0 no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
+.peerplays {
+  width: 600px;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  background: transparent linear-gradient(180deg, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+  opacity: 1;
+}
+
+.success {
+  width: 700px;
+  border: 2px solid rgb(190, 195, 210);
+  background: transparent linear-gradient(#001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0 0 no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
+.challengeConfirm {
+  max-width: 1300px;
+  border: 2px solid #ffffff;
+  border-radius: 30px;
+  background: transparent linear-gradient(180deg, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
+.challengeSuccess {
+  width: 1030px;
+  max-width: 1030px;
+  border: 2px solid #ffffff;
+  border-radius: 30px;
+  background: transparent linear-gradient(180deg, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+}
+
+.category {
+  width: 700px;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  background: transparent linear-gradient(180deg, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 2px 6px 11px #000000bf;
+  opacity: 1;
+}

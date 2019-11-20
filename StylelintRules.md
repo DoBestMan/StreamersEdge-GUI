@@ -147,7 +147,7 @@ See below for a comprehensive list. Any properties not listed should be declared
 
   // typography
   font: 16px/1.5 sans-serif 400 italic;
-  line-height: 1.5; // no units
+  line-height: 1.5; 
   font-family: sans-serif;
   font-weight: 400;
   font-style: italic;
@@ -308,7 +308,7 @@ Placeholders should be extended before any property declarations.
 
 *animation*: `s`
 
-*background-image | background*: `px`, `x`, or `%`
+*background-image | background*: `px`, `x`, `deg`, or `%`
 
 *border | border-width*: `px`
 

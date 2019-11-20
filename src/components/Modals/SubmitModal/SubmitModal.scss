@@ -1,0 +1,52 @@
+@import '../../../assets/styles/common';
+
+.submit-modal {
+  &__wrapper {
+    position: relative;
+    text-align: center;
+  }
+
+  &__cross {
+    position: absolute;
+    right:0;
+
+    &-img {
+      width: 10px;
+      max-width: 10px;
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    padding: 20px 0;
+
+    &-img {
+      width:230px;
+      min-width:230px;
+    }
+  }
+
+  &-text {
+    padding-bottom: 20px;
+
+    &__header {
+      margin:0;
+      font-family: $lato;
+      font-style: italic;
+      font-size: 32px;
+    }
+
+    &__subText {
+      font-size: 18px;
+      color: $white;
+      opacity: 0.7;
+    }
+
+    &__redirect {
+      font-size: 18px;
+      color: #b8252d;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.challenge-info {
+  text-align: left;
+
+  &__formlabel {
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 0;
+  }
+
+  &__game {
+    display: flex;
+    margin-top: 60px;
+  }
+}

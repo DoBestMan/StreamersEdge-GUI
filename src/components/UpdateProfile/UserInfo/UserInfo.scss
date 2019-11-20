@@ -1,0 +1,103 @@
+@import '../../../assets/styles/common';
+
+.update-user-info {
+  &__header {
+    display: flex;
+    font-family: $lato;
+    font-style: Italic;
+    font-size: 30px;
+    text-align: left;
+  }
+
+  &__card {
+    width: 50%;
+    max-width: 960px;
+    min-height: 300px;
+    margin: 67px 5px 0;
+    padding: 76px;
+    border: 2px solid $white;
+    border-radius: 25px;
+    background-image: $profile-gradient;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-width: 650px;
+    padding-bottom: 20px;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 0 0;
+
+    .MuiSelect-root-63 {
+      padding-left: 20px;
+      text-align: left;
+    }
+  }
+
+  &__account-type {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 23px;
+
+    &__label {
+      display: block;
+      width: 100%;
+      font-family: $lato;
+      font-style: Italic;
+      font-size: 20px;
+    }
+  }
+
+  &__email {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 23px;
+
+    &__label {
+      display: block;
+      width: 100%;
+      padding-bottom: 6px;
+      font-family: $lato;
+      font-style: Italic;
+      font-size: 20px;
+    }
+
+    &__input {
+      width: 330px;
+    }
+  }
+
+  &__avatar {
+    display: inline-block;
+    flex-direction: column;
+    width: 300px;
+    text-align: center;
+
+    &-label {
+      font-family: $lato;
+      font-style: Italic;
+      font-size: 23px;
+      color: $white;
+      text-align: center;
+      opacity: 1;
+      letter-spacing: 0;
+    }
+  }
+}
+
+.profile-picture__prop {
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.profile-frame__prop {
+  width: 0;
+  height: 0;
+}

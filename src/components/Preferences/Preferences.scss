@@ -1,0 +1,58 @@
+@import '../../assets/styles/common';
+
+.preferences {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 663px;
+  min-height: 886px;
+  margin: auto;
+  background: #06002a 0% 0% no-repeat padding-box;
+  box-shadow: 0 7px 9px #000000bf;
+
+  &__header {
+    display: flex;
+    margin-top: 20px;
+    font-family: $lato;
+    font-weight: $lato-light;
+    font-style: italic;
+    font-size: $preferenceHeaderSize;
+    color:$white;
+  }
+
+  &__image {
+    margin-bottom: 10px;
+    padding-right: 20px;
+    object-fit: contain;
+  }
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin: 30px 0;
+}
+
+.button {
+  width: 130px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 130px;
+
+  &-save {
+    @extend .button;
+
+    width: 298px;
+    margin-left: 31px;
+    background: transparent url('../../assets/images/preferences/Save.png') 0% 0% no-repeat padding-box;
+  }
+
+  &-cancel {
+    @extend .button;
+
+    width: 205px;
+    background: transparent url('../../assets/images/preferences/Cancel.png') 0% 0% no-repeat padding-box;
+  }
+}

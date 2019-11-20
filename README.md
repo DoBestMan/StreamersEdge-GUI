@@ -1,4 +1,4 @@
-# react-redux-linter-boilerplater.git
+# Streamers Edge
 
 [![JavaScript](https://img.shields.io/badge/</>-JavaScript-blue.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
 
@@ -7,6 +7,9 @@
 ## STACK
 
 - React
+- [react-hot-loader](https://www.npmjs.com/package/react-hot-loader)
+  - React-🔥-Dom
+  - Updating translation file contents will not work with hot reloading.
 - [Redux](https://redux.js.org/) (single source of truth state management)
 - Redux dev tools (allow user to debug )
 - React-Router (we use this to control navigation)
@@ -54,8 +57,3 @@ npm run release-patch // patch bump
 // To cut a pre-release:
 npm run pre-release // v0.2.1 to v0.2.2-rc.0
 ```
-
-## TODO
-
-- add generic build script
-- add SonarCloud local executable

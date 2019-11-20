@@ -1,0 +1,60 @@
+@import '../../assets/styles/common';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+  width: 100vw;
+  height: $height__header;
+  background-image: linear-gradient($blue-darkest, $blue);
+
+  &__image {
+    max-width: 100%;
+    height: auto;
+    max-height: 108.19px;
+  }
+
+  &__link {
+    margin-right: 12px;
+    font-size: 28px;
+    color: $blue-light;
+    text-decoration: none;
+    cursor: pointer;
+
+    &__active, &:hover {
+      color: $white;
+    }
+  }
+
+  &__logo {
+    margin: auto;
+    cursor: pointer;
+
+    &--display-none {
+      display: none;
+    }
+  }
+
+  &--left {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: 50px;
+  }
+
+  &--center {
+    display: flex;
+    flex: 0 1 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--right {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    margin-left: auto;
+  }
+}

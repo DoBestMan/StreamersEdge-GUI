@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: services/ProfileService.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AuthUtil.html">AuthUtil</a></li><li><a href="Config.html">Config</a></li><li><a href="TokenUtil.html">TokenUtil</a></li><li><a href="ValidationUtil.html">ValidationUtil</a></li></ul><h3>Classes</h3><ul><li><a href="AccountActions.html">AccountActions</a></li><li><a href="AppActions.html">AppActions</a></li><li><a href="AuthService.html">AuthService</a></li><li><a href="ChallengeActions.html">ChallengeActions</a></li><li><a href="ChallengeUtil.html">ChallengeUtil</a></li><li><a href="ErrorBoxActions.html">ErrorBoxActions</a></li><li><a href="ModalActions.html">ModalActions</a></li><li><a href="NavigateActions.html">NavigateActions</a></li><li><a href="PeerplaysActions.html">PeerplaysActions</a></li><li><a href="PeerplaysAuthActions.html">PeerplaysAuthActions</a></li><li><a href="PeerplaysService.html">PeerplaysService</a></li><li><a href="PrivateAuthService.html">PrivateAuthService</a></li><li><a href="PrivateProfileService.html">PrivateProfileService</a></li><li><a href="PrivateUserService.html">PrivateUserService</a></li><li><a href="ProfileService.html">ProfileService</a></li><li><a href="StorageUtil.html">StorageUtil</a></li><li><a href="StreamService.StreamService.html">StreamService</a></li><li><a href="UserSerivce.html">UserSerivce</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dummyDataWrapper">dummyDataWrapper</a></li><li><a href="global.html#listenChainStore">listenChainStore</a></li><li><a href="global.html#translate">translate</a></li><li><a href="global.html#updateChainStore">updateChainStore</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>services/ProfileService.js</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from 'axios';
+import {Config, StorageUtil, GenUtil} from '../utility';
+import querystring from 'query-string';
+
+const ApiHandler = axios.create({withCredentials: true});
+
+const apiRoot = Config.isDev
+  ? Config.devApiRoute
+  : Config.prodApiRoute;
+
+/**
+ * Handles all server calls related to profiles.
+ *
+ * @class PrivateProfileService
+ */
+class PrivateProfileService {
+  /**
+   * Retrieves information on the currently logged in user's SE profile, and stores it in LS if the promise resolves without issue.
+   *
+   * @returns {Promise} A promise that resolves to a user profile object.
+   */
+  static getProfile() {
+    const query = `${apiRoot}api/v1/profile`;
+    return new Promise(async(resolve, reject) => {
+      const response = await ApiHandler.get(query);
+
+      if (response.data.status === 401) {
+        StorageUtil.remove('se-user');
+      }
+
+      if (response.data.status !== 200) {
+        return reject(response);
+      }
+
+      StorageUtil.set('se-user', JSON.stringify(response.data.result));
+      return resolve(response.data.result);
+    });
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {object} account - Contains object with updated account fields.
+   * @returns {Promise} - A promise that resolves to an updated user profile object wrapped by dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static updateProfile(account) {
+    let response;
+    const query = `${apiRoot}api/v1/profile`;
+
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      const body = {
+        email: account.email,
+        twitchUserName: account.twitchUserName,
+        googleName: account.googleName,
+        facebook: account.facebook,
+        pubgUsername: account.pubgUsername,
+        peerplaysAccountName: account.peerplaysAccountName,
+        userType: account.userType
+      };
+
+      try {
+        response = await ApiHandler.patch(query, querystring.stringify(body), headers);
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.response);
+      }
+    });
+  }
+
+  /**
+   * Changes the user's email.
+   *
+   * @static
+   * @param {string} token - Token generated from the backend api.
+   * @returns {Promise} - A promise that indicates success or failure.
+   * @memberof PrivateAuthService
+   */
+  static changeEmail(token) {
+    let response;
+    const query = `${apiRoot}api/v1/profile/change-email/${token}`;
+
+    return new Promise(async(resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+
+      try {
+        response = await ApiHandler.get(query, headers);
+
+        return resolve(response.data.result);
+      } catch (err) {
+        return reject(err.toString());
+      }
+    });
+  }
+
+  /**
+   * Reconnect to blockchain in case of disconnect.
+   *
+   * @param {Blob} image - Image as Blob.
+   * @returns {Promise}
+   * @memberof PrivateProfileService
+   */
+  static uploadProfilePicture(image) {
+    // POST /api/v1/profile/avatar
+    let response;
+    const query = `${apiRoot}api/v1/profile/avatar`;
+    return new Promise(async (resolve, reject) => {
+      const headers = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+
+      try {
+        response = await ApiHandler.post(query, image, headers);
+        return resolve(response.data.result);
+
+      } catch(err) {
+        return reject(err.toString());
+      }
+
+
+    });
+  }
+}
+
+/**
+ * Handles all server calls related to profiles.
+ *
+ * @class ProfileService
+ */
+class ProfileService {
+  /**
+   * Retrieves information on the currently logged in user's SE profile, and stores it in LS if the promise resolves without issue.
+   *
+   * @returns {Promise} A promise that resolves to a user profile object wrapped by dummy data wrapper.
+   */
+  static getProfile() {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.getProfile());
+  }
+
+  /**
+   *
+   * @param {object} account - Contains object with updated account fields.
+   * @static
+   * @returns {Promise} A promise that resolves to an updated user profile object wrapped by dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static updateProfile(account) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.updateProfile(account));
+  }
+
+  /**
+   * Reconnect to blockchain in case of disconnect.
+   *
+   * @param {Blob} image - Image as Blob.
+   * @returns {Promise} - A promise that indicates success or failure wrapped in dummy data wrapper.
+   * @memberof ProfileService
+   */
+  static uploadProfilePicture(image) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.uploadProfilePicture(image));
+  }
+
+  static changeEmail(token) {
+    return GenUtil.dummyDataWrapper(PrivateProfileService.changeEmail(token));
+  }
+
+}
+
+export default ProfileService;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Oct 31 2019 14:01:07 GMT-0300 (Atlantic Daylight Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
+        </p>
+    </div>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

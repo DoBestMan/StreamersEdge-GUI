@@ -1,0 +1,123 @@
+@import '../../../assets/styles/common.scss';
+
+.react-tags {
+  position: relative;
+  width: 100%;
+  height: 242px;
+  padding: 20px;
+  border: 2px solid $blue-light;
+  border-radius: 11px;
+  font-size: 20px;
+  word-break: break-word;
+  background-color: $input-blue;
+  cursor: text;
+  letter-spacing: 0;
+}
+
+.react-tags.is-focused {
+  background-color: $input-blue;
+}
+
+.react-tags__selected {
+  display: inline;
+}
+
+.react-tags__selected-tag {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 11px 0 0 11px;
+  line-height: inherit;
+  font-size: inherit;
+  background-color: $challenge-condition__background;
+}
+
+.react-tags__selected-tag:hover,
+.react-tags__selected-tag:focus {
+  background-color: $challenge-condition__background;
+}
+
+.react-tags__search {
+  display: inline-block;
+
+  /* prevent autoresize overflowing the container */
+  max-width: 100%;
+
+  /* match tag layout */
+  margin-bottom: 6px;
+  padding: 7px 2px;
+}
+
+@media screen and (min-width: 30em) {
+  .react-tags__search {
+    /* this will become the offsetParent for suggestions */
+    position: relative;
+  }
+}
+
+.react-tags__search input {
+  /* prevent autoresize overflowing the container */
+  max-width: 100%;
+
+  /* remove styles and layout from this element */
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  /* match the font styles */
+  line-height: inherit;
+  font-size: inherit;
+  background: transparent;
+  outline: none;
+}
+
+.react-tags__search input::-ms-clear {
+  display: none;
+}
+
+.react-tags__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 30em) {
+  .react-tags__suggestions {
+    width: 240px;
+  }
+}
+
+.react-tags__suggestions ul {
+  max-height: 250px;
+  margin: 4px -1px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 2px;
+  background-color: $tags-suggestion__background;
+  list-style: none;
+  overflow: auto;
+}
+
+.react-tags__suggestions li {
+  justify-content: center;
+  padding: 6px 8px;
+  border: solid 1px transparent;
+  border-radius: 5px;
+  font-size: 20px;
+  color: $white;
+
+  &:hover {
+    border-radius: 0;
+    background-color: $tags-suggestion__background-hover;
+    cursor: pointer;
+  }
+}
+
+.react-tags__suggestions li mark {
+  font-weight: 600;
+  text-decoration: underline;
+  background: none;
+}

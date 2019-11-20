@@ -1,0 +1,18 @@
+.peerplayslogin {
+  &-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 545px;
+    margin: auto;
+    background-size: cover;
+  }
+
+  &__subHeader {
+    margin-top: 60px;
+    font-style: italic;
+    font-size: 30px;
+    color: #ffffff;
+    text-shadow: 3px 3px 4px #003366;
+  }
+}

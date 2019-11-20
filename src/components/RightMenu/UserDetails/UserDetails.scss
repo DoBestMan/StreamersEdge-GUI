@@ -1,0 +1,37 @@
+@import '../../../assets/styles/common.scss';
+
+.user-details {
+  display: flex;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 16px;
+
+    &__name {
+      font-size: 25px;
+      color: $white;
+    }
+
+    &__following {
+      font-style: italic;
+      font-size: 17px;
+      color: #3fa9f5;
+    }
+
+    &__wallet {
+      max-width: 200px;
+      font-size: 17px;
+      color: #3fa9f5;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      &__white {
+        margin-left: 6px;
+        color: $white;
+      }
+    }
+  }
+}

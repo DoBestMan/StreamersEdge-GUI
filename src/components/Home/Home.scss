@@ -1,10 +1,9 @@
-/* stylelint-disable */
+@import '../../assets/styles/common';
 
-html {
-  background-color: rgb(25, 40, 55);
-}
+.home {
+  margin: $base-margins;
 
-.code-me {
-  padding: 10%;
-  color: orange;
+  .lorem {
+    margin: $base-margins;
+  }
 }
