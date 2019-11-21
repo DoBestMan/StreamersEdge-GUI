@@ -1,11 +1,15 @@
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: License-Management.gitlab-ci.yml
+
 image: node:10.16.0
 
 stages:
-  - build
+  - test
   - deploy
 
 build:
-  stage: build
+  stage: test
   script:
     - npm install
     - npm run test
