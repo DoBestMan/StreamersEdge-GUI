@@ -258,6 +258,7 @@ export const translationObject = {
         cryptoLabel: 'Wallet Address',
 
         socialHeader:'Social Connections',
+        socialConnectPlus: 'You must connect at least one social account to unlock challenge creation',
         gameHeader: 'Game Connections',
         connectionSelect: 'Connect these accounts and unlock special streamers edge integrations',
         connectionDescription: 'CONNECT YOUR ACCOUNTS',

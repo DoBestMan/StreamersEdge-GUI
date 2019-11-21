@@ -3,7 +3,9 @@ import {Card, CardContent, ExpansionPanel, ExpansionPanelSummary, ExpansionPanel
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styles from '../MUI.css';
 import {withStyles} from '@material-ui/core/styles';
+import {GenUtil} from '../../../utility';
 
+const translate = GenUtil.translate;
 class AccountConnections extends Component {
 
   /**
@@ -28,6 +30,7 @@ class AccountConnections extends Component {
       </ExpansionPanelSummary>
     );
   }
+
   //renders connection select: E.G 'Select Your Cryptocurrency account'
   /**
    * @param {object} type - Object containing imgs, text, and username for a service.
@@ -40,6 +43,11 @@ class AccountConnections extends Component {
         <div className='link-accounts__wrapper'>
           <CardContent className='link-accounts__content'>
             <p className='link-accounts__content-header'>{ type.headerLabel }</p>
+            {
+              type.header.toLowerCase().indexOf('social') !== -1
+                ? <p className='link-accounts__content-header'>{ translate('updateProfile.accountConnections.socialConnectPlus') }</p>
+                : null
+            }
             <p className='link-accounts__content-body'>{ type.headerDescription }</p>
             {this.renderIcons(type.connections)}
           </CardContent>

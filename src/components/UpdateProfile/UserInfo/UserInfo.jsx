@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ProfilePictureUpload from '../../ProfilePictureUpload';
 import CustomInput from '../../CustomInput';
-import Dropdown from '../../Dropdown';
 import {
   EmailIcon,
   EmailIconActive,
@@ -34,10 +33,6 @@ class UserInfo extends Component {
         </span>
         <div className='update-user-info__content'>
           <div className='update-user-info__inputs'>
-            <div className='update-user-info__account-type'>
-              <span className='update-user-info__account-type__label'>{translate('updateProfile.userInfo.editUserType')}</span>
-              <Dropdown value={ this.props.userType } dropdownList={ translate('createProfile.accountTypes').split(',') } handleChange={ this.handleUserTypeChange }/>
-            </div>
             <div className='update-user-info__email'>
               <span className='update-user-info__email__label'>{translate('updateProfile.userInfo.editEmail')}</span>
               <div className='update-user-info__email__input'>

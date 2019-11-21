@@ -9,7 +9,7 @@ import {ProfileService} from '../../services';
 import {ModalActions, NavigateActions, AccountActions} from '../../actions';
 import {ModalTypes} from '../../constants';
 import {GenUtil, ValidationUtil} from '../../utility';
-import {PeerplaysIcon, YoutubeIcon, TwitchIcon, FacebookIcon, FortniteIcon, PubgIcon, LOL, CancelButton} from '../../assets/images/updateProfile';
+import {PeerplaysIcon, YoutubeIcon, TwitchIcon, FacebookIcon, PubgIcon, CancelButton} from '../../assets/images/updateProfile';
 import SaveButton from '../../assets/images/preferences/Save.png';
 const translate = GenUtil.translate;
 
@@ -85,20 +85,9 @@ class UpdateProfile extends Component {
           headerDescription: translate('updateProfile.accountConnections.connectionDescription'),
 
           connections: [
-            {//fortnite
-              name: 'fortnite',
-              headerIcon: FortniteIcon,
-              bodyIcon: null
-            },
             {//pubg
               name: 'pubg',
               headerIcon: PubgIcon,
-              bodyIcon: null,
-              bodyUsername: ''
-            },
-            {//league of legends
-              name: 'league',
-              headerIcon: LOL,
               bodyIcon: null,
               bodyUsername: ''
             }
@@ -157,11 +146,11 @@ class UpdateProfile extends Component {
   }
 
   render() {
-    const {connections, userType} = this.state;
+    const {connections} = this.state;
     return (
       <div className='update-profile__wrapper'>
         <form className='update-profile-form' onSubmit={ this.handleSubmit }>
-          <UserInfo handleEmailChange={ this.handleEmailChange } email={ this.state.email } handleUserTypeChange={ this.handleUserTypeChange } userType={ userType } />
+          <UserInfo handleEmailChange={ this.handleEmailChange } email={ this.state.email } handleUserTypeChange={ this.handleUserTypeChange } />
           <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } openUnlinkAccountModal={ this.openUnlinkAccountModal }
             closeLinkAccountModal={ this.closeLinkAccountModal } peerplaysAccountName = { this.props.peerplaysAccountName } />
           <img src={ CancelButton } alt='close button' className='update-profile__close-btn' onClick={ this.props.navigateToDashboard }/>

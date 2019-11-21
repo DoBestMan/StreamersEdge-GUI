@@ -4,3 +4,4 @@ node_modules/
 sonar-scanner/
 .idea/
 .DS_Store
+.env

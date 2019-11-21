@@ -16,11 +16,7 @@ import {
   facebookIcon,
   twitchIcon,
   youtubeIcon,
-  fortniteBox,
   pubgBox,
-  leagueBox,
-  fortniteIcon,
-  pubgIcon,
   leagueIcon
 } from '../../assets/images/profile';
 import {GenUtil, ValidationUtil} from '../../utility';
@@ -38,7 +34,6 @@ class CreateProfile extends Component {
   }
 
   componentDidUpdate(prevProps) {
-
     if (this.props.account !== prevProps.account) {
       const {twitchUsername, youtubeUsername, facebookUsername} = this.props;
       const path = this.props.location.pathname;
@@ -87,22 +82,10 @@ class CreateProfile extends Component {
           headerDescription: translate('updateProfile.accountConnections.connectionDescription'),
 
           connections: [
-            {//fortnite
-              name: 'fortnite',
-              headerIcon: fortniteBox,
-              bodyIcon: fortniteIcon,
-              bodyUsername: ''
-            },
             {//pubg
               name: 'pubg',
               headerIcon: pubgBox,
               bodyIcon: leagueIcon,
-              bodyUsername: ''
-            },
-            {//league of legends
-              name: 'league',
-              headerIcon: leagueBox,
-              bodyIcon: pubgIcon,
               bodyUsername: ''
             }
           ]
@@ -114,10 +97,6 @@ class CreateProfile extends Component {
   handleEmailChange = (email) => {
     const validation = ValidationUtil.seEmail(email).success;
     this.setState({email: email, emailValid: validation});
-  }
-
-  handleUserTypeChange = (userType) => {
-    this.setState({userType: userType});
   }
 
   setStep = (currentStep) => {
@@ -161,7 +140,7 @@ class CreateProfile extends Component {
   }
 
   render() {
-    const {connections, currentStep, userType, emailValid} = this.state;
+    const {connections, currentStep, emailValid} = this.state;
     return (
       <div className='create-profile__wrapper'>
         <form className='create-profile' onSubmit={ this.handleSubmit }>
@@ -169,7 +148,7 @@ class CreateProfile extends Component {
             { translate('createProfile.header') }
           </div>
           {currentStep === '1' ?
-            <UserInfo handleEmailChange={ this.handleEmailChange } email={ this.state.email } handleUserTypeChange={ this.handleUserTypeChange } userType={ userType } />
+            <UserInfo handleEmailChange={ this.handleEmailChange } email={ this.state.email } handleUserTypeChange={ this.handleUserTypeChange } />
             :
             <AccountConnections connections={ connections } openLinkAccountModal={ this.openLinkAccountModal } openUnlinkAccountModal={ this.openUnlinkAccountModal }
               closeLinkAccountModal={ this.closeLinkAccountModal }/>
