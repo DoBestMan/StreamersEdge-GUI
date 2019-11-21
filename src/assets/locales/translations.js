@@ -159,6 +159,7 @@ export const translationObject = {
         newPassword: 'Enter your new password',
         confirmPassword: 'Confirm your new password',
         noMatch: 'Passwords do not match.',
+        expired: 'The reset link has expired or is no longer valid.',
         passwordStrength: {
           veryWeak: 'Very Weak',
           weak: 'Weak',
