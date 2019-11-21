@@ -29,6 +29,8 @@ class UserInfo extends Component {
     if (this.state.isEmailInputClicked) {
       return ValidationUtil.seEmail(this.props.email).success;
     }
+
+    return true;
   }
 
   render() {
@@ -45,7 +47,7 @@ class UserInfo extends Component {
             </div>
             <div className='user-info__email'>
               <span className='user-info__email__label'>{translate('updateProfile.userInfo.email')}</span>
-              <div className='user-info__email__input test1234'>
+              <div className='user-info__email__input'>
                 <CustomInput
                   name='email'
                   hasActiveGlow={ true }

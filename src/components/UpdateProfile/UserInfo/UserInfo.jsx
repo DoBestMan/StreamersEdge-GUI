@@ -40,7 +40,7 @@ class UserInfo extends Component {
             </div>
             <div className='update-user-info__email'>
               <span className='update-user-info__email__label'>{translate('updateProfile.userInfo.editEmail')}</span>
-              <div className='update-user-info__email__input test1234'>
+              <div className='update-user-info__email__input'>
                 <CustomInput
                   name='email'
                   hasActiveGlow={ true }
