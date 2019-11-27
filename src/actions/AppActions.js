@@ -119,14 +119,13 @@ class AppActions {
         dispatch(ModalActions.toggleModal());
         dispatch(NavigateActions.navigateToDashboard());
       }).catch((err) => {
-        if(err.status === 403){
+        if(err.status === 403 && err.data.error.includes('banned')){
           dispatch(ModalActions.toggleModal());
           dispatch(ModalActions.setModalType(ModalTypes.BAN));
           dispatch(ModalActions.toggleModal());
         } else {
           dispatch(AppActions.setLoginError(err.data.error));
         }
-
       });
     };
   }

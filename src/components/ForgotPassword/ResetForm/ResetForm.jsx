@@ -81,7 +81,10 @@ class ResetForm extends Component {
         this.loginAndRedirect();
       })
       .catch((err) => {
-        console.warn(err);
+        this.setState({
+          resultText: translate('forgotPassword.resetForm.expired')
+        });
+        console.error(err);
       });
   };
 
@@ -163,6 +166,9 @@ class ResetForm extends Component {
                     type='submit'
                   />
                 </Button>
+                <div className='reset-result'>
+                  {this.state.resultText}
+                </div>
               </div>
             </form>
           </div>

@@ -1,4 +1,4 @@
-@import '../../../assets/styles/common';
+@import '../../../assets/styles/common.scss';
 
 .reset {
   &-card {
@@ -12,6 +12,10 @@
     border-radius: 11px;
     background: transparent linear-gradient(to bottom, #001668 0%, #01115b 15%, #030a45 43%, #06002a 100%) 0% 0% no-repeat padding-box;
     box-shadow: 2px 6px 11px #000000bf;
+  }
+
+  &-result {
+    color: $red;
   }
 
   &-form {

@@ -12,6 +12,7 @@ import {GenUtil} from '../../utility';
 import {withStyles} from '@material-ui/core/styles';
 import ReportButton from '../../assets/images/report/report_button.png';
 import {ReportService} from '../../services';
+import {ReportConstants} from '../../constants';
 import styles from './MUI.css';
 
 const translate = GenUtil.translate;
@@ -20,7 +21,8 @@ class ReportUser extends Component {
   state = {
     reportType: '1',
     desc: '',
-    error: ''
+    error: '',
+    resetToDefault: false
   };
 
   handleChange = (event) => {
@@ -36,19 +38,42 @@ class ReportUser extends Component {
     });
   }
 
+  resetHandler = () => {
+    this.setState({resetToDefault: false});
+  }
+
+  parseReportType = (value) => {
+    switch(value) {
+      case '1':
+        return ReportConstants.OFFENDS_MY_RELIGIOUS_SENTIMENTS;
+      case '2':
+        return ReportConstants.OFFENSIVE_PROFILE_PIC;
+      case '3':
+      default:
+        return ReportConstants.OTHER;
+    }
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
 
     if (!this.state.reportType || !this.state.desc) {
       this.setState({
-        error: translate('reportUser.error')
+        error: translate('reportUser.error.emptyField')
+      });
+    } else if (this.state.desc.length < 24) {
+      this.setState({
+        error: translate('reportUser.error.length')
       });
     } else {
       this.setState({
-        error: ''
+        error: translate('reportUser.sent'),
+        desc: '',
+        reportType: '1',
+        resetToDefault: true
       });
       //TODO: Connect to API once it exists
-      ReportService.reportUser(this.props.user.id, this.state.reportType, this.state.desc);
+      ReportService.reportUser(this.props.user.id, this.parseReportType(this.state.reportType), this.state.desc);
     }
 
   }
@@ -84,7 +109,8 @@ class ReportUser extends Component {
               </RadioGroup>
             </FormControl>
             <FormControl className='report-form__textArea'>
-              <CustomInput theme='white' muiInputClass='inputBlack' rows={ 10 } multiline fullwidth={ false } handleChange={ this.handleDescChange }
+              <CustomInput resetHandler={ this.resetHandler } resetToDefault={ this.state.resetToDefault }
+                theme='white' muiInputClass='inputBlack' rows={ 10 } multiline fullwidth={ false } handleChange={ this.handleDescChange }
                 placeholder={ translate('reportUser.giveDescription') }/>
             </FormControl>
           </div>

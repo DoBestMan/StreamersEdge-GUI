@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/pbsa/streamersedge-gui/compare/v0.7.0...v0.8.0) (2019-11-27)
+
+
+### Bug Fixes
+
+* fixed create profile email incorrectly displaying error state ([#193](https://github.com/pbsa/streamersedge-gui/issues/193)) ([0c05125](https://github.com/pbsa/streamersedge-gui/commit/0c05125))
+* redirect strm742 ([#191](https://github.com/pbsa/streamersedge-gui/issues/191)) ([43712e4](https://github.com/pbsa/streamersedge-gui/commit/43712e4))
+* show error message for not verified email ([#179](https://github.com/pbsa/streamersedge-gui/issues/179)) ([e6f41e0](https://github.com/pbsa/streamersedge-gui/commit/e6f41e0))
+* submit modal x style changed ([#184](https://github.com/pbsa/streamersedge-gui/issues/184)) ([93e11d4](https://github.com/pbsa/streamersedge-gui/commit/93e11d4))
+
+
+
 <a name="0.7.0"></a>
 # 0.7.0 (2019-11-20)
 

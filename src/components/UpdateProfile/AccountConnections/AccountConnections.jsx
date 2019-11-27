@@ -4,6 +4,10 @@ import styles from '../MUI.css';
 import {withStyles} from '@material-ui/core/styles';
 import {ConnectButton, DisconnectButton} from '../../../assets/images/updateProfile/index';
 import classNames from 'classnames';
+import {GenUtil} from '../../../utility';
+
+const translate = GenUtil.translate;
+
 class AccountConnections extends Component {
   /**
    * Renders connection header: E.G 'Peerplays Wallet'.
@@ -38,6 +42,11 @@ class AccountConnections extends Component {
         <div className='update-link-accounts__wrapper'>
           <div className='update-link-accounts__content'>
             <p className='update-link-accounts__content-header'>{ type.header }</p>
+            {
+              type.header.toLowerCase().indexOf('social') !== -1
+                ? <p className='link-accounts__content-header'>{ translate('updateProfile.accountConnections.socialConnectPlus') }</p>
+                : null
+            }
             <div className='update-link-accounts__content-body'>
               {this.renderIcons(type.connections)}
             </div>

@@ -12,15 +12,11 @@ import {AuthUtil} from '../../../../utility';
 import {withRouter} from 'react-router-dom';
 
 class LinkAccount extends Component {
-  constructor(props) {
-    super(props);
-
-    // Set the initial input values
-    this.state = {
-      platform: '',
-      open: false
-    };
-  }
+  // Set the initial input values
+  state = {
+    platform: '',
+    open: false
+  };
 
   handleOpen = () => {
     this.setState({
